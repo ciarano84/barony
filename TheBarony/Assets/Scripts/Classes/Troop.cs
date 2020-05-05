@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Troop : MonoBehaviour
+public class Troop : TacticsMovement
 {
     public int moveSpeed;
     public int health;
     public int damage;
 
-    public void MeleeAttack() 
+    private void Start()
     {
-        //proxy attack logic.
-        
+        Init();
     }
+
 }
