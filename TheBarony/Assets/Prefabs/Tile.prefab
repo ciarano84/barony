@@ -106,6 +106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf6f529037387746a8911357bae1a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkable: 1
   current: 0
   target: 0
   selectable: 0
+  adjacencyList: []
+  visited: 0
+  parent: {fileID: 0}
+  distance: 0
+  debug: 0

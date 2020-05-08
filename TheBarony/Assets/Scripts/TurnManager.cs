@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    public MovementManager movementManager;
+    /*public MovementManager movementManager;
     
     //proxy rosta of troops in lieu of a turn order that builds itself. 
     public GameObject troop1;
@@ -41,5 +41,5 @@ public class TurnManager : MonoBehaviour
         TurnOrder[1] = troop1;
         TurnOrder[2] = troop2;
         TurnOrder[3] = troop3;
-    }
+    }*/
 }

@@ -33,7 +33,6 @@ public class Tile : MonoBehaviour
         else
         {
             GetComponent<Renderer>().material.color = Color.white;
-            Debug.Log("Set to white");
         }
     }
 
@@ -51,8 +50,9 @@ public class Tile : MonoBehaviour
 
     public void FindNeighbours(float jumpHeight)
     {
+        //issue is likely somewhere in here. 
         Reset();
-
+        
         CheckTile(Vector3.forward, jumpHeight);
         CheckTile(-Vector3.forward, jumpHeight);
         CheckTile(Vector3.right, jumpHeight);
@@ -60,16 +60,17 @@ public class Tile : MonoBehaviour
     }
 
     public void CheckTile(Vector3 direction, float jumpHeight) {
+
         Vector3 halfExtents = new Vector3(0.25f, (1 + jumpHeight) / 2f, 0.25f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
 
         foreach (Collider item in colliders) 
-        {
+        {   
             Tile tile = item.GetComponent<Tile>();
             if (tile != null && tile.walkable)
             {
                 RaycastHit hit;
-                if (!Physics.Raycast(transform.position, Vector3.up, out hit, 1))
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
                 {
                     adjacencyList.Add(tile);
                 }

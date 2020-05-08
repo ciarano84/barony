@@ -6,10 +6,10 @@ using UnityEngine.AI;
 
 public class MovementManager : MonoBehaviour
 {
-    public LayerMask whatCanBeClickedOn;
+    /*public LayerMask whatCanBeClickedOn;
     public NavMeshAgent troopAgent;
     Troop troopScript;
-    int troopMoveSpeed;
+    float troopMoveSpeed;
     
     //likely not needed. 
     public TurnManager turnManager;
@@ -80,5 +80,5 @@ public class MovementManager : MonoBehaviour
     {
         turnManager.NewTurn();
         troopMoving = false;
-    }
+    }*/
 }
