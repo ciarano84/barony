@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
 
 public class TacticsMovement : MonoBehaviour
@@ -15,12 +16,17 @@ public class TacticsMovement : MonoBehaviour
     public int move = 5;
     public float jumpHeight = 2f;
     public float moveSpeed = 2;
+    public float jumpVelocity = 4.5f;
 
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
+    Vector3 jumpTarget;
 
     float halfHeight = 0;
 
+    bool jumpingUp = false;
+    bool movingEdge = false;
+    bool fallingDown = false;
     
     public void Init() {
         tiles = GameObject.FindGameObjectsWithTag("tile");
@@ -107,14 +113,24 @@ public class TacticsMovement : MonoBehaviour
             Tile t = path.Peek();
             Vector3 target = t.transform.position;
 
-            //Calculate the unit's position on top of target tile. (due to my centre point being at base, this forced creature to float) 
+            //Calculate the unit's position on top of target tile. 
             target.y += halfHeight + t.GetComponent<Collider>().bounds.extents.y;
 
             if (Vector3.Distance(transform.position, target) >= 0.05f)
             {
-                CalculateHeading(target);
-                SetHorizontalVelocity();
+                bool jump = transform.position.y != target.y;
 
+                if (jump)
+                {
+                    Jump(target);
+                }
+                else
+                {
+                    CalculateHeading(target);
+                    SetHorizontalVelocity();
+                }
+                
+                //Locomotion (and where we would add animation). 
                 transform.forward = heading;
                 transform.position += velocity * Time.deltaTime;
             }
@@ -152,11 +168,104 @@ public class TacticsMovement : MonoBehaviour
         heading.Normalize();
 
         //out of interest
-        Debug.Log(heading);
+        //Debug.Log(heading);
     }
 
     void SetHorizontalVelocity()
     {
         velocity = heading * moveSpeed;
     }
+
+    void Jump(Vector3 target) 
+    {
+        if (fallingDown)
+        {
+            FallDownward(target);
+        }
+        else if (jumpingUp)
+        {
+            JumpUpward(target);
+        }
+        else if (movingEdge)
+        {
+            MoveToEdge();
+        }
+        else 
+        {
+            PrepareJump(target);
+        }
+    }
+
+    void PrepareJump(Vector3 target) {
+        float targetY = target.y;
+        target.y = transform.position.y;
+        CalculateHeading(target);
+
+        if (transform.position.y > targetY)
+        {
+            fallingDown = false;
+            jumpingUp = false;
+            movingEdge = true;
+
+            jumpTarget = transform.position + (target - transform.position) / 2;
+        }
+        else {
+            fallingDown = false;
+            jumpingUp = true;
+            movingEdge = false;
+
+            velocity = heading * moveSpeed / 3.0f;
+
+            float difference = targetY - transform.position.y;
+
+            velocity.y = jumpVelocity * (0.5f + difference / 2.0f);
+        }
+    }
+
+    void FallDownward(Vector3 target) {
+        velocity += Physics.gravity * Time.deltaTime;
+
+        if (transform.position.y <= target.y)
+        {
+            fallingDown = false;
+            jumpingUp = false;
+            movingEdge = false;
+
+            Vector3 p = transform.position;
+            p.y = target.y;
+            transform.position = p;
+
+            velocity = new Vector3();
+        }
+    }
+
+    void JumpUpward(Vector3 target) {
+        velocity += Physics.gravity * Time.deltaTime;
+
+        if (transform.position.y > target.y)
+        {
+            jumpingUp = false;
+            fallingDown = true;
+        }
+    }
+
+    void MoveToEdge() {
+        if (Vector3.Distance(transform.position, jumpTarget) >= 0.05f)
+        {
+            SetHorizontalVelocity();
+        }
+        else 
+        {
+            movingEdge = false;
+            fallingDown = true;
+            velocity /= 5.0f;
+            velocity.y = 1.5f;
+        }
+    }
+
+    /*for debugging
+    public void PrintStates()
+    {
+        Debug.Log("MovingEdge = " + movingEdge);
+    }*/
 }

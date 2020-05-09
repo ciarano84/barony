@@ -14,6 +14,8 @@ public class PlayerCharacter : TacticsMovement
     }
     private void Update()
     {
+        Debug.DrawRay(transform.position, transform.forward);
+
         if (!moving)
         {
             FindSelectableTiles();
@@ -35,7 +37,6 @@ public class PlayerCharacter : TacticsMovement
             {
                 if (hit.collider.tag == "tile")
                 {
-                    Debug.Log("tile");
                     Tile t = hit.collider.GetComponent<Tile>();
                     if (t.selectable)
                     {
