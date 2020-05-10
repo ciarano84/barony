@@ -18,6 +18,8 @@ public class TacticsMovement : MonoBehaviour
     public float jumpHeight = 2f;
     public float moveSpeed = 2;
     public float jumpVelocity = 4.5f;
+    public int initiativeMod = 0;
+    public int currentInitiative = 0;
 
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
@@ -32,7 +34,8 @@ public class TacticsMovement : MonoBehaviour
     public void Init() {
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
-        TurnManager.AddUnit(this);
+        CheckInitiative();
+        Initiative.AddUnit(this);
     }
 
     public void GetCurrentTile() {
@@ -149,7 +152,7 @@ public class TacticsMovement : MonoBehaviour
             moving = false;
 
             //Ending a turn here, though this would obviously have to change when actions are added in. 
-            TurnManager.EndTurn();
+            Initiative.EndTurn();
         }
     }
 
@@ -278,6 +281,10 @@ public class TacticsMovement : MonoBehaviour
         turn = false;
     }
 
+    void CheckInitiative()
+    {
+        currentInitiative = (Random.Range(1, 20) + initiativeMod);
+    }
 
     /*for debugging
     public void PrintStates()
