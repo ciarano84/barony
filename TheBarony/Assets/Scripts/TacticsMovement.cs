@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class TacticsMovement : MonoBehaviour
 {
-    
+    public bool turn = false;
+
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
@@ -31,6 +32,7 @@ public class TacticsMovement : MonoBehaviour
     public void Init() {
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
+        TurnManager.AddUnit(this);
     }
 
     public void GetCurrentTile() {
@@ -143,8 +145,11 @@ public class TacticsMovement : MonoBehaviour
         }
         else
         {
-            //remove selectable tiles;
+            RemoveSelectableTiles();
             moving = false;
+
+            //Ending a turn here, though this would obviously have to change when actions are added in. 
+            TurnManager.EndTurn();
         }
     }
 
@@ -262,6 +267,17 @@ public class TacticsMovement : MonoBehaviour
             velocity.y = 1.5f;
         }
     }
+
+    public void BeginTurn() 
+    {
+        turn = true;
+    }
+
+    public void EndTurn()
+    {
+        turn = false;
+    }
+
 
     /*for debugging
     public void PrintStates()

@@ -1,45 +1,81 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Accessibility;
 
 public class TurnManager : MonoBehaviour
 {
-    /*public MovementManager movementManager;
-    
-    //proxy rosta of troops in lieu of a turn order that builds itself. 
-    public GameObject troop1;
-    public GameObject troop2;
-    public GameObject troop3;
-    private int turnNumber = 0;
+    static Dictionary<string, List<TacticsMovement>> units = new Dictionary<string, List<TacticsMovement>>();
+    static Queue<string> turnKey = new Queue<string>();
+    static Queue<TacticsMovement> turnTeam = new Queue<TacticsMovement>();
 
-    public GameObject selector;
-    Selector selectorScript;
-
-    private GameObject[] TurnOrder = new GameObject [5];
-    private GameObject currentTurnTroop;
-
-    private void Start()
+    private void Update()
     {
-        selectorScript = selector.GetComponent<Selector>();
-        PopulateTurnOrder();
-        NewTurn();
+        
+        if (turnTeam.Count == 0)
+        {
+            InitTeamTurnQueue();
+        }
     }
 
-    public void NewTurn()
+    static void InitTeamTurnQueue()
     {
-        turnNumber++;
-        if (turnNumber > TurnOrder.Length) { turnNumber = 1; }
-        currentTurnTroop = TurnOrder[turnNumber];
-        selectorScript.AssignSelector(currentTurnTroop);
-        movementManager.UpdateTroop(currentTurnTroop);
-        //the instruction to make it the agent for the navmesh
+        List<TacticsMovement> teamList = units[turnKey.Peek()];
+
+        foreach (TacticsMovement unit in teamList)
+        {
+            turnTeam.Enqueue(unit);
+        }
+
+        StartTurn();
     }
 
-    void PopulateTurnOrder() {
-        //This will do for now. 
-        TurnOrder[0] = troop1;
-        TurnOrder[1] = troop1;
-        TurnOrder[2] = troop2;
-        TurnOrder[3] = troop3;
-    }*/
+    //I chose to make this public, against what happens in the vid. 
+    //I chose to NOT make this public, against what happens in the vid. 
+    static void StartTurn()
+    {
+        if (turnTeam.Count > 0)
+        {
+            turnTeam.Peek().BeginTurn();
+        }
+    }
+
+    public static void EndTurn()
+    {
+        TacticsMovement unit = turnTeam.Dequeue();
+        unit.EndTurn();
+
+        if (turnTeam.Count > 0)
+        {
+            StartTurn();
+        }
+        else {
+            string team = turnKey.Dequeue();
+            turnKey.Enqueue(team);
+        }
+    }
+
+    public static void AddUnit(TacticsMovement unit) 
+    {
+        List<TacticsMovement> list;
+
+        if (!units.ContainsKey(unit.tag))
+        {
+            list = new List<TacticsMovement>();
+            units[unit.tag] = list;
+            if (!turnKey.Contains(unit.tag))
+            {
+                turnKey.Enqueue(unit.tag);
+            }
+        }
+        else
+        {
+            list = units[unit.tag];
+        }
+
+        list.Add(unit);
+    }
+
+    //You'll need a remove function to remove a unit from the queue, for when it is defeated. 
+    //You'll also need to handle having an entire team removed. 
 }

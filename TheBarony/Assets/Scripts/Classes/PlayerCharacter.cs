@@ -16,6 +16,11 @@ public class PlayerCharacter : TacticsMovement
     {
         Debug.DrawRay(transform.position, transform.forward);
 
+        if (!turn)
+        {
+            return;
+        }
+
         if (!moving)
         {
             FindSelectableTiles();
