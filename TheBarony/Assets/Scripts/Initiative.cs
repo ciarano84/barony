@@ -7,20 +7,14 @@ using UnityEngine.XR.WSA.Input;
 
 public class Initiative : MonoBehaviour
 {
-    //We will need to be able to do the following:
-    //Have an AddUnit function that units can call.
-    //Have a StartTurn() they can call.  
-    //have a EndTurn() they can call. 
-    //have an AddUnit(TacticMovement unit) they can call at start. 
+    //I can likely strip this down to just be a list and a queue. 
 
     static List<TacticsMovement> unsortedUnits = new List<TacticsMovement>();
     static List<TacticsMovement> sortedUnits = new List<TacticsMovement>();
     static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
-    static int initiativeCount = 0;
-    static int highestInitiative = 0;
-    static int lowestInitiative = 0;
 
     static bool combatStarted = false;
+    public static TacticsMovement currentUnit;
 
     private void Start()
     {
@@ -54,8 +48,9 @@ public class Initiative : MonoBehaviour
 
     static void StartTurn()
     {
-        Debug.Log(order.Peek());
         order.Peek().BeginTurn();
+        currentUnit = order.Peek();
+        ActionUIManager.UpdateActions(currentUnit);
     }
 
     public static void EndTurn()
@@ -66,6 +61,7 @@ public class Initiative : MonoBehaviour
         //Unsure if this will work as intended. 
         order.Enqueue(unit);
     }
+
 
     void AddUnitMidCombat()
     {

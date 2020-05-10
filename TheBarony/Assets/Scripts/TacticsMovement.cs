@@ -21,6 +21,10 @@ public class TacticsMovement : MonoBehaviour
     public int initiativeMod = 0;
     public int currentInitiative = 0;
 
+    //Required for Action/move economy
+    public int remainingMove;
+    public int remainingActions;
+
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
     Vector3 jumpTarget;
@@ -285,10 +289,4 @@ public class TacticsMovement : MonoBehaviour
     {
         currentInitiative = (Random.Range(1, 20) + initiativeMod);
     }
-
-    /*for debugging
-    public void PrintStates()
-    {
-        Debug.Log("MovingEdge = " + movingEdge);
-    }*/
 }
