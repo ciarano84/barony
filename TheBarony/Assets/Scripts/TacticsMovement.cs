@@ -29,8 +29,6 @@ public class TacticsMovement : MonoBehaviour
     public float remainingMove;
     public int remainingActions;
 
-    public Weapon weapon1;
-
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
     Vector3 jumpTarget;
@@ -40,7 +38,6 @@ public class TacticsMovement : MonoBehaviour
     bool jumpingUp = false;
     bool movingEdge = false;
     bool fallingDown = false;
-    bool leftFirstTile = false;
     
     public void Init() {
         tiles = GameObject.FindGameObjectsWithTag("tile");
@@ -49,10 +46,7 @@ public class TacticsMovement : MonoBehaviour
         CheckInitiative();
         remainingMove = move;
         remainingActions = 1;
-        leftFirstTile = false;
         Initiative.AddUnit(this);
-        weapon1 = this.gameObject.AddComponent<Weapon>();
-        weapon1.owner = this;
     }
 
     public void GetCurrentTile() {

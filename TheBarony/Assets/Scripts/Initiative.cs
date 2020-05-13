@@ -46,7 +46,7 @@ public class Initiative : MonoBehaviour
     {
         order.Peek().BeginTurn();
         currentUnit = order.Peek();
-        actionUIManager.UpdateActions(currentUnit);
+        actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
     }
 
     public static void EndTurn()
@@ -71,7 +71,7 @@ public class Initiative : MonoBehaviour
         {
             if (unit.remainingMove > 0 || unit.remainingActions > 0)
             {
-                actionUIManager.UpdateActions(unit);
+                actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
                 return;
             }
             else

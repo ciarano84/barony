@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ActionUIManager : MonoBehaviour
 {
-    public static TacticsMovement currentUnit;
+    public static PlayerCharacter currentUnit;
     public Button endTurn;
     public Button Weapon1Attack;
     Weapon weapon1;
@@ -16,7 +16,7 @@ public class ActionUIManager : MonoBehaviour
         endTurn.gameObject.SetActive(false);
     }
 
-    public void UpdateActions(TacticsMovement unit)
+    public void UpdateActions(PlayerCharacter unit)
     {
         currentUnit = unit;
         GetEquipmentUI(unit.weapon1);
