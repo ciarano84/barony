@@ -71,12 +71,12 @@ public class Initiative : MonoBehaviour
         {
             if (unit.remainingMove > 0 || unit.remainingActions > 0)
             {
+                actionUIManager.UpdateActions(unit);
                 return;
             }
             else
             {
                 EndTurn();
-                Debug.Log("reached");
             }
         }
     }

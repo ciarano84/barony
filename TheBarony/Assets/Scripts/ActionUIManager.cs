@@ -8,6 +8,8 @@ public class ActionUIManager : MonoBehaviour
 {
     public static TacticsMovement currentUnit;
     public Button endTurn;
+    public Button Weapon1Attack;
+    Weapon weapon1;
 
     private void Start()
     {
@@ -16,6 +18,8 @@ public class ActionUIManager : MonoBehaviour
 
     public void UpdateActions(TacticsMovement unit)
     {
+        GetEquipment();
+
         if (unit.GetComponent<PlayerCharacter>() != null)
         {
             if (unit.remainingMove > 0 || unit.remainingActions > 0)
@@ -23,6 +27,7 @@ public class ActionUIManager : MonoBehaviour
                 //need to make sure this gets turned off at some point. 
                 endTurn.gameObject.SetActive(true);
             }
+            else Clear();
         }
         else {
             //This is for NPC actions, so not really needed atm.
@@ -31,9 +36,20 @@ public class ActionUIManager : MonoBehaviour
         }
     }
 
+    //A default, starting action for testing purposes. 
+    public void PlayerWeapon1(TacticsMovement unit)
+    {
+        weapon1.Attack();
+    }
+
     public void PlayerEndsTurnEarly()
     {
         Initiative.EndTurn();
+    }
+
+    void GetEquipment()
+    {
+        weapon1 = currentUnit.weapon1;
     }
 
     public void Clear() {

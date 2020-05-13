@@ -28,6 +28,8 @@ public class TacticsMovement : MonoBehaviour
     public float remainingMove;
     public int remainingActions;
 
+    public Weapon weapon1;
+
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
     Vector3 jumpTarget;
@@ -46,6 +48,8 @@ public class TacticsMovement : MonoBehaviour
         remainingMove = move;
         leftFirstTile = false;
         Initiative.AddUnit(this);
+        weapon1 = new Weapon();
+        weapon1.owner = this;
     }
 
     public void GetCurrentTile() {
