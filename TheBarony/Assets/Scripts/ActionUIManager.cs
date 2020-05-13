@@ -14,7 +14,7 @@ public class ActionUIManager : MonoBehaviour
         endTurn.gameObject.SetActive(false);
     }
 
-    public static void UpdateActions(TacticsMovement unit)
+    public void UpdateActions(TacticsMovement unit)
     {
         if (unit.GetComponent<PlayerCharacter>() != null)
         {
@@ -36,7 +36,7 @@ public class ActionUIManager : MonoBehaviour
         Initiative.EndTurn();
     }
 
-    public static void Clear() {
+    public void Clear() {
         endTurn.gameObject.SetActive(false);
         //get rid of all Action UI. 
     }

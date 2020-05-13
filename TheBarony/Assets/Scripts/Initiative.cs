@@ -14,10 +14,12 @@ public class Initiative : MonoBehaviour
     static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
 
     static bool combatStarted = false;
-    public static TacticsMovement currentUnit;
+    public static TacticsMovement currentUnit; 
+    static ActionUIManager actionUIManager;
 
     private void Start()
     {
+        actionUIManager = FindObjectOfType<ActionUIManager>();
         StartCoroutine("StartEncounter");
     }
 
@@ -28,12 +30,6 @@ public class Initiative : MonoBehaviour
         foreach (TacticsMovement u in sortedUnits)
         {
             order.Enqueue(u);
-        }
-
-        //Debugging
-        foreach (TacticsMovement x in order)
-        {
-            Debug.Log("unit with initiative of " + x.currentInitiative);
         }
         
         combatStarted = true;
@@ -50,18 +46,40 @@ public class Initiative : MonoBehaviour
     {
         order.Peek().BeginTurn();
         currentUnit = order.Peek();
-        ActionUIManager.UpdateActions(currentUnit);
+        actionUIManager.UpdateActions(currentUnit);
     }
 
     public static void EndTurn()
     {
+        //Debug.Log("EndTurn with current unit as " + order.Peek().name);
         TacticsMovement unit = order.Dequeue();
         unit.EndTurn();
         StartTurn();
-        //Unsure if this will work as intended. 
         order.Enqueue(unit);
+
     }
 
+    public void UpdateUI()
+    {
+        
+    }
+
+    public static void CheckForTurnEnd(TacticsMovement unit) 
+    {
+        //Check its a player Character
+        if (unit.GetComponent<PlayerCharacter>() != null)
+        {
+            if (unit.remainingMove > 0 || unit.remainingActions > 0)
+            {
+                return;
+            }
+            else
+            {
+                EndTurn();
+                Debug.Log("reached");
+            }
+        }
+    }
 
     void AddUnitMidCombat()
     {

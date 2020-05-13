@@ -12,6 +12,9 @@ public class TacticsMovement : MonoBehaviour
 
     Stack<Tile> path = new Stack<Tile>();
     Tile currentTile;
+    
+    //Used to ensure the first tile doesn't count against movement.
+    Tile firstTileInPath;
 
     public bool moving = false;
     public int move = 5;
@@ -22,7 +25,7 @@ public class TacticsMovement : MonoBehaviour
     public int currentInitiative = 0;
 
     //Required for Action/move economy
-    public int remainingMove;
+    public float remainingMove;
     public int remainingActions;
 
     Vector3 velocity = new Vector3();
@@ -34,11 +37,14 @@ public class TacticsMovement : MonoBehaviour
     bool jumpingUp = false;
     bool movingEdge = false;
     bool fallingDown = false;
+    bool leftFirstTile = false;
     
     public void Init() {
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         CheckInitiative();
+        remainingMove = move;
+        leftFirstTile = false;
         Initiative.AddUnit(this);
     }
 
@@ -86,7 +92,7 @@ public class TacticsMovement : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if (t.distance < move)
+            if (t.distance < remainingMove)
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
@@ -112,6 +118,10 @@ public class TacticsMovement : MonoBehaviour
         while (next != null)
         {
             path.Push(next);
+            if (next.parent != null)
+            {
+                firstTileInPath = next;
+            }
             next = next.parent;
         }
     }
@@ -147,6 +157,12 @@ public class TacticsMovement : MonoBehaviour
             {
                 //Tile centre reached
                 transform.position = target;
+                
+                //Take this move off remaining move IF it's not the first tile in the path.
+                if (path.Peek() != firstTileInPath)
+                {
+                    remainingMove--;
+                }
                 path.Pop();
             }
         }
@@ -156,7 +172,7 @@ public class TacticsMovement : MonoBehaviour
             moving = false;
 
             //Ending a turn here, though this would obviously have to change when actions are added in. 
-            Initiative.EndTurn();
+            Initiative.CheckForTurnEnd(this);
         }
     }
 
@@ -283,6 +299,7 @@ public class TacticsMovement : MonoBehaviour
     public void EndTurn()
     {
         turn = false;
+        remainingMove = move;
     }
 
     void CheckInitiative()
