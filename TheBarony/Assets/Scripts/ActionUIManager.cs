@@ -18,7 +18,8 @@ public class ActionUIManager : MonoBehaviour
 
     public void UpdateActions(TacticsMovement unit)
     {
-        GetEquipment();
+        currentUnit = unit;
+        GetEquipmentUI(unit.weapon1);
 
         if (unit.GetComponent<PlayerCharacter>() != null)
         {
@@ -37,9 +38,9 @@ public class ActionUIManager : MonoBehaviour
     }
 
     //A default, starting action for testing purposes. 
-    public void PlayerWeapon1(TacticsMovement unit)
+    public void PlayerWeapon1()
     {
-        weapon1.Attack();
+        currentUnit.weapon1.StartCoroutine("Attack");
     }
 
     public void PlayerEndsTurnEarly()
@@ -47,9 +48,9 @@ public class ActionUIManager : MonoBehaviour
         Initiative.EndTurn();
     }
 
-    void GetEquipment()
+    void GetEquipmentUI(Weapon weapon1)
     {
-        weapon1 = currentUnit.weapon1;
+        //not sure what I need this for actually. 
     }
 
     public void Clear() {

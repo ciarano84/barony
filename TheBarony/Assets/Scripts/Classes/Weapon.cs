@@ -11,10 +11,12 @@ public class Weapon : MonoBehaviour
         owner = GetComponent<TacticsMovement>();
     }
 
-    public void Attack()
+    public IEnumerator Attack()
     {
-        Gizmos.DrawIcon(transform.position, "Light Gizmo.tiff", true);
+        owner.unitAnim.SetTrigger("melee");
         owner.remainingActions--;
+        yield return new WaitForSeconds(1f);
         Initiative.CheckForTurnEnd(owner);
+        yield break;
     }
 }

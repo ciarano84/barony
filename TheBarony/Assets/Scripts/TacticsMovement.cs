@@ -12,6 +12,7 @@ public class TacticsMovement : MonoBehaviour
 
     Stack<Tile> path = new Stack<Tile>();
     Tile currentTile;
+    public Animator unitAnim;
     
     //Used to ensure the first tile doesn't count against movement.
     Tile firstTileInPath;
@@ -44,11 +45,13 @@ public class TacticsMovement : MonoBehaviour
     public void Init() {
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
+        unitAnim = GetComponent<Animator>();
         CheckInitiative();
         remainingMove = move;
+        remainingActions = 1;
         leftFirstTile = false;
         Initiative.AddUnit(this);
-        weapon1 = new Weapon();
+        weapon1 = this.gameObject.AddComponent<Weapon>();
         weapon1.owner = this;
     }
 
@@ -304,6 +307,7 @@ public class TacticsMovement : MonoBehaviour
     {
         turn = false;
         remainingMove = move;
+        remainingActions = 1;
     }
 
     void CheckInitiative()

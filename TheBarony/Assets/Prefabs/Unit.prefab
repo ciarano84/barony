@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4232902180161399290}
   - component: {fileID: 3776180033427457308}
   - component: {fileID: 449622018361949191}
+  - component: {fileID: 5857560626200230535}
   m_Layer: 0
-  m_Name: Troop
+  m_Name: Unit
   m_TagString: character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,10 +46,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52dd51c56f588f346a5fd2471853612b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turn: 0
+  unitAnim: {fileID: 0}
   moving: 0
   move: 8
   jumpHeight: 2
   moveSpeed: 8
+  jumpVelocity: 4.5
+  initiativeMod: 0
+  currentInitiative: 0
+  remainingMove: 0
+  remainingActions: 0
+  weapon1: {fileID: 0}
   health: 0
   damage: 0
 --- !u!65 &449622018361949191
@@ -64,6 +73,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1, z: 0.6}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!95 &5857560626200230535
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4232902180161399285}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98f19e72f066c1b49bbc7fc7b3c4c5b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4232902180826852983
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,6 +103,7 @@ GameObject:
   - component: {fileID: 4232902180826852980}
   - component: {fileID: 4232902180826852987}
   - component: {fileID: 4232902180826852986}
+  - component: {fileID: 3188616878823910792}
   m_Layer: 0
   m_Name: ObjectVisual
   m_TagString: Untagged
@@ -143,3 +172,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &3188616878823910792
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4232902180826852983}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29758a0b88e15f741871b66e9be09b69, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
