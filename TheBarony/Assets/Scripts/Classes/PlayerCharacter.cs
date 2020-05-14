@@ -30,7 +30,7 @@ public class PlayerCharacter : TacticsMovement
 
         if (!moving)
         {
-            FindSelectableTiles();
+            //FindSelectableTiles();
             CheckMouse();
         }
         else

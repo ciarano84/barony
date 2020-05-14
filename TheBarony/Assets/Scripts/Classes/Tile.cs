@@ -69,7 +69,6 @@ public class Tile : MonoBehaviour
             Tile tile = item.GetComponent<Tile>();
             if (tile != null && tile.walkable)
             {
-                //I suspect this is failing for the NPC (but not for the player).
                 RaycastHit hit;
                 if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
                 {

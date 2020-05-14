@@ -10,10 +10,10 @@ public class Initiative : MonoBehaviour
     //I can likely strip this down to just be a list and a queue. 
 
     static List<TacticsMovement> unsortedUnits = new List<TacticsMovement>();
-    static List<TacticsMovement> sortedUnits = new List<TacticsMovement>();
+    public static List<TacticsMovement> sortedUnits = new List<TacticsMovement>();
     static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
 
-    static bool combatStarted = false;
+    //static bool combatStarted = false;
     public static TacticsMovement currentUnit; 
     static ActionUIManager actionUIManager;
 
@@ -72,6 +72,7 @@ public class Initiative : MonoBehaviour
             if (unit.remainingMove > 0 || unit.remainingActions > 0)
             {
                 actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
+                unit.GetComponent<TacticsMovement>().BeginTurn();
                 return;
             }
             else

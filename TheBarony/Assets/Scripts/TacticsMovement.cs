@@ -7,11 +7,12 @@ public class TacticsMovement : MonoBehaviour
 {
     public bool turn = false;
 
-    List<Tile> selectableTiles = new List<Tile>();
+    //Made public so that the weapons can grab it. 
+    public List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
     Stack<Tile> path = new Stack<Tile>();
-    Tile currentTile;
+    public Tile currentTile;
     public Animator unitAnim;
     
     //Used to ensure the first tile doesn't count against movement.
@@ -295,6 +296,10 @@ public class TacticsMovement : MonoBehaviour
     public void BeginTurn() 
     {
         turn = true;
+        //I've put this in to stop it firing constantly. Don't know why original vid had it on update, but I'm sure there's a good reason I'll find out. 
+        GetComponent<PlayerCharacter>().FindSelectableTiles();  
+        
+        GetComponent<PlayerCharacter>().weapon1.GetTargets();
     }
 
     public void EndTurn()
