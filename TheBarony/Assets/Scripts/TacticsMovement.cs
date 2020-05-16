@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-//using System.Numerics;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class TacticsMovement : MonoBehaviour
-{
+{    
     public bool turn = false;
 
     //Made public so that the weapons can grab it. 
@@ -52,7 +52,8 @@ public class TacticsMovement : MonoBehaviour
 
     public void GetCurrentTile() {
         currentTile = GetTargetTile(gameObject);
-        currentTile.current = true;
+        //Removing the below as I think I have it covered elsewhere. 
+        //currentTile.current = true;
     }
 
     public Tile GetTargetTile(GameObject target) {
@@ -173,8 +174,10 @@ public class TacticsMovement : MonoBehaviour
             RemoveSelectableTiles();
             moving = false;
 
-            //Ending a turn here, though this would obviously have to change when actions are added in. 
             Initiative.CheckForTurnEnd(this);
+
+            //was experimenting. 
+            //checkForTurnEnd.Invoke();
         }
     }
 
@@ -297,8 +300,8 @@ public class TacticsMovement : MonoBehaviour
     {
         turn = true;
         //I've put this in to stop it firing constantly. Don't know why original vid had it on update, but I'm sure there's a good reason I'll find out. 
-        GetComponent<PlayerCharacter>().FindSelectableTiles();  
         
+        GetComponent<PlayerCharacter>().FindSelectableTiles();  
         GetComponent<PlayerCharacter>().weapon1.GetTargets();
     }
 
@@ -312,5 +315,28 @@ public class TacticsMovement : MonoBehaviour
     void CheckInitiative()
     {
         currentInitiative = (Random.Range(1, 20) + initiativeMod);
+    }
+
+    private void OnMouseOver()
+    {
+        if (Initiative.currentUnit.remainingActions > 0)
+        {
+            foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().weapon1.targets)
+            {
+                //Debug
+                Debug.Log(target.unitTargeted);
+                
+                if (target.unitTargeted == this && (Initiative.currentUnit != this))
+                {
+                    //change mouse pointer.
+                    ActionUIManager.GetAttackCursor();
+                }
+            }
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        ActionUIManager.SetStandardCursor();
     }
 }

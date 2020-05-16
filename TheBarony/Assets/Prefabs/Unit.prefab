@@ -46,7 +46,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52dd51c56f588f346a5fd2471853612b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkForTurnEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3776180033427457308}
+        m_MethodName: EndTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   turn: 0
+  selectableTiles: []
+  currentTile: {fileID: 0}
   unitAnim: {fileID: 0}
   moving: 0
   move: 8
@@ -57,9 +73,12 @@ MonoBehaviour:
   currentInitiative: 0
   remainingMove: 0
   remainingActions: 0
+  maxHealth: 0
+  currentHealth: 0
+  Resiliance: 0
+  damageModifier: 0
+  attackModifier: 0
   weapon1: {fileID: 0}
-  health: 0
-  damage: 0
 --- !u!65 &449622018361949191
 BoxCollider:
   m_ObjectHideFlags: 0

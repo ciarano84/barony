@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.WSA.Input;
 
 public class Initiative : MonoBehaviour
 {
+    public UnityEvent newTurn;
+    
     //I can likely strip this down to just be a list and a queue. 
-
     static List<TacticsMovement> unsortedUnits = new List<TacticsMovement>();
     public static List<TacticsMovement> sortedUnits = new List<TacticsMovement>();
     static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
@@ -32,7 +35,7 @@ public class Initiative : MonoBehaviour
             order.Enqueue(u);
         }
         
-        combatStarted = true;
+        //combatStarted = true;
         StartTurn();
         yield break;
     }

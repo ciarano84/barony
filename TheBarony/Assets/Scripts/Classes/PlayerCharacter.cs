@@ -43,13 +43,24 @@ public class PlayerCharacter : TacticsMovement
     {
         if (Input.GetMouseButtonUp(0))
         {
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.collider.tag == "tile")
+                    //Work out if a TacticsMovement has been selected.
+                    if (hit.collider.GetComponent<TacticsMovement>() != null)
+                    {
+                        if (weapon1.unitsInMeleeReach.ContainsKey(hit.collider.GetComponent<TacticsMovement>()))
+                        {
+                        //debug
+                        Debug.Log("reached");
+
+                            Tile tile;
+                            weapon1.unitsInMeleeReach.TryGetValue(hit.collider.GetComponent<TacticsMovement>(), out tile);
+                            weapon1.Attack(hit.collider.GetComponent<TacticsMovement>(), tile);
+                        }
+                    }
+                    else if (hit.collider.tag == "tile")
                     {
                         Tile t = hit.collider.GetComponent<Tile>();
                         if (t.selectable)
@@ -58,7 +69,8 @@ public class PlayerCharacter : TacticsMovement
                         }
                     }
                 }
-            } 
         }
     }
+
+
 }

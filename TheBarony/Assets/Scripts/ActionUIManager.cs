@@ -11,9 +11,12 @@ public class ActionUIManager : MonoBehaviour
     public Button Weapon1Attack;
     Weapon weapon1;
 
+    static Texture2D attackCursor;
+
     private void Start()
     {
         endTurn.gameObject.SetActive(false);
+        attackCursor = Resources.Load<Texture2D>("Sword_Cursor");
     }
 
     public void UpdateActions(PlayerCharacter unit)
@@ -56,5 +59,13 @@ public class ActionUIManager : MonoBehaviour
     public void Clear() {
         endTurn.gameObject.SetActive(false);
         //get rid of all Action UI. 
+    }
+
+    public static void GetAttackCursor() {
+        Cursor.SetCursor(attackCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    public static void SetStandardCursor() {
+        Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
     }
 }
