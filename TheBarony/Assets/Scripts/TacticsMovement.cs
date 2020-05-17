@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using UnityEditor.Build;
 
 public class TacticsMovement : MonoBehaviour
 {    
@@ -25,6 +26,9 @@ public class TacticsMovement : MonoBehaviour
     public float jumpVelocity = 4.5f;
     public int initiativeMod = 0;
     public int currentInitiative = 0;
+    Vector3 tileToFace;
+    //Tells it that it will need to turn to face a certain point at the end. 
+    bool turnRequired;
 
     //Required for Action/move economy
     public float remainingMove;
@@ -112,7 +116,7 @@ public class TacticsMovement : MonoBehaviour
     }
 
     public void MoveToTile(Tile tile) 
-    {
+    {   
         path.Clear();
         tile.target = true;
         moving = true;
@@ -128,6 +132,34 @@ public class TacticsMovement : MonoBehaviour
             next = next.parent;
         }
     }
+
+    //overload for when there is a facing
+    public void MoveToTile(Tile tile, Vector3 facing)
+    {
+        //My bit to work out if it should face a certain way at the end. 
+        if (facing != null)
+        {
+            tileToFace = facing;
+            turnRequired = true;
+        }
+
+        //the original tactics movement
+        path.Clear();
+        tile.target = true;
+        moving = true;
+
+        Tile next = tile;
+        while (next != null)
+        {
+            path.Push(next);
+            if (next.parent != null)
+            {
+                firstTileInPath = next;
+            }
+            next = next.parent;
+        }
+    }
+
     public void Move()
     {
         if (path.Count > 0)
@@ -172,12 +204,15 @@ public class TacticsMovement : MonoBehaviour
         else
         {
             RemoveSelectableTiles();
+            if (turnRequired)
+            {
+                tileToFace.y = transform.position.y;
+                transform.LookAt(tileToFace);
+                turnRequired = false;
+            }
+
             moving = false;
-
             Initiative.CheckForTurnEnd(this);
-
-            //was experimenting. 
-            //checkForTurnEnd.Invoke();
         }
     }
 
@@ -195,13 +230,10 @@ public class TacticsMovement : MonoBehaviour
         selectableTiles.Clear();
     }
 
-    void CalculateHeading(Vector3 target)
+    public void CalculateHeading(Vector3 target)
     {
         heading = target - transform.position;
         heading.Normalize();
-
-        //out of interest
-        //Debug.Log(heading);
     }
 
     void SetHorizontalVelocity()
@@ -323,8 +355,6 @@ public class TacticsMovement : MonoBehaviour
         {
             foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().weapon1.targets)
             {
-                //Debug
-                Debug.Log(target.unitTargeted);
                 
                 if (target.unitTargeted == this && (Initiative.currentUnit != this))
                 {

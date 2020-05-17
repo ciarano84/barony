@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    //likely will need someway to clear the dictionary in here. 
-    
     List<Tile> selectableTiles = new List<Tile>();
-    //cos I have this
-    public Dictionary<TacticsMovement, Tile> unitsInMeleeReach = new Dictionary<TacticsMovement, Tile>();
     public PlayerCharacter owner;
     int attackModifier = 0;
     int damageModifier = 2;
@@ -29,35 +25,30 @@ public class Weapon : MonoBehaviour
         damageModifier += owner.damageModifier;
     }
 
-    public IEnumerator Attack(TacticsMovement target, Tile tile)
+    public IEnumerator MeleeAttack(Weapon.Target target)
     {
         //Move script goes here.
-        owner.MoveToTile(tile);
+        owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
 
-        //Get heading to face target. 
-        
-        
+        yield return new WaitUntil(() => !owner.moving);
         
         owner.unitAnim.SetTrigger("melee");
-        owner.remainingActions--;
         yield return new WaitForSeconds(0.3f);
 
         //proxy attack vs 10 in here.
         AbilityChecker.CheckAbility(attackModifier, 10);
 
         yield return new WaitForSeconds(1f);
+        owner.remainingActions--;
         Initiative.CheckForTurnEnd(owner);
         yield break;
     }
 
+    //This function is definitely gammy. 
     public void GetTargets()
     {
+        targets.Clear();        
         Tile tileToMeleeAttackFrom = null;
-        selectableTiles.Clear();
-
-        //This will need removing
-        unitsInMeleeReach.Clear();
-        
         selectableTiles = GetComponent<TacticsMovement>().selectableTiles;
         List<TacticsMovement> units = Initiative.sortedUnits;
 
@@ -67,28 +58,46 @@ public class Weapon : MonoBehaviour
             if (unit != owner.GetComponent<TacticsMovement>())
             {
                 unit.GetCurrentTile();
+                float maxDistance = 200f;
+                bool targetFound = false;
 
-                foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
+                //This way of finding adjacents by distance is flawed, particularly if and when they are up or down. But kinda works. 
+                if (Vector3.Distance(owner.currentTile.transform.position, unit.currentTile.transform.position) < 1.3f)
                 {
-                    foreach (Tile tileCanBeWalkedTo in selectableTiles)
+                    AddTarget(unit, owner.currentTile);
+                } 
+                
+                else foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
+                {
+                        
+                        foreach (Tile tileCanBeWalkedTo in selectableTiles)
                     {
-                        if (tileCanBeWalkedTo == tileNextToTarget)
+                            if (tileCanBeWalkedTo == tileNextToTarget)
                         {
-                            if (tileToMeleeAttackFrom == null) tileToMeleeAttackFrom = tileCanBeWalkedTo;
-                            //Compare against the initial tile. 
-                            else if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < Vector3.Distance(owner.transform.position, tileToMeleeAttackFrom.transform.position))
+                                targetFound = true;
+                            if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
                             {
-                                tileToMeleeAttackFrom = tileCanBeWalkedTo;
+                                maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
+                                tileToMeleeAttackFrom = tileNextToTarget;
                             }
-                            Target target = new Target();
-                            target.unitTargeted = unit;
-                            target.tileToAttackFrom = tileToMeleeAttackFrom;
-
-                            targets.Add(target);
                         }
                     }
                 }
+                if (targetFound)
+                {
+                    AddTarget(unit, tileToMeleeAttackFrom);
+                    targetFound = false;
+                }
+                unit.currentTile.adjacencyList.Clear();
             } 
         }
+    }
+
+    void AddTarget(TacticsMovement unit, Tile tileToAttackFrom)
+    {
+        Target target = new Target();
+        target.unitTargeted = unit;
+        target.tileToAttackFrom = tileToAttackFrom;
+        targets.Add(target);
     }
 }

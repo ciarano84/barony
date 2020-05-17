@@ -54,7 +54,6 @@ public class Initiative : MonoBehaviour
 
     public static void EndTurn()
     {
-        //Debug.Log("EndTurn with current unit as " + order.Peek().name);
         TacticsMovement unit = order.Dequeue();
         unit.EndTurn();
         StartTurn();
