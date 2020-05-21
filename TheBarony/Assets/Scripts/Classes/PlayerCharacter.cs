@@ -30,6 +30,7 @@ public class PlayerCharacter : TacticsMovement
 
         if (!moving)
         {
+            //FindSelectableTiles();
             CheckMouse();
         }
         else
@@ -42,31 +43,34 @@ public class PlayerCharacter : TacticsMovement
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                //Work out if a TacticsMovement has been selected.
-                if (hit.collider.GetComponent<TacticsMovement>() != null)
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
                 {
-                    TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
-                    foreach (Weapon.Target target in weapon1.targets)
+                    //Work out if a TacticsMovement has been selected.
+                    if (hit.collider.GetComponent<TacticsMovement>() != null)
                     {
-                        if (target.unitTargeted == UnitClickedOn)
+                        if (weapon1.unitsInMeleeReach.ContainsKey(hit.collider.GetComponent<TacticsMovement>()))
                         {
-                            weapon1.StartCoroutine("MeleeAttack", target);
+                        //debug
+                        Debug.Log("reached");
+
+                            Tile tile;
+                            weapon1.unitsInMeleeReach.TryGetValue(hit.collider.GetComponent<TacticsMovement>(), out tile);
+                            weapon1.Attack(hit.collider.GetComponent<TacticsMovement>(), tile);
+                        }
+                    }
+                    else if (hit.collider.tag == "tile")
+                    {
+                        Tile t = hit.collider.GetComponent<Tile>();
+                        if (t.selectable)
+                        {
+                            MoveToTile(t);
                         }
                     }
                 }
-                else if (hit.collider.tag == "tile")
-                {
-                    Tile t = hit.collider.GetComponent<Tile>();
-                    if (t.selectable)
-                    {
-                        MoveToTile(t);
-                    }
-                }
-            }
         }
     }
+
+
 }
