@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using UnityEngine;
 using UnityEditor.Build;
 
-public class TacticsMovement : MonoBehaviour
+public class TacticsMovement : Unit
 {    
     public bool turn = false;
 

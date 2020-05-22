@@ -5,13 +5,6 @@ using UnityEngine.EventSystems;
 
 public class PlayerCharacter : TacticsMovement
 {
-    //public int moveSpeed;
-    public int maxHealth;
-    public int currentHealth;
-    public int Resiliance;
-    public int damageModifier;
-    public int attackModifier;
-    public Weapon weapon1;
 
     private void Start()
     {
@@ -46,26 +39,29 @@ public class PlayerCharacter : TacticsMovement
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                //Work out if a TacticsMovement has been selected.
-                if (hit.collider.GetComponent<TacticsMovement>() != null)
+                if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
-                    foreach (Weapon.Target target in weapon1.targets)
+                    //Work out if a TacticsMovement has been selected.
+                    if (hit.collider.GetComponent<TacticsMovement>() != null)
                     {
-                        if (target.unitTargeted == UnitClickedOn)
+                        TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
+                        foreach (Weapon.Target target in weapon1.targets)
                         {
-                            weapon1.StartCoroutine("MeleeAttack", target);
+                            if (target.unitTargeted == UnitClickedOn)
+                            {
+                                weapon1.StartCoroutine("MeleeAttack", target);
+                            }
                         }
                     }
-                }
-                else if (hit.collider.tag == "tile")
-                {
-                    Tile t = hit.collider.GetComponent<Tile>();
-                    if (t.selectable)
+                    else if (hit.collider.tag == "tile")
                     {
-                        MoveToTile(t);
+                        Tile t = hit.collider.GetComponent<Tile>();
+                        if (t.selectable)
+                        {
+                            MoveToTile(t);
+                        }
                     }
-                }
+                }     
             }
         }
     }

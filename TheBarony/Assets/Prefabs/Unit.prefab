@@ -46,6 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52dd51c56f588f346a5fd2471853612b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxBreath: 8
+  currentBreath: 8
+  Resiliance: 0
+  damageModifier: 1
+  attackModifier: 1
+  defendModifier: 0
+  wounds: 0
+  fate: 
+  weapon1: {fileID: 0}
   turn: 0
   selectableTiles: []
   currentTile: {fileID: 0}
@@ -59,12 +68,6 @@ MonoBehaviour:
   currentInitiative: 0
   remainingMove: 0
   remainingActions: 0
-  maxHealth: 0
-  currentHealth: 0
-  Resiliance: 0
-  damageModifier: 0
-  attackModifier: 0
-  weapon1: {fileID: 0}
 --- !u!65 &449622018361949191
 BoxCollider:
   m_ObjectHideFlags: 0

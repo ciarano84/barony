@@ -27,6 +27,7 @@ public class Weapon : MonoBehaviour
 
     public IEnumerator MeleeAttack(Weapon.Target target)
     {
+
         //Move script goes here.
         owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
 
@@ -36,7 +37,7 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         //proxy attack vs 10 in here.
-        AbilityChecker.CheckAbility(attackModifier, 10);
+        AttackManager.AttackRoll(owner, target.unitTargeted);
 
         yield return new WaitForSeconds(1f);
         owner.remainingActions--;
