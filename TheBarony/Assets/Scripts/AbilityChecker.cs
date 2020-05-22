@@ -22,12 +22,6 @@ public class AbilityChecker : MonoBehaviour
             { result += 1; }
         }
         else result = -1;
-
-        //Debug data
-        Debug.Log("First Dice is " + firstDie);
-        Debug.Log("Second Dice is " + secondDie);
-        Debug.Log("result (including + 2) is " + (result));
-
         return result;
     }
 
@@ -66,9 +60,9 @@ public class AbilityChecker : MonoBehaviour
         else result = -1;
 
         //Debug data
-        Debug.Log("First Dice is " + firstDie);
-        Debug.Log("Second Dice is " + secondDie);
-        Debug.Log("result (including + 2) is " + (result));
+        //Debug.Log("First Dice is " + firstDie);
+        //Debug.Log("Second Dice is " + secondDie);
+        //wDebug.Log("result (including + 2) is " + (result));
 
         return result;
     }
