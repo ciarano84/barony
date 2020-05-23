@@ -9,6 +9,9 @@ using UnityEngine.XR.WSA.Input;
 
 public class Initiative : MonoBehaviour
 {
+    //Action bool is TRUE when events are unfolding in the scene, and the intiative order needs to wait for them before moving on. 
+    public static bool action = false;
+    
     public UnityEvent newTurn;
     
     //I can likely strip this down to just be a list and a queue. 
@@ -54,11 +57,11 @@ public class Initiative : MonoBehaviour
 
     public static void EndTurn()
     {
+        if (action) return;
         TacticsMovement unit = order.Dequeue();
         unit.EndTurn();
         StartTurn();
         order.Enqueue(unit);
-
     }
 
     public void UpdateUI()
