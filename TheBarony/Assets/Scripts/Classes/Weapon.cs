@@ -36,7 +36,7 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         //proxy attack vs 10 in here.
-        AbilityChecker.CheckAbility(attackModifier, 10);
+        AttackManager.AttackRoll(this.GetComponent<Unit>(),target.unitTargeted.GetComponent<Unit>());
 
         yield return new WaitForSeconds(1f);
         owner.remainingActions--;

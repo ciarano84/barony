@@ -46,7 +46,7 @@ public class Unit : MonoBehaviour
             amount--;
             if ((currentBreath <= 0) || (wounds >= 3))
             {
-                KO();
+                StartCoroutine("KO");
             }
         }
     }
@@ -55,6 +55,7 @@ public class Unit : MonoBehaviour
     public IEnumerator KO()
     {
         currentBreath = 0;
+
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);
 
