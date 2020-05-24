@@ -17,11 +17,6 @@ public class Unit : MonoBehaviour
     public Weapon weapon1;
     public Animator unitAnim;
 
-    void BeginTurn()
-    { 
-    
-    }
-
     public void UpdateBreath(int amount)
     {
         currentBreath += amount;
@@ -47,7 +42,6 @@ public class Unit : MonoBehaviour
         }
     }
 
-    //Debugging
     public IEnumerator KO()
     {
         //Tell the initiative order to hang on. 
@@ -55,9 +49,10 @@ public class Unit : MonoBehaviour
 
         currentBreath = 0;
         unitAnim.SetBool("dead", true);
-        yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length + unitAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length/* + unitAnim.GetCurrentAnimatorStateInfo(0).normalizedTime*/);
 
         //Tell the initiative order to go
         Initiative.action = false;
+        Initiative.RemoveUnit(this.GetComponent<TacticsMovement>());
     }
 }

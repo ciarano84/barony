@@ -27,31 +27,26 @@ public class Weapon : MonoBehaviour
 
     public IEnumerator MeleeAttack(Weapon.Target target)
     {
-
-        //Move script goes here.
         owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
-
         yield return new WaitUntil(() => !owner.moving);
         
         owner.unitAnim.SetTrigger("melee");
         yield return new WaitForSeconds(0.6f);
 
-        //proxy attack vs 10 in here.
         AttackManager.AttackRoll(owner, target.unitTargeted);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         owner.remainingActions--;
-        Initiative.CheckForTurnEnd(owner);
+        Initiative.CheckForTurnEnd();
         yield break;
     }
 
-    //This function is definitely gammy. 
     public void GetTargets()
     {
         targets.Clear();        
         Tile tileToMeleeAttackFrom = null;
         selectableTiles = GetComponent<TacticsMovement>().selectableTiles;
-        List<TacticsMovement> units = Initiative.sortedUnits;
+        Queue<TacticsMovement> units = Initiative.order;
 
         //Go through each unit on the battlefield, get squares next to it, then work out which can be walked to. Pick one per unit. 
         foreach (TacticsMovement unit in units)

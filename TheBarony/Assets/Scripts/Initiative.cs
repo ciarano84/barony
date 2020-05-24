@@ -10,23 +10,26 @@ using UnityEngine.XR.WSA.Input;
 public class Initiative : MonoBehaviour
 {
     //Action bool is TRUE when events are unfolding in the scene, and the intiative order needs to wait for them before moving on. 
-    public static bool action = false;
+    public static bool action = true;
     
-    public UnityEvent newTurn;
-    
-    //I can likely strip this down to just be a list and a queue. 
     static List<TacticsMovement> unsortedUnits = new List<TacticsMovement>();
     public static List<TacticsMovement> sortedUnits = new List<TacticsMovement>();
-    static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
+    public static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
 
-    //static bool combatStarted = false;
     public static TacticsMovement currentUnit; 
-    static ActionUIManager actionUIManager;
+
+    //trying out the delegate feature - this should have action manager, tiles and weapon subscribe.  
+    public delegate void OnAwaitPlayerInput();
+    public static OnAwaitPlayerInput onAwaitPlayerInput;
 
     private void Start()
     {
-        actionUIManager = FindObjectOfType<ActionUIManager>();
         StartCoroutine("StartEncounter");
+    }
+
+    private void Update()
+    {
+        //Debug.Log("current unit is " + currentUnit);
     }
 
     IEnumerator StartEncounter()
@@ -37,47 +40,43 @@ public class Initiative : MonoBehaviour
         {
             order.Enqueue(u);
         }
-        
-        //combatStarted = true;
-        StartTurn();
+        BeginTurn();
         yield break;
     }
 
-    public static void AddUnit(TacticsMovement unit)
+    static void BeginTurn()
     {
-        unsortedUnits.Add(unit);
-    }
-
-    static void StartTurn()
-    {
-        order.Peek().BeginTurn();
+        action = false;
         currentUnit = order.Peek();
-        actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
+        currentUnit.NextAction();
+        onAwaitPlayerInput();
     }
 
     public static void EndTurn()
     {
         if (action) return;
         TacticsMovement unit = order.Dequeue();
-        unit.EndTurn();
-        StartTurn();
         order.Enqueue(unit);
+        unit.EndTurn();
+        BeginTurn();
     }
 
-    public void UpdateUI()
+    public static void ResumeAction()
     {
-        
+        action = true;
     }
 
-    public static void CheckForTurnEnd(TacticsMovement unit) 
+    public static void CheckForTurnEnd() 
     {
         //Check its a player Character
-        if (unit.GetComponent<PlayerCharacter>() != null)
+        if ((currentUnit.GetComponent<PlayerCharacter>() != null))
         {
-            if (unit.remainingMove > 0 || unit.remainingActions > 0)
+            currentUnit.RemoveSelectableTiles();
+            if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
-                actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
-                unit.GetComponent<TacticsMovement>().BeginTurn();
+                action = false;
+                onAwaitPlayerInput();
+                currentUnit.GetComponent<TacticsMovement>().NextAction();
                 return;
             }
             else
@@ -87,17 +86,15 @@ public class Initiative : MonoBehaviour
         }
     }
 
-    void AddUnitMidCombat()
+    public static void RemoveUnit(TacticsMovement unit)
     {
-        //This is likely to be a lot more complex. the below throws an error. 
+        order = new Queue<TacticsMovement>(order.Where(x => x != unit));
+        Destroy(unit.gameObject);
+        CheckForTurnEnd();
+    }
 
-        /*foreach (TacticsMovement u in sortedUnits)
-        {
-            if (u.currentInitiative > initiativeCount)
-            {
-                sortedUnits.Remove(u);
-                sortedUnits.Add(u);
-            }
-        }*/
+    public static void AddUnit(TacticsMovement unit)
+    {
+        unsortedUnits.Add(unit);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using UnityEditor.Build;
+using UnityEngine.UIElements;
 
 public class TacticsMovement : Unit
 {    
@@ -55,8 +56,6 @@ public class TacticsMovement : Unit
 
     public void GetCurrentTile() {
         currentTile = GetTargetTile(gameObject);
-        //Removing the below as I think I have it covered elsewhere. 
-        //currentTile.current = true;
     }
 
     public Tile GetTargetTile(GameObject target) {
@@ -84,8 +83,10 @@ public class TacticsMovement : Unit
 
     public void FindSelectableTiles()
     {
+        Debug.Log("find selectable tiles called on " + this);
         ComputeAdjacencyList();
         GetCurrentTile();
+        currentTile.current = true;
 
         Queue<Tile> process = new Queue<Tile>();
 
@@ -202,7 +203,6 @@ public class TacticsMovement : Unit
         }
         else
         {
-            RemoveSelectableTiles();
             if (turnRequired)
             {
                 tileToFace.y = transform.position.y;
@@ -211,11 +211,11 @@ public class TacticsMovement : Unit
             }
 
             moving = false;
-            Initiative.CheckForTurnEnd(this);
+            Initiative.CheckForTurnEnd();
         }
     }
 
-    protected void RemoveSelectableTiles()
+    public void RemoveSelectableTiles()
     {
         if (currentTile != null)
         {
@@ -327,11 +327,10 @@ public class TacticsMovement : Unit
         }
     }
 
-    public void BeginTurn() 
+    public void NextAction() 
     {
+        if (this != Initiative.currentUnit) return;
         turn = true;
-        //I've put this in to stop it firing constantly. Don't know why original vid had it on update, but I'm sure there's a good reason I'll find out. 
-        
         GetComponent<PlayerCharacter>().FindSelectableTiles();  
         GetComponent<PlayerCharacter>().weapon1.GetTargets();
     }
@@ -350,18 +349,21 @@ public class TacticsMovement : Unit
 
     private void OnMouseOver()
     {
-        if (Initiative.currentUnit.remainingActions > 0)
+        if (Initiative.action == false)
         {
-            foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().weapon1.targets)
+            if (Initiative.currentUnit.remainingActions > 0)
             {
-                
-                if (target.unitTargeted == this && (Initiative.currentUnit != this))
+                foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().weapon1.targets)
                 {
-                    //change mouse pointer.
-                    ActionUIManager.GetAttackCursor();
+
+                    if (target.unitTargeted == this && (Initiative.currentUnit != this))
+                    {
+                        //change mouse pointer.
+                        ActionUIManager.GetAttackCursor();
+                    }
                 }
             }
-        }
+        } 
     }
 
     private void OnMouseExit()

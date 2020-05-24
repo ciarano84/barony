@@ -16,19 +16,22 @@ public class Tile : MonoBehaviour
     public Tile parent = null;
     public int distance = 0;
 
-    void Update()
+    public void Update()
     {
-        if (current)
+        if (Initiative.action == false)
         {
-            GetComponent<Renderer>().material.color = Color.magenta;
-        }
-        else if (target)
-        {
-            GetComponent<Renderer>().material.color = Color.green;
-        }
-        else if (selectable)
-        {
-            GetComponent<Renderer>().material.color = Color.red;
+            if (current)
+            {
+                GetComponent<Renderer>().material.color = Color.magenta;
+            }
+            else if (target)
+            {
+                GetComponent<Renderer>().material.color = Color.green;
+            }
+            else if (selectable)
+            {
+                GetComponent<Renderer>().material.color = Color.red;
+            }
         }
         else
         {

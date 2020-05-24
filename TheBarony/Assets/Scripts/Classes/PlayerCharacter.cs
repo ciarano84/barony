@@ -8,9 +8,9 @@ public class PlayerCharacter : TacticsMovement
 
     private void Start()
     {
-        Init();
         weapon1 = this.gameObject.AddComponent<Weapon>();
         weapon1.owner = this;
+        Init();
     }
     private void Update()
     {
@@ -50,6 +50,7 @@ public class PlayerCharacter : TacticsMovement
                             if (target.unitTargeted == UnitClickedOn)
                             {
                                 weapon1.StartCoroutine("MeleeAttack", target);
+                                Initiative.ResumeAction();
                             }
                         }
                     }
@@ -59,6 +60,7 @@ public class PlayerCharacter : TacticsMovement
                         if (t.selectable)
                         {
                             MoveToTile(t);
+                            Initiative.ResumeAction();
                         }
                     }
                 }     

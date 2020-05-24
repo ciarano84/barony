@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class ActionUIManager : MonoBehaviour
 {
-    public static PlayerCharacter currentUnit;
     public Button endTurn;
     public Button Weapon1Attack;
     Weapon weapon1;
@@ -15,18 +14,18 @@ public class ActionUIManager : MonoBehaviour
 
     private void Start()
     {
+        Initiative.onAwaitPlayerInput += UpdateActions;
         endTurn.gameObject.SetActive(false);
         attackCursor = Resources.Load<Texture2D>("Sword_Cursor");
     }
 
-    public void UpdateActions(PlayerCharacter unit)
+    void UpdateActions()
     {
-        currentUnit = unit;
-        GetEquipmentUI(unit.weapon1);
+        TacticsMovement currentUnit = Initiative.currentUnit;
 
-        if (unit.GetComponent<PlayerCharacter>() != null)
+        if (currentUnit.GetComponent<PlayerCharacter>() != null)
         {
-            if (unit.remainingMove > 0 || unit.remainingActions > 0)
+            if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
                 //need to make sure this gets turned off at some point. 
                 endTurn.gameObject.SetActive(true);
@@ -40,20 +39,12 @@ public class ActionUIManager : MonoBehaviour
         }
     }
 
-    //A default, starting action for testing purposes. 
-    public void PlayerWeapon1()
-    {
-        currentUnit.weapon1.StartCoroutine("Attack");
-    }
-
+    //Called from the End turn button. 
     public void PlayerEndsTurnEarly()
     {
-        Initiative.EndTurn();
-    }
-
-    void GetEquipmentUI(Weapon weapon1)
-    {
-        //not sure what I need this for actually. 
+        Initiative.currentUnit.remainingMove = 0;
+        Initiative.currentUnit.remainingActions = 0;
+        Initiative.CheckForTurnEnd();
     }
 
     public void Clear() {
