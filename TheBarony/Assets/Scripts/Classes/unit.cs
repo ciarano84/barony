@@ -15,7 +15,6 @@ public class Unit : MonoBehaviour
     //These should be chosen from "drugdge" "elite" "dangerous"
     public string fate;
     public Weapon weapon1;
-    public Animator unitAnim;
 
     public void UpdateBreath(int amount)
     {
@@ -23,7 +22,7 @@ public class Unit : MonoBehaviour
         if (currentBreath < 0)
         {
             currentBreath = 0;
-            StartCoroutine("KO");
+            KO();
         }
     }
 
@@ -37,22 +36,28 @@ public class Unit : MonoBehaviour
             amount--;
             if ((currentBreath <= 0) || (wounds >= 3))
             {
-                StartCoroutine("KO");
+                KO();
             }
         }
     }
 
+<<<<<<< HEAD
     public IEnumerator KO()
+=======
+    //Debugging
+    public void KO()
+>>>>>>> parent of bb5829a... 0.02
     {
-        //Tell the initiative order to hang on. 
-        Initiative.action = true;
-
         currentBreath = 0;
+<<<<<<< HEAD
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length/* + unitAnim.GetCurrentAnimatorStateInfo(0).normalizedTime*/);
 
         //Tell the initiative order to go
         Initiative.action = false;
         Initiative.RemoveUnit(this.GetComponent<TacticsMovement>());
+=======
+        GetComponent<Renderer>().material.color = Color.black;
+>>>>>>> parent of bb5829a... 0.02
     }
 }

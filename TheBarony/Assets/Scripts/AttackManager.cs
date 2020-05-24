@@ -8,8 +8,6 @@ public class AttackManager : MonoBehaviour
     //For now this will just be hitting or missing (no crits). 
     public static void AttackRoll(Unit attacker, Unit defender)
     {
-        Initiative.action = true;
-
         AbilityCheck check = new AbilityCheck();
 
         check.CheckAbility(attacker.attackModifier, defender.defendModifier);
@@ -25,7 +23,6 @@ public class AttackManager : MonoBehaviour
         {
             Debug.Log("miss");
         }
-        Initiative.action = false;
     }
 
     public static void DamageRoll(Unit attacker, Unit defender)

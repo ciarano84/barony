@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityCheck
+public class AbilityCheck //: MonoBehaviour
 {
     //The basic outcome of the roll, with 0 meaning equalling the opposition, and a success. Negative means a failure and under. 
     public int baseResult = 0;

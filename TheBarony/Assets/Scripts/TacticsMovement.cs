@@ -15,6 +15,7 @@ public class TacticsMovement : Unit
 
     Stack<Tile> path = new Stack<Tile>();
     public Tile currentTile;
+    public Animator unitAnim;
     
     //Used to ensure the first tile doesn't count against movement.
     Tile firstTileInPath;
