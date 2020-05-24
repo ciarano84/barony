@@ -6,18 +6,11 @@ using UnityEngine.EventSystems;
 public class PlayerCharacter : TacticsMovement
 {
     //public int moveSpeed;
-    public int maxHealth;
-    public int currentHealth;
-    public int Resiliance;
-    public int damageModifier;
-    public int attackModifier;
-    public Weapon weapon1;
 
     private void Start()
     {
-        Init();
-        weapon1 = this.gameObject.AddComponent<Weapon>();
-        weapon1.owner = this;
+        InitTacticsMovement();
+        InitUnit();
     }
     private void Update()
     {
@@ -42,28 +35,31 @@ public class PlayerCharacter : TacticsMovement
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                //Work out if a TacticsMovement has been selected.
-                if (hit.collider.GetComponent<TacticsMovement>() != null)
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
                 {
-                    TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
-                    foreach (Weapon.Target target in weapon1.targets)
+                    //Work out if a TacticsMovement has been selected.
+                    if (hit.collider.GetComponent<TacticsMovement>() != null)
                     {
-                        if (target.unitTargeted == UnitClickedOn)
+                        TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
+                        foreach (Weapon.Target target in weapon1.targets)
                         {
-                            weapon1.StartCoroutine("MeleeAttack", target);
+                            if (target.unitTargeted == UnitClickedOn)
+                            {
+                                weapon1.StartCoroutine("MeleeAttack", target);
+                            }
                         }
                     }
-                }
-                else if (hit.collider.tag == "tile")
-                {
-                    Tile t = hit.collider.GetComponent<Tile>();
-                    if (t.selectable)
+                    else if (hit.collider.tag == "tile")
                     {
-                        MoveToTile(t);
+                        Tile t = hit.collider.GetComponent<Tile>();
+                        if (t.selectable)
+                        {
+                            MoveToTile(t);
+                        }
                     }
                 }
             }

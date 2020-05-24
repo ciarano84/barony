@@ -1,12 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
-public class unit : MonoBehaviour
+public class Unit : MonoBehaviour
 {
-    
-    void BeginTurn()
-    { 
-    
+    public int maxBreath;
+    public int currentBreath;
+    public int Resiliance;
+    public int damageModifier;
+    public int attackModifier;
+    public int defendModifier;
+    public int wounds;
+
+    public Animator unitAnim;
+    public Weapon weapon1;
+
+    //These should be chosen from "drugdge" "elite" "dangerous"
+    public string fate;
+
+    protected void InitUnit()
+    {
+        weapon1 = gameObject.AddComponent<Weapon>();
+        PlayerCharacter weaponOwner = gameObject.GetComponent<PlayerCharacter>();
+        weapon1.owner = weaponOwner; 
+    }
+
+    public void UpdateBreath(int amount)
+    {
+        currentBreath += amount;
+        if (currentBreath < 0)
+        {
+            currentBreath = 0;
+            KO();
+        }
+    }
+
+    public void UpdateWounds(int amount)
+    {
+        wounds += amount;
+        while (amount > 0)
+        {
+            currentBreath -= 5;
+            wounds++;
+            amount--;
+            if ((currentBreath <= 0) || (wounds >= 3))
+            {
+                KO();
+            }
+        }
+    }
+
+    //This needs sorting out. 
+    public IEnumerator KO()
+    {
+        currentBreath = 0;
+        unitAnim.SetBool("dead", true);
+        yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);
+
+        //Tell the initiative order to go
+        Initiative.RemoveUnit(this);
     }
 }

@@ -84,6 +84,11 @@ public class Initiative : MonoBehaviour
         }
     }
 
+    public static void RemoveUnit(Unit unit)
+    {
+        Debug.Log("remove code would be called");
+    }
+
     void AddUnitMidCombat()
     {
         //This is likely to be a lot more complex. the below throws an error. 

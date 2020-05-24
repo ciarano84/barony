@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using UnityEngine;
 using UnityEditor.Build;
 
-public class TacticsMovement : MonoBehaviour
+public class TacticsMovement : Unit
 {    
     public bool turn = false;
 
@@ -14,7 +14,6 @@ public class TacticsMovement : MonoBehaviour
 
     Stack<Tile> path = new Stack<Tile>();
     public Tile currentTile;
-    public Animator unitAnim;
     
     //Used to ensure the first tile doesn't count against movement.
     Tile firstTileInPath;
@@ -44,7 +43,7 @@ public class TacticsMovement : MonoBehaviour
     bool movingEdge = false;
     bool fallingDown = false;
     
-    public void Init() {
+    public void InitTacticsMovement() {
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         unitAnim = GetComponent<Animator>();
