@@ -49,6 +49,7 @@ public class PlayerCharacter : TacticsMovement
                         {
                             if (target.unitTargeted == UnitClickedOn)
                             {
+                                Initiative.queuedActions += 2;
                                 weapon1.StartCoroutine("MeleeAttack", target);
                             }
                         }
@@ -58,6 +59,7 @@ public class PlayerCharacter : TacticsMovement
                         Tile t = hit.collider.GetComponent<Tile>();
                         if (t.selectable)
                         {
+                            Initiative.queuedActions++;
                             MoveToTile(t);
                         }
                     }

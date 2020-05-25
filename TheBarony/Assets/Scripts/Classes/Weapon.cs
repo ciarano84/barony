@@ -27,7 +27,6 @@ public class Weapon : MonoBehaviour
 
     public IEnumerator MeleeAttack(Weapon.Target target)
     {
-        //Move script goes here.
         owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
 
         yield return new WaitUntil(() => !owner.moving);

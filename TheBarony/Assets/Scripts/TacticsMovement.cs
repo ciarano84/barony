@@ -55,8 +55,7 @@ public class TacticsMovement : Unit
 
     public void GetCurrentTile() {
         currentTile = GetTargetTile(gameObject);
-        //Removing the below as I think I have it covered elsewhere. 
-        //currentTile.current = true;
+        if (turn) currentTile.current = true;
     }
 
     public Tile GetTargetTile(GameObject target) {

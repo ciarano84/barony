@@ -54,6 +54,7 @@ public class Unit : MonoBehaviour
     //This needs sorting out. 
     public IEnumerator KO()
     {
+        Initiative.queuedActions++;
         currentBreath = 0;
 
         unitAnim.SetBool("dead", true);

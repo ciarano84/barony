@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Selector : MonoBehaviour
 {
-    GameObject followedTroop;
-    float offset = 1.75f;
 
     //adjust this to change speed
-    float speed = 2f;
+    float speed = 4f;
 
-    float height = 0.2f;
+    float height = 0.1f;
 
     //Bobs the selector (horrid function that needs clearing up, too much on update). 
     void Update()
@@ -20,11 +18,6 @@ public class Selector : MonoBehaviour
         //calculate what the new Y position will be
         float newY = Mathf.Sin(Time.time * speed);
         //set the object's Y to the new calculated Y
-        transform.position = new Vector3(pos.x, (newY * height), pos.z);
-        transform.position = new Vector3(followedTroop.transform.position.x, transform.position.y + offset, followedTroop.transform.position.z);
-    }
-
-    public void AssignSelector(GameObject troop) {
-        followedTroop = troop;
+        transform.position = new Vector3(pos.x, (newY * height) + 2f, pos.z);
     }
 }

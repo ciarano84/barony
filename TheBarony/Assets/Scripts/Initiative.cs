@@ -80,7 +80,7 @@ public class Initiative : MonoBehaviour
 
     public static IEnumerator CheckForTurnEnd() 
     {
-        Debug.Log("check for turn end called");
+        queuedActions--;
         if (queuedActions > 0)
         {
             yield break;
