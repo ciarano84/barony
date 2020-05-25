@@ -1,11 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Factions {players, enemies, allies}
 
 public class EncounterManager : MonoBehaviour
 {
+    public GameObject encounterEndPanel;
+    static GameObject staticEncounterPanel;
+
+    public Text encounterEndtext;
+    static Text staticEncounterEndtext;
+
+    private void Start()
+    {
+        staticEncounterPanel = encounterEndPanel;
+        staticEncounterEndtext = encounterEndtext;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown("space"))
@@ -31,8 +44,8 @@ public class EncounterManager : MonoBehaviour
         }
 
         if (playerVictory) 
-        { 
-            OnPlayerVictory();
+        {
+            EncounterEnd(Factions.players);
             return;
         }
 
@@ -40,7 +53,7 @@ public class EncounterManager : MonoBehaviour
         {
             if (unit.faction == Factions.players) return;
         }
-        OnEnemyVictory();
+        EncounterEnd(Factions.enemies);
     }
 
     static void CheckForOtherWinCondition()
@@ -48,13 +61,10 @@ public class EncounterManager : MonoBehaviour
         //have other win conditions added as methods, then do a delegate in the start to decide which is going to get called.     
     }
 
-    static void OnPlayerVictory()
+    static void EncounterEnd(Factions faction)
     {
-        Debug.Log("Player victory");
-    }
-
-    static void OnEnemyVictory()
-    {
-        Debug.Log("Enemy victory");
+        Initiative.queuedActions++;
+        staticEncounterPanel.SetActive(true);
+        staticEncounterEndtext.text = (faction + " are victorious!");
     }
 }
