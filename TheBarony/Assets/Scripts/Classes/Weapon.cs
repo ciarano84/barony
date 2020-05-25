@@ -38,9 +38,9 @@ public class Weapon : MonoBehaviour
         //proxy attack vs 10 in here.
         AttackManager.AttackRoll(this.GetComponent<Unit>(),target.unitTargeted.GetComponent<Unit>());
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         owner.remainingActions--;
-        Initiative.CheckForTurnEnd();
+        Initiative.EndAction();
         yield break;
     }
 

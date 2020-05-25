@@ -211,7 +211,7 @@ public class TacticsMovement : Unit
             }
 
             moving = false;
-            Initiative.CheckForTurnEnd();
+            Initiative.EndAction();
         }
     }
 
@@ -331,7 +331,6 @@ public class TacticsMovement : Unit
     {
         turn = true;
         //I've put this in to stop it firing constantly. Don't know why original vid had it on update, but I'm sure there's a good reason I'll find out. 
-
         GetComponent<PlayerCharacter>().FindSelectableTiles();  
         GetComponent<PlayerCharacter>().weapon1.GetTargets();
     }

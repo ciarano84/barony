@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using UnityEditor.ProjectWindowCallback;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,7 +10,7 @@ using UnityEngine.XR.WSA.Input;
 
 public class Initiative : MonoBehaviour
 {
-    public UnityEvent newTurn;
+    public static int queuedActions;
     
     //I can likely strip this down to just be a list and a queue. 
     static List<TacticsMovement> unsortedUnits = new List<TacticsMovement>();
@@ -20,9 +21,19 @@ public class Initiative : MonoBehaviour
     public static TacticsMovement currentUnit; 
     static ActionUIManager actionUIManager;
 
-    private void Start()
+    public static Initiative initiativeManager;
+    public GameObject selector;
+
+
+    public void Awake()
     {
+        initiativeManager = this;
+    }
+
+    private void Start()
+    { 
         actionUIManager = FindObjectOfType<ActionUIManager>();
+        selector = GameObject.FindGameObjectWithTag("selector");
         StartCoroutine("StartEncounter");
     }
 
@@ -49,6 +60,8 @@ public class Initiative : MonoBehaviour
     {
         order.Peek().BeginTurn();
         currentUnit = order.Peek();
+        GameObject selector = GameObject.FindGameObjectWithTag("selector");
+        selector.transform.SetParent(currentUnit.transform, false);
         actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
     }
 
@@ -58,7 +71,6 @@ public class Initiative : MonoBehaviour
         unit.EndTurn();
         order.Enqueue(unit);
         StartTurn();
-
     }
 
     public void UpdateUI()
@@ -66,17 +78,27 @@ public class Initiative : MonoBehaviour
         
     }
 
-    public static void CheckForTurnEnd() 
+    public static IEnumerator CheckForTurnEnd() 
     {
-        if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
+        Debug.Log("check for turn end called");
+        if (queuedActions > 0)
         {
-            actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
-            currentUnit.GetComponent<TacticsMovement>().BeginTurn();
-            return;
+            yield break;
         }
         else
         {
-            EndTurn();
+            yield return new WaitForSeconds(1f);
+            if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
+            {
+                actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
+                currentUnit.GetComponent<TacticsMovement>().BeginTurn();
+                yield break;
+            }
+            else
+            {
+                EndTurn();
+                yield break;
+            }
         }
     }
 
@@ -84,7 +106,12 @@ public class Initiative : MonoBehaviour
     {
         order = new Queue<TacticsMovement>(order.Where(x => x != unit));
         Destroy(unit.gameObject);
-        CheckForTurnEnd();
+        EndAction();
+    }
+
+    public static void EndAction()
+    {
+        initiativeManager.StartCoroutine(CheckForTurnEnd());
     }
 
     void AddUnitMidCombat()
