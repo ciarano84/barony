@@ -211,7 +211,7 @@ public class TacticsMovement : Unit
             }
 
             moving = false;
-            Initiative.CheckForTurnEnd(this);
+            Initiative.CheckForTurnEnd();
         }
     }
 

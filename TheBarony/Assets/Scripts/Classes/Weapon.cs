@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         owner.remainingActions--;
-        Initiative.CheckForTurnEnd(owner);
+        Initiative.CheckForTurnEnd();
         yield break;
     }
 
@@ -50,10 +50,10 @@ public class Weapon : MonoBehaviour
         targets.Clear();        
         Tile tileToMeleeAttackFrom = null;
         selectableTiles = GetComponent<TacticsMovement>().selectableTiles;
-        List<TacticsMovement> units = Initiative.sortedUnits;
+        //List<TacticsMovement> units = Initiative.sortedUnits;
 
         //Go through each unit on the battlefield, get squares next to it, then work out which can be walked to. Pick one per unit. 
-        foreach (TacticsMovement unit in units)
+        foreach (TacticsMovement unit in Initiative.order)
         {
             if (unit != owner.GetComponent<TacticsMovement>())
             {

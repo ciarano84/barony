@@ -14,7 +14,7 @@ public class Initiative : MonoBehaviour
     //I can likely strip this down to just be a list and a queue. 
     static List<TacticsMovement> unsortedUnits = new List<TacticsMovement>();
     public static List<TacticsMovement> sortedUnits = new List<TacticsMovement>();
-    static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
+    public static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
 
     //static bool combatStarted = false;
     public static TacticsMovement currentUnit; 
@@ -66,27 +66,25 @@ public class Initiative : MonoBehaviour
         
     }
 
-    public static void CheckForTurnEnd(TacticsMovement unit) 
+    public static void CheckForTurnEnd() 
     {
-        //Check its a player Character
-        if (unit.GetComponent<PlayerCharacter>() != null)
+        if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
         {
-            if (unit.remainingMove > 0 || unit.remainingActions > 0)
-            {
-                actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
-                unit.GetComponent<TacticsMovement>().BeginTurn();
-                return;
-            }
-            else
-            {
-                EndTurn();
-            }
+            actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
+            currentUnit.GetComponent<TacticsMovement>().BeginTurn();
+            return;
+        }
+        else
+        {
+            EndTurn();
         }
     }
 
     public static void RemoveUnit(Unit unit)
     {
-        Debug.Log("remove code would be called");
+        order = new Queue<TacticsMovement>(order.Where(x => x != unit));
+        Destroy(unit.gameObject);
+        CheckForTurnEnd();
     }
 
     void AddUnitMidCombat()
