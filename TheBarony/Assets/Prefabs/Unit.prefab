@@ -50,7 +50,7 @@ MonoBehaviour:
   currentBreath: 5
   Resiliance: 0
   damageModifier: 20
-  attackModifier: 2
+  attackModifier: 5
   defendModifier: 0
   wounds: 0
   unitAnim: {fileID: 0}

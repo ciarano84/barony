@@ -56,8 +56,8 @@ public class Initiative : MonoBehaviour
     {
         TacticsMovement unit = order.Dequeue();
         unit.EndTurn();
-        StartTurn();
         order.Enqueue(unit);
+        StartTurn();
 
     }
 
