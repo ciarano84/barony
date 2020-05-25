@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class Unit : MonoBehaviour
     public int attackModifier;
     public int defendModifier;
     public int wounds;
+
+    public Factions faction;
 
     public Animator unitAnim;
     public Weapon weapon1;

@@ -15,20 +15,17 @@ public class AttackManager : MonoBehaviour
         if (check.baseResult >= 0)
         //hit goes here. 
         {
-            Debug.Log("hit");
             DamageRoll(attacker, defender);
         }
         else
         //miss goes here. 
         {
-            Debug.Log("miss");
+
         }
     }
 
     public static void DamageRoll(Unit attacker, Unit defender)
     {
-        Debug.Log("damage called");
-        
         AbilityCheck check = new AbilityCheck();
 
         check.CheckAbility(attacker.damageModifier, defender.Resiliance);

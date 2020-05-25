@@ -106,6 +106,7 @@ public class Initiative : MonoBehaviour
     {
         order = new Queue<TacticsMovement>(order.Where(x => x != unit));
         Destroy(unit.gameObject);
+        EncounterManager.CheckForFactionDeath();
         EndAction();
     }
 
