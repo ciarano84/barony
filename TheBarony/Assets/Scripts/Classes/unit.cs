@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    public string name;
+    public string className;
     public int maxBreath;
     public int currentBreath;
     public int Resiliance;
