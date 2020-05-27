@@ -4,23 +4,37 @@ using UnityEngine;
 
 public class ProxyRosta : MonoBehaviour
 {
-    //This script is JUST to give us a starting List of troops to work from. 
+    //This whole script is JUST to give us a starting List of troops to work from. 
 
-    List<PlayerCharacter> proxyRosta = new List<PlayerCharacter>();
-    public int rostaTotal;
     string[] names = { "bob", "Sandy", "Rex", "Bill", "Helen", "Walter", "Elsa", "Reiner", "Daz", "Peter", "Lucy" };
 
+    static public int numSelectors = 5;
+    public static List<PlayerCharacter> proxyRosta = new List<PlayerCharacter>();
+    public GameObject unit1;
+    public GameObject unit2;
+    public GameObject unit3;
+    public GameObject unit4;
+    public GameObject unit5;
+    public GameObject unit6;
     void Start()
     {
-        for (int i = rostaTotal; i > 0; i--)
+        proxyRosta.Add(unit1.GetComponent<PlayerCharacter>());
+        proxyRosta.Add(unit2.GetComponent<PlayerCharacter>());
+        proxyRosta.Add(unit3.GetComponent<PlayerCharacter>());
+        proxyRosta.Add(unit4.GetComponent<PlayerCharacter>());
+        proxyRosta.Add(unit5.GetComponent<PlayerCharacter>());
+        proxyRosta.Add(unit6.GetComponent<PlayerCharacter>());
+
+        foreach (PlayerCharacter p in proxyRosta)
         {
-            CreatePlayerInstance();
+            AssignStats(p);
         }
+
+        RostaManager.BringInRosta();
     }
 
-    PlayerCharacter CreatePlayerInstance()
+    void AssignStats(PlayerCharacter player)
     {
-        PlayerCharacter player = new PlayerCharacter();
         player.name = (names[Random.Range(0, names.Length)] + names[Random.Range(0, names.Length)]);
         if (Random.Range(0, 10) > 6) player.className = ("Heavy");
         else player.className = ("Scout");
@@ -30,7 +44,5 @@ public class ProxyRosta : MonoBehaviour
         player.defendModifier = -1 + Random.Range(0, 3);
         player.damageModifier = -1 + Random.Range(0, 3);
         player.Resiliance = -1 + Random.Range(0, 3);
-
-        return player;
     }
 }
