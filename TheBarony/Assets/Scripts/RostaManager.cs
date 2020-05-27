@@ -11,9 +11,11 @@ public class RostaManager : MonoBehaviour
 
     public delegate void NewUnitShown();
     public static NewUnitShown newUnitShown;
+    static Vector3 pedestalPosition;
+    public GameObject pedestal;
+    public GameObject hidden;
 
     enum Direction {left, right};
-    Direction direction;
 
     public Text nameText;
     public Text classText;
@@ -26,13 +28,8 @@ public class RostaManager : MonoBehaviour
 
     private void Start()
     {
-        RostaManager.newUnitShown += startShowStatsCoroutine;
-        StartCoroutine(showStats());
-    }
-
-    void startShowStatsCoroutine()
-    {
-        StartCoroutine(showStats());
+        pedestalPosition = pedestal.transform.position;
+        RostaManager.newUnitShown += ShowStats;
     }
 
     // This brings in the rosta and is currently called by the proxy script. 
@@ -42,13 +39,13 @@ public class RostaManager : MonoBehaviour
         {
             rosta.Add(go);
             go.gameObject.SetActive(false);
+            go.gameObject.transform.Find("Visual").gameObject.transform.position = pedestalPosition;
         }
         ShowUnit(Direction.right);
     }
 
-    public IEnumerator showStats()
+    public void ShowStats()
     {
-        yield return new WaitForSeconds(0f);
         nameText.text = (rosta[currentTroopShown].name);
         classText.text = (rosta[currentTroopShown].className);
         breathText.text = (rosta[currentTroopShown].maxBreath.ToString());
@@ -57,7 +54,6 @@ public class RostaManager : MonoBehaviour
         damageText.text = (rosta[currentTroopShown].damageModifier.ToString());
         armourText.text = (rosta[currentTroopShown].Resiliance.ToString());
         speedText.text = (rosta[currentTroopShown].moveSpeed.ToString());
-        yield break;
     }
 
     public void OnRightButtonClick() { GetNextsUnit(); }
@@ -74,10 +70,10 @@ public class RostaManager : MonoBehaviour
 
     static void ShowUnit(Direction direction)
     {
+
         Debug.Log("show unit called and currentTroopShown int is " + currentTroopShown + " and rosta count is " + rosta.Count);
         rosta[currentTroopShown].gameObject.SetActive(false);
 
-        //Will need something here to make it loop round. 
         if (direction == Direction.right)
         {
             currentTroopShown++;
@@ -96,9 +92,8 @@ public class RostaManager : MonoBehaviour
         }
 
         rosta[currentTroopShown].gameObject.SetActive(true);
-        //cos this is static!
-        //showStats();
 
+        //get the delegate to call subscribers. 
         newUnitShown();
     }
 }
