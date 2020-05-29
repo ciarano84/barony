@@ -20,6 +20,7 @@ public class EncounterManager : MonoBehaviour
 
     List<GameObject> playerSquad = new List<GameObject>();
     public GameObject playerPrefab;
+    public GameObject enemyPrefab;
 
     //This is all in lieu of an actual system of pulling in enemies. 
     List<List<GameObject>> enemyCells = new List<List<GameObject>>(); 
@@ -57,7 +58,7 @@ public class EncounterManager : MonoBehaviour
             for (int x = EnemiesPerCell; x > 0; x--)
             {
                 Debug.Log("enemy created");
-                GameObject enemy = Instantiate(playerPrefab);
+                GameObject enemy = Instantiate(enemyPrefab);
                 enemyCells[i].Add(enemy);
             }
         }
@@ -74,7 +75,7 @@ public class EncounterManager : MonoBehaviour
             arenaBlockScript.spawnPoints = ShuffleArray(arenaBlockScript.spawnPoints);  
         }
 
-        PlaceUnitsOnSpawnPoints(playerSquad, arenaBlocks[1].GetComponent<ArenaBlock>());
+        PlaceUnitsOnSpawnPoints(playerSquad, arenaBlocks[0].GetComponent<ArenaBlock>());
 
         /*int debugListNumber = 0;
         foreach (List<GameObject> cell in enemyCells)
