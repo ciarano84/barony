@@ -46,7 +46,7 @@ public class RostaManager : MonoBehaviour
 
     public void ShowStats()
     {
-        nameText.text = (rosta[currentTroopShown].name);
+        nameText.text = (rosta[currentTroopShown].unitName);
         classText.text = (rosta[currentTroopShown].className);
         breathText.text = (rosta[currentTroopShown].maxBreath.ToString());
         attackText.text = (rosta[currentTroopShown].attackModifier.ToString());

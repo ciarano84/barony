@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public string name;
+    public string unitName;
     public string className;
     public int maxBreath;
     public int currentBreath;

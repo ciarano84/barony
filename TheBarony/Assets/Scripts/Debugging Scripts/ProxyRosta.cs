@@ -35,7 +35,7 @@ public class ProxyRosta : MonoBehaviour
 
     void AssignStats(PlayerCharacter player)
     {
-        player.name = (names[Random.Range(0, names.Length)] + names[Random.Range(0, names.Length)]);
+        player.unitName = (names[Random.Range(0, names.Length)] + names[Random.Range(0, names.Length)]);
         if (Random.Range(0, 10) > 6) player.className = ("Heavy");
         else player.className = ("Scout");
         player.maxBreath = 4 + Random.Range(0, 5);
