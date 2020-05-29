@@ -37,7 +37,7 @@ public class TacticsMovement : Unit
     Vector3 heading = new Vector3();
     Vector3 jumpTarget;
 
-    float halfHeight = 0;
+    public float halfHeight = 0;
 
     bool jumpingUp = false;
     bool movingEdge = false;

@@ -963,6 +963,8 @@ MonoBehaviour:
   - {fileID: 1512913059}
   playerPrefab: {fileID: 6211376839704097251, guid: 2df62ea2db2494941ab843993de30677,
     type: 3}
+  numberOfEnemyCells: 2
+  EnemiesPerCell: 3
 --- !u!4 &854366418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7996415037781218376, guid: 6f6b944a620892a4580556b299648826,

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,16 +21,21 @@ public class EncounterManager : MonoBehaviour
     List<GameObject> playerSquad = new List<GameObject>();
     public GameObject playerPrefab;
 
-    List<Unit> enemySquad = new List<Unit>();
+    //This is all in lieu of an actual system of pulling in enemies. 
+    List<List<GameObject>> enemyCells = new List<List<GameObject>>(); 
+    public int numberOfEnemyCells;
+    public int EnemiesPerCell;
 
     private void Start()
     {
         staticEncounterPanel = encounterEndPanel;
         staticEncounterEndtext = encounterEndtext;
         GetPlayers();
-        //Get enemies into scene (remember they will add themselves to initiative)
+        GetEnemies();
         SetPositions();
     }
+
+
 
     void GetPlayers()
     {
@@ -41,21 +47,51 @@ public class EncounterManager : MonoBehaviour
         }
     }
 
-
-    //This needs writing. Will be what positions players and enemies. 
+    void GetEnemies()
+    {
+        for (int i = 0; i < numberOfEnemyCells; i++)
+        {
+            Debug.Log("Cell iterated through");
+            //is this overwriting? 
+            enemyCells.Add(new List<GameObject>());
+            for (int x = EnemiesPerCell; x > 0; x--)
+            {
+                Debug.Log("enemy created");
+                GameObject enemy = Instantiate(playerPrefab);
+                enemyCells[i].Add(enemy);
+            }
+        }
+    }
+ 
     void SetPositions()
     {
-        //choose one block for the players to be set up on.
-        //set them up. 
-        //chose another bock for the enemies to be set up on. 
-        //set them up. 
-
         //Randomize the blocks
         ShuffleArray(arenaBlocks);
+
         foreach (GameObject a in arenaBlocks)
         {
             ArenaBlock arenaBlockScript = a.GetComponent<ArenaBlock>();
             arenaBlockScript.spawnPoints = ShuffleArray(arenaBlockScript.spawnPoints);  
+        }
+
+        PlaceUnitsOnSpawnPoints(playerSquad, arenaBlocks[1].GetComponent<ArenaBlock>());
+
+        /*int debugListNumber = 0;
+        foreach (List<GameObject> cell in enemyCells)
+        {
+            Debug.Log("list being printed is: " + cell);
+            debugListNumber++;
+            foreach (GameObject go in cell)
+            {
+                Debug.Log(go);
+            }
+        }*/
+
+            int blockToPlaceOn = 1;
+        foreach (List<GameObject> cell in enemyCells)
+        {
+            PlaceUnitsOnSpawnPoints(cell, arenaBlocks[blockToPlaceOn].GetComponent<ArenaBlock>());
+            blockToPlaceOn++;
         }
 
     }
@@ -121,5 +157,15 @@ public class EncounterManager : MonoBehaviour
         }
 
         return source;
+    }
+
+    void PlaceUnitsOnSpawnPoints(List<GameObject> units, ArenaBlock arenaBlock)
+    {
+        for (int i = 0; i < units.Count; i++)
+        {
+            Vector3 p = arenaBlock.spawnPoints[i].transform.position;
+            //The following includes a hack. I'm not ACTUALLY working out where to place them on the Y, I'm just putting in a value that works for basic units as is. Will need remidying. 
+            units[i].transform.position = new Vector3 (p.x, p.y + 0.5f/*2 * (p.y + units[i].GetComponent<TacticsMovement>().halfHeight)*/, p.z);
+        }
     }
 }
