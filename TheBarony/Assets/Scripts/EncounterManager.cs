@@ -52,14 +52,13 @@ public class EncounterManager : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemyCells; i++)
         {
-            Debug.Log("Cell iterated through");
             //is this overwriting? 
             enemyCells.Add(new List<GameObject>());
             for (int x = EnemiesPerCell; x > 0; x--)
             {
-                Debug.Log("enemy created");
                 GameObject enemy = Instantiate(enemyPrefab);
                 enemyCells[i].Add(enemy);
+                enemy.GetComponent<Unit>().faction = Factions.enemies;
             }
         }
     }
@@ -76,17 +75,6 @@ public class EncounterManager : MonoBehaviour
         }
 
         PlaceUnitsOnSpawnPoints(playerSquad, arenaBlocks[0].GetComponent<ArenaBlock>());
-
-        /*int debugListNumber = 0;
-        foreach (List<GameObject> cell in enemyCells)
-        {
-            Debug.Log("list being printed is: " + cell);
-            debugListNumber++;
-            foreach (GameObject go in cell)
-            {
-                Debug.Log(go);
-            }
-        }*/
 
             int blockToPlaceOn = 1;
         foreach (List<GameObject> cell in enemyCells)

@@ -49,7 +49,6 @@ public class Weapon : MonoBehaviour
         targets.Clear();        
         Tile tileToMeleeAttackFrom = null;
         selectableTiles = GetComponent<TacticsMovement>().selectableTiles;
-        //List<TacticsMovement> units = Initiative.sortedUnits;
 
         //Go through each unit on the battlefield, get squares next to it, then work out which can be walked to. Pick one per unit. 
         foreach (TacticsMovement unit in Initiative.order)
@@ -59,6 +58,8 @@ public class Weapon : MonoBehaviour
                 unit.GetCurrentTile();
                 float maxDistance = 200f;
                 bool targetFound = false;
+
+                Debug.Log("owner is " + owner.currentTile.transform.position);
 
                 //This way of finding adjacents by distance is flawed, particularly if and when they are up or down. But kinda works. 
                 if (Vector3.Distance(owner.currentTile.transform.position, unit.currentTile.transform.position) < 1.3f)

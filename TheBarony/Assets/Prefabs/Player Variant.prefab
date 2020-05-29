@@ -32,6 +32,36 @@ PrefabInstance:
       propertyPath: move
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: maxBreath
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: currentBreath
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: Resiliance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: damageModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: attackModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: defendModifier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4232902180161399285, guid: 6c152d632ebb9d448a7485221bbd4289,
         type: 3}
       propertyPath: m_Name
