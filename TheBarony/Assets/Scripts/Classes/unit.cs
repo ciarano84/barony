@@ -4,7 +4,8 @@ using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+[System.Serializable]
+public class UnitInfo
 {
     public string unitName;
     public string className;
@@ -15,41 +16,45 @@ public class Unit : MonoBehaviour
     public int attackModifier;
     public int defendModifier;
     public int wounds;
-
     public Factions faction;
-
     public Animator unitAnim;
     public Weapon weapon1;
+}
+
+public class Unit : MonoBehaviour
+{
+    public UnitInfo unitInfo;
+    public Animator unitAnim;
 
     //These should be chosen from "drugdge" "elite" "dangerous"
     public string fate;
 
     protected void InitUnit()
     {
-        weapon1 = gameObject.AddComponent<Weapon>();
+        unitInfo.weapon1 = gameObject.AddComponent<Weapon>();
         PlayerCharacter weaponOwner = gameObject.GetComponent<PlayerCharacter>();
-        weapon1.owner = weaponOwner; 
+        unitInfo.weapon1.owner = weaponOwner; 
     }
 
     public void UpdateBreath(int amount)
     {
-        currentBreath += amount;
-        if (currentBreath < 0)
+        unitInfo.currentBreath += amount;
+        if (unitInfo.currentBreath < 0)
         {
-            currentBreath = 0;
+            unitInfo.currentBreath = 0;
             KO();
         }
     }
 
     public void UpdateWounds(int amount)
     {
-        wounds += amount;
+        unitInfo.wounds += amount;
         while (amount > 0)
         {
-            currentBreath -= 5;
-            wounds++;
+            unitInfo.currentBreath -= 5;
+            unitInfo.wounds++;
             amount--;
-            if ((currentBreath <= 0) || (wounds >= 3))
+            if ((unitInfo.currentBreath <= 0) || (unitInfo.wounds >= 3))
             {
                 StartCoroutine("KO");
             }
@@ -60,7 +65,7 @@ public class Unit : MonoBehaviour
     public IEnumerator KO()
     {
         Initiative.queuedActions++;
-        currentBreath = 0;
+        unitInfo.currentBreath = 0;
 
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);

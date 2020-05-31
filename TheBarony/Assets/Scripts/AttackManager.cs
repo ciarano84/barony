@@ -10,7 +10,7 @@ public class AttackManager : MonoBehaviour
     {
         AbilityCheck check = new AbilityCheck();
 
-        check.CheckAbility(attacker.attackModifier, defender.defendModifier);
+        check.CheckAbility(attacker.unitInfo.attackModifier, defender.unitInfo.defendModifier);
 
         if (check.baseResult >= 0)
         //hit goes here. 
@@ -28,7 +28,7 @@ public class AttackManager : MonoBehaviour
     {
         AbilityCheck check = new AbilityCheck();
 
-        check.CheckAbility(attacker.damageModifier, defender.Resiliance);
+        check.CheckAbility(attacker.unitInfo.damageModifier, defender.unitInfo.Resiliance);
 
         int result = check.baseResult;
 

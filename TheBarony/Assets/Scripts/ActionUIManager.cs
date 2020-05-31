@@ -22,7 +22,7 @@ public class ActionUIManager : MonoBehaviour
     public void UpdateActions(PlayerCharacter unit)
     {
         currentUnit = unit;
-        GetEquipmentUI(unit.weapon1);
+        GetEquipmentUI(unit.unitInfo.weapon1);
 
         if (unit.GetComponent<PlayerCharacter>() != null)
         {
@@ -43,7 +43,7 @@ public class ActionUIManager : MonoBehaviour
     //A default, starting action for testing purposes. 
     public void PlayerWeapon1()
     {
-        currentUnit.weapon1.StartCoroutine("Attack");
+        currentUnit.unitInfo.weapon1.StartCoroutine("Attack");
     }
 
     public void PlayerEndsTurnEarly()

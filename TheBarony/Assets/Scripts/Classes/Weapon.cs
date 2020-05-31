@@ -21,8 +21,8 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         owner = GetComponent<PlayerCharacter>();
-        attackModifier += owner.attackModifier;
-        damageModifier += owner.damageModifier;
+        attackModifier += owner.unitInfo.attackModifier;
+        damageModifier += owner.unitInfo.damageModifier;
     }
 
     public IEnumerator MeleeAttack(Weapon.Target target)

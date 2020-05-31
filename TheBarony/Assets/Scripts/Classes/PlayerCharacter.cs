@@ -45,12 +45,12 @@ public class PlayerCharacter : TacticsMovement
                     if (hit.collider.GetComponent<TacticsMovement>() != null)
                     {
                         TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
-                        foreach (Weapon.Target target in weapon1.targets)
+                        foreach (Weapon.Target target in unitInfo.weapon1.targets)
                         {
                             if (target.unitTargeted == UnitClickedOn)
                             {
                                 Initiative.queuedActions += 2;
-                                weapon1.StartCoroutine("MeleeAttack", target);
+                                unitInfo.weapon1.StartCoroutine("MeleeAttack", target);
                             }
                         }
                     }

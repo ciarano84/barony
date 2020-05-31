@@ -9,6 +9,8 @@ public enum Factions {players, enemies, allies}
 
 public class EncounterManager : MonoBehaviour
 {
+    public RostaInfo rosta;
+
     public GameObject encounterEndPanel;
     static GameObject staticEncounterPanel;
 
@@ -36,14 +38,13 @@ public class EncounterManager : MonoBehaviour
         SetPositions();
     }
 
-
-
     void GetPlayers()
     {
         //This next bit is in lieu of feeding in from the rosta. 
-        for (int i = 4; i > 0; i--)
+        for (int i = 0; i < rosta.squad.Count; i++)
         {
             GameObject player = Instantiate(playerPrefab);
+            //get the data. 
             playerSquad.Add(player);
         }
     }
@@ -58,7 +59,7 @@ public class EncounterManager : MonoBehaviour
             {
                 GameObject enemy = Instantiate(enemyPrefab);
                 enemyCells[i].Add(enemy);
-                enemy.GetComponent<Unit>().faction = Factions.enemies;
+                enemy.GetComponent<Unit>().unitInfo.faction = Factions.enemies;
             }
         }
     }
@@ -91,7 +92,7 @@ public class EncounterManager : MonoBehaviour
         {
             foreach (TacticsMovement unit in Initiative.order)
             {
-                Debug.Log(unit + " belonging to faction " + unit.faction);
+                Debug.Log(unit + " belonging to faction " + unit.unitInfo.faction);
             }
         }    
     }
@@ -102,7 +103,7 @@ public class EncounterManager : MonoBehaviour
         //checks to see if one side has wiped out the other. 
         foreach (TacticsMovement unit in Initiative.order)
         {
-            if (unit.faction == Factions.enemies)
+            if (unit.unitInfo.faction == Factions.enemies)
             {
                 playerVictory = false;
                 break;
@@ -117,7 +118,7 @@ public class EncounterManager : MonoBehaviour
 
         foreach (TacticsMovement unit in Initiative.order)
         {
-            if (unit.faction == Factions.players) return;
+            if (unit.unitInfo.faction == Factions.players) return;
         }
         EncounterEnd(Factions.enemies);
     }
