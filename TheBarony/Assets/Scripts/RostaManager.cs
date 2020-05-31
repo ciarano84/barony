@@ -42,6 +42,9 @@ public class RostaManager : MonoBehaviour
             go.gameObject.transform.Find("Visual").gameObject.transform.position = pedestalPosition;
         }
         ShowUnit(Direction.right);
+        
+        //write the data into the static rosta class. 
+        //RostaData.rosta = rosta;
     }
 
     public void ShowStats()

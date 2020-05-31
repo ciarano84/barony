@@ -6,6 +6,17 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    //this is debug in order to try and move a script from one go to another. 
+    public Unit unit;
+
+    public UnitInfo unitInfo;
+
+    void GetUnitInfo()
+    {
+        SquadInfo squadInfo = FindObjectOfType<SquadInfo>();
+        this.unitInfo = squadInfo.DeployUnit(0);
+    }
+    
     public string unitName;
     public string className;
     public int maxBreath;

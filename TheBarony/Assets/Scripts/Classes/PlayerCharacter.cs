@@ -67,4 +67,10 @@ public class PlayerCharacter : TacticsMovement
             }
         }
     }
+    /*
+    public PlayerCharacter ShallowCopy()
+    {
+        return (PlayerCharacter)this.MemberwiseClone();
+    }
+    */
 }

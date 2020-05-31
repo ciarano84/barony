@@ -27,6 +27,9 @@ public class EncounterManager : MonoBehaviour
     public int numberOfEnemyCells;
     public int EnemiesPerCell;
 
+    //proxy sample player
+    GameObject unit1;
+
     private void Start()
     {
         staticEncounterPanel = encounterEndPanel;
@@ -36,16 +39,37 @@ public class EncounterManager : MonoBehaviour
         SetPositions();
     }
 
-
-
     void GetPlayers()
     {
+        //proxy script to create a sample player.
+        //Unit proxyPlayer = new Unit();
+        //proxyPlayer.Resiliance = 30;
+        //RostaData.squad.Add(proxyPlayer);
+
+        /*for (int count = 0; count < RostaData.squad.Count; count++)
+        {
+            GameObject player = Instantiate(playerPrefab);
+            Destroy(player.GetComponent<Unit>());
+            player.AddComponent<Unit>.
+            //RostaData.CopyUnitStats(RostaData.squad[0] , player.GetComponent<PlayerCharacter>());
+            playerSquad.Add(player);
+        }*
+        
+        /*
+        foreach (PlayerCharacter p in RostaData.squad)
+        {
+            GameObject player = Instantiate(playerPrefab);
+            
+            player.GetComponent<PlayerCharacter>()
+            playerSquad.Add(player);
+        }
+        
         //This next bit is in lieu of feeding in from the rosta. 
         for (int i = 4; i > 0; i--)
         {
             GameObject player = Instantiate(playerPrefab);
-            playerSquad.Add(player);
-        }
+            
+        }*/
     }
 
     void GetEnemies()
