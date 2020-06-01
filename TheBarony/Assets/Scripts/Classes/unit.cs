@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class UnitInfo
 {
-    public string unitName;
+    public string unitName = "nobody";
     public string className;
     public int maxBreath;
     public int currentBreath;
@@ -23,7 +23,7 @@ public class UnitInfo
 
 public class Unit : MonoBehaviour
 {
-    public UnitInfo unitInfo;
+    public UnitInfo unitInfo = new UnitInfo();
     public Animator unitAnim;
 
     //These should be chosen from "drugdge" "elite" "dangerous"

@@ -44,7 +44,7 @@ public class EncounterManager : MonoBehaviour
         for (int i = 0; i < rosta.squad.Count; i++)
         {
             GameObject player = Instantiate(playerPrefab);
-            //get the data. 
+            player.GetComponent<Unit>().unitInfo = rosta.squad[i].unitInfo; 
             playerSquad.Add(player);
         }
     }
