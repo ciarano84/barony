@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon
 {
     List<Tile> selectableTiles = new List<Tile>();
     public PlayerCharacter owner;
+    
+    //As I add classes that inherit, we can get move variation. 
     int attackModifier = 0;
     int damageModifier = 2;
-
-    public string imageFile; 
+    public string imageFile = "Shortsword"; 
 
     //Target class to replace the dictionary, and associated list. 
     public class Target 
@@ -22,11 +23,13 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        owner = GetComponent<PlayerCharacter>();
         attackModifier += owner.unitInfo.attackModifier;
         damageModifier += owner.unitInfo.damageModifier;
     }
 
+    public void Debug()
+    { }
+    
     public IEnumerator MeleeAttack(Weapon.Target target)
     {
         owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
@@ -37,7 +40,7 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         //proxy attack vs 10 in here.
-        AttackManager.AttackRoll(this.GetComponent<Unit>(),target.unitTargeted.GetComponent<Unit>());
+        AttackManager.AttackRoll(owner,target.unitTargeted.GetComponent<Unit>());
 
         yield return new WaitForSeconds(2f);
         owner.remainingActions--;
@@ -50,7 +53,7 @@ public class Weapon : MonoBehaviour
     {
         targets.Clear();        
         Tile tileToMeleeAttackFrom = null;
-        selectableTiles = GetComponent<TacticsMovement>().selectableTiles;
+        selectableTiles = owner.selectableTiles;
 
         //Go through each unit on the battlefield, get squares next to it, then work out which can be walked to. Pick one per unit. 
         foreach (TacticsMovement unit in Initiative.order)

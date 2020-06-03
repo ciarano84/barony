@@ -12,7 +12,8 @@ public class RostaInfo : MonoBehaviour
         //dummy squad data
         UnitInfo testPlayer = new UnitInfo();
         testPlayer.unitName = "TESTPLAYER";
-        //testPlayer.weapon1.imageFile = "Shortsword";
+        testPlayer.weapon1 = new Weapon();
+        testPlayer.weapon1.imageFile = "Shortsword";
         squad.Add(testPlayer);
 
         UnitInfo testPlayer2 = new UnitInfo();

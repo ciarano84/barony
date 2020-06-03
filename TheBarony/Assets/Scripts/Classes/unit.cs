@@ -31,7 +31,6 @@ public class Unit : MonoBehaviour
 
     protected void InitUnit()
     {
-        unitInfo.weapon1 = gameObject.AddComponent<Weapon>();
         PlayerCharacter weaponOwner = gameObject.GetComponent<PlayerCharacter>();
         unitInfo.weapon1.owner = weaponOwner; 
     }

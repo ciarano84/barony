@@ -50,7 +50,8 @@ public class PlayerCharacter : TacticsMovement
                             if (target.unitTargeted == UnitClickedOn)
                             {
                                 Initiative.queuedActions += 2;
-                                unitInfo.weapon1.StartCoroutine("MeleeAttack", target);
+                                //unitInfo.weapon1.StartCoroutine("MeleeAttack", target);
+                                unitInfo.weapon1.StartCoroutine(MeleeAttack(target));
                             }
                         }
                     }

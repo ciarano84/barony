@@ -40,12 +40,6 @@ public class ActionUIManager : MonoBehaviour
         }
     }
 
-    //A default, starting action for testing purposes. 
-    public void PlayerWeapon1()
-    {
-        currentUnit.unitInfo.weapon1.StartCoroutine("Attack");
-    }
-
     public void PlayerEndsTurnEarly()
     {
         Initiative.EndTurn();
