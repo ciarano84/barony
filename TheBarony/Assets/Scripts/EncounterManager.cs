@@ -35,15 +35,22 @@ public class EncounterManager : MonoBehaviour
         rosta = GameObject.Find("PlayerData").GetComponent<RostaInfo>();
         staticEncounterPanel = encounterEndPanel;
         staticEncounterEndtext = encounterEndtext;
-        StartCoroutine(GetPlayers());
-        GetEnemies();
-        SetPositions();
+        StartCoroutine(PositioningUnits());
     }
 
-    IEnumerator GetPlayers()
+    IEnumerator PositioningUnits()
     {
         //This waits to give the player data time to catch up. Hopefully not needed once the player data persists between scenes. 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
+        GetPlayers();
+        GetEnemies();
+        yield return new WaitForSeconds(0.1f);
+        SetPositions();
+        yield break;
+    }
+
+    void GetPlayers()
+    {
         Debug.Log("rosta squad count is" + rosta.squad.Count);
         for (int i = 0; i < rosta.squad.Count; i++)
         {
@@ -51,7 +58,6 @@ public class EncounterManager : MonoBehaviour
             player.GetComponent<Unit>().unitInfo = rosta.squad[i]; 
             playerSquad.Add(player);
         }
-        yield break;
     }
 
     void GetEnemies()

@@ -12,5 +12,17 @@ public class RostaInfo : MonoBehaviour
         UnitInfo testPlayer = new UnitInfo();
         testPlayer.unitName = "TESTPLAYER";
         squad.Add(testPlayer);
+
+        UnitInfo testPlayer2 = new UnitInfo();
+        testPlayer2.unitName = "TESTPLAYER2";
+        squad.Add(testPlayer2);
+
+        UnitInfo testPlayer3 = new UnitInfo();
+        testPlayer3.unitName = "TESTPLAYER3";
+        squad.Add(testPlayer3);
+
+        UnitInfo testPlayer4 = new UnitInfo();
+        testPlayer4.unitName = "TESTPLAYER4";
+        squad.Add(testPlayer4);
     }
 }
