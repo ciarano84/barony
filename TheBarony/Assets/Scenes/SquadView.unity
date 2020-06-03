@@ -121,37 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &106685049
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 106685050}
-  m_Layer: 0
-  m_Name: Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &106685050
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106685049}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 489.9608, y: 377.1162, z: -17.370174}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1355428251}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &500324843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -162,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 4968408495182563413, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}
       propertyPath: m_Name
-      value: Panel 4
+      value: Panel (6)
       objectReference: {fileID: 0}
     - target: {fileID: 4968408495182563414, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}
@@ -410,7 +379,7 @@ PrefabInstance:
     - target: {fileID: 4968408495182563413, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}
       propertyPath: m_Name
-      value: Panel 2
+      value: Panel (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4968408495182563414, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}
@@ -644,18 +613,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855714523}
   m_CullTransparentMesh: 0
---- !u!114 &895821408 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 257727243128539140, guid: 23e0785930b5e994aa7289fccf975953,
-    type: 3}
-  m_PrefabInstance: {fileID: 752214571}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 014811aff39d9dd40a764b2ba88123ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1224245773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -666,7 +623,7 @@ PrefabInstance:
     - target: {fileID: 4968408495182563413, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}
       propertyPath: m_Name
-      value: Panel 3
+      value: Panel (5)
       objectReference: {fileID: 0}
     - target: {fileID: 4968408495182563414, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}
@@ -781,83 +738,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1224245773}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1227737966 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 257727243128539140, guid: 23e0785930b5e994aa7289fccf975953,
-    type: 3}
-  m_PrefabInstance: {fileID: 4968408493870863468}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 014811aff39d9dd40a764b2ba88123ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1298472413 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 257727243128539140, guid: 23e0785930b5e994aa7289fccf975953,
-    type: 3}
-  m_PrefabInstance: {fileID: 500324843}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 014811aff39d9dd40a764b2ba88123ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1314331706 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4968408495182563414, guid: 23e0785930b5e994aa7289fccf975953,
     type: 3}
   m_PrefabInstance: {fileID: 4968408493870863468}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1355428250
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1355428251}
-  - component: {fileID: 1355428252}
-  m_Layer: 0
-  m_Name: Company Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1355428251
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355428250}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 106685050}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1355428252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355428250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 651d875070d52d146b050990e1b6aa0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitInfoPanel1: {fileID: 1227737966}
-  unitInfoPanel2: {fileID: 895821408}
-  unitInfoPanel3: {fileID: 1605099417}
-  unitInfoPanel4: {fileID: 1298472413}
 --- !u!1 &1387733836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,18 +890,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1605099417 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 257727243128539140, guid: 23e0785930b5e994aa7289fccf975953,
-    type: 3}
-  m_PrefabInstance: {fileID: 1224245773}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 014811aff39d9dd40a764b2ba88123ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1620228269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,7 +1179,7 @@ PrefabInstance:
     - target: {fileID: 4968408495182563413, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}
       propertyPath: m_Name
-      value: Panel 1
+      value: Panel
       objectReference: {fileID: 0}
     - target: {fileID: 4968408495182563414, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}

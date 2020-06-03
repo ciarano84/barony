@@ -10,7 +10,10 @@ public class Weapon
     //As I add classes that inherit, we can get move variation. 
     int attackModifier = 0;
     int damageModifier = 2;
+<<<<<<< HEAD
     public string imageFile = "Shortsword"; 
+=======
+>>>>>>> parent of 2ebb2af... ImportSquad2-5
 
     //Target class to replace the dictionary, and associated list. 
     public class Target 
