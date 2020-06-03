@@ -9,8 +9,10 @@ public class RostaInfo : MonoBehaviour
 
     private void Start()
     {
+        //dummy squad data
         UnitInfo testPlayer = new UnitInfo();
         testPlayer.unitName = "TESTPLAYER";
+        //testPlayer.weapon1.imageFile = "Shortsword";
         squad.Add(testPlayer);
 
         UnitInfo testPlayer2 = new UnitInfo();
@@ -24,5 +26,13 @@ public class RostaInfo : MonoBehaviour
         UnitInfo testPlayer4 = new UnitInfo();
         testPlayer4.unitName = "TESTPLAYER4";
         squad.Add(testPlayer4);
+
+        //dummy rosta data
+        rosta.Add(testPlayer);
+        rosta.Add(testPlayer2);
+        rosta.Add(testPlayer3);
+        rosta.Add(testPlayer4);
+
+
     }
 }

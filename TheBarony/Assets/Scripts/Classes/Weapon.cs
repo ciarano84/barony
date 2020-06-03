@@ -9,6 +9,8 @@ public class Weapon : MonoBehaviour
     int attackModifier = 0;
     int damageModifier = 2;
 
+    public string imageFile; 
+
     //Target class to replace the dictionary, and associated list. 
     public class Target 
     {

@@ -32,6 +32,7 @@ public class EncounterManager : MonoBehaviour
 
     private void Start()
     {
+        //Need this till the data persists. 
         rosta = GameObject.Find("PlayerData").GetComponent<RostaInfo>();
         staticEncounterPanel = encounterEndPanel;
         staticEncounterEndtext = encounterEndtext;
@@ -50,7 +51,7 @@ public class EncounterManager : MonoBehaviour
     }
 
     void GetPlayers()
-    {
+    {        
         Debug.Log("rosta squad count is" + rosta.squad.Count);
         for (int i = 0; i < rosta.squad.Count; i++)
         {
