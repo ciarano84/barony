@@ -70,8 +70,6 @@ public class RostaManager : MonoBehaviour
 
     static void ShowUnit(Direction direction)
     {
-
-        Debug.Log("show unit called and currentTroopShown int is " + currentTroopShown + " and rosta count is " + rosta.Count);
         rosta[currentTroopShown].gameObject.SetActive(false);
 
         if (direction == Direction.right)

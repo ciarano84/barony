@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public enum Factions {players, enemies, allies}
 
 public class EncounterManager : MonoBehaviour
 {
-    public RostaInfo rosta;
+    RostaInfo rosta;
 
     public GameObject encounterEndPanel;
     static GameObject staticEncounterPanel;
@@ -31,22 +32,26 @@ public class EncounterManager : MonoBehaviour
 
     private void Start()
     {
+        rosta = GameObject.Find("PlayerData").GetComponent<RostaInfo>();
         staticEncounterPanel = encounterEndPanel;
         staticEncounterEndtext = encounterEndtext;
-        GetPlayers();
+        StartCoroutine(GetPlayers());
         GetEnemies();
         SetPositions();
     }
 
-    void GetPlayers()
+    IEnumerator GetPlayers()
     {
-        //This next bit is in lieu of feeding in from the rosta. 
+        //This waits to give the player data time to catch up. Hopefully not needed once the player data persists between scenes. 
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("rosta squad count is" + rosta.squad.Count);
         for (int i = 0; i < rosta.squad.Count; i++)
         {
             GameObject player = Instantiate(playerPrefab);
-            player.GetComponent<Unit>().unitInfo = rosta.squad[i].unitInfo; 
+            player.GetComponent<Unit>().unitInfo = rosta.squad[i]; 
             playerSquad.Add(player);
         }
+        yield break;
     }
 
     void GetEnemies()

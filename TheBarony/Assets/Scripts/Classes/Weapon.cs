@@ -59,8 +59,6 @@ public class Weapon : MonoBehaviour
                 float maxDistance = 200f;
                 bool targetFound = false;
 
-                Debug.Log("owner is " + owner.currentTile.transform.position);
-
                 //This way of finding adjacents by distance is flawed, particularly if and when they are up or down. But kinda works. 
                 if (Vector3.Distance(owner.currentTile.transform.position, unit.currentTile.transform.position) < 1.3f)
                 {

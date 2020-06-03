@@ -23,7 +23,7 @@ public class UnitInfo
 
 public class Unit : MonoBehaviour
 {
-    public UnitInfo unitInfo = new UnitInfo();
+    public UnitInfo unitInfo; // = new UnitInfo();
     public Animator unitAnim;
 
     //These should be chosen from "drugdge" "elite" "dangerous"
