@@ -9,23 +9,23 @@ public class ProxyRosta : MonoBehaviour
     string[] names = { "bob", "Sandy", "Rex", "Bill", "Helen", "Walter", "Elsa", "Reiner", "Daz", "Peter", "Lucy" };
 
     static public int numSelectors = 5;
-    public static List<PlayerCharacter> proxyRosta = new List<PlayerCharacter>();
-    public GameObject unit1;
-    public GameObject unit2;
-    public GameObject unit3;
-    public GameObject unit4;
-    public GameObject unit5;
-    public GameObject unit6;
+    public static List<UnitInfo> proxyRosta = new List<UnitInfo>();
+    public UnitInfo unit1;
+    public UnitInfo unit2;
+    public UnitInfo unit3;
+    public UnitInfo unit4;
+    public UnitInfo unit5;
+    public UnitInfo unit6;
     void Start()
     {
-        proxyRosta.Add(unit1.GetComponent<PlayerCharacter>());
-        proxyRosta.Add(unit2.GetComponent<PlayerCharacter>());
-        proxyRosta.Add(unit3.GetComponent<PlayerCharacter>());
-        proxyRosta.Add(unit4.GetComponent<PlayerCharacter>());
-        proxyRosta.Add(unit5.GetComponent<PlayerCharacter>());
-        proxyRosta.Add(unit6.GetComponent<PlayerCharacter>());
+        proxyRosta.Add(new UnitInfo());
+        proxyRosta.Add(new UnitInfo());
+        proxyRosta.Add(new UnitInfo());
+        proxyRosta.Add(new UnitInfo());
+        proxyRosta.Add(new UnitInfo());
+        proxyRosta.Add(new UnitInfo());
 
-        foreach (PlayerCharacter p in proxyRosta)
+        foreach (UnitInfo p in proxyRosta)
         {
             AssignStats(p);
         }
@@ -33,16 +33,15 @@ public class ProxyRosta : MonoBehaviour
         RostaManager.BringInRosta();
     }
 
-    void AssignStats(PlayerCharacter player)
+    void AssignStats(UnitInfo player)
     {
-        player.unitInfo.unitName = (names[Random.Range(0, names.Length)] + names[Random.Range(0, names.Length)]);
-        if (Random.Range(0, 10) > 6) player.unitInfo.className = ("Heavy");
-        else player.unitInfo.className = ("Scout");
-        player.unitInfo.maxBreath = 4 + Random.Range(0, 5);
-        player.moveSpeed = 4 + Random.Range(0, 5);
-        player.unitInfo.attackModifier = -1 + Random.Range(0, 3);
-        player.unitInfo.defendModifier = -1 + Random.Range(0, 3);
-        player.unitInfo.damageModifier = -1 + Random.Range(0, 3);
-        player.unitInfo.Resiliance = -1 + Random.Range(0, 3);
+        player.unitName = (names[Random.Range(0, names.Length)] + names[Random.Range(0, names.Length)]);
+        if (Random.Range(0, 10) > 6) player.className = ("Heavy");
+        else player.className = ("Scout");
+        player.maxBreath = 4 + Random.Range(0, 5);
+        player.attackModifier = -1 + Random.Range(0, 3);
+        player.defendModifier = -1 + Random.Range(0, 3);
+        player.damageModifier = -1 + Random.Range(0, 3);
+        player.Resiliance = -1 + Random.Range(0, 3);
     }
 }

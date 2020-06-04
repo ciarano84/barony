@@ -114,7 +114,6 @@ public class EncounterManager : MonoBehaviour
         {
             if (unit.unitInfo.faction == Factions.enemies)
             {
-                Debug.Log("enemy found in initiative order");
                 playerVictory = false;
                 break;
             }

@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class RostaManager : MonoBehaviour
 {
-    static List<PlayerCharacter> rosta = new List<PlayerCharacter>();
+    //this class is totally borked as it's based on having game objects. Need to update it to use player data. 
+    
+    static List<UnitInfo> rosta = new List<UnitInfo>();
     static int currentTroopShown = 1;
 
     public delegate void NewUnitShown();
@@ -35,25 +37,25 @@ public class RostaManager : MonoBehaviour
     // This brings in the rosta and is currently called by the proxy script. 
     public static void BringInRosta()
     {
-        foreach (PlayerCharacter go in ProxyRosta.proxyRosta)
+        foreach (UnitInfo go in ProxyRosta.proxyRosta)
         {
             rosta.Add(go);
-            go.gameObject.SetActive(false);
-            go.gameObject.transform.Find("Visual").gameObject.transform.position = pedestalPosition;
+            //go.gameObject.SetActive(false);
+            //go.gameObject.transform.Find("Visual").gameObject.transform.position = pedestalPosition;
         }
         ShowUnit(Direction.right);
     }
 
     public void ShowStats()
     {
-        nameText.text = (rosta[currentTroopShown].unitInfo.unitName);
-        classText.text = (rosta[currentTroopShown].unitInfo.className);
-        breathText.text = (rosta[currentTroopShown].unitInfo.maxBreath.ToString());
-        attackText.text = (rosta[currentTroopShown].unitInfo.attackModifier.ToString());
-        defenceText.text = (rosta[currentTroopShown].unitInfo.defendModifier.ToString());
-        damageText.text = (rosta[currentTroopShown].unitInfo.damageModifier.ToString());
-        armourText.text = (rosta[currentTroopShown].unitInfo.Resiliance.ToString());
-        speedText.text = (rosta[currentTroopShown].moveSpeed.ToString());
+        nameText.text = (rosta[currentTroopShown].unitName);
+        classText.text = (rosta[currentTroopShown].className);
+        breathText.text = (rosta[currentTroopShown].maxBreath.ToString());
+        attackText.text = (rosta[currentTroopShown].attackModifier.ToString());
+        defenceText.text = (rosta[currentTroopShown].defendModifier.ToString());
+        damageText.text = (rosta[currentTroopShown].damageModifier.ToString());
+        armourText.text = (rosta[currentTroopShown].Resiliance.ToString());
+        speedText.text = (rosta[currentTroopShown].ToString());
     }
 
     public void OnRightButtonClick() { GetNextsUnit(); }
@@ -70,7 +72,7 @@ public class RostaManager : MonoBehaviour
 
     static void ShowUnit(Direction direction)
     {
-        rosta[currentTroopShown].gameObject.SetActive(false);
+        //rosta[currentTroopShown].gameObject.SetActive(false);
 
         if (direction == Direction.right)
         {
@@ -89,7 +91,7 @@ public class RostaManager : MonoBehaviour
             }
         }
 
-        rosta[currentTroopShown].gameObject.SetActive(true);
+        //rosta[currentTroopShown].gameObject.SetActive(true);
 
         //get the delegate to call subscribers. 
         newUnitShown();
