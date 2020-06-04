@@ -20,6 +20,7 @@ public class UnitInfo
     public Factions faction = Factions.players;
     public Animator unitAnim;
     public WeaponData weaponData;
+    public string unitVisual = "PlayerVisual";
 }
 
 public class Unit : MonoBehaviour

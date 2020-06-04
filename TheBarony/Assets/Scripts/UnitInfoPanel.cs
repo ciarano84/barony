@@ -8,6 +8,7 @@ public class UnitInfoPanel : MonoBehaviour
     public Text unitName;
     public Image unitWeaponImage;
     public UnitInfo unit;
+    public GameObject point;
 
     public void SetUnit(UnitInfo unitInfo)
     {
@@ -18,5 +19,10 @@ public class UnitInfoPanel : MonoBehaviour
         Sprite sprite;
         sprite = Resources.Load<Sprite>(unit.weaponData.imageFile);
         unitWeaponImage.sprite = sprite;
+
+        GameObject instance = Instantiate(Resources.Load(unit.unitVisual)) as GameObject;
+        instance.transform.position = point.transform.position;
+        //this is nonsense just to get stuff showing right for the time being:
+        instance.transform.Rotate(0,90,0);
     }
 }
