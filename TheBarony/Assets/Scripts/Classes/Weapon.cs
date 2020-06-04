@@ -2,19 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon
+public class WeaponData
+{
+    //As I add classes that inherit, we can get move variation. Crucially there should be a 1:1 relaionship between weapon scripts and WeaponData scripts.
+    public int attackModifier = 0;
+    public int damageModifier = 2;
+    public string imageFile = "Shortsword";
+
+    public void CreateWeapon(Unit unit)
+    {
+        Weapon weapon = unit.gameObject.AddComponent<Weapon>();
+        weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        weapon.weaponData = this;
+        unit.weapon1 = weapon;
+    }
+}
+
+public class Weapon : MonoBehaviour
 {
     List<Tile> selectableTiles = new List<Tile>();
     public PlayerCharacter owner;
+    public WeaponData weaponData;
     
-    //As I add classes that inherit, we can get move variation. 
-    int attackModifier = 0;
-    int damageModifier = 2;
-<<<<<<< HEAD
-    public string imageFile = "Shortsword"; 
-=======
->>>>>>> parent of 2ebb2af... ImportSquad2-5
-
     //Target class to replace the dictionary, and associated list. 
     public class Target 
     {
@@ -26,13 +35,16 @@ public class Weapon
 
     private void Start()
     {
-        attackModifier += owner.unitInfo.attackModifier;
-        damageModifier += owner.unitInfo.damageModifier;
+        weaponData.attackModifier += owner.unitInfo.attackModifier;
+        weaponData.damageModifier += owner.unitInfo.damageModifier;
     }
 
-    public void Debug()
-    { }
-    
+
+    public IEnumerator Test()
+    {
+        yield break;
+    }
+
     public IEnumerator MeleeAttack(Weapon.Target target)
     {
         owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);

@@ -11,23 +11,22 @@ public class RostaInfo : MonoBehaviour
     {
         UnitInfo testPlayer = new UnitInfo();
         testPlayer.unitName = "TESTPLAYER";
-<<<<<<< HEAD
-        testPlayer.weapon1 = new Weapon();
-        testPlayer.weapon1.imageFile = "Shortsword";
-=======
->>>>>>> parent of 2ebb2af... ImportSquad2-5
+        testPlayer.weaponData = new WeaponData();
         squad.Add(testPlayer);
 
         UnitInfo testPlayer2 = new UnitInfo();
         testPlayer2.unitName = "TESTPLAYER2";
+        testPlayer2.weaponData = new WeaponData();
         squad.Add(testPlayer2);
 
         UnitInfo testPlayer3 = new UnitInfo();
         testPlayer3.unitName = "TESTPLAYER3";
+        testPlayer3.weaponData = new WeaponData();
         squad.Add(testPlayer3);
 
         UnitInfo testPlayer4 = new UnitInfo();
         testPlayer4.unitName = "TESTPLAYER4";
+        testPlayer4.weaponData = new WeaponData();
         squad.Add(testPlayer4);
     }
 }

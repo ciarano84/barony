@@ -8,6 +8,7 @@ using UnityEngine;
 public class UnitInfo
 {
     public string unitName = "nobody";
+    public int move = 15;
     public string className;
     public int maxBreath;
     public int currentBreath;
@@ -16,23 +17,25 @@ public class UnitInfo
     public int attackModifier;
     public int defendModifier;
     public int wounds;
-    public Factions faction;
+    public Factions faction = Factions.players;
     public Animator unitAnim;
-    public Weapon weapon1;
+    public WeaponData weaponData;
 }
 
 public class Unit : MonoBehaviour
 {
     public UnitInfo unitInfo; // = new UnitInfo();
     public Animator unitAnim;
+    public Weapon weapon1;
 
     //These should be chosen from "drugdge" "elite" "dangerous"
     public string fate;
 
-    protected void InitUnit()
+    //was protected and not sure why. 
+    public virtual void InitUnit()
     {
-        PlayerCharacter weaponOwner = gameObject.GetComponent<PlayerCharacter>();
-        unitInfo.weapon1.owner = weaponOwner; 
+        unitInfo = new UnitInfo();
+        unitInfo.weaponData.CreateWeapon(this);
     }
 
     public void UpdateBreath(int amount)

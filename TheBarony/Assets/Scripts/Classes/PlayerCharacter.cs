@@ -12,6 +12,20 @@ public class PlayerCharacter : TacticsMovement
         InitTacticsMovement();
         InitUnit();
     }
+
+    public override void InitUnit()
+    {
+        //this should just read 'unitInfo.weaponData.CreateWeapon(this);' but has the rest to catch the proxy npcs. 
+        if (unitInfo.unitName == "nobody")
+        {
+            unitInfo = new UnitInfo();
+            unitInfo.weaponData = new WeaponData();
+            unitInfo.faction = Factions.enemies;
+            unitInfo.damageModifier = 10;
+        }
+        unitInfo.weaponData.CreateWeapon(this);
+    }
+
     private void Update()
     {
         Debug.DrawRay(transform.position, transform.forward);
@@ -45,13 +59,13 @@ public class PlayerCharacter : TacticsMovement
                     if (hit.collider.GetComponent<TacticsMovement>() != null)
                     {
                         TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
-                        foreach (Weapon.Target target in unitInfo.weapon1.targets)
+                        foreach (Weapon.Target target in weapon1.targets)
                         {
                             if (target.unitTargeted == UnitClickedOn)
                             {
                                 Initiative.queuedActions += 2;
-                                //unitInfo.weapon1.StartCoroutine("MeleeAttack", target);
-                                unitInfo.weapon1.StartCoroutine(MeleeAttack(target));
+                                weapon1.StartCoroutine("MeleeAttack", target);
+                                //weapon1.StartCoroutine(MeleeAttack(target));
                             }
                         }
                     }

@@ -22,7 +22,6 @@ public class ActionUIManager : MonoBehaviour
     public void UpdateActions(PlayerCharacter unit)
     {
         currentUnit = unit;
-        GetEquipmentUI(unit.unitInfo.weapon1);
 
         if (unit.GetComponent<PlayerCharacter>() != null)
         {
@@ -43,11 +42,6 @@ public class ActionUIManager : MonoBehaviour
     public void PlayerEndsTurnEarly()
     {
         Initiative.EndTurn();
-    }
-
-    void GetEquipmentUI(Weapon weapon1)
-    {
-        //not sure what I need this for actually. 
     }
 
     public void Clear() {

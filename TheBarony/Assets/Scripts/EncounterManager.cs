@@ -51,7 +51,6 @@ public class EncounterManager : MonoBehaviour
 
     void GetPlayers()
     {
-        Debug.Log("rosta squad count is" + rosta.squad.Count);
         for (int i = 0; i < rosta.squad.Count; i++)
         {
             GameObject player = Instantiate(playerPrefab);
@@ -70,7 +69,6 @@ public class EncounterManager : MonoBehaviour
             {
                 GameObject enemy = Instantiate(enemyPrefab);
                 enemyCells[i].Add(enemy);
-                enemy.GetComponent<Unit>().unitInfo.faction = Factions.enemies;
             }
         }
     }
@@ -116,6 +114,7 @@ public class EncounterManager : MonoBehaviour
         {
             if (unit.unitInfo.faction == Factions.enemies)
             {
+                Debug.Log("enemy found in initiative order");
                 playerVictory = false;
                 break;
             }

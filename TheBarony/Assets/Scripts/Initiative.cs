@@ -43,6 +43,7 @@ public class Initiative : MonoBehaviour
         sortedUnits = unsortedUnits.OrderByDescending(o => o.currentInitiative).ToList();
         foreach (TacticsMovement u in sortedUnits)
         {
+            Debug.Log(u.unitInfo.faction);
             order.Enqueue(u);
         }
         
