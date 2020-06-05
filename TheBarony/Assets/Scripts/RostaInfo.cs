@@ -7,9 +7,14 @@ public class RostaInfo : MonoBehaviour
     public List<UnitInfo> rosta = new List<UnitInfo>();
     public List<UnitInfo> squad = new List<UnitInfo>();
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     private void Start()
     {
-        UnitInfo testPlayer = new UnitInfo();
+        /*UnitInfo testPlayer = new UnitInfo();
         testPlayer.unitName = "TESTPLAYER";
         testPlayer.weaponData = new WeaponData();
         rosta.Add(testPlayer);
@@ -31,6 +36,6 @@ public class RostaInfo : MonoBehaviour
         testPlayer4.unitName = "TESTPLAYER4";
         testPlayer4.weaponData = new WeaponData();
         rosta.Add(testPlayer4);
-        squad.Add(testPlayer4);
+        squad.Add(testPlayer4);*/
     }
 }

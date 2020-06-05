@@ -8,26 +8,26 @@ public class ProxyRosta : MonoBehaviour
 
     string[] names = { "bob", "Sandy", "Rex", "Bill", "Helen", "Walter", "Elsa", "Reiner", "Daz", "Peter", "Lucy" };
 
-    static public int numSelectors = 5;
-    public static List<UnitInfo> proxyRosta = new List<UnitInfo>();
-    public UnitInfo unit1;
-    public UnitInfo unit2;
-    public UnitInfo unit3;
-    public UnitInfo unit4;
-    public UnitInfo unit5;
-    public UnitInfo unit6;
+    public int numberOfStartingUnits = 8;
+    //static public int numSelectors = 5;
+    //public UnitInfo unit1;
+    //public UnitInfo unit2;
+    //public UnitInfo unit3;
+    //public UnitInfo unit4;
+    //public UnitInfo unit5;
+    //public UnitInfo unit6;
+
+    RostaInfo rosta;
+
     void Start()
     {
-        proxyRosta.Add(new UnitInfo());
-        proxyRosta.Add(new UnitInfo());
-        proxyRosta.Add(new UnitInfo());
-        proxyRosta.Add(new UnitInfo());
-        proxyRosta.Add(new UnitInfo());
-        proxyRosta.Add(new UnitInfo());
+        rosta = GameObject.Find("PlayerData").GetComponent<RostaInfo>();
 
-        foreach (UnitInfo p in proxyRosta)
+        for (int n = numberOfStartingUnits; n > 0; n--)
         {
-            AssignStats(p);
+            UnitInfo unit = new UnitInfo();
+            AssignStats(unit);
+            rosta.rosta.Add(unit);
         }
 
         RostaManager.BringInRosta();
@@ -35,7 +35,7 @@ public class ProxyRosta : MonoBehaviour
 
     void AssignStats(UnitInfo player)
     {
-        player.unitName = (names[Random.Range(0, names.Length)] + names[Random.Range(0, names.Length)]);
+        player.unitName = (names[Random.Range(0, names.Length)] + " " + names[Random.Range(0, names.Length)]);
         if (Random.Range(0, 10) > 6) player.className = ("Heavy");
         else player.className = ("Scout");
         player.maxBreath = 4 + Random.Range(0, 5);

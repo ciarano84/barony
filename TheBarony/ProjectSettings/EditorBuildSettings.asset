@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SquadView.unity
+    guid: 6f6947f0503a06f4283951fa0c92e3f8
+  - enabled: 1
+    path: Assets/Scenes/Arena0.unity
+    guid: a037c9c5b0bf9344e961292e83be89ae
+  - enabled: 1
+    path: Assets/Scenes/TroopRosta.unity
+    guid: 75008b6f6093f2440b6a83e999bf2b3c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 147d8821e753ba14b8553d8b6b548868,
       type: 2}

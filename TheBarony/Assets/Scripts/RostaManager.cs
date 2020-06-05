@@ -37,13 +37,13 @@ public class RostaManager : MonoBehaviour
     // This brings in the rosta and is currently called by the proxy script. 
     public static void BringInRosta()
     {
-        foreach (UnitInfo go in ProxyRosta.proxyRosta)
+        /*foreach (UnitInfo go in ProxyRosta.proxyRosta)
         {
             rosta.Add(go);
             //go.gameObject.SetActive(false);
             //go.gameObject.transform.Find("Visual").gameObject.transform.position = pedestalPosition;
         }
-        ShowUnit(Direction.right);
+        ShowUnit(Direction.right);*/
     }
 
     public void ShowStats()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CompanySelectManager : MonoBehaviour
 {
@@ -30,5 +31,16 @@ public class CompanySelectManager : MonoBehaviour
             unitInfoPanels[count].SetUnit(rosta.rosta[count]);
         }
         yield break;
+    }
+
+    public void BeginEncounter()
+    {
+        //set troops into the squad
+        for (int count = 0; count < 4; count++)
+        {
+            rosta.squad.Add(unitInfoPanels[count].unit);
+        }
+
+        SceneManager.LoadScene("Arena0");
     }
 }
