@@ -30,14 +30,22 @@ public class ProxyRosta : MonoBehaviour
             rosta.rosta.Add(unit);
         }
 
-        RostaManager.BringInRosta();
+        //RostaManager.BringInRosta();
     }
 
     void AssignStats(UnitInfo player)
     {
         player.unitName = (names[Random.Range(0, names.Length)] + " " + names[Random.Range(0, names.Length)]);
-        if (Random.Range(0, 10) > 6) player.className = ("Heavy");
-        else player.className = ("Scout");
+        if (Random.Range(0, 10) > 6)
+        {
+            player.className = ("Heavy");
+            player.unitVisual = "PlayerVisual";
+        }
+        else
+        {
+            player.className = ("Scout");
+            player.unitVisual = "PlayerVisualScout";
+        }
         player.maxBreath = 4 + Random.Range(0, 5);
         player.attackModifier = -1 + Random.Range(0, 3);
         player.defendModifier = -1 + Random.Range(0, 3);
