@@ -8,15 +8,15 @@ using UnityEngine;
 public class UnitInfo
 {
     public string unitName = "nobody";
-    public int move = 5;
+    public int move = 6;
     public string className;
-    public int maxBreath;
-    public int currentBreath;
-    public int Resiliance;
-    public int damageModifier;
-    public int attackModifier;
-    public int defendModifier;
-    public int wounds;
+    public int maxBreath = 3;
+    public int currentBreath = 3;
+    public int Resiliance = -2;
+    public int damageModifier = 0;
+    public int attackModifier = 0;
+    public int defendModifier = -2;
+    public int wounds = 0;
     public Factions faction = Factions.players;
     //public Animator unitAnim;
     public WeaponData weaponData;
