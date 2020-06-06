@@ -9,28 +9,33 @@ public class ProxyRosta : MonoBehaviour
     string[] names = { "bob", "Sandy", "Rex", "Bill", "Helen", "Walter", "Elsa", "Reiner", "Daz", "Peter", "Lucy" };
 
     public int numberOfStartingUnits = 8;
-    //static public int numSelectors = 5;
-    //public UnitInfo unit1;
-    //public UnitInfo unit2;
-    //public UnitInfo unit3;
-    //public UnitInfo unit4;
-    //public UnitInfo unit5;
-    //public UnitInfo unit6;
 
     RostaInfo rosta;
+    public GameObject playerData;
+    public GameObject companySelectManager;
 
-    void Start()
+    void Awake()
     {
-        rosta = GameObject.Find("PlayerData").GetComponent<RostaInfo>();
-
-        for (int n = numberOfStartingUnits; n > 0; n--)
+        if (GameObject.Find("PlayerData"+"(Clone)") != null)
         {
-            UnitInfo unit = new UnitInfo();
-            AssignStats(unit);
-            rosta.rosta.Add(unit);
+            rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
         }
-
-        //RostaManager.BringInRosta();
+        else 
+        {
+            rosta = Instantiate(playerData).GetComponent<RostaInfo>();
+            for (int n = 4; n > 0; n--)
+            {
+                UnitInfo unit = new UnitInfo();
+                AssignStats(unit);
+                rosta.squad.Add(unit);
+            }
+            for (int n = (numberOfStartingUnits-4); n > 0; n--)
+            {
+                UnitInfo unit = new UnitInfo();
+                AssignStats(unit);
+                rosta.rosta.Add(unit);
+            }
+        }
     }
 
     void AssignStats(UnitInfo player)

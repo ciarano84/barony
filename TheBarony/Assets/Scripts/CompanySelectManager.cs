@@ -15,32 +15,31 @@ public class CompanySelectManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SetInfoPanels());
+        Debug.Log("SetInfoPanels being called");
     }
 
     IEnumerator SetInfoPanels()
     {
         yield return new WaitForSeconds(0.1f);
         unitInfoPanels.Add(infoPanel1);
+        unitInfoPanels[0].position = 0;
         unitInfoPanels.Add(infoPanel2);
+        unitInfoPanels[1].position = 1;
         unitInfoPanels.Add(infoPanel3);
+        unitInfoPanels[2].position = 2;
         unitInfoPanels.Add(infoPanel4);
+        unitInfoPanels[3].position = 3;
 
-        rosta = GameObject.Find("PlayerData").GetComponent<RostaInfo>();
+        rosta = GameObject.Find("PlayerData"+"(Clone)").GetComponent<RostaInfo>();
         for (int count = 0; count < 4; count++)
         {
-            unitInfoPanels[count].SetUnit(rosta.rosta[count]);
+            unitInfoPanels[count].SetUnit(rosta.squad[count]);
         }
         yield break;
     }
 
     public void BeginEncounter()
     {
-        //set troops into the squad
-        for (int count = 0; count < 4; count++)
-        {
-            rosta.squad.Add(unitInfoPanels[count].unit);
-        }
-
         SceneManager.LoadScene("Arena0");
     }
 }

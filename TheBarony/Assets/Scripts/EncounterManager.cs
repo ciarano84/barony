@@ -32,7 +32,7 @@ public class EncounterManager : MonoBehaviour
 
     private void Start()
     {
-        rosta = GameObject.Find("PlayerData").GetComponent<RostaInfo>();
+        rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
         staticEncounterPanel = encounterEndPanel;
         staticEncounterEndtext = encounterEndtext;
         StartCoroutine(PositioningUnits());
