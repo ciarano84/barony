@@ -167,7 +167,8 @@ public class TacticsMovement : Unit
             //Calculate the unit's position on top of target tile. 
             target.y += halfHeight + t.GetComponent<Collider>().bounds.extents.y;
 
-            if (Vector3.Distance(transform.position, target) >= 0.05f)
+            //This was set at 0.05f but was missing itself often. 
+            if (Vector3.Distance(transform.position, target) >= 0.1f)
             {
                 bool jump = transform.position.y != target.y;
 

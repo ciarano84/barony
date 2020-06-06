@@ -8,7 +8,7 @@ using UnityEngine;
 public class UnitInfo
 {
     public string unitName = "nobody";
-    public int move = 15;
+    public int move = 5;
     public string className;
     public int maxBreath;
     public int currentBreath;

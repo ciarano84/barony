@@ -15,7 +15,6 @@ public class CompanySelectManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SetInfoPanels());
-        Debug.Log("SetInfoPanels being called");
     }
 
     IEnumerator SetInfoPanels()
