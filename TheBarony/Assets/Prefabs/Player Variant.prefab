@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 449622018361949191, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
         type: 3}
       propertyPath: debugTile
@@ -134,4 +139,5 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4232902180826852981, guid: 6c152d632ebb9d448a7485221bbd4289, type: 3}
+    - {fileID: 1757503752861625940, guid: 6c152d632ebb9d448a7485221bbd4289, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6c152d632ebb9d448a7485221bbd4289, type: 3}

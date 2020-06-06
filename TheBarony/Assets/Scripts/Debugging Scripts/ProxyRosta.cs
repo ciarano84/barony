@@ -12,7 +12,7 @@ public class ProxyRosta : MonoBehaviour
 
     RostaInfo rosta;
     public GameObject playerData;
-    public GameObject companySelectManager;
+    //public GameObject companySelectManager;
 
     void Awake()
     {
@@ -51,10 +51,10 @@ public class ProxyRosta : MonoBehaviour
             player.className = ("Scout");
             player.unitVisual = "PlayerVisualScout";
         }
-        player.maxBreath = 4 + Random.Range(0, 5);
-        player.attackModifier = -1 + Random.Range(0, 3);
-        player.defendModifier = -1 + Random.Range(0, 3);
-        player.damageModifier = -1 + Random.Range(0, 3);
-        player.Resiliance = -1 + Random.Range(0, 3);
+        player.maxBreath = 4 + Random.Range(0, 6);
+        player.attackModifier = -1 + Random.Range(0, 5);
+        player.defendModifier = -1 + Random.Range(0, 5);
+        player.damageModifier = -1 + Random.Range(0, 5);
+        player.Resiliance = -1 + Random.Range(0, 5);
     }
 }

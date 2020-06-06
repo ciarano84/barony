@@ -167,8 +167,14 @@ public class TacticsMovement : Unit
             //Calculate the unit's position on top of target tile. 
             target.y += halfHeight + t.GetComponent<Collider>().bounds.extents.y;
 
+            //Failsafe I've put in to catch unit's who's movement has gone wrong
+            if (Vector3.Distance(transform.position, target) >= 1.6f)
+            {
+                transform.position = target;
+            }
+            
             //This was set at 0.05f but was missing itself often. 
-            if (Vector3.Distance(transform.position, target) >= 0.1f)
+            if (Vector3.Distance(transform.position, target) >= 0.2f)
             {
                 bool jump = transform.position.y != target.y;
 
@@ -181,10 +187,20 @@ public class TacticsMovement : Unit
                     CalculateHeading(target);
                     SetHorizontalVelocity();
                 }
-                
+
                 //Locomotion (and where we would add animation). 
+
+                //The following replaces "transform.position += velocity * Time.deltaTime"
                 transform.forward = heading;
-                transform.position += velocity * Time.deltaTime;
+                if (movingEdge)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, jumpTarget, moveSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    transform.position += velocity * Time.deltaTime;
+                }
+
             }
             else
             {
@@ -208,7 +224,7 @@ public class TacticsMovement : Unit
                 transform.LookAt(tileToFace);
                 turnRequired = false;
             }
-
+            Debug.Log("move set to false");
             moving = false;
             Initiative.EndAction();
         }
@@ -277,7 +293,7 @@ public class TacticsMovement : Unit
             jumpingUp = true;
             movingEdge = false;
 
-            velocity = heading * moveSpeed / 3.0f;
+            velocity = heading * moveSpeed / 4.0f;
 
             float difference = targetY - transform.position.y;
 
@@ -313,7 +329,7 @@ public class TacticsMovement : Unit
     }
 
     void MoveToEdge() {
-        if (Vector3.Distance(transform.position, jumpTarget) >= 0.05f)
+        if (Vector3.Distance(transform.position, jumpTarget) >= 0.2f)
         {
             SetHorizontalVelocity();
         }
@@ -348,7 +364,7 @@ public class TacticsMovement : Unit
 
     private void OnMouseOver()
     {
-        if (Initiative.currentUnit.remainingActions > 0)
+        if ((Initiative.currentUnit.remainingActions > 0) && (!Initiative.currentUnit.moving))
         {
             foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().weapon1.targets)
             {
