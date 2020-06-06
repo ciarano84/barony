@@ -16,6 +16,12 @@ public class Tile : MonoBehaviour
     public Tile parent = null;
     public int distance = 0;
 
+    //diagonals
+    Vector3 forwardAndLeft = new Vector3(-1, 0, 1);
+    Vector3 forwardAndRight = new Vector3(1, 0, 1);
+    Vector3 backAndLeft = new Vector3(-1, 0, -1);
+    Vector3 backAndRight = new Vector3(1, 0, -1);
+
     void Update()
     {
             if (current)
@@ -53,11 +59,17 @@ public class Tile : MonoBehaviour
     {
         //issue is likely somewhere in here. 
         Reset();
-        
+
         CheckTile(Vector3.forward, jumpHeight);
         CheckTile(-Vector3.forward, jumpHeight);
         CheckTile(Vector3.right, jumpHeight);
         CheckTile(-Vector3.right, jumpHeight);
+
+        //Diagonals
+        CheckTile(forwardAndLeft, jumpHeight);
+        CheckTile(forwardAndRight, jumpHeight);
+        CheckTile(backAndLeft, jumpHeight);
+        CheckTile(backAndRight, jumpHeight);
     }
 
     public void CheckTile(Vector3 direction, float jumpHeight) {
