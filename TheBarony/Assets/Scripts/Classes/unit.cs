@@ -18,7 +18,7 @@ public class UnitInfo
     public int defendModifier;
     public int wounds;
     public Factions faction = Factions.players;
-    public Animator unitAnim;
+    //public Animator unitAnim;
     public WeaponData weaponData;
     public string unitVisual = "PlayerVisual";
 }
@@ -73,7 +73,7 @@ public class Unit : MonoBehaviour
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);
 
-        //Tell the initiative order to go
+        //Tell the initiative order to remove this unit. 
         Initiative.RemoveUnit(this);
     }
 }
