@@ -29,8 +29,21 @@ public class UnitInfoPanel : MonoBehaviour
     {
         unit = unitInfo;
         unitName.text = unit.unitName;
-        //This is where we will have to get it to choose WHAT weapon data it puts in. 
-        unit.weaponData = new MeleeWeaponData();
+        //This is where we will have to get it to choose WHAT weapon data it puts in. Should probably make an equipment manager's job.  
+        switch (unit.className)
+        {
+            case "Heavy":
+                unit.weaponData = new MeleeWeaponData();
+                break;
+            case "Scout":
+                unit.weaponData = new RangedWeaponData();
+                break;
+            default:
+                unit.weaponData = new MeleeWeaponData();
+                break;
+        }
+                
+        unit.weaponData.SetWeaponData();
 
         Sprite sprite;
         sprite = Resources.Load<Sprite>(unit.weaponData.imageFile);

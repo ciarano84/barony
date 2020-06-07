@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MeleeWeaponData : WeaponData
 {
-    new int attackModifier = 0;
-    new int damageModifier = 2;
-    new public string imageFile = "Shortsword";
+    public override void SetWeaponData()
+    {
+        imageFile = "Shortsword";
+    }
 
     public override void CreateWeapon(Unit unit)
     {

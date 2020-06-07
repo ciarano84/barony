@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class AttackManager : MonoBehaviour
 {
-    
     //For now this will just be hitting or missing (no crits). 
     public static void AttackRoll(Unit attacker, Unit defender)
     {
         AbilityCheck check = new AbilityCheck();
 
-        check.CheckAbility(attacker.unitInfo.attackModifier, defender.unitInfo.defendModifier);
+        int attack = attacker.unitInfo.attackModifier + attacker.weapon1.weaponData.weaponAttack;
+        int defence = defender.unitInfo.defendModifier;
+
+        check.CheckAbility(attack, defence);
 
         if (check.baseResult >= 0)
         //hit goes here. 
@@ -28,7 +30,10 @@ public class AttackManager : MonoBehaviour
     {
         AbilityCheck check = new AbilityCheck();
 
-        check.CheckAbility(attacker.unitInfo.damageModifier, defender.unitInfo.Resiliance);
+        int damage = attacker.unitInfo.damageModifier + attacker.weapon1.weaponData.weaponDamage;
+        int resiliance = defender.unitInfo.Resiliance;
+
+        check.CheckAbility(damage, resiliance);
 
         int result = check.baseResult;
 

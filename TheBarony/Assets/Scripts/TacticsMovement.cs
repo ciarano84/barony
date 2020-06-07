@@ -239,7 +239,6 @@ public class TacticsMovement : Unit
                 transform.LookAt(tileToFace);
                 turnRequired = false;
             }
-            Debug.Log("move set to false");
             moving = false;
             Initiative.EndAction();
         }

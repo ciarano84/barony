@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponData
+public abstract class WeaponData
 {
     //As I add classes that inherit, we can get move variation. Crucially there should be a 1:1 relaionship between weapon scripts and WeaponData scripts.
-    public int attackModifier = 0;
-    public int damageModifier = 2;
+    public int weaponAttack = 0;
+    public int weaponDamage = 2;
+    public int range;
     public string imageFile;
 
-    public virtual void CreateWeapon(Unit unit)
-    {
-        //To be overidden. 
-    }
+    public abstract void SetWeaponData();
+    public abstract void CreateWeapon(Unit unit);
 }
 
 public class Weapon : MonoBehaviour
@@ -27,12 +26,6 @@ public class Weapon : MonoBehaviour
     }
 
     public List<Target> targets = new List<Target>();
-
-    private void Start()
-    {
-        weaponData.attackModifier += owner.unitInfo.attackModifier;
-        weaponData.damageModifier += owner.unitInfo.damageModifier;
-    }
 
     public virtual IEnumerator Attack(Target target)
     {
