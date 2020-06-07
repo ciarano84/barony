@@ -79,15 +79,15 @@ public class Weapon : MonoBehaviour
                 float maxDistance = 200f;
                 bool targetFound = false;
 
-                //This way of finding adjacents by distance is flawed, particularly if and when they are up or down. But kinda works. 
-                if (Vector3.Distance(owner.currentTile.transform.position, unit.currentTile.transform.position) < 1.3f)
+                //This way of finding adjacents by distance is flawed, particularly if and when they are up or down. But kinda works.  
+                if (Vector3.Distance(owner.currentTile.transform.position, unit.currentTile.transform.position) < 1.6f)
                 {
                     AddTarget(unit, owner.currentTile);
                 }
 
                 else
                 {
-                    foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
+                foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
                     {
 
                         foreach (Tile tileCanBeWalkedTo in selectableTiles)
