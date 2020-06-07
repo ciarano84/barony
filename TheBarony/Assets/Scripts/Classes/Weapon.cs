@@ -83,30 +83,52 @@ public class Weapon : MonoBehaviour
                 if (Vector3.Distance(owner.currentTile.transform.position, unit.currentTile.transform.position) < 1.3f)
                 {
                     AddTarget(unit, owner.currentTile);
-                } 
-                
-                else foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
+                }
+
+                else
                 {
-                        
-                        foreach (Tile tileCanBeWalkedTo in selectableTiles)
+                    foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
                     {
-                            if (tileCanBeWalkedTo == tileNextToTarget)
+
+                        foreach (Tile tileCanBeWalkedTo in selectableTiles)
                         {
-                                targetFound = true;
-                            if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
+                            if (tileCanBeWalkedTo == tileNextToTarget)
                             {
-                                maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
-                                tileToMeleeAttackFrom = tileNextToTarget;
+                                targetFound = true;
+                                if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
+                                {
+                                    maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
+                                    tileToMeleeAttackFrom = tileNextToTarget;
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (Tile tileNextToTarget in unit.currentTile.diagonalAdjacencyList)
+                    {
+
+                        foreach (Tile tileCanBeWalkedTo in selectableTiles)
+                        {
+                            if (tileCanBeWalkedTo == tileNextToTarget)
+                            {
+                                targetFound = true;
+                                if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
+                                {
+                                    maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
+                                    tileToMeleeAttackFrom = tileNextToTarget;
+                                }
                             }
                         }
                     }
                 }
+                    
                 if (targetFound)
                 {
                     AddTarget(unit, tileToMeleeAttackFrom);
                     targetFound = false;
                 }
                 unit.currentTile.adjacencyList.Clear();
+                unit.currentTile.diagonalAdjacencyList.Clear();
             } 
         }
     }

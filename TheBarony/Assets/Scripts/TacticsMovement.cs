@@ -108,6 +108,19 @@ public class TacticsMovement : Unit
                         process.Enqueue(tile);
                     }
                 }
+
+                //Now go through the diagonals, which use up 'distance' quicker
+                foreach (Tile tile in t.diagonalAdjacencyList)
+                {
+                    if (!tile.visited)
+                    {
+                        tile.parent = t;
+                        tile.visited = true;
+                        tile.diagonal = true;
+                        tile.distance = 1.5f + t.distance;
+                        process.Enqueue(tile);
+                    }
+                }
             }
         }
     }
@@ -210,7 +223,9 @@ public class TacticsMovement : Unit
                 //Take this move off remaining move IF it's not the first tile in the path.
                 if (path.Peek() != firstTileInPath)
                 {
-                    remainingMove--;
+                    //This is wrong!!! it's not taking into account diagonals. 
+                    if (t.diagonal) remainingMove -= 1.5f;
+                    else remainingMove--;
                 }
                 path.Pop();
             }
