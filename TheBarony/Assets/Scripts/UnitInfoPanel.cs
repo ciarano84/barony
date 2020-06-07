@@ -29,7 +29,8 @@ public class UnitInfoPanel : MonoBehaviour
     {
         unit = unitInfo;
         unitName.text = unit.unitName;
-        unit.weaponData = new WeaponData();
+        //This is where we will have to get it to choose WHAT weapon data it puts in. 
+        unit.weaponData = new MeleeWeaponData();
 
         Sprite sprite;
         sprite = Resources.Load<Sprite>(unit.weaponData.imageFile);

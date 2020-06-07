@@ -19,14 +19,14 @@ public class PlayerCharacter : TacticsMovement
         if (unitInfo.unitName == "nobody")
         {
             unitInfo = new UnitInfo();
-            unitInfo.weaponData = new WeaponData();
+            unitInfo.weaponData = new MeleeWeaponData();
             unitInfo.faction = Factions.enemies;
             unitInfo.damageModifier = 2;
         }
         //This next section is just for when we start direct in a combat.  
         if (this.unitInfo.weaponData == null)
         {
-            unitInfo.weaponData = new WeaponData();
+            unitInfo.weaponData = new MeleeWeaponData();
             unitInfo.damageModifier = 2;
         }
         
@@ -71,7 +71,7 @@ public class PlayerCharacter : TacticsMovement
                             if (target.unitTargeted == UnitClickedOn)
                             {
                                 Initiative.queuedActions += 2;
-                                weapon1.StartCoroutine("MeleeAttack", target);
+                                weapon1.StartCoroutine("Attack", target);
                                 //weapon1.StartCoroutine(MeleeAttack(target));
                             }
                         }
