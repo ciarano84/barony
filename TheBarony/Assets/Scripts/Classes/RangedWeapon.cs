@@ -21,8 +21,41 @@ public class RangedWeaponData : WeaponData
 
 public class RangedWeapon : Weapon
 {
+    int missDistance = 2;
+
     public override IEnumerator Attack(Target target)
     {
+        Debug.Log("Attack called");
+        owner.FaceDirection(target.unitTargeted.gameObject.transform.position);
+        yield return new WaitForSeconds(0.3f);
+
+        //Create this animation.
+        owner.unitAnim.SetTrigger("rangedAttack");
+        yield return new WaitForSeconds(0.3f);
+
+        bool hit = AttackManager.RangedAttackRoll(owner, target.unitTargeted.GetComponent<Unit>());
+        yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length);
+        GameObject missile = Instantiate(Resources.Load("Arrow"), owner.transform.position, owner.transform.rotation, owner.gameObject.transform) as GameObject;
+
+        if (hit)
+        {
+            //Hit goes here.
+            Debug.Log("hit");
+            missile.transform.LookAt(target.unitTargeted.transform);
+
+        }
+        else
+        {
+            //miss goes here. 
+            Debug.Log("miss");
+            Vector3 missPosition = new Vector3(0, missDistance, 0);
+            missile.transform.LookAt(target.unitTargeted.transform.position + missPosition);
+        }
+
+        yield return new WaitForSeconds(2f);
+        owner.remainingActions--;
+        Initiative.EndAction();
+
         yield break;
     }
 
@@ -52,7 +85,7 @@ public class RangedWeapon : Weapon
 
         foreach (Target t in targets)
         {
-            Debug.Log(t.unitTargeted.gameObject);
+            //Debug.Log(t.unitTargeted.gameObject);
         }
     }
 }

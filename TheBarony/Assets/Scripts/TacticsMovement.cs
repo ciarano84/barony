@@ -396,4 +396,10 @@ public class TacticsMovement : Unit
     {
         ActionUIManager.SetStandardCursor();
     }
+
+    public void FaceDirection(Vector3 target)
+    {
+        target.y = transform.position.y;
+        transform.LookAt(target);
+    }
 }

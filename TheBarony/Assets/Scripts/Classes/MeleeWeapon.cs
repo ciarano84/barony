@@ -31,7 +31,6 @@ public class MeleeWeapon : Weapon
         owner.unitAnim.SetTrigger("melee");
         yield return new WaitForSeconds(0.3f);
 
-        //proxy attack vs 10 in here.
         AttackManager.AttackRoll(owner,target.unitTargeted.GetComponent<Unit>());
 
         yield return new WaitForSeconds(2f);

@@ -56,6 +56,7 @@ public class PlayerCharacter : TacticsMovement
     {
         if (Input.GetMouseButtonUp(0))
         {
+            Debug.Log("mousebutton up");
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

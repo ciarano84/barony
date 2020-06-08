@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class AttackManager : MonoBehaviour
 {
-    //For now this will just be hitting or missing (no crits). 
+    //For now this will just be hitting or missing (no crits).
+    //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. 
+    
+    //This is the default and generally used for melee. 
     public static void AttackRoll(Unit attacker, Unit defender)
     {
         AbilityCheck check = new AbilityCheck();
@@ -23,6 +27,28 @@ public class AttackManager : MonoBehaviour
         //miss goes here. 
         {
 
+        }
+    }
+
+    //This is the ranged variation
+    public static bool RangedAttackRoll(Unit attacker, Unit defender)
+    {
+        AbilityCheck check = new AbilityCheck();
+
+        int attack = attacker.unitInfo.attackModifier + attacker.weapon1.weaponData.weaponAttack;
+        int defence = defender.unitInfo.defendModifier;
+
+        check.CheckAbility(attack, defence);
+
+        if (check.baseResult >= 0)
+        //hit goes here. 
+        {
+            return true;
+        }
+        else
+        //miss goes here. 
+        {
+            return false;
         }
     }
 
