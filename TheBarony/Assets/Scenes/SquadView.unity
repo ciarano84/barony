@@ -827,7 +827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090626457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 267.74817, y: 414.124, z: -26.266535}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 642345675}
@@ -1368,7 +1368,6 @@ MonoBehaviour:
   numberOfStartingUnits: 8
   playerData: {fileID: 5074459663259614845, guid: 5107435ded40eff49ad7d8de3a62f05b,
     type: 3}
-  companySelectManager: {fileID: 642345674}
 --- !u!1 &1731492036
 GameObject:
   m_ObjectHideFlags: 0
