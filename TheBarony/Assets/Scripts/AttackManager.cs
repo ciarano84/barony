@@ -56,7 +56,11 @@ public class AttackManager : MonoBehaviour
     {
         AbilityCheck check = new AbilityCheck();
 
-        int damage = attacker.unitInfo.damageModifier + attacker.weapon1.weaponData.weaponDamage;
+        int damage;
+
+        if (attacker.weapon1.weaponData.rangeType == WeaponData.Range.ranged) { damage = attacker.weapon1.weaponData.weaponDamage; }
+        else {damage = attacker.unitInfo.damageModifier + attacker.weapon1.weaponData.weaponDamage; }
+
         int resiliance = defender.unitInfo.Resiliance;
 
         check.CheckAbility(damage, resiliance);

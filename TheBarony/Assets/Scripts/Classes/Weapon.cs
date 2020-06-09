@@ -9,6 +9,8 @@ public abstract class WeaponData
     public int weaponDamage = 2;
     public int range;
     public string imageFile;
+    public enum Range {melee, ranged};
+    public Range rangeType;
 
     public abstract void SetWeaponData();
     public abstract void CreateWeapon(Unit unit);

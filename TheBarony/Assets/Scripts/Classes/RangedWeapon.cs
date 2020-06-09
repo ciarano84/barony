@@ -8,6 +8,7 @@ public class RangedWeaponData : WeaponData
     {
         imageFile = "Shortbow";
         range = 200;
+        rangeType = Range.ranged;
     }
 
     public override void CreateWeapon(Unit unit)
@@ -43,7 +44,7 @@ public class RangedWeapon : Weapon
             //Hit goes here.
             Debug.Log("hit");
             missile.transform.LookAt(target.unitTargeted.transform);
-
+            AttackManager.DamageRoll(owner, target.unitTargeted.GetComponent<Unit>());
         }
         else
         {

@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeWeaponData : WeaponData
 {
+    
     public override void SetWeaponData()
     {
         imageFile = "Shortsword";
+        rangeType = Range.ranged;
     }
 
     public override void CreateWeapon(Unit unit)
