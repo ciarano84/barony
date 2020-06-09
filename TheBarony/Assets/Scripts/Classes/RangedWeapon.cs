@@ -22,10 +22,12 @@ public class RangedWeaponData : WeaponData
 public class RangedWeapon : Weapon
 {
     int missDistance = 2;
+    new public int actionsPerAttack = 1;
 
     public override IEnumerator Attack(Target target)
     {
         Debug.Log("Attack called");
+        owner.moving = true;
         owner.FaceDirection(target.unitTargeted.gameObject.transform.position);
         yield return new WaitForSeconds(0.3f);
 
@@ -54,6 +56,7 @@ public class RangedWeapon : Weapon
 
         yield return new WaitForSeconds(2f);
         owner.remainingActions--;
+        owner.moving = false;
         Initiative.EndAction();
 
         yield break;

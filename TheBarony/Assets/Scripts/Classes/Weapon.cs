@@ -18,6 +18,7 @@ public class Weapon : MonoBehaviour
 {
     public PlayerCharacter owner;
     public WeaponData weaponData;
+    public int actionsPerAttack;
 
     public class Target
     {

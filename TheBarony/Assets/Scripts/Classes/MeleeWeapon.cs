@@ -21,6 +21,7 @@ public class MeleeWeaponData : WeaponData
 public class MeleeWeapon : Weapon
 {
     List<Tile> selectableTiles = new List<Tile>();    //Target class to replace the dictionary, and associated list. 
+    new public int actionsPerAttack = 2;
 
     public override IEnumerator Attack(Target target)
     {
