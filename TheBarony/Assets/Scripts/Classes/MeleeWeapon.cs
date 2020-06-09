@@ -9,14 +9,17 @@ public class MeleeWeaponData : WeaponData
     public override void SetWeaponData()
     {
         imageFile = "Shortsword";
-        rangeType = Range.ranged;
+        rangeType = Range.melee;
+        actionsPerAttack = 2;
     }
 
     public override void CreateWeapon(Unit unit)
     {
         MeleeWeapon weapon = unit.gameObject.AddComponent<MeleeWeapon>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-        weapon.weaponData = this;
+
+        unit.unitInfo.weaponData = this;
+
         unit.weapon1 = weapon;
     }
 }
@@ -24,7 +27,6 @@ public class MeleeWeaponData : WeaponData
 public class MeleeWeapon : Weapon
 {
     List<Tile> selectableTiles = new List<Tile>();    //Target class to replace the dictionary, and associated list. 
-    new public int actionsPerAttack = 2;
 
     public override IEnumerator Attack(Target target)
     {

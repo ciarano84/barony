@@ -186,7 +186,6 @@ public class TacticsMovement : Unit
                 transform.position = target;
             }
             
-            //This was set at 0.05f but was missing itself often. 
             if (Vector3.Distance(transform.position, target) >= 0.2f)
             {
                 bool jump = transform.position.y != target.y;
@@ -223,11 +222,14 @@ public class TacticsMovement : Unit
                 //Take this move off remaining move IF it's not the first tile in the path.
                 if (path.Peek() != firstTileInPath)
                 {
-                    //This is wrong!!! it's not taking into account diagonals. 
                     if (t.diagonal) remainingMove -= 1.5f;
                     else remainingMove--;
                 }
                 path.Pop();
+                if (path.Count == 0)
+                {
+                    Initiative.EndAction();
+                }
             }
         }
         else
@@ -240,7 +242,6 @@ public class TacticsMovement : Unit
                 turnRequired = false;
             }
             moving = false;
-            Initiative.EndAction();
         }
     }
 

@@ -9,26 +9,26 @@ public class RangedWeaponData : WeaponData
         imageFile = "Shortbow";
         range = 200;
         rangeType = Range.ranged;
+        actionsPerAttack = 1;
     }
 
     public override void CreateWeapon(Unit unit)
     {
         RangedWeapon weapon = unit.gameObject.AddComponent<RangedWeapon>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-        weapon.weaponData = this;
+
+        unit.unitInfo.weaponData = this;
+        
         unit.weapon1 = weapon;
     }
 }
 
 public class RangedWeapon : Weapon
 {
-    int missDistance = 1;
-    new public int actionsPerAttack = 1;
+    readonly int missDistance = 1;
 
     public override IEnumerator Attack(Target target)
     {
-        Debug.Log("Attack called");
-        owner.moving = true;
         owner.FaceDirection(target.unitTargeted.gameObject.transform.position);
         yield return new WaitForSeconds(0.3f);
 
@@ -56,7 +56,6 @@ public class RangedWeapon : Weapon
 
         yield return new WaitForSeconds(2f);
         owner.remainingActions--;
-        owner.moving = false;
         Initiative.EndAction();
 
         yield break;
@@ -84,11 +83,6 @@ public class RangedWeapon : Weapon
                     }
                 }
             }
-        }
-
-        foreach (Target t in targets)
-        {
-            //Debug.Log(t.unitTargeted.gameObject);
         }
     }
 }

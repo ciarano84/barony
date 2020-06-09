@@ -13,7 +13,7 @@ public class AttackManager : MonoBehaviour
     {
         AbilityCheck check = new AbilityCheck();
 
-        int attack = attacker.unitInfo.attackModifier + attacker.weapon1.weaponData.weaponAttack;
+        int attack = attacker.unitInfo.attackModifier + attacker.unitInfo.weaponData.weaponAttack;
         int defence = defender.unitInfo.defendModifier;
 
         check.CheckAbility(attack, defence);
@@ -35,7 +35,7 @@ public class AttackManager : MonoBehaviour
     {
         AbilityCheck check = new AbilityCheck();
 
-        int attack = attacker.unitInfo.attackModifier + attacker.weapon1.weaponData.weaponAttack;
+        int attack = attacker.unitInfo.attackModifier + attacker.unitInfo.weaponData.weaponAttack;
         int defence = defender.unitInfo.defendModifier;
 
         check.CheckAbility(attack, defence);
@@ -58,8 +58,8 @@ public class AttackManager : MonoBehaviour
 
         int damage;
 
-        if (attacker.weapon1.weaponData.rangeType == WeaponData.Range.ranged) { damage = attacker.weapon1.weaponData.weaponDamage; }
-        else {damage = attacker.unitInfo.damageModifier + attacker.weapon1.weaponData.weaponDamage; }
+        if (attacker.unitInfo.weaponData.rangeType == WeaponData.Range.ranged) { damage = attacker.unitInfo.weaponData.weaponDamage; }
+        else {damage = attacker.unitInfo.damageModifier + attacker.unitInfo.weaponData.weaponDamage; }
 
         int resiliance = defender.unitInfo.Resiliance;
 

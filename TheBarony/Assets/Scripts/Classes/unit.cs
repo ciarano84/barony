@@ -25,7 +25,7 @@ public class UnitInfo
 
 public class Unit : MonoBehaviour
 {
-    public UnitInfo unitInfo; // = new UnitInfo();
+    public UnitInfo unitInfo; 
     public Animator unitAnim;
     public Weapon weapon1;
 
@@ -35,8 +35,6 @@ public class Unit : MonoBehaviour
     //was protected and not sure why. 
     public virtual void InitUnit()
     {
-        unitInfo = new UnitInfo();
-        unitInfo.weaponData.CreateWeapon(this);
     }
 
     public void UpdateBreath(int amount)

@@ -6,18 +6,21 @@ using UnityEditor.ProjectWindowCallback;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.PlayerLoop;
 using UnityEngine.XR.WSA.Input;
 
 public class Initiative : MonoBehaviour
 {
     public static int queuedActions;
+
+    //Debug, but very useful. 
+    //public int publicQueuedActions;
     
     //I can likely strip this down to just be a list and a queue. 
     static List<TacticsMovement> unsortedUnits = new List<TacticsMovement>();
     public static List<TacticsMovement> sortedUnits = new List<TacticsMovement>();
     public static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
 
-    //static bool combatStarted = false;
     public static TacticsMovement currentUnit; 
     static ActionUIManager actionUIManager;
 
@@ -37,6 +40,12 @@ public class Initiative : MonoBehaviour
         StartCoroutine("StartEncounter");
     }
 
+    /*
+    private void Update()
+    {
+        publicQueuedActions = queuedActions;
+    }*/
+
     IEnumerator StartEncounter()
     {
         yield return new WaitForSeconds(2f);
@@ -46,7 +55,6 @@ public class Initiative : MonoBehaviour
             order.Enqueue(u);
         }
         
-        //combatStarted = true;
         StartTurn();
         yield break;
     }

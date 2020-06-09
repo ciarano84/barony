@@ -22,14 +22,16 @@ public class PlayerCharacter : TacticsMovement
             unitInfo.weaponData = new MeleeWeaponData();
             unitInfo.faction = Factions.enemies;
             unitInfo.damageModifier = 2;
+            unitInfo.weaponData.SetWeaponData();
         }
         //This next section is just for when we start direct in a combat.  
         if (this.unitInfo.weaponData == null)
         {
             unitInfo.weaponData = new MeleeWeaponData();
             unitInfo.damageModifier = 2;
+            unitInfo.weaponData.SetWeaponData();
         }
-        
+
         unitInfo.weaponData.CreateWeapon(this);
     }
 
@@ -42,7 +44,7 @@ public class PlayerCharacter : TacticsMovement
             return;
         }
 
-        if (!moving)
+        if (!moving && Initiative.queuedActions < 1)
         {
             CheckMouse();
         }
@@ -56,7 +58,6 @@ public class PlayerCharacter : TacticsMovement
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("mousebutton up");
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -71,9 +72,9 @@ public class PlayerCharacter : TacticsMovement
                         {
                             if (target.unitTargeted == UnitClickedOn)
                             {
-                                Initiative.queuedActions += weapon1.actionsPerAttack;
-                                weapon1.StartCoroutine("Attack", target);
-                                //weapon1.StartCoroutine(MeleeAttack(target));
+                                Initiative.queuedActions += unitInfo.weaponData.actionsPerAttack;
+                                weapon1.StartCoroutine("Attack", target); 
+                                return;
                             }
                         }
                     }
@@ -84,6 +85,7 @@ public class PlayerCharacter : TacticsMovement
                         {
                             Initiative.queuedActions++;
                             MoveToTile(t);
+                            return;
                         }
                     }
                 }

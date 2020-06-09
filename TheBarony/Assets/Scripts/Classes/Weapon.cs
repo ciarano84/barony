@@ -7,6 +7,7 @@ public abstract class WeaponData
     //As I add classes that inherit, we can get move variation. Crucially there should be a 1:1 relaionship between weapon scripts and WeaponData scripts.
     public int weaponAttack = 0;
     public int weaponDamage = 2;
+    public int actionsPerAttack;
     public int range;
     public string imageFile;
     public enum Range {melee, ranged};
@@ -19,8 +20,6 @@ public abstract class WeaponData
 public class Weapon : MonoBehaviour
 {
     public PlayerCharacter owner;
-    public WeaponData weaponData;
-    public int actionsPerAttack;
 
     public class Target
     {
