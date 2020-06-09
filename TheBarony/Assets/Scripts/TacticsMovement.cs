@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using UnityEditor.Build;
+using UnityEditorInternal;
 
 public class TacticsMovement : Unit
 {    
@@ -379,7 +380,11 @@ public class TacticsMovement : Unit
 
     private void OnMouseOver()
     {
-        if ((Initiative.currentUnit.remainingActions > 0) && (!Initiative.currentUnit.moving))
+        if (Initiative.queuedActions > 0)
+        {
+            ActionUIManager.SetStandardCursor();
+        }
+        else if ((Initiative.currentUnit.remainingActions > 0) && (!Initiative.currentUnit.moving))
         {
             foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().weapon1.targets)
             {

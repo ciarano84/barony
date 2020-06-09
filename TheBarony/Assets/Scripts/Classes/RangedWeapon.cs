@@ -43,18 +43,21 @@ public class RangedWeapon : Weapon
         {
             //Hit goes here.
             Debug.Log("hit");
-            missile.transform.LookAt(target.unitTargeted.transform);
+            missile.GetComponent<Missile>().target = target.unitTargeted.transform.position;
+            missile.GetComponent<Missile>().Launch();
+            yield return new WaitForSeconds(1.2f);
             AttackManager.DamageRoll(owner, target.unitTargeted.GetComponent<Unit>());
         }
         else
         {
             //miss goes here. 
             Debug.Log("miss");
-            Vector3 missPosition = new Vector3(missDistance, missDistance, missDistance);
-            missile.transform.LookAt(target.unitTargeted.transform.position + missPosition);
+            Vector3 missTarget = new Vector3(missDistance, missDistance, missDistance);
+            missile.GetComponent<Missile>().target = target.unitTargeted.transform.position + missTarget;
+            missile.GetComponent<Missile>().Launch();
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         owner.remainingActions--;
         Initiative.EndAction();
 

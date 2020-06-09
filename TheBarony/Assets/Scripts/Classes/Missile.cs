@@ -5,15 +5,37 @@ using UnityEngine.Animations;
 
 public class Missile : MonoBehaviour
 {
-    float speed = 16;
+    readonly float speed = 16;
+    Transform startingPoint;
+    float step;
     public Vector3 target;
+    public bool launched = false;
+
+    public void Start()
+    {
+        startingPoint = this.transform;
+    }
+
+    public void Launch()
+    {
+        launched = true;
+        Destroy(this.gameObject, 3);
+    }
 
     private void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * speed;
+        if (launched)
+        {
+            step = speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(startingPoint.position, target, step);
+        }
 
-        //if it reaches the object
+        if (Vector3.Distance(this.transform.position, target) < 0.02) Destroy(this.gameObject);
+            
 
-        //if it lives for too long
+        //Might need this to accomdate for aiming at the feet. 
+        //Vector3 direction = target.unitTargeted.transform.position;
+        //direction.y += target.unitTargeted.GetComponent<TacticsMovement>().halfHeight;
+
     }
 }
