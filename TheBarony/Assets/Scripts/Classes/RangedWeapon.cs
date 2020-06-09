@@ -21,7 +21,7 @@ public class RangedWeaponData : WeaponData
 
 public class RangedWeapon : Weapon
 {
-    int missDistance = 2;
+    int missDistance = 1;
     new public int actionsPerAttack = 1;
 
     public override IEnumerator Attack(Target target)
@@ -33,7 +33,6 @@ public class RangedWeapon : Weapon
 
         //Create this animation.
         owner.unitAnim.SetTrigger("rangedAttack");
-        yield return new WaitForSeconds(0.3f);
 
         bool hit = AttackManager.RangedAttackRoll(owner, target.unitTargeted.GetComponent<Unit>());
         yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length);
@@ -50,7 +49,7 @@ public class RangedWeapon : Weapon
         {
             //miss goes here. 
             Debug.Log("miss");
-            Vector3 missPosition = new Vector3(0, missDistance, 0);
+            Vector3 missPosition = new Vector3(missDistance, missDistance, missDistance);
             missile.transform.LookAt(target.unitTargeted.transform.position + missPosition);
         }
 
