@@ -67,6 +67,10 @@ public class TacticsMovement : Unit
         {  
             tile = hit.collider.GetComponent<Tile>();
         }
+        if ((tile == null) && turn) 
+        {
+            Debug.Log("no current tile found"); //This to help track down bug 1. 
+        }
         return tile;
     }
 
