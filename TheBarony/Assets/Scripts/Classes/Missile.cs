@@ -10,16 +10,18 @@ public class Missile : MonoBehaviour
     float step;
     public Vector3 target;
     public bool launched = false;
+    public bool hit = false;
 
     public void Start()
     {
         startingPoint = this.transform;
     }
 
-    public void Launch()
+    public void Launch(bool onTarget)
     {
         launched = true;
-        Destroy(this.gameObject, 3);
+        Destroy(this.gameObject, 2);
+        if (onTarget) hit = true;
     }
 
     private void Update()
@@ -30,7 +32,11 @@ public class Missile : MonoBehaviour
             transform.position = Vector3.MoveTowards(startingPoint.position, target, step);
         }
 
-        if (Vector3.Distance(this.transform.position, target) < 0.02) Destroy(this.gameObject);
+        if (hit)
+        {
+            if (Vector3.Distance(this.transform.position, target) < 0.02) Destroy(this.gameObject);
+        }
+            
             
 
         //Might need this to accomdate for aiming at the feet. 

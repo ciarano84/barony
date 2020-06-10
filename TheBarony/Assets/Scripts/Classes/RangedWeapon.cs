@@ -25,7 +25,7 @@ public class RangedWeaponData : WeaponData
 
 public class RangedWeapon : Weapon
 {
-    readonly int missDistance = 1;
+    readonly int missDistance = 20;
 
     public override IEnumerator Attack(Target target)
     {
@@ -44,7 +44,7 @@ public class RangedWeapon : Weapon
             //Hit goes here.
             Debug.Log("hit");
             missile.GetComponent<Missile>().target = target.unitTargeted.transform.position;
-            missile.GetComponent<Missile>().Launch();
+            missile.GetComponent<Missile>().Launch(true);
             yield return new WaitForSeconds(1.2f);
             AttackManager.DamageRoll(owner, target.unitTargeted.GetComponent<Unit>());
         }
@@ -52,9 +52,9 @@ public class RangedWeapon : Weapon
         {
             //miss goes here. 
             Debug.Log("miss");
-            Vector3 missTarget = new Vector3(missDistance, missDistance, missDistance);
+            Vector3 missTarget = new Vector3(1, 1, missDistance);
             missile.GetComponent<Missile>().target = target.unitTargeted.transform.position + missTarget;
-            missile.GetComponent<Missile>().Launch();
+            missile.GetComponent<Missile>().Launch(false);
         }
 
         yield return new WaitForSeconds(1f);

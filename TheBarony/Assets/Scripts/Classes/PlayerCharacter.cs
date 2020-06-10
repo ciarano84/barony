@@ -68,13 +68,17 @@ public class PlayerCharacter : TacticsMovement
                     if (hit.collider.GetComponent<TacticsMovement>() != null)
                     {
                         TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
-                        foreach (Weapon.Target target in weapon1.targets)
+
+                        if (remainingActions > 0)
                         {
-                            if (target.unitTargeted == UnitClickedOn)
+                            foreach (Weapon.Target target in weapon1.targets)
                             {
-                                Initiative.queuedActions += unitInfo.weaponData.actionsPerAttack;
-                                weapon1.StartCoroutine("Attack", target); 
-                                return;
+                                if (target.unitTargeted == UnitClickedOn)
+                                {
+                                    Initiative.queuedActions += unitInfo.weaponData.actionsPerAttack;
+                                    weapon1.StartCoroutine("Attack", target);
+                                    return;
+                                }
                             }
                         }
                     }
