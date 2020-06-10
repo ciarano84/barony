@@ -20,7 +20,7 @@ public class UnitInfo
     public Factions faction = Factions.players;
     //public Animator unitAnim;
     public WeaponData weaponData;
-    public string unitVisual = "PlayerVisual";
+    public string unitVisual = "EnemyVisual";
 }
 
 public class Unit : MonoBehaviour
@@ -31,6 +31,10 @@ public class Unit : MonoBehaviour
 
     //These should be chosen from "drugdge" "elite" "dangerous"
     public string fate;
+
+    private void Start()
+    {
+    }
 
     //was protected and not sure why. 
     public virtual void InitUnit()

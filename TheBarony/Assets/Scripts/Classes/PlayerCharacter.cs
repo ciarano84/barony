@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class PlayerCharacter : TacticsMovement
 {
     //public int moveSpeed;
+    GameObject visual;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class PlayerCharacter : TacticsMovement
 
     public override void InitUnit()
     {
+
         //this should just read 'unitInfo.weaponData.CreateWeapon(this);' but has the rest to catch the proxy npcs. 
         if (unitInfo.unitName == "nobody")
         {
@@ -23,6 +25,7 @@ public class PlayerCharacter : TacticsMovement
             unitInfo.faction = Factions.enemies;
             unitInfo.damageModifier = 2;
             unitInfo.weaponData.SetWeaponData();
+            unitInfo.unitVisual = "EnemyVisual";
         }
         //This next section is just for when we start direct in a combat.  
         if (this.unitInfo.weaponData == null)
@@ -31,6 +34,10 @@ public class PlayerCharacter : TacticsMovement
             unitInfo.damageModifier = 2;
             unitInfo.weaponData.SetWeaponData();
         }
+
+        //Get the visual. This, at present, will only affect player characters (this script). There's nothing in place for enemies. 
+        visual = Instantiate(Resources.Load(unitInfo.unitVisual), transform) as GameObject;
+        visual.transform.position = transform.position;
 
         unitInfo.weaponData.CreateWeapon(this);
     }
