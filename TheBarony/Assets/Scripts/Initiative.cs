@@ -11,7 +11,8 @@ using UnityEngine.XR.WSA.Input;
 
 public class Initiative : MonoBehaviour
 {
-    public static int queuedActions;
+    public static int queuedActions = 0;
+    public int publicQueuedActions;
 
     
     //I can likely strip this down to just be a list and a queue. 
@@ -25,6 +26,11 @@ public class Initiative : MonoBehaviour
     public static Initiative initiativeManager;
     public GameObject selector;
 
+    private void Update()
+    {
+        publicQueuedActions = queuedActions;
+        //Debug.Log(queuedActions);
+    }
 
     public void Awake()
     {
@@ -80,26 +86,27 @@ public class Initiative : MonoBehaviour
 
     public static IEnumerator CheckForTurnEnd() 
     {
-        
         if (queuedActions > 1)
         {
+            Debug.Log("Thinks there is more than one queuedaction.");
             queuedActions--;
             yield break;
         }
         else
         {
-            yield return new WaitForSeconds(0.5f);
-
+            //yield return new WaitForSeconds(1f);
             if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
                 actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
                 currentUnit.GetComponent<TacticsMovement>().BeginTurn();
+                Debug.Log("Thinks the unit has more actions left to take.");
                 queuedActions--;
                 yield break;
             }
             else
             {
                 EndTurn();
+                Debug.Log("Thinks the turn is over");
                 queuedActions--;
                 yield break;
             }

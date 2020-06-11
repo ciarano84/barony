@@ -41,6 +41,7 @@ public class ActionUIManager : MonoBehaviour
 
     public void PlayerEndsTurnEarly()
     {
+        if (Initiative.queuedActions > 0) return;
         Initiative.EndTurn();
     }
 

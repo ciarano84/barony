@@ -30,6 +30,7 @@ public class MeleeWeapon : Weapon
 
     public override IEnumerator Attack(Target target)
     {
+        targets.Clear();
         owner.remainingActions--;
         owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
 

@@ -55,7 +55,7 @@ public class PlayerCharacter : TacticsMovement
         {
             CheckMouse();
         }
-        else
+        else 
         {
             Move();
         }

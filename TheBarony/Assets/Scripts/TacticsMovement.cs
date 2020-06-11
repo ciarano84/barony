@@ -8,6 +8,7 @@ using UnityEditorInternal;
 public class TacticsMovement : Unit
 {    
     public bool turn = false;
+    bool moveGate = false;
 
     //Made public so that the weapons can grab it. 
     public List<Tile> selectableTiles = new List<Tile>();
@@ -134,6 +135,7 @@ public class TacticsMovement : Unit
     public void MoveToTile(Tile tile) 
     {   
         path.Clear();
+        moveGate = true;
         tile.target = true;
         moving = true;
 
@@ -178,7 +180,12 @@ public class TacticsMovement : Unit
 
     public void Move()
     {
-        if (path.Count > 0)
+        if (!moveGate)
+        {
+            Debug.Log("movegate set false");
+            return;
+        } 
+        else if (path.Count > 0)
         {
             Tile t = path.Peek();
             Vector3 target = t.transform.position;
@@ -224,18 +231,18 @@ public class TacticsMovement : Unit
             {
                 //Tile centre reached
                 transform.position = target;
-                
+
                 //Take this move off remaining move IF it's not the first tile in the path.
                 if (path.Peek() != firstTileInPath)
                 {
-                    if (t.diagonal) remainingMove -= 1.5f;
+                    if (t.diagonal)
+                    {
+                        remainingMove -= 1.5f;
+                        Debug.Log("diagonal square");
+                    } 
                     else remainingMove--;
                 }
                 path.Pop();
-                /*if (path.Count == 0)
-                {
-                    Initiative.EndAction();
-                }*/
             }
         }
         else
@@ -248,6 +255,7 @@ public class TacticsMovement : Unit
                 turnRequired = false;
             }
             moving = false;
+            moveGate = false;
             Initiative.EndAction();
         }
     }
