@@ -13,8 +13,6 @@ public class Initiative : MonoBehaviour
 {
     public static int queuedActions;
 
-    //Debug, but very useful. 
-    //public int publicQueuedActions;
     
     //I can likely strip this down to just be a list and a queue. 
     static List<TacticsMovement> unsortedUnits = new List<TacticsMovement>();
@@ -39,12 +37,6 @@ public class Initiative : MonoBehaviour
         selector = GameObject.FindGameObjectWithTag("selector");
         StartCoroutine("StartEncounter");
     }
-
-    /*
-    private void Update()
-    {
-        publicQueuedActions = queuedActions;
-    }*/
 
     IEnumerator StartEncounter()
     {
@@ -88,23 +80,27 @@ public class Initiative : MonoBehaviour
 
     public static IEnumerator CheckForTurnEnd() 
     {
-        queuedActions--;
-        if (queuedActions > 0)
+        
+        if (queuedActions > 1)
         {
+            queuedActions--;
             yield break;
         }
         else
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
+
             if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
                 actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
                 currentUnit.GetComponent<TacticsMovement>().BeginTurn();
+                queuedActions--;
                 yield break;
             }
             else
             {
                 EndTurn();
+                queuedActions--;
                 yield break;
             }
         }

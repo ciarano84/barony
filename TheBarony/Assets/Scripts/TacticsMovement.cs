@@ -59,9 +59,10 @@ public class TacticsMovement : Unit
     }
 
     public Tile GetTargetTile(GameObject target) {
+        //if (turn) Debug.Log("get target tile called");
         RaycastHit hit;
 
-        Tile tile = null; 
+        Tile tile = null;
 
         if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
         {  
@@ -231,10 +232,10 @@ public class TacticsMovement : Unit
                     else remainingMove--;
                 }
                 path.Pop();
-                if (path.Count == 0)
+                /*if (path.Count == 0)
                 {
                     Initiative.EndAction();
-                }
+                }*/
             }
         }
         else
@@ -247,6 +248,7 @@ public class TacticsMovement : Unit
                 turnRequired = false;
             }
             moving = false;
+            Initiative.EndAction();
         }
     }
 

@@ -30,6 +30,7 @@ public class MeleeWeapon : Weapon
 
     public override IEnumerator Attack(Target target)
     {
+        owner.remainingActions--;
         owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
 
         yield return new WaitUntil(() => !owner.moving);
@@ -40,7 +41,7 @@ public class MeleeWeapon : Weapon
         AttackManager.AttackRoll(owner,target.unitTargeted.GetComponent<Unit>());
 
         yield return new WaitForSeconds(2f);
-        owner.remainingActions--;
+        
         Initiative.EndAction();
         yield break;
     }

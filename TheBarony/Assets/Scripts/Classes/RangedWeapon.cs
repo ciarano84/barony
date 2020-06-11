@@ -29,6 +29,7 @@ public class RangedWeapon : Weapon
 
     public override IEnumerator Attack(Target target)
     {
+        owner.remainingActions--;
         owner.FaceDirection(target.unitTargeted.gameObject.transform.position);
         yield return new WaitForSeconds(0.3f);
 
@@ -58,7 +59,6 @@ public class RangedWeapon : Weapon
         }
 
         yield return new WaitForSeconds(1f);
-        owner.remainingActions--;
         Initiative.EndAction();
 
         yield break;

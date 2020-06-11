@@ -95,17 +95,6 @@ public class EncounterManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            foreach (TacticsMovement unit in Initiative.order)
-            {
-                Debug.Log(unit + " belonging to faction " + unit.unitInfo.faction);
-            }
-        }    
-    }
-
     public static void CheckForFactionDeath()
     {
         bool playerVictory = true;
