@@ -10,6 +10,8 @@ public class RangedWeaponData : WeaponData
         range = 200;
         rangeType = Range.ranged;
         actionsPerAttack = 1;
+        weaponAttack = 3;
+        weaponDamage = 3;
     }
 
     public override void CreateWeapon(Unit unit)

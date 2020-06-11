@@ -60,7 +60,6 @@ public class TacticsMovement : Unit
     }
 
     public Tile GetTargetTile(GameObject target) {
-        //if (turn) Debug.Log("get target tile called");
         RaycastHit hit;
 
         Tile tile = null;
@@ -89,6 +88,7 @@ public class TacticsMovement : Unit
 
     public void FindSelectableTiles()
     {
+        Debug.Log("find selectable tiles is called. Queued actions is at " + Initiative.queuedActions);
         ComputeAdjacencyList();
         GetCurrentTile();
 
@@ -124,7 +124,7 @@ public class TacticsMovement : Unit
                         tile.parent = t;
                         tile.visited = true;
                         tile.diagonal = true;
-                        tile.distance = 1.5f + t.distance;
+                        tile.distance = 1.41f + t.distance;
                         process.Enqueue(tile);
                     }
                 }
@@ -132,8 +132,9 @@ public class TacticsMovement : Unit
         }
     }
 
+    //HAS AN OVERLOAD!!!!
     public void MoveToTile(Tile tile) 
-    {   
+    {
         path.Clear();
         moveGate = true;
         tile.target = true;
@@ -163,6 +164,7 @@ public class TacticsMovement : Unit
 
         //the original tactics movement
         path.Clear();
+        moveGate = true;
         tile.target = true;
         moving = true;
 
@@ -182,7 +184,6 @@ public class TacticsMovement : Unit
     {
         if (!moveGate)
         {
-            Debug.Log("movegate set false");
             return;
         } 
         else if (path.Count > 0)
@@ -237,8 +238,7 @@ public class TacticsMovement : Unit
                 {
                     if (t.diagonal)
                     {
-                        remainingMove -= 1.5f;
-                        Debug.Log("diagonal square");
+                        remainingMove -= 1.41f;
                     } 
                     else remainingMove--;
                 }

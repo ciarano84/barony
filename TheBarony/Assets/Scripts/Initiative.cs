@@ -29,7 +29,6 @@ public class Initiative : MonoBehaviour
     private void Update()
     {
         publicQueuedActions = queuedActions;
-        //Debug.Log(queuedActions);
     }
 
     public void Awake()
@@ -88,25 +87,25 @@ public class Initiative : MonoBehaviour
     {
         if (queuedActions > 1)
         {
-            Debug.Log("Thinks there is more than one queuedaction.");
+            Debug.Log("still another queued action due.");
             queuedActions--;
             yield break;
         }
         else
         {
-            //yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
+                Debug.Log("unit still has actions left.");
                 actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
                 currentUnit.GetComponent<TacticsMovement>().BeginTurn();
-                Debug.Log("Thinks the unit has more actions left to take.");
                 queuedActions--;
                 yield break;
             }
             else
             {
+                Debug.Log("turn end");
                 EndTurn();
-                Debug.Log("Thinks the turn is over");
                 queuedActions--;
                 yield break;
             }
