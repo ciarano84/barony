@@ -5,13 +5,13 @@ using UnityEngine;
 public class AbilityCheck
 {
     //The basic outcome of the roll, with 0 meaning equalling the opposition, and a success. Negative means a failure and under. 
-    public int baseResult = 0;
-    public int crits = 0;
-    public int fumbles;
+    public static int baseResult = 0;
+    public static int crits = 0;
+    public static int fumbles;
 
     //This returns -1 for a failure. 0 for a success. and 1 for each critical beyond that. 
     //Because the last permater is set in the method declaration, it has a default and is optional. 
-    public void CheckAbility(int activeModifier, int passiveModifier, int bonuses = 0)
+    public static void CheckAbility(int activeModifier, int passiveModifier, int bonuses = 0)
     {
         //Work out active roll
         int activeRoll = BasicRoll(activeModifier);
@@ -36,7 +36,7 @@ public class AbilityCheck
         baseResult = activeRoll - passiveRoll;
     }
 
-    int BasicRoll(int activeAbility)
+    static int BasicRoll(int activeAbility)
     {
         int activeResult;
         int firstActiveDie = Random.Range(1, 10);

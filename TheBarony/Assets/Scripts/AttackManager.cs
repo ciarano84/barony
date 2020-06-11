@@ -11,14 +11,12 @@ public class AttackManager : MonoBehaviour
     //This is the default and generally used for melee. 
     public static void AttackRoll(Unit attacker, Unit defender)
     {
-        AbilityCheck check = new AbilityCheck();
-
         int attack = attacker.unitInfo.attackModifier + attacker.unitInfo.weaponData.weaponAttack;
         int defence = defender.unitInfo.defendModifier;
 
-        check.CheckAbility(attack, defence);
+        AbilityCheck.CheckAbility(attack, defence);
 
-        if (check.baseResult >= 0)
+        if (AbilityCheck.baseResult >= 0)
         //hit goes here. 
         {
             DamageRoll(attacker, defender);
@@ -38,9 +36,9 @@ public class AttackManager : MonoBehaviour
         int attack = attacker.unitInfo.attackModifier + attacker.unitInfo.weaponData.weaponAttack;
         int defence = defender.unitInfo.defendModifier;
 
-        check.CheckAbility(attack, defence);
+        AbilityCheck.CheckAbility(attack, defence);
 
-        if (check.baseResult >= 0)
+        if (AbilityCheck.baseResult >= 0)
         //hit goes here. 
         {
             return true;
@@ -63,9 +61,9 @@ public class AttackManager : MonoBehaviour
 
         int resiliance = defender.unitInfo.Resiliance;
 
-        check.CheckAbility(damage, resiliance);
+        AbilityCheck.CheckAbility(damage, resiliance);
 
-        int result = check.baseResult;
+        int result = AbilityCheck.baseResult;
 
         //assumes all are 'fated' for now. 
         if (result < -9) return;
