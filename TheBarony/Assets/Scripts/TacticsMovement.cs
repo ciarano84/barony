@@ -88,7 +88,6 @@ public class TacticsMovement : Unit
 
     public void FindSelectableTiles()
     {
-        Debug.Log("find selectable tiles is called. Queued actions is at " + Initiative.queuedActions);
         ComputeAdjacencyList();
         GetCurrentTile();
 

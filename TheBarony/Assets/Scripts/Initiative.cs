@@ -87,7 +87,6 @@ public class Initiative : MonoBehaviour
     {
         if (queuedActions > 1)
         {
-            Debug.Log("still another queued action due.");
             queuedActions--;
             yield break;
         }
@@ -96,7 +95,6 @@ public class Initiative : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
-                Debug.Log("unit still has actions left.");
                 actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
                 currentUnit.GetComponent<TacticsMovement>().BeginTurn();
                 queuedActions--;
@@ -104,7 +102,6 @@ public class Initiative : MonoBehaviour
             }
             else
             {
-                Debug.Log("turn end");
                 EndTurn();
                 queuedActions--;
                 yield break;

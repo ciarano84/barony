@@ -18,6 +18,9 @@ public class Tile : MonoBehaviour
     public Tile parent = null;
     public float distance = 0;
 
+    //Debug
+    public bool foundABarrier = false;
+
     //diagonals
     Vector3 forwardAndLeft = new Vector3(-1, 0, 1);
     Vector3 forwardAndRight = new Vector3(1, 0, 1);
@@ -76,6 +79,20 @@ public class Tile : MonoBehaviour
 
     public void CheckTile(Vector3 direction, float jumpHeight) {
 
+        //Barrier check overlapbox
+        Vector3 barrierCheckRange = new Vector3(0.25f, 0.25f, 0.25f);
+        Collider[] barrierCheckColliders = Physics.OverlapBox(transform.position + (direction/2), barrierCheckRange);
+
+        foreach (Collider boundary in barrierCheckColliders)
+        {
+            if (boundary.gameObject.tag == "barrier")
+            {
+                Debug.Log("found a barrier");
+                foundABarrier = true;
+                return;
+            }
+        }
+
         Vector3 halfExtents = new Vector3(0.25f, (1 + jumpHeight) / 2f, 0.25f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
 
@@ -95,6 +112,19 @@ public class Tile : MonoBehaviour
 
     public void CheckTile(Vector3 direction, float jumpHeight, bool diagonal)
     {
+        //Barrier check overlapbox
+        Vector3 barrierCheckRange = new Vector3(0.25f, 0.25f, 0.25f);
+        Collider[] barrierCheckColliders = Physics.OverlapBox(transform.position + (direction / 2), barrierCheckRange);
+
+        foreach (Collider boundary in barrierCheckColliders)
+        {
+            if (boundary.gameObject.tag == "barrier")
+            {
+                Debug.Log("found a barrier");
+                foundABarrier = true;
+                return;
+            }
+        }
 
         Vector3 halfExtents = new Vector3(0.25f, (1 + jumpHeight) / 2f, 0.25f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
