@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class TestTriggerCombatPopUp : MonoBehaviour
 {
-    public Transform pfDamagePopup;
-    public GameObject target;
+    public Transform position;
 
-    /*private void Start()
+    private void Update()
     {
-        DamagePopUp.Create(target.transform.position, 600);
-    }*/
+        /*if (Input.GetMouseButtonDown(0))
+        {
+            DamagePopUp.Create(position.position, 2, false);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            DamagePopUp.Create(position.position, 5, true);
+        }*/
+    }
 }

@@ -24,7 +24,7 @@ public class AttackManager : MonoBehaviour
         else
         //miss goes here. 
         {
-
+            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "miss", false);
         }
     }
 
@@ -55,9 +55,10 @@ public class AttackManager : MonoBehaviour
         AbilityCheck check = new AbilityCheck();
 
         int damage;
+        int wounds;
 
         if (attacker.unitInfo.weaponData.rangeType == WeaponData.Range.ranged) { damage = attacker.unitInfo.weaponData.weaponDamage; }
-        else {damage = attacker.unitInfo.damageModifier + attacker.unitInfo.weaponData.weaponDamage; }
+        else { damage = attacker.unitInfo.damageModifier + attacker.unitInfo.weaponData.weaponDamage; }
 
         int resiliance = defender.unitInfo.Resiliance;
 
@@ -66,13 +67,18 @@ public class AttackManager : MonoBehaviour
         int result = AbilityCheck.baseResult;
 
         //assumes all are 'fated' for now. 
-        if (result < -9) return;
+        if (result < -9)
+        {
+            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "harmless", false);
+            return;
+        }
         else if (result < 1) defender.UpdateBreath(-2);
         else
         {
-            if (result > 9) defender.UpdateWounds(3);
-            else if (result > 4) defender.UpdateWounds(2);
-            else { defender.UpdateWounds(1); }
+            if (result > 9) wounds = 1;
+            else if (result > 4) wounds = 2;
+            else { wounds = 3; }
+            defender.UpdateWounds(wounds);
         }
     }
 }

@@ -87,7 +87,6 @@ public class Tile : MonoBehaviour
         {
             if (boundary.gameObject.tag == "barrier")
             {
-                Debug.Log("found a barrier");
                 foundABarrier = true;
                 return;
             }
@@ -120,7 +119,6 @@ public class Tile : MonoBehaviour
         {
             if (boundary.gameObject.tag == "barrier")
             {
-                Debug.Log("found a barrier");
                 foundABarrier = true;
                 return;
             }

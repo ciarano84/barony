@@ -44,6 +44,7 @@ public class Unit : MonoBehaviour
     public void UpdateBreath(int amount)
     {
         unitInfo.currentBreath += amount;
+        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), amount.ToString(), false);
         if (unitInfo.currentBreath < 0)
         {
             unitInfo.currentBreath = 0;
@@ -64,6 +65,8 @@ public class Unit : MonoBehaviour
                 StartCoroutine("KO");
             }
         }
+
+        //DamagePopUp.Create(gameObject.transform.position, amount, true);
     }
 
     //This needs sorting out. 

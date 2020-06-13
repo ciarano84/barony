@@ -51,7 +51,8 @@ public class ActionUIManager : MonoBehaviour
     }
 
     public static void GetAttackCursor() {
-        Cursor.SetCursor(attackCursor, Vector2.zero, CursorMode.Auto);
+        //Testing a change here. 
+        Cursor.SetCursor(GameAssets.i.Sword_Cursor, Vector2.zero, CursorMode.Auto);
     }
 
     public static void SetStandardCursor() {
