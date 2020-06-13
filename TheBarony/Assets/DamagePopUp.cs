@@ -12,16 +12,15 @@ public class DamagePopUp : MonoBehaviour
         textMesh = GetComponent<TextMeshPro>();
     }
 
-
-    /*public static DamagePopUp Create(Vector3 position, int damageAmount)
+    public static DamagePopUp Create(Vector3 position, int damageAmount)
     {
         Debug.Log("called");
-        //Transform damagePopUpTransform = Instantiate(TestTriggerCombatPopUp.pfDamagePopup, position, Quaternion.identity);
-        //DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
-        //damagePopUp.Setup(damageAmount);
+        Transform damagePopUpTransform = Instantiate(GameAssets.i.damagePopUp, position, Quaternion.identity);
+        DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
+        damagePopUp.Setup(damageAmount);
 
         return damagePopUp;
-    }*/
+    }
 
 
 
