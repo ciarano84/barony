@@ -17,9 +17,20 @@ public abstract class WeaponData
     public abstract void CreateWeapon(Unit unit);
 }
 
-public class Weapon : MonoBehaviour
+interface IEquipable<T>
+{
+    void Equip();
+    void Unequip();
+}
+
+public class Weapon : MonoBehaviour, IEquipable<Weapon>
 {
     public PlayerCharacter owner;
+
+    public void Equip()
+    { }
+    public void Unequip()
+    { }
 
     public class Target
     {
