@@ -66,8 +66,23 @@ public class Unit : MonoBehaviour
                 StartCoroutine("KO");
             }
         }
+        string woundedText;
+        switch (amount)
+        {   case 1:
+                woundedText = "wounded";
+                break;
+            case 2:
+                woundedText = "severely wounded";
+                break;
+            case 3:
+                woundedText = "executed";
+                break;
+            default:
+                woundedText = "wounded";
+                break;
+        }
 
-        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Wounded", true);
+        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), woundedText, true);
     }
 
     //This needs sorting out. 
