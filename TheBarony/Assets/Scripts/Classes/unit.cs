@@ -8,13 +8,13 @@ using UnityEngine;
 public class UnitInfo
 {
     public string unitName = "nobody";
-    public int move = 8;
+    public int move = 5;
     public string className;
     public int maxBreath = 3;
     public int currentBreath = 3;
     public int Resiliance = -3;
     public int damageModifier = 0;
-    public int attackModifier = 0;
+    public int attackModifier = 1;
     public int defendModifier = -3;
     public int wounds = 0;
     public Factions faction = Factions.players;
@@ -44,8 +44,9 @@ public class Unit : MonoBehaviour
     public void UpdateBreath(int amount)
     {
         unitInfo.currentBreath += amount;
-        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), amount.ToString(), false);
-        if (unitInfo.currentBreath < 0)
+        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), amount.ToString(), false);
+
+        if (unitInfo.currentBreath <= 0)
         {
             unitInfo.currentBreath = 0;
             KO();
@@ -66,7 +67,7 @@ public class Unit : MonoBehaviour
             }
         }
 
-        //DamagePopUp.Create(gameObject.transform.position, amount, true);
+        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Wounded", true);
     }
 
     //This needs sorting out. 

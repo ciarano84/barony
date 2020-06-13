@@ -24,7 +24,6 @@ public class DamagePopUp : MonoBehaviour
         Transform damagePopUpTransform = Instantiate(GameAssets.i.damagePopUp, position, Quaternion.identity);
         DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
         damagePopUp.Setup(effect, isWounding);
-
         return damagePopUp;
     }
 
@@ -35,14 +34,15 @@ public class DamagePopUp : MonoBehaviour
         if (!isWounding)
         {
             //for basic breath loss
-            textMesh.fontSize = 5;
+            textMesh.fontSize = 4;
             textColor = Color.white;
         }
         else if (isWounding)
         {
             //for wounding hits
-            textMesh.fontSize = 10;
+            textMesh.fontSize = 5;
             textColor = Color.red;
+            transform.position += new Vector3(0, 0.5f, 0);
         }
 
         textMesh.color = textColor;
@@ -52,6 +52,7 @@ public class DamagePopUp : MonoBehaviour
     private void Update()
     {
         transform.position += new Vector3(0, moveSpeed) * Time.deltaTime;
+        transform.rotation = Camera.main.transform.rotation;
 
         dissappearTimer -= Time.deltaTime;
         if (dissappearTimer < 0)

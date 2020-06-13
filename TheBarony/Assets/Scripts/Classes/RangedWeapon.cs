@@ -45,7 +45,6 @@ public class RangedWeapon : Weapon
         if (hit)
         {
             //Hit goes here.
-            Debug.Log("hit");
             missile.GetComponent<Missile>().target = target.unitTargeted.transform.position;
             missile.GetComponent<Missile>().Launch(true);
             yield return new WaitForSeconds(1.2f);
@@ -54,7 +53,7 @@ public class RangedWeapon : Weapon
         else
         {
             //miss goes here. 
-            Debug.Log("miss");
+            DamagePopUp.Create(transform.position + new Vector3(0, GetComponent<TacticsMovement>().halfHeight), "miss", false);
             Vector3 missTarget = new Vector3(1, 1, missDistance);
             missile.GetComponent<Missile>().target = target.unitTargeted.transform.position + missTarget;
             missile.GetComponent<Missile>().Launch(false);

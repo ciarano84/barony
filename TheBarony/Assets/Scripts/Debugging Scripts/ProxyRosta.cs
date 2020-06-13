@@ -41,7 +41,7 @@ public class ProxyRosta : MonoBehaviour
     void AssignStats(UnitInfo player)
     {
         player.unitName = (names[Random.Range(0, names.Length)] + " " + names[Random.Range(0, names.Length)]);
-        if (Random.Range(0, 10) > 6)
+        if (Random.Range(0, 10) > 4)
         {
             player.className = ("Heavy");
             player.unitVisual = "PlayerVisual";

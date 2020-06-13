@@ -23,10 +23,8 @@ public class PlayerCharacter : TacticsMovement
             unitInfo = new UnitInfo();
             unitInfo.weaponData = new MeleeWeaponData();
             unitInfo.faction = Factions.enemies;
-            unitInfo.damageModifier = 2;
             unitInfo.weaponData.SetWeaponData();
             unitInfo.unitVisual = "EnemyVisual";
-            unitInfo.move = 2;
         }
         //This next section is just for when we start direct in a combat.  
         if (this.unitInfo.weaponData == null)
