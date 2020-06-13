@@ -8,6 +8,7 @@ TagManager:
   - character
   - NPC
   - selector
+  - barrier
   layers:
   - Default
   - TransparentFX
