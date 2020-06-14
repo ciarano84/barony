@@ -42,10 +42,9 @@ public class UnitInfoPanel : MonoBehaviour
                 unit.weaponData = new MeleeWeaponData();
                 break;
         }
-                
-        unit.weaponData.SetWeaponData();
 
         Sprite sprite;
+        unit.weaponData.SetData();
         sprite = Resources.Load<Sprite>(unit.weaponData.imageFile);
         unitWeaponImage.sprite = sprite;
 

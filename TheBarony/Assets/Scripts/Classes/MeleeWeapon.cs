@@ -5,22 +5,18 @@ using UnityEngine;
 
 public class MeleeWeaponData : WeaponData
 {
-    
-    public override void SetWeaponData()
+    public override void SetData()
     {
         imageFile = "Shortsword";
-        rangeType = Range.melee;
-        actionsPerAttack = 2;
     }
-
-    public override void CreateWeapon(Unit unit)
+    public override void EquipItem(Unit unit)
     {
         MeleeWeapon weapon = unit.gameObject.AddComponent<MeleeWeapon>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-
         unit.unitInfo.weaponData = this;
-
-        unit.weapon1 = weapon;
+        unit.currentWeapon = weapon;
+        weapon.actionsPerAttack = 2;
+        weapon.rangeType = Weapon.Range.melee;
     }
 }
 

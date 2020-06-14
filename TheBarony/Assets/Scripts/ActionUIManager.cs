@@ -9,7 +9,7 @@ public class ActionUIManager : MonoBehaviour
     public static PlayerCharacter currentUnit;
     public Button endTurn;
     public Button Weapon1Attack;
-    Weapon weapon1;
+    Weapon currentWeapon;
 
     static Texture2D attackCursor;
 

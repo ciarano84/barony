@@ -23,22 +23,22 @@ public class PlayerCharacter : TacticsMovement
             unitInfo = new UnitInfo();
             unitInfo.weaponData = new MeleeWeaponData();
             unitInfo.faction = Factions.enemies;
-            unitInfo.weaponData.SetWeaponData();
+            unitInfo.weaponData.EquipItem(GetComponent<Unit>());
             unitInfo.unitVisual = "EnemyVisual";
         }
         //This next section is just for when we start direct in a combat.  
         if (this.unitInfo.weaponData == null)
         {
             unitInfo.weaponData = new MeleeWeaponData();
-            unitInfo.damageModifier = 2;
-            unitInfo.weaponData.SetWeaponData();
+            unitInfo.weaponData.EquipItem(GetComponent<Unit>());
         }
 
         //Get the visual. This, at present, will only affect player characters (this script). There's nothing in place for enemies. 
         visual = Instantiate(Resources.Load(unitInfo.unitVisual), transform) as GameObject;
         visual.transform.position = transform.position;
 
-        unitInfo.weaponData.CreateWeapon(this);
+        SetStats();
+        unitInfo.weaponData.EquipItem(GetComponent<Unit>());
     }
 
     private void FixedUpdate()
@@ -77,12 +77,12 @@ public class PlayerCharacter : TacticsMovement
 
                         if (remainingActions > 0)
                         {
-                            foreach (Weapon.Target target in weapon1.targets)
+                            foreach (Weapon.Target target in currentWeapon.targets)
                             {
                                 if (target.unitTargeted == UnitClickedOn)
                                 {
-                                    Initiative.queuedActions += unitInfo.weaponData.actionsPerAttack;
-                                    weapon1.StartCoroutine("Attack", target);
+                                    Initiative.queuedActions += currentWeapon.actionsPerAttack;
+                                    currentWeapon.StartCoroutine("Attack", target);
                                     return;
                                 }
                             }

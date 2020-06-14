@@ -11,8 +11,8 @@ public class AttackManager : MonoBehaviour
     //This is the default and generally used for melee. 
     public static void AttackRoll(Unit attacker, Unit defender)
     {
-        int attack = attacker.unitInfo.attackModifier + attacker.unitInfo.weaponData.weaponAttack;
-        int defence = defender.unitInfo.defendModifier;
+        int attack = attacker.unitInfo.currentAttack;
+        int defence = defender.unitInfo.currentDefence;
 
         AbilityCheck.CheckAbility(attack, defence);
 
@@ -33,8 +33,8 @@ public class AttackManager : MonoBehaviour
     {
         AbilityCheck check = new AbilityCheck();
 
-        int attack = attacker.unitInfo.attackModifier + attacker.unitInfo.weaponData.weaponAttack;
-        int defence = defender.unitInfo.defendModifier;
+        int attack = attacker.unitInfo.currentAttack;
+        int defence = defender.unitInfo.currentDefence;
 
         AbilityCheck.CheckAbility(attack, defence);
 
@@ -57,10 +57,9 @@ public class AttackManager : MonoBehaviour
         int damage;
         int wounds;
 
-        if (attacker.unitInfo.weaponData.rangeType == WeaponData.Range.ranged) { damage = attacker.unitInfo.weaponData.weaponDamage; }
-        else { damage = attacker.unitInfo.damageModifier + attacker.unitInfo.weaponData.weaponDamage; }
+        damage = attacker.unitInfo.currentDamage;
 
-        int resiliance = defender.unitInfo.Resiliance;
+        int resiliance = defender.unitInfo.currentToughness;
 
         AbilityCheck.CheckAbility(damage, resiliance);
 

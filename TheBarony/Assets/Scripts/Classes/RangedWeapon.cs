@@ -4,30 +4,28 @@ using UnityEngine;
 
 public class RangedWeaponData : WeaponData
 {
-    public override void SetWeaponData()
+    public override void SetData()
     {
         imageFile = "Shortbow";
-        range = 200;
-        rangeType = Range.ranged;
-        actionsPerAttack = 1;
-        weaponAttack = 3;
-        weaponDamage = 3;
     }
 
-    public override void CreateWeapon(Unit unit)
+    public override void EquipItem(Unit unit)
     {
         RangedWeapon weapon = unit.gameObject.AddComponent<RangedWeapon>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-
         unit.unitInfo.weaponData = this;
-        
-        unit.weapon1 = weapon;
+        unit.currentWeapon = weapon;
+        weapon.rangeType = Weapon.Range.ranged;
+        weapon.range = 200;
+        weapon.actionsPerAttack = 1;
+        weapon.missDistance = 20;
+        unit.unitInfo.currentDamage = 3;
     }
 }
 
 public class RangedWeapon : Weapon
 {
-    readonly int missDistance = 20;
+    public int missDistance = 20;
 
     public override IEnumerator Attack(Target target)
     {

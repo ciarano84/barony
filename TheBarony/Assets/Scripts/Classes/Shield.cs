@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour, IEquipable<Shield>
+public class ShieldData : ItemData
 {
-    public PlayerCharacter owner;
-
-    public void Equip()
+    public override void SetData()
     {
-        owner.unitInfo.defendModifier += 2;
+        imageFile = "Shield";
     }
 
-    public void Unequip()
+    public override void EquipItem(Unit unit)
     {
-        owner.unitInfo.defendModifier -= 2;
+        Shield shield = unit.gameObject.AddComponent<Shield>();
+        shield.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        //unit.unitInfo.shield = this;
+        //unit.currentWeapon = weapon;
+        unit.unitInfo.currentDefence = unit.unitInfo.baseDefence + 2;
     }
+}
+
+public class Shield : Item
+{
+    public int defendModifier = 2;
 }

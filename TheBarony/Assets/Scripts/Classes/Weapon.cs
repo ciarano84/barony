@@ -2,35 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class WeaponData
+public abstract class WeaponData : ItemData
 {
-    //As I add classes that inherit, we can get move variation. Crucially there should be a 1:1 relaionship between weapon scripts and WeaponData scripts.
-    public int weaponAttack = 0;
-    public int weaponDamage = 2;
+}
+
+public class Weapon : Item
+{
     public int actionsPerAttack;
     public int range;
-    public string imageFile;
-    public enum Range {melee, ranged};
+    public int weaponAttack;
+    public int weaponDamage;
+    public enum Range { melee, ranged };
     public Range rangeType;
-
-    public abstract void SetWeaponData();
-    public abstract void CreateWeapon(Unit unit);
-}
-
-interface IEquipable<T>
-{
-    void Equip();
-    void Unequip();
-}
-
-public class Weapon : MonoBehaviour, IEquipable<Weapon>
-{
-    public PlayerCharacter owner;
-
-    public void Equip()
-    { }
-    public void Unequip()
-    { }
 
     public class Target
     {

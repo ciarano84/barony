@@ -51,10 +51,10 @@ public class ProxyRosta : MonoBehaviour
             player.className = ("Scout");
             player.unitVisual = "PlayerVisualScout";
         }
-        player.maxBreath = 4 + Random.Range(0, 6);
-        player.attackModifier = -1 + Random.Range(0, 5);
-        player.defendModifier = -1 + Random.Range(0, 5);
-        player.damageModifier = -1 + Random.Range(0, 5);
-        player.Resiliance = -1 + Random.Range(0, 5);
+        player.baseBreath = 4 + Random.Range(0, 6);
+        player.baseAttack = -1 + Random.Range(0, 5);
+        player.baseDefence = -1 + Random.Range(0, 5);
+        player.baseStrength = -1 + Random.Range(0, 5);
+        player.baseToughness = -1 + Random.Range(0, 5);
     }
 }

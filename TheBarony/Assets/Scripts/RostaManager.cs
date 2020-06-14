@@ -51,11 +51,11 @@ public class RostaManager : MonoBehaviour
 
         nameText.text = (rosta.rosta[rosta.currentUnitShown].unitName);
         classText.text = (rosta.rosta[rosta.currentUnitShown].className);
-        breathText.text = (rosta.rosta[rosta.currentUnitShown].maxBreath.ToString());
-        attackText.text = (rosta.rosta[rosta.currentUnitShown].attackModifier.ToString());
-        defenceText.text = (rosta.rosta[rosta.currentUnitShown].defendModifier.ToString());
-        damageText.text = (rosta.rosta[rosta.currentUnitShown].damageModifier.ToString());
-        armourText.text = (rosta.rosta[rosta.currentUnitShown].Resiliance.ToString());
+        breathText.text = (rosta.rosta[rosta.currentUnitShown].baseBreath.ToString());
+        attackText.text = (rosta.rosta[rosta.currentUnitShown].baseAttack.ToString());
+        defenceText.text = (rosta.rosta[rosta.currentUnitShown].baseDefence.ToString());
+        damageText.text = (rosta.rosta[rosta.currentUnitShown].baseStrength.ToString());
+        armourText.text = (rosta.rosta[rosta.currentUnitShown].baseToughness.ToString());
         speedText.text = (rosta.rosta[rosta.currentUnitShown].ToString());
     }
 

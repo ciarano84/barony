@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Animations;
@@ -8,32 +9,44 @@ using UnityEngine;
 public class UnitInfo
 {
     public string unitName = "nobody";
-    public int move = 5;
-    public string className;
-    public int maxBreath = 3;
-    public int currentBreath = 3;
-    public int Resiliance = -3;
-    public int damageModifier = 0;
-    public int attackModifier = 1;
-    public int defendModifier = -3;
-    public int wounds = 0;
-    public Factions faction = Factions.players;
-    //public Animator unitAnim;
-    public WeaponData weaponData;
     public string unitVisual = "EnemyVisual";
+    public Factions faction = Factions.players;
+    public string className;
+    public WeaponData weaponData;
+
+    //Base Stats
+    public int move = 5;
+    public int baseBreath = 3;
+    public int baseAttack = 1;
+    public int baseDefence = -3;
+    public int baseToughness = -3;
+    public int baseStrength = 0;
+
+    //Modified Stats
+    public int wounds = 0;
+    public int currentBreath;
+    public int currentAttack;
+    public int currentDefence;
+    public int currentToughness;
+    public int currentDamage;
 }
 
 public class Unit : MonoBehaviour
 {
     public UnitInfo unitInfo; 
     public Animator unitAnim;
-    public Weapon weapon1;
+    public Weapon currentWeapon;
 
     //These should be chosen from "drugdge" "elite" "dangerous"
     public string fate;
 
-    private void Start()
+    public void SetStats()
     {
+        unitInfo.currentBreath = unitInfo.baseBreath;
+        unitInfo.currentAttack = unitInfo.baseAttack;
+        unitInfo.currentDefence = unitInfo.baseDefence;
+        unitInfo.currentToughness = unitInfo.baseToughness;
+        unitInfo.currentDamage = unitInfo.baseStrength;
     }
 
     //was protected and not sure why. 
