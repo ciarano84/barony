@@ -36,15 +36,14 @@ public class AbilityCheck
         baseResult = activeRoll - passiveRoll;
     }
 
-    static int BasicRoll(int activeAbility)
+    static int BasicRoll(int stat)
     {
-        int activeResult;
         int firstActiveDie = Random.Range(1, 10);
         if (firstActiveDie == 10) crits++;
         int secondActiveDie = Random.Range(1, 10);
         if (secondActiveDie == 10) crits++;
-        activeResult = firstActiveDie + secondActiveDie;
+        stat += (firstActiveDie + secondActiveDie);
 
-        return activeResult;
+        return stat;
     }
 }

@@ -39,6 +39,8 @@ public class PlayerCharacter : TacticsMovement
         SetStats();
         unitInfo.weaponData.EquipItem(GetComponent<Unit>());
         if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(GetComponent<Unit>());
+        if (unitInfo.armourData != null) unitInfo.armourData.EquipItem(GetComponent<Unit>());
+        if (unitInfo.aspectData != null) unitInfo.aspectData.GetAspect(GetComponent<Unit>());
     }
 
     private void FixedUpdate()

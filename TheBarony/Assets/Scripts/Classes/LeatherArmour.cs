@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldData : ItemData
+public class LeatherArmourData : ItemData
 {
     public override void SetData()
     {
-        imageFile = "Shield";
+        imageFile = "LeatherArmour";
     }
 
     public override void EquipItem(Unit unit)
     {
-        Shield shield = unit.gameObject.AddComponent<Shield>();
+        LeatherArmour shield = unit.gameObject.AddComponent<LeatherArmour>();
         shield.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-        unit.unitInfo.currentDefence = unit.unitInfo.baseDefence + 2;
+        unit.unitInfo.currentToughness += 1;
     }
 }
 
-public class Shield : Item
+public class LeatherArmour : Item
 {
-    public int defendModifier = 2;
 }

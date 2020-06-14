@@ -1,16 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class AttackManager : MonoBehaviour
 {
+    //The values that can be manipulated by other classes. 
+    public static int grazeDamage = -2;
+
+    //These are the delegate handlers that class features and items can subscribe to. 
+    public delegate void OnGrazeDelegate(Unit attacker, Unit defender);
+    public static OnGrazeDelegate OnGraze;
+
+
     //For now this will just be hitting or missing (no crits).
     //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. 
-    
+
     //This is the default and generally used for melee. 
     public static void AttackRoll(Unit attacker, Unit defender)
     {
+        ResetValues();
+
         int attack = attacker.unitInfo.currentAttack;
         int defence = defender.unitInfo.currentDefence;
 
@@ -52,14 +63,12 @@ public class AttackManager : MonoBehaviour
 
     public static void DamageRoll(Unit attacker, Unit defender)
     {
-        AbilityCheck check = new AbilityCheck();
-
         int damage;
+        int resiliance;
         int wounds;
 
         damage = attacker.unitInfo.currentDamage;
-
-        int resiliance = defender.unitInfo.currentToughness;
+        resiliance = defender.unitInfo.currentToughness;
 
         AbilityCheck.CheckAbility(damage, resiliance);
 
@@ -71,7 +80,11 @@ public class AttackManager : MonoBehaviour
             DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "harmless", false);
             return;
         }
-        else if (result < 1) defender.UpdateBreath(-2);
+        else if (result < 1)
+        {
+            defender.UpdateBreath(grazeDamage);
+            OnGraze(attacker, defender); //Alert all that someone is grazed. 
+        } 
         else
         {
             if (result > 9) wounds = 1;
@@ -79,5 +92,10 @@ public class AttackManager : MonoBehaviour
             else { wounds = 3; }
             defender.UpdateWounds(wounds);
         }
+    }
+
+    private static void ResetValues()
+    {
+        grazeDamage = -2;
     }
 }

@@ -14,6 +14,8 @@ public class UnitInfo
     public string className;
     public WeaponData weaponData;
     public ItemData offHandData;
+    public ItemData armourData;
+    public AspectData aspectData;
 
     //Base Stats
     public int move = 5;
@@ -62,8 +64,7 @@ public class Unit : MonoBehaviour
 
         if (unitInfo.currentBreath <= 0)
         {
-            unitInfo.currentBreath = 0;
-            KO();
+            StartCoroutine("KO");
         }
     }
 
