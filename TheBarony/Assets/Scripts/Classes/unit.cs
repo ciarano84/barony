@@ -13,6 +13,7 @@ public class UnitInfo
     public Factions faction = Factions.players;
     public string className;
     public WeaponData weaponData;
+    public ItemData offHandData;
 
     //Base Stats
     public int move = 5;

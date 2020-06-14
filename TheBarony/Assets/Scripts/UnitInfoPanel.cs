@@ -34,6 +34,7 @@ public class UnitInfoPanel : MonoBehaviour
         {
             case "Heavy":
                 unit.weaponData = new MeleeWeaponData();
+                unit.offHandData = new ShieldData();
                 break;
             case "Scout":
                 unit.weaponData = new RangedWeaponData();

@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class PlayerCharacter : TacticsMovement
 {
-    //public int moveSpeed;
     GameObject visual;
 
     private void Start()
@@ -39,6 +38,7 @@ public class PlayerCharacter : TacticsMovement
 
         SetStats();
         unitInfo.weaponData.EquipItem(GetComponent<Unit>());
+        if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(GetComponent<Unit>());
     }
 
     private void FixedUpdate()
