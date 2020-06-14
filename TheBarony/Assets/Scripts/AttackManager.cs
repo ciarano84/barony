@@ -82,8 +82,8 @@ public class AttackManager : MonoBehaviour
         }
         else if (result < 1)
         {
-            defender.UpdateBreath(grazeDamage);
             OnGraze(attacker, defender); //Alert all that someone is grazed. 
+            defender.UpdateBreath(grazeDamage);
         } 
         else
         {
