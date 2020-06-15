@@ -20,7 +20,14 @@ public class ShortbowData : RangedWeaponData
         weapon.range = 200;
         weapon.actionsPerAttack = 1;
         weapon.missDistance = 20;
+        weapon.maxAmmo = 1;
+        weapon.currentAmmo = 1;
         unit.unitInfo.currentDamage = 2;
+
+        //Set up for an action. 
+        Reload reload = new Reload();
+        reload.SetActionButtonData(unit);
+        unit.actions.Add(reload);
     }
 }
 

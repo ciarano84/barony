@@ -39,7 +39,8 @@ public class Unit : MonoBehaviour
     public UnitInfo unitInfo; 
     public Animator unitAnim;
     public Weapon currentWeapon;
-    public Queue<Action> actions = new Queue<Action>();
+    //how is this being populated?  
+    public List<Action> actions = new List<Action>();
 
     //These should be chosen from "drugdge" "elite" "dangerous"
     public string fate;

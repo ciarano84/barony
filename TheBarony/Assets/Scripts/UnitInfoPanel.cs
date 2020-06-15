@@ -39,7 +39,7 @@ public class UnitInfoPanel : MonoBehaviour
                 unit.aspectData = new DefenderData();
                 break;
             case "Scout":
-                unit.weaponData = new RangedWeaponData();
+                unit.weaponData = new ShortbowData();
                 break;
             default:
                 unit.weaponData = new MeleeWeaponData();

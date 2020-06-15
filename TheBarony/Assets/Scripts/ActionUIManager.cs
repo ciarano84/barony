@@ -8,11 +8,18 @@ public class ActionUIManager : MonoBehaviour
 {
     public static PlayerCharacter currentUnit;
     public Button endTurn;
-    public Button Weapon1Attack;
+    public Button ActionButton1;
+    public Text ActionButtonText1;
+    public Button ActionButton2;
+    public Text ActionButtonText2;
+    public Button ActionButton3;
+    public Text ActionButtonText3;
+    public Button ActionButton4;
+    public Text ActionButtonText4;
 
-    Queue<Action> actions = new Queue<Action>();
+    List<Action> actions = new List<Action>();
 
-    Weapon currentWeapon;
+    //Weapon currentWeapon;
 
     static Texture2D attackCursor;
 
@@ -33,11 +40,38 @@ public class ActionUIManager : MonoBehaviour
                 //need to make sure this gets turned off at some point. 
                 endTurn.gameObject.SetActive(true);
 
-                //load in all the actions and make buttons for them. 
-                actions = unit.actions;
-                foreach (Action action in actions)
+                //Ensure conditions for actions are met. 
+                foreach (Action a in unit.actions)
                 {
-                    SetActionButton(action);
+                    if (a.CheckAvailable())
+                    {
+                        actions.Add(a);
+                    }
+                }
+
+                for (int count = 0; count < actions.Count; count++)
+                {
+                    switch (count)
+                    {
+                        case 0:
+                            ActionButton1.gameObject.SetActive(true);
+                            SetActionButtonText(actions[0], ActionButtonText1);
+                            break;
+                        case 1:
+                            ActionButton2.gameObject.SetActive(true);
+                            SetActionButtonText(actions[1], ActionButtonText2);
+                            break;
+                        case 2:
+                            ActionButton3.gameObject.SetActive(true);
+                            SetActionButtonText(actions[2], ActionButtonText3);
+                            break;
+                        case 3:
+                            ActionButton4.gameObject.SetActive(true);
+                            SetActionButtonText(actions[3], ActionButtonText4);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
             else Clear();
@@ -59,6 +93,10 @@ public class ActionUIManager : MonoBehaviour
         endTurn.gameObject.SetActive(false);
         //get rid of all Action UI. 
         actions.Clear();
+        ActionButton1.gameObject.SetActive(false);
+        ActionButton2.gameObject.SetActive(false);
+        ActionButton3.gameObject.SetActive(false);
+        ActionButton4.gameObject.SetActive(false);
     }
 
     public static void GetAttackCursor() {
@@ -70,8 +108,28 @@ public class ActionUIManager : MonoBehaviour
         Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
     }
 
-    void SetActionButton(Action action)
+    void SetActionButtonText(Action action, Text text)
     {
-        //Create the action button. 
+        text.text = action.buttonText;
+    }
+
+    public void ActionButton1Press()
+    {
+        actions[0].ExecuteAction();
+    }
+
+    public void ActionButton2Press()
+    {
+        actions[1].ExecuteAction();
+    }
+
+    public void ActionButton3Press()
+    {
+        actions[2].ExecuteAction();
+    }
+
+    public void ActionButton4Press()
+    {
+        actions[3].ExecuteAction();
     }
 }

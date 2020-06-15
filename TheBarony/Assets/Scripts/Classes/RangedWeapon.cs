@@ -62,6 +62,7 @@ public class RangedWeapon : Weapon
         }
 
         yield return new WaitForSeconds(1f);
+        currentAmmo--;
         Initiative.EndAction();
 
         yield break;
@@ -70,6 +71,8 @@ public class RangedWeapon : Weapon
     public override void GetTargets()
     {
         targets.Clear();
+        if (currentAmmo == 0) return;
+
         foreach (TacticsMovement unit in Initiative.order)
         {
             if (unit != owner.GetComponent<TacticsMovement>())
@@ -100,5 +103,7 @@ public class RangedWeapon : Weapon
         { owner.remainingActions -= 1; }
         else 
         { owner.remainingMove = 0; }
+
+        //need to kick start a new turn here for the character. 
     }
 }
