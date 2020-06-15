@@ -47,7 +47,7 @@ public class UnitInfoPanel : MonoBehaviour
         }
 
         Sprite sprite;
-        unit.weaponData.SetData();
+        unit.weaponData.SetData(unit);
         sprite = Resources.Load<Sprite>(unit.weaponData.imageFile);
         unitWeaponImage.sprite = sprite;
 

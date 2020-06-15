@@ -95,6 +95,7 @@ public class Initiative : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
+                //Do we need this here? 
                 actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
                 currentUnit.GetComponent<TacticsMovement>().BeginTurn();
                 queuedActions--;

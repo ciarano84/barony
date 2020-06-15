@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangedWeaponData : WeaponData
 {
-    public override void SetData()
+    public override void SetData(UnitInfo unitInfo)
     {
         imageFile = "Shortbow";
     }
@@ -20,12 +20,16 @@ public class RangedWeaponData : WeaponData
         weapon.actionsPerAttack = 1;
         weapon.missDistance = 20;
         unit.unitInfo.currentDamage = 3;
+        weapon.maxAmmo = 1;
+        weapon.currentAmmo = 1;
     }
 }
 
 public class RangedWeapon : Weapon
 {
     public int missDistance = 20;
+    public int maxAmmo;
+    public int currentAmmo;
 
     public override IEnumerator Attack(Target target)
     {
@@ -86,5 +90,15 @@ public class RangedWeapon : Weapon
                 }
             }
         }
+    }
+
+    public void Reload(bool asMainAction = false)
+    {
+        currentAmmo = maxAmmo;
+        DamagePopUp.Create(transform.position + new Vector3(0, GetComponent<TacticsMovement>().halfHeight), "Arrow nocked", false);
+        if (asMainAction)
+        { owner.remainingActions -= 1; }
+        else 
+        { owner.remainingMove = 0; }
     }
 }

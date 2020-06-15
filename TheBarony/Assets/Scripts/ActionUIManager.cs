@@ -9,6 +9,9 @@ public class ActionUIManager : MonoBehaviour
     public static PlayerCharacter currentUnit;
     public Button endTurn;
     public Button Weapon1Attack;
+
+    Queue<Action> actions = new Queue<Action>();
+
     Weapon currentWeapon;
 
     static Texture2D attackCursor;
@@ -29,6 +32,13 @@ public class ActionUIManager : MonoBehaviour
             {
                 //need to make sure this gets turned off at some point. 
                 endTurn.gameObject.SetActive(true);
+
+                //load in all the actions and make buttons for them. 
+                actions = unit.actions;
+                foreach (Action action in actions)
+                {
+                    SetActionButton(action);
+                }
             }
             else Clear();
         }
@@ -48,6 +58,7 @@ public class ActionUIManager : MonoBehaviour
     public void Clear() {
         endTurn.gameObject.SetActive(false);
         //get rid of all Action UI. 
+        actions.Clear();
     }
 
     public static void GetAttackCursor() {
@@ -57,5 +68,10 @@ public class ActionUIManager : MonoBehaviour
 
     public static void SetStandardCursor() {
         Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
+    }
+
+    void SetActionButton(Action action)
+    {
+        //Create the action button. 
     }
 }

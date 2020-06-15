@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MeleeWeaponData : WeaponData
 {
-    public override void SetData()
+    public override void SetData(UnitInfo unitInfo)
     {
         imageFile = "Shortsword";
     }

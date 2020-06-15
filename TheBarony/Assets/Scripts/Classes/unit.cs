@@ -39,6 +39,7 @@ public class Unit : MonoBehaviour
     public UnitInfo unitInfo; 
     public Animator unitAnim;
     public Weapon currentWeapon;
+    public Queue<Action> actions = new Queue<Action>();
 
     //These should be chosen from "drugdge" "elite" "dangerous"
     public string fate;

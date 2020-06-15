@@ -27,7 +27,6 @@ public class Defender : Aspect
 
     public void SoakDamage(Unit attacker, Unit defender)
     {
-        Debug.Log("SoakDamageCalled");
         if (defender == owner)
         {
             AttackManager.grazeDamage = -1;

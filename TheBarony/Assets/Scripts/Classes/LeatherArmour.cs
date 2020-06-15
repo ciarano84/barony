@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LeatherArmourData : ItemData
 {
-    public override void SetData()
+    public override void SetData(UnitInfo unitInfo)
     {
         imageFile = "LeatherArmour";
     }
