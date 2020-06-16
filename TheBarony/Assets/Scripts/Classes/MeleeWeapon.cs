@@ -27,19 +27,18 @@ public class MeleeWeapon : Weapon
     public override IEnumerator Attack(Target target)
     {
         targets.Clear();
-        owner.remainingActions--;
-        owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
-
-        yield return new WaitUntil(() => !owner.moving);
         
+        owner.remainingActions--;
+        
+        owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
+        yield return new WaitUntil(() => !owner.moving);
         owner.unitAnim.SetTrigger("melee");
         yield return new WaitForSeconds(0.3f);
-
         AttackManager.AttackRoll(owner,target.unitTargeted.GetComponent<Unit>());
-
         yield return new WaitForSeconds(2f);
         
         Initiative.EndAction();
+
         yield break;
     }
 

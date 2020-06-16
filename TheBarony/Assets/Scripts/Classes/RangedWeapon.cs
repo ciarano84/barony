@@ -98,12 +98,11 @@ public class RangedWeapon : Weapon
     public void Reload(bool asMainAction = false)
     {
         currentAmmo = maxAmmo;
-        DamagePopUp.Create(transform.position + new Vector3(0, GetComponent<TacticsMovement>().halfHeight), "Arrow nocked", false);
+        DamagePopUp.Create(transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Arrow nocked", false);
         if (asMainAction)
         { owner.remainingActions -= 1; }
         else 
         { owner.remainingMove = 0; }
-
-        //need to kick start a new turn here for the character. 
+        Initiative.EndAction();
     }
 }

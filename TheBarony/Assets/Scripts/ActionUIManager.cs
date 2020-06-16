@@ -31,6 +31,7 @@ public class ActionUIManager : MonoBehaviour
 
     public void UpdateActions(PlayerCharacter unit)
     {
+        Clear();
         currentUnit = unit;
 
         if (unit.GetComponent<PlayerCharacter>() != null)

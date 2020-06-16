@@ -23,7 +23,8 @@ public class Reload : Action
     //this bool is used to decide if the action is avialable to the player or not. 
     public override bool CheckAvailable()
     {
-        if (actioningUnit.GetComponent<RangedWeapon>().currentAmmo < actioningUnit.GetComponent<RangedWeapon>().maxAmmo) return true;
+        if (actioningUnit.GetComponent<RangedWeapon>().currentAmmo < actioningUnit.GetComponent<RangedWeapon>().maxAmmo
+            && actioningUnit.GetComponent<TacticsMovement>().remainingMove == actioningUnit.unitInfo.move) return true;
         else { return false; }
     }
 }
