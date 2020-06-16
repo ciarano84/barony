@@ -20,6 +20,7 @@ public class UnitInfoPanel : MonoBehaviour
 
     IEnumerator WaitAndFindPlayerData()
     {
+        //gammy way of doing this. Should set up a delegate on player data that announces when everything is in place. 
         yield return new WaitForSeconds(0.2f);
         rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
         yield break;
@@ -28,11 +29,13 @@ public class UnitInfoPanel : MonoBehaviour
     public void SetUnit(UnitInfo unitInfo)
     {
         unit = unitInfo;
+        //might need to tie the aspect data to the unitdata somehow. 
+        unit.aspectData.SetAspectData();
         unitName.text = unit.unitName;
         //This is where we will have to get it to choose WHAT weapon data it puts in. Should probably make an equipment manager's job.  
-        switch (unit.className)
+        switch (unit.aspectData.className)
         {
-            case "Heavy":
+            case "Defender":
                 unit.weaponData = new MeleeWeaponData();
                 unit.offHandData = new ShieldData();
                 unit.armourData = new LeatherArmourData();
@@ -41,7 +44,7 @@ public class UnitInfoPanel : MonoBehaviour
             case "Scout":
                 unit.weaponData = new ShortbowData();
                 break;
-            default:
+            case "Priest":
                 unit.weaponData = new MeleeWeaponData();
                 break;
         }
@@ -51,10 +54,8 @@ public class UnitInfoPanel : MonoBehaviour
         sprite = Resources.Load<Sprite>(unit.weaponData.imageFile);
         unitWeaponImage.sprite = sprite;
 
-        GameObject instance = Instantiate(Resources.Load(unit.unitVisual)) as GameObject;
-        instance.transform.position = point.transform.position;
-        //this is nonsense just to get stuff showing right for the time being:
-        instance.transform.Rotate(0,90,0);
+        //This is ultimately how I'll have to access the visual from gameassets. 
+        Instantiate(unit.aspectData.GetVisual(), point.transform);
     }
 
     public void SelectUnit()

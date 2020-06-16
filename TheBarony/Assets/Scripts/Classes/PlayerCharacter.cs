@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 
 public class PlayerCharacter : TacticsMovement
 {
-    GameObject visual;
-
     private void Start()
     {
         InitTacticsMovement();
@@ -19,11 +17,12 @@ public class PlayerCharacter : TacticsMovement
         //this should just read 'unitInfo.weaponData.CreateWeapon(this);' but has the rest to catch the proxy npcs. 
         if (unitInfo.unitName == "nobody")
         {
+            Debug.Log("reached");
             unitInfo = new UnitInfo();
             unitInfo.weaponData = new MeleeWeaponData();
             unitInfo.faction = Factions.enemies;
             unitInfo.weaponData.EquipItem(GetComponent<Unit>());
-            unitInfo.unitVisual = "EnemyVisual";
+            Instantiate(GameAssets.i.EnemyVisual, transform);
         }
         //This next section is just for when we start direct in a combat.  
         if (this.unitInfo.weaponData == null)
@@ -32,15 +31,15 @@ public class PlayerCharacter : TacticsMovement
             unitInfo.weaponData.EquipItem(GetComponent<Unit>());
         }
 
-        //Get the visual. This, at present, will only affect player characters (this script). There's nothing in place for enemies. 
-        visual = Instantiate(Resources.Load(unitInfo.unitVisual), transform) as GameObject;
-        visual.transform.position = transform.position;
-
         SetStats();
         unitInfo.weaponData.EquipItem(GetComponent<Unit>());
         if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(GetComponent<Unit>());
         if (unitInfo.armourData != null) unitInfo.armourData.EquipItem(GetComponent<Unit>());
         if (unitInfo.aspectData != null) unitInfo.aspectData.GetAspect(GetComponent<Unit>());
+        if (unitInfo.aspectData != null) Instantiate(unitInfo.aspectData.GetVisual(), transform);
+
+        //visual = Instantiate(Resources.Load(unitInfo.unitVisual), transform) as GameObject;
+        //visual.transform.position = transform.position;
     }
 
     private void FixedUpdate()

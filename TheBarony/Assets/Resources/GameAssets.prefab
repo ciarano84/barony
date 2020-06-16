@@ -46,5 +46,11 @@ MonoBehaviour:
   damagePopUp: {fileID: 7401985853768158229, guid: 9d0f9ef1dfcce5f438b66c7d20d46006,
     type: 3}
   Sword_Cursor: {fileID: 2800000, guid: 3ea26815491cfdc43969475b606dd477, type: 3}
-  selector: {fileID: 0}
-  unitSelectPanel: {fileID: 0}
+  PriestVisual: {fileID: 3775126955254116175, guid: 33df6f5613ba9724bac3cbdc4ced076b,
+    type: 3}
+  DefenderVisual: {fileID: 3775126955254116175, guid: 3006b0ae66dd5c449bb0fdf2b0566a11,
+    type: 3}
+  ScoutVisual: {fileID: 3775126955254116175, guid: 0e46780efe6497847b7bdd0fc5028556,
+    type: 3}
+  EnemyVisual: {fileID: 3775126955254116175, guid: 12c155818b5894040a98bcaf39ce9ae2,
+    type: 3}

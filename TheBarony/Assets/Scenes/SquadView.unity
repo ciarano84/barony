@@ -158,6 +158,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePopUp: {fileID: 7401985853768158229, guid: 9d0f9ef1dfcce5f438b66c7d20d46006,
     type: 3}
+  Sword_Cursor: {fileID: 0}
+  PriestVisual: {fileID: 0}
+  DefenderVisual: {fileID: 0}
+  ScoutVisual: {fileID: 0}
+  EnemyVisual: {fileID: 0}
 --- !u!4 &414144200
 Transform:
   m_ObjectHideFlags: 0
@@ -1672,6 +1677,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968408495182563413, guid: 23e0785930b5e994aa7289fccf975953,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4968408495182563414, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}

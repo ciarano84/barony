@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2034100475775085849}
   - component: {fileID: 8066552967303197416}
   m_Layer: 0
-  m_Name: EnemyVisual
+  m_Name: PlayerVisualHeavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3775126955254116175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 879, y: 448.7, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e1b7e2eea8cb1564498e652c8dd3f7b0, type: 2}
+  - {fileID: 2100000, guid: 11ea8616e61aaad4193eb3b664ce4b29, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

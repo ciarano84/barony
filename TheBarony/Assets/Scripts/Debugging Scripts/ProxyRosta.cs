@@ -12,7 +12,6 @@ public class ProxyRosta : MonoBehaviour
 
     RostaInfo rosta;
     public GameObject playerData;
-    //public GameObject companySelectManager;
 
     void Awake()
     {
@@ -41,15 +40,25 @@ public class ProxyRosta : MonoBehaviour
     void AssignStats(UnitInfo player)
     {
         player.unitName = (names[Random.Range(0, names.Length)] + " " + names[Random.Range(0, names.Length)]);
-        if (Random.Range(0, 10) > 4)
+
+        int classroll = Random.Range(0, 10);
+        switch (classroll)
         {
-            player.className = ("Heavy");
-            player.unitVisual = "PlayerVisual";
-        }
-        else
-        {
-            player.className = ("Scout");
-            player.unitVisual = "PlayerVisualScout";
+            case 0: case 1: case 2: case 3:
+                player.aspectData = new DefenderData();
+                //player.className = ("Heavy");
+                //player.unitVisual = "PlayerVisualHeavy";
+                break;
+            case 4: case 5: case 6: case 7:
+                player.aspectData = new ScoutData();
+                //player.className = ("Scout");
+                //player.unitVisual = "PlayerVisualScout";
+                break;
+            case 8: case 9:
+                player.aspectData = new PriestData();
+                //player.className = ("Priest")
+                //player.unitVisual = PlayerVisualPriest;
+                break;
         }
         player.baseBreath = 4 + Random.Range(0, 6);
         player.baseAttack = -1 + Random.Range(0, 5);

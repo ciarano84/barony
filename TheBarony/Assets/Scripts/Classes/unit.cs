@@ -11,11 +11,12 @@ public class UnitInfo
     public string unitName = "nobody";
     public string unitVisual = "EnemyVisual";
     public Factions faction = Factions.players;
+    public AspectData aspectData;
+    public Aspect aspect;
     public string className;
     public WeaponData weaponData;
     public ItemData offHandData;
     public ItemData armourData;
-    public AspectData aspectData;
 
     //Base Stats
     public int move = 5;

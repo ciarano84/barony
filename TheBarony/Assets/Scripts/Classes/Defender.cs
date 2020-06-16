@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class DefenderData : AspectData
 {
-    public override void Level1(Unit unit)
+    public override void SetAspectData()
     {
-        
+        className = "Defender";
+    }
+
+    public override void Level1(Unit unit)
+    {    
     }
 
     public override void GetAspect(Unit unit)
@@ -14,12 +18,13 @@ public class DefenderData : AspectData
         Defender defenderAspect = unit.gameObject.AddComponent<Defender>();
         defenderAspect.owner = unit;
     }
+
+    public override GameObject GetVisual() { return GameAssets.i.DefenderVisual; }
+
 }
 
 public class Defender : Aspect
 {
-    public Unit owner;
-
     private void Start()
     {
         AttackManager.OnGraze += SoakDamage;
