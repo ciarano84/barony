@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class DefenderData : AspectData
 {
-    public override void SetAspectData()
+    public override void SetAspectData(UnitInfo unit)
     {
         className = "Defender";
+        unitInfo = unit;
     }
 
-    public override void Level1(Unit unit)
-    {    
+    public override void Level1()
+    {
+        unitInfo.baseBreath += 1;
+        unitInfo.baseStrength += 1;
+        unitInfo.baseToughness += 1;
     }
 
     public override void GetAspect(Unit unit)
@@ -20,7 +24,6 @@ public class DefenderData : AspectData
     }
 
     public override GameObject GetVisual() { return GameAssets.i.DefenderVisual; }
-
 }
 
 public class Defender : Aspect

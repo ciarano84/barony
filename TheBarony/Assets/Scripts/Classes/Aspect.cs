@@ -5,11 +5,12 @@ using UnityEngine;
 public abstract class AspectData 
 {
     public string className;
+    public UnitInfo unitInfo;
 
     //This is the basic aspect (dnd class) that is inherited from. 
-    public abstract void SetAspectData();
+    public abstract void SetAspectData(UnitInfo unitInfo);
 
-    public abstract void Level1(Unit unit);
+    public abstract void Level1();
     //level up()s
 
     public abstract void GetAspect(Unit unit);

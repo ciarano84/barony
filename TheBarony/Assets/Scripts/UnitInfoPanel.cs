@@ -29,8 +29,6 @@ public class UnitInfoPanel : MonoBehaviour
     public void SetUnit(UnitInfo unitInfo)
     {
         unit = unitInfo;
-        //might need to tie the aspect data to the unitdata somehow. 
-        unit.aspectData.SetAspectData();
         unitName.text = unit.unitName;
         //This is where we will have to get it to choose WHAT weapon data it puts in. Should probably make an equipment manager's job.  
         switch (unit.aspectData.className)

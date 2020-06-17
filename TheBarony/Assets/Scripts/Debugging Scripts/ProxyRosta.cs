@@ -40,30 +40,33 @@ public class ProxyRosta : MonoBehaviour
     void AssignStats(UnitInfo player)
     {
         player.unitName = (names[Random.Range(0, names.Length)] + " " + names[Random.Range(0, names.Length)]);
+        player.baseBreath = 4 + Random.Range(0, 5);
+        player.baseAttack = -1 + Random.Range(0, 4);
+        player.baseDefence = -1 + Random.Range(0, 4);
+        player.baseStrength = -1 + Random.Range(0, 4);
+        player.baseToughness = -1 + Random.Range(0, 4);
 
         int classroll = Random.Range(0, 10);
         switch (classroll)
         {
-            case 0: case 1: case 2: case 3:
+            case 0:
+            case 1:
+            case 2:
+            case 3:
                 player.aspectData = new DefenderData();
-                //player.className = ("Heavy");
-                //player.unitVisual = "PlayerVisualHeavy";
                 break;
-            case 4: case 5: case 6: case 7:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
                 player.aspectData = new ScoutData();
-                //player.className = ("Scout");
-                //player.unitVisual = "PlayerVisualScout";
                 break;
-            case 8: case 9:
+            case 8:
+            case 9:
                 player.aspectData = new PriestData();
-                //player.className = ("Priest")
-                //player.unitVisual = PlayerVisualPriest;
                 break;
         }
-        player.baseBreath = 4 + Random.Range(0, 6);
-        player.baseAttack = -1 + Random.Range(0, 5);
-        player.baseDefence = -1 + Random.Range(0, 5);
-        player.baseStrength = -1 + Random.Range(0, 5);
-        player.baseToughness = -1 + Random.Range(0, 5);
+        player.aspectData.SetAspectData(player);
+        player.aspectData.Level1();
     }
 }

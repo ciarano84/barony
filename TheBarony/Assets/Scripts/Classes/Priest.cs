@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PriestData : AspectData
 {
-    public override void SetAspectData()
+    public override void SetAspectData(UnitInfo unit)
     {
         className = "Priest";
+        unitInfo = unit;
     }
 
-    public override void Level1(Unit unit)
+    public override void Level1()
     {
 
     }
