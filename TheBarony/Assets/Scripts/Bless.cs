@@ -13,7 +13,6 @@ public class Bless : Effect
         owner = gameObject.GetComponent<Unit>();
         if (BlessVisual == null)
         {
-            Debug.Log("Blessvisual found to be null");
             blessingUnit = effectCauser.GetComponent<Unit>();
             BlessVisual = Instantiate(GameAssets.i.Bless, owner.transform);
         }
@@ -26,7 +25,7 @@ public class Bless : Effect
         TacticsMovement.OnEnterSquare += RemovalCheck;
     }
 
-    public override void RemovalCheck(Unit unit)
+    public override void RemovalCheck(Unit unit = null)
     {
         Vector3 rayOrigin = owner.gameObject.transform.position;
 
