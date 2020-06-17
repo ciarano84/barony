@@ -1436,7 +1436,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endTurn: {fileID: 371776633}
-  Weapon1Attack: {fileID: 55307715}
+  ActionButton1: {fileID: 0}
+  ActionButtonText1: {fileID: 0}
+  ActionButton2: {fileID: 0}
+  ActionButtonText2: {fileID: 0}
+  ActionButton3: {fileID: 0}
+  ActionButtonText3: {fileID: 0}
+  ActionButton4: {fileID: 0}
+  ActionButtonText4: {fileID: 0}
 --- !u!1001 &1574135247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1946,6 +1953,12 @@ PrefabInstance:
       propertyPath: unitSelectPanel
       value: 
       objectReference: {fileID: 4968408495182563414, guid: 23e0785930b5e994aa7289fccf975953,
+        type: 3}
+    - target: {fileID: 2372815007070468236, guid: 3099c9bd14ffc5942b566c84177c4d78,
+        type: 3}
+      propertyPath: Bless
+      value: 
+      objectReference: {fileID: 2017922947834362310, guid: 75d3f7fe088f1e34c9e925c774ee180d,
         type: 3}
     - target: {fileID: 2372815007070468237, guid: 3099c9bd14ffc5942b566c84177c4d78,
         type: 3}

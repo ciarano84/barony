@@ -54,3 +54,4 @@ MonoBehaviour:
     type: 3}
   EnemyVisual: {fileID: 3775126955254116175, guid: 12c155818b5894040a98bcaf39ce9ae2,
     type: 3}
+  Bless: {fileID: 2017922947834362310, guid: 75d3f7fe088f1e34c9e925c774ee180d, type: 3}

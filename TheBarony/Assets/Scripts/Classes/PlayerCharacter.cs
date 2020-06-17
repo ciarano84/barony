@@ -17,7 +17,6 @@ public class PlayerCharacter : TacticsMovement
         //this should just read 'unitInfo.weaponData.CreateWeapon(this);' but has the rest to catch the proxy npcs. 
         if (unitInfo.unitName == "nobody")
         {
-            Debug.Log("reached");
             unitInfo = new UnitInfo();
             unitInfo.weaponData = new MeleeWeaponData();
             unitInfo.faction = Factions.enemies;

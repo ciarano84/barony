@@ -43,7 +43,10 @@ public class TacticsMovement : Unit
     bool jumpingUp = false;
     bool movingEdge = false;
     bool fallingDown = false;
-    
+
+    public delegate void OnEnterSquareDelegate(Unit mover);
+    public static OnEnterSquareDelegate OnEnterSquare;
+
     public void InitTacticsMovement() {
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
@@ -231,6 +234,7 @@ public class TacticsMovement : Unit
             {
                 //Tile centre reached
                 transform.position = target;
+                OnEnterSquare(this); //Alert that a unit has entered a square.
 
                 //Take this move off remaining move IF it's not the first tile in the path.
                 if (path.Peek() != firstTileInPath)

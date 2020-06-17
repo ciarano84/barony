@@ -20,4 +20,5 @@ public class GameAssets : MonoBehaviour
     public GameObject DefenderVisual;
     public GameObject ScoutVisual;
     public GameObject EnemyVisual;
+    public GameObject Bless;
 }
