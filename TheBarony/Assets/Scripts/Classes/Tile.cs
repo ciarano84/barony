@@ -18,7 +18,6 @@ public class Tile : MonoBehaviour
     public Tile parent = null;
     public float distance = 0;
 
-    //Debug
     public bool foundABarrier = false;
 
     //diagonals

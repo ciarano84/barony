@@ -23,6 +23,7 @@ public class Bless : Effect
         owner.unitInfo.currentAttack += 2;
         owner.unitInfo.currentDefence += 2;
         TacticsMovement.OnEnterSquare += RemovalCheck;
+        Unit.onKO += UnSubscribe;
     }
 
     public override void RemovalCheck(Unit unit = null)
@@ -30,7 +31,7 @@ public class Bless : Effect
         Vector3 rayOrigin = owner.gameObject.transform.position;
 
         //Debug
-        Debug.DrawRay(transform.position, (blessingUnit.gameObject.transform.position - transform.position), Color.green, 1000f);
+        Debug.DrawRay(transform.position, (blessingUnit.gameObject.transform.position - transform.position), Color.green, 3f);
 
         // Declare a raycast hit to store information about what our raycast has hit
         if (Physics.Raycast(rayOrigin, (blessingUnit.gameObject.transform.position - transform.position), out RaycastHit hit))
@@ -42,9 +43,19 @@ public class Bless : Effect
             else { Remove(); }
         }
     }
-    
+
+    public void UnSubscribe(Unit unit)
+    {
+        if (unit == owner)
+        {
+            TacticsMovement.OnEnterSquare -= RemovalCheck;
+            Unit.onKO -= UnSubscribe;
+        }
+    }
+
     public override void Remove()
     {
+        UnSubscribe(owner);
         owner.unitInfo.currentAttack -= 2;
         owner.unitInfo.currentDefence -= 2;
         BlessVisual.SetActive(false);

@@ -52,7 +52,7 @@ public class TacticsMovement : Unit
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         unitAnim = GetComponent<Animator>();
         CheckInitiative();
-        remainingMove = unitInfo.move;
+        remainingMove = unitInfo.currentMove;
         remainingActions = 1;
         Initiative.AddUnit(this);
     }
@@ -386,7 +386,7 @@ public class TacticsMovement : Unit
     public void EndTurn()
     {
         turn = false;
-        remainingMove = unitInfo.move;
+        remainingMove = unitInfo.currentMove;
         remainingActions = 1;
     }
 

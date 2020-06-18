@@ -8,6 +8,7 @@ public class DefenderData : AspectData
     {
         className = "Defender";
         unitInfo = unit;
+        unit.className = className;
     }
 
     public override void Level1()
@@ -31,6 +32,7 @@ public class Defender : Aspect
     private void Start()
     {
         AttackManager.OnGraze += SoakDamage;
+        Unit.onKO += UnSubscribe;
     }
 
     public void SoakDamage(Unit attacker, Unit defender)
@@ -38,6 +40,15 @@ public class Defender : Aspect
         if (defender == owner)
         {
             AttackManager.grazeDamage = -1;
+        }
+    }
+
+    public void UnSubscribe(Unit unit)
+    {
+        if (unit == owner)
+        {
+            AttackManager.OnGraze -= SoakDamage;
+            Unit.onKO -= UnSubscribe;
         }
     }
 }

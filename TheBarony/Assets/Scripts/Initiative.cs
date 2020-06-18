@@ -30,6 +30,7 @@ public class Initiative : MonoBehaviour
     public delegate void OnEncounterStartDelegate(Unit unit);
     public static OnEncounterStartDelegate OnEncounterStart;
 
+
     private void Update()
     {
         publicQueuedActions = queuedActions;
@@ -56,6 +57,7 @@ public class Initiative : MonoBehaviour
             order.Enqueue(u);
         }
         OnEncounterStart(order.Peek()); //Alert all that the encounter has started. 
+
         StartTurn();
         yield break;
     }

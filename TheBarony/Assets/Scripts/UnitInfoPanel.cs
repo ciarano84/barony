@@ -37,7 +37,6 @@ public class UnitInfoPanel : MonoBehaviour
                 unit.weaponData = new MeleeWeaponData();
                 unit.offHandData = new ShieldData();
                 unit.armourData = new LeatherArmourData();
-                unit.aspectData = new DefenderData();
                 break;
             case "Scout":
                 unit.weaponData = new ShortbowData();

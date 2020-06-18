@@ -80,9 +80,6 @@ public class RangedWeapon : Weapon
                 Vector3 rayOrigin = owner.gameObject.transform.position;
                 Vector3 centre = -Vector3.up;
 
-                //Debug
-                Debug.DrawRay(transform.position, (unit.gameObject.transform.position - transform.position), Color.green, 1000f);
-
                 // Declare a raycast hit to store information about what our raycast has hit
                 if (Physics.Raycast(rayOrigin, (unit.gameObject.transform.position - transform.position), out RaycastHit hit))
                 {

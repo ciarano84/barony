@@ -19,12 +19,12 @@ public class UnitInfo
     public ItemData armourData;
 
     //Base Stats
-    public int move = 5;
     public int baseBreath = 3;
     public int baseAttack = 1;
     public int baseDefence = -3;
     public int baseToughness = -3;
     public int baseStrength = 0;
+    public int baseMove = 4;
 
     //Modified Stats
     public int wounds = 0;
@@ -33,6 +33,7 @@ public class UnitInfo
     public int currentDefence;
     public int currentToughness;
     public int currentDamage;
+    public int currentMove;
 }
 
 public class Unit : MonoBehaviour
@@ -46,6 +47,9 @@ public class Unit : MonoBehaviour
     //These should be chosen from "drugdge" "elite" "dangerous"
     public string fate;
 
+    public delegate void OnKODelegate(Unit unit);
+    public static OnKODelegate onKO;
+
     public void SetStats()
     {
         unitInfo.currentBreath = unitInfo.baseBreath;
@@ -53,6 +57,7 @@ public class Unit : MonoBehaviour
         unitInfo.currentDefence = unitInfo.baseDefence;
         unitInfo.currentToughness = unitInfo.baseToughness;
         unitInfo.currentDamage = unitInfo.baseStrength;
+        unitInfo.currentMove = unitInfo.baseMove;
     }
 
     //was protected and not sure why. 
@@ -111,6 +116,7 @@ public class Unit : MonoBehaviour
 
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);
+        onKO(this);
 
         //Tell the initiative order to remove this unit. 
         Initiative.RemoveUnit(this);

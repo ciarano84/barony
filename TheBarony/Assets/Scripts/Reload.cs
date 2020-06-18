@@ -24,7 +24,7 @@ public class Reload : Action
     public override bool CheckAvailable()
     {
         if (actioningUnit.GetComponent<RangedWeapon>().currentAmmo < actioningUnit.GetComponent<RangedWeapon>().maxAmmo
-            && actioningUnit.GetComponent<TacticsMovement>().remainingMove == actioningUnit.unitInfo.move) return true;
+            && actioningUnit.GetComponent<TacticsMovement>().remainingMove == actioningUnit.unitInfo.currentMove) return true;
         else { return false; }
     }
 }

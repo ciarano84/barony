@@ -45,18 +45,18 @@ public class RostaManager : MonoBehaviour
     public void ShowStats()
     {
         Destroy(unitVisual);
-        unitVisual = Instantiate(Resources.Load(rosta.rosta[rosta.currentUnitShown].unitVisual)) as GameObject;
-        unitVisual.transform.position = pedestal.transform.position;
-        unitVisual.transform.Rotate(0, 90, 0);
+        UnitInfo unit = rosta.rosta[rosta.currentUnitShown];
 
-        nameText.text = (rosta.rosta[rosta.currentUnitShown].unitName);
-        classText.text = (rosta.rosta[rosta.currentUnitShown].className);
-        breathText.text = (rosta.rosta[rosta.currentUnitShown].baseBreath.ToString());
-        attackText.text = (rosta.rosta[rosta.currentUnitShown].baseAttack.ToString());
-        defenceText.text = (rosta.rosta[rosta.currentUnitShown].baseDefence.ToString());
-        damageText.text = (rosta.rosta[rosta.currentUnitShown].baseStrength.ToString());
-        armourText.text = (rosta.rosta[rosta.currentUnitShown].baseToughness.ToString());
-        speedText.text = (rosta.rosta[rosta.currentUnitShown].ToString());
+        unitVisual = Instantiate(unit.aspectData.GetVisual(), pedestal.transform);
+
+        nameText.text = (unit.unitName);
+        classText.text = (unit.aspectData.className);
+        breathText.text = (unit.baseBreath.ToString());
+        attackText.text = (unit.baseAttack.ToString());
+        defenceText.text = (unit.baseDefence.ToString()); //This won't show shield effects. might be fine. 
+        damageText.text = (unit.baseStrength.ToString());
+        armourText.text = (unit.baseToughness.ToString());
+        speedText.text = (unit.ToString());
     }
 
     public void OnRightButtonClick() { GetNextsUnit(); }

@@ -14,6 +14,7 @@ public class ScoutData : AspectData
     {
         unitInfo.baseAttack += 1;
         unitInfo.baseDefence += 1;
+        unitInfo.baseMove += 1;
     }
 
     public override void GetAspect(Unit unit)

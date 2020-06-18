@@ -26,8 +26,6 @@ public class PriestData : AspectData
 
 public class Priest : Aspect
 {
-    List<Unit> blessedUnits = new List<Unit>();
-
     private void Start()
     {
         TacticsMovement.OnEnterSquare += Bless;

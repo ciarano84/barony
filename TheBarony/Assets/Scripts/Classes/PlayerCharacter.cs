@@ -7,8 +7,8 @@ public class PlayerCharacter : TacticsMovement
 {
     private void Start()
     {
-        InitTacticsMovement();
         InitUnit();
+        InitTacticsMovement();
     }
 
     public override void InitUnit()
