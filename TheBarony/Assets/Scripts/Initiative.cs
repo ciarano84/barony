@@ -1,13 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using UnityEditor.ProjectWindowCallback;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.PlayerLoop;
-using UnityEngine.XR.WSA.Input;
 
 public class Initiative : MonoBehaviour
 {
@@ -101,9 +96,8 @@ public class Initiative : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
-                //Do we need this here? 
-                actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
                 currentUnit.GetComponent<TacticsMovement>().BeginTurn();
+                actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
                 queuedActions--;
                 yield break;
             }

@@ -56,7 +56,7 @@ public class RostaManager : MonoBehaviour
         defenceText.text = (unit.baseDefence.ToString()); //This won't show shield effects. might be fine. 
         damageText.text = (unit.baseStrength.ToString());
         armourText.text = (unit.baseToughness.ToString());
-        speedText.text = (unit.ToString());
+        speedText.text = (unit.baseMove.ToString());
     }
 
     public void OnRightButtonClick() { GetNextsUnit(); }

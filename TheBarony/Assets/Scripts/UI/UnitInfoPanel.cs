@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 public class UnitInfoPanel : MonoBehaviour
 {
-    public Text unitName;
+    public TextMeshProUGUI unitName;
     public Image unitWeaponImage;
     public UnitInfo unit;
     public GameObject point;
