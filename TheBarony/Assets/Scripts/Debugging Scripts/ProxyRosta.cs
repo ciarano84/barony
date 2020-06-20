@@ -46,6 +46,7 @@ public class ProxyRosta : MonoBehaviour
         player.baseStrength = -1 + Random.Range(0, 4);
         player.baseToughness = -1 + Random.Range(0, 4);
         player.baseMove = 3 + Random.Range(0, 4);
+        player.faction = Factions.players;
 
         int classroll = Random.Range(0, 10);
         switch (classroll)

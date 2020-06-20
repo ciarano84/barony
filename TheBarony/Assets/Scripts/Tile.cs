@@ -108,6 +108,7 @@ public class Tile : MonoBehaviour
         }
     }
 
+    //We should be ditching this and just setting a default diagonal bool in CheckTile. 
     public void CheckTile(Vector3 direction, float jumpHeight, bool diagonal)
     {
         //Barrier check overlapbox

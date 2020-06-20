@@ -33,6 +33,18 @@ public class RangedWeapon : Weapon
 
     public override IEnumerator Attack(Target target)
     {
+        int bonuses = 0;
+        owner.FindAdjacentUnits();
+        foreach (Unit unit in owner.adjacentUnits)
+        {
+            if (unit.unitInfo.faction != owner.unitInfo.faction)
+            {
+                Debug.Log("enemy next to me!");
+                bonuses--;
+                break;
+            }
+        }
+
         owner.remainingActions--;
         owner.FaceDirection(target.unitTargeted.gameObject.transform.position);
         yield return new WaitForSeconds(0.3f);
@@ -40,7 +52,7 @@ public class RangedWeapon : Weapon
         //Create this animation.
         owner.unitAnim.SetTrigger("rangedAttack");
 
-        bool hit = AttackManager.RangedAttackRoll(owner, target.unitTargeted.GetComponent<Unit>());
+        bool hit = AttackManager.RangedAttackRoll(owner, target.unitTargeted.GetComponent<Unit>(), bonuses);
         yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length);
         GameObject missile = Instantiate(Resources.Load("Arrow"), owner.transform.position, owner.transform.rotation, owner.gameObject.transform) as GameObject;
 

@@ -9,7 +9,7 @@ public class UnitInfo
 {
     public string unitName = "nobody";
     public string unitVisual = "EnemyVisual";
-    public Factions faction = Factions.players;
+    public Factions faction = Factions.enemies;
     public AspectData aspectData;
     public Aspect aspect;
     public string className;
@@ -42,6 +42,8 @@ public class Unit : MonoBehaviour
     public Weapon currentWeapon;
     //how is this being populated?  
     public List<Action> actions = new List<Action>();
+
+    public List<Unit> adjacentUnits = new List<Unit>();
 
     //These should be chosen from "drugdge" "elite" "dangerous"
     public string fate;
@@ -120,5 +122,42 @@ public class Unit : MonoBehaviour
 
         //Tell the initiative order to remove this unit. 
         Initiative.RemoveUnit(this);
+    }
+
+    public void FindAdjacentUnits()
+    {
+        adjacentUnits.Clear();
+
+        float jumpHeight = GetComponent<TacticsMovement>().jumpHeight;
+
+        //diagonals
+        Vector3 forwardAndLeft = new Vector3(-1, 0, 1);
+        Vector3 forwardAndRight = new Vector3(1, 0, 1);
+        Vector3 backAndLeft = new Vector3(-1, 0, -1);
+        Vector3 backAndRight = new Vector3(1, 0, -1);
+
+        CheckForUnit(Vector3.forward, jumpHeight);
+        CheckForUnit(-Vector3.forward, jumpHeight);
+        CheckForUnit(Vector3.right, jumpHeight);
+        CheckForUnit(-Vector3.right, jumpHeight);
+
+        //Diagonals
+        CheckForUnit(forwardAndLeft, jumpHeight);
+        CheckForUnit(forwardAndRight, jumpHeight);
+        CheckForUnit(backAndLeft, jumpHeight);
+        CheckForUnit(backAndRight, jumpHeight);
+    }
+
+    void CheckForUnit(Vector3 direction, float jumpHeight)
+    {
+        RaycastHit hit;
+        Vector3 viewpoint = transform.position + new Vector3(0, GetComponent<TacticsMovement>().halfHeight, 0);
+        if (Physics.Raycast(viewpoint, direction, out hit, 1.5f))
+        {
+            if (hit.collider.GetComponent<Unit>() != null)
+            {
+                adjacentUnits.Add(hit.collider.GetComponent<Unit>());
+            }
+        }
     }
 }

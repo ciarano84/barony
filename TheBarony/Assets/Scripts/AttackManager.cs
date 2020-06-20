@@ -39,14 +39,12 @@ public class AttackManager : MonoBehaviour
     }
 
     //This is the ranged variation
-    public static bool RangedAttackRoll(Unit attacker, Unit defender)
+    public static bool RangedAttackRoll(Unit attacker, Unit defender, int bonuses = 0)
     {
-        AbilityCheck check = new AbilityCheck();
-
         int attack = attacker.unitInfo.currentAttack;
         int defence = defender.unitInfo.currentDefence;
 
-        AbilityCheck.CheckAbility(attack, defence);
+        AbilityCheck.CheckAbility(attack, defence, bonuses);
 
         if (AbilityCheck.baseResult >= 0)
         //hit goes here. 

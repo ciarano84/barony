@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class AbilityCheck
@@ -13,37 +14,51 @@ public class AbilityCheck
     //Because the last permater is set in the method declaration, it has a default and is optional. 
     public static void CheckAbility(int activeModifier, int passiveModifier, int bonuses = 0)
     {
+        Reset();
+
         //Work out active roll
         int activeRoll = BasicRoll(activeModifier);
+        Debug.Log("active roll is " + activeRoll);
 
         while (bonuses > 0)
         {
-            int bonusRoll = Random.Range(1, 5);
-            if (bonusRoll == 5)
-            { crits++; }
+            int bonusRoll = Random.Range(1, 6);
+            baseResult += bonusRoll;
+            if (bonusRoll == 5) { crits++; }
             bonuses--;
         }
 
         while (bonuses < 0)
         {
-            baseResult -= Random.Range(1, 5);
+            
+            baseResult -= Random.Range(1, 6);
             bonuses++;
+            Debug.Log("Penalty is " + baseResult);
         }
 
         //Work out passive check:
         int passiveRoll = BasicRoll(passiveModifier);
+        Debug.Log("passive roll is " + passiveRoll);
 
-        baseResult = activeRoll - passiveRoll;
+        baseResult += (activeRoll - passiveRoll);
+        Debug.Log("active total is " + baseResult);
     }
 
     static int BasicRoll(int stat)
     {
-        int firstActiveDie = Random.Range(1, 10);
+        int firstActiveDie = Random.Range(1, 11);
         if (firstActiveDie == 10) crits++;
-        int secondActiveDie = Random.Range(1, 10);
+        int secondActiveDie = Random.Range(1, 11);
         if (secondActiveDie == 10) crits++;
         stat += (firstActiveDie + secondActiveDie);
 
         return stat;
+    }
+
+    static void Reset()
+    {
+        baseResult = 0;
+        crits = 0;
+        fumbles = 0;
     }
 }
