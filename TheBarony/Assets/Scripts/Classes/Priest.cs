@@ -30,6 +30,7 @@ public class Priest : Aspect
     {
         TacticsMovement.OnEnterSquare += Bless;
         Initiative.OnEncounterStart += Bless;
+        Unit.onKO += UnSubscribe;
     }
 
     public void Bless(Unit mover)
@@ -64,4 +65,15 @@ public class Priest : Aspect
             }
         }
     }
+
+    public void UnSubscribe(Unit unit)
+    {
+        if (unit == gameObject.GetComponent<Unit>())
+        {
+            TacticsMovement.OnEnterSquare -= Bless;
+            Initiative.OnEncounterStart -= Bless;
+            Unit.onKO -= UnSubscribe;
+        }
+    }
+
 }

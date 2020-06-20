@@ -23,7 +23,15 @@ public class Bless : Effect
         owner.unitInfo.currentAttack += 2;
         owner.unitInfo.currentDefence += 2;
         TacticsMovement.OnEnterSquare += RemovalCheck;
-        Unit.onKO += UnSubscribe;
+        Unit.onKO += DeathRemovalCheck;
+    }
+
+    public void DeathRemovalCheck(Unit unit)
+    {
+        if ((unit == gameObject.GetComponent<Unit>()) || unit == blessingUnit)
+        {
+            Remove();
+        }
     }
 
     public override void RemovalCheck(Unit unit = null)
@@ -46,11 +54,9 @@ public class Bless : Effect
 
     public void UnSubscribe(Unit unit)
     {
-        if (unit == owner)
-        {
-            TacticsMovement.OnEnterSquare -= RemovalCheck;
-            Unit.onKO -= UnSubscribe;
-        }
+        TacticsMovement.OnEnterSquare -= RemovalCheck;
+        Unit.onKO -= DeathRemovalCheck;
+        Unit.onKO -= UnSubscribe;
     }
 
     public override void Remove()

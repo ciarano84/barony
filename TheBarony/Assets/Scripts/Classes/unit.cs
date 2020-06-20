@@ -112,10 +112,11 @@ public class Unit : MonoBehaviour
     {
         Initiative.queuedActions++;
         unitInfo.currentBreath = 0;
+        onKO(this);
 
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);
-        onKO(this);
+        
 
         //Tell the initiative order to remove this unit. 
         Initiative.RemoveUnit(this);
