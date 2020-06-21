@@ -39,7 +39,6 @@ public class RangedWeapon : Weapon
         {
             if (unit.unitInfo.faction != owner.unitInfo.faction)
             {
-                Debug.Log("enemy next to me!");
                 bonuses--;
                 break;
             }

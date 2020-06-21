@@ -17,14 +17,14 @@ public class AttackManager : MonoBehaviour
     //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. 
 
     //This is the default and generally used for melee. 
-    public static void AttackRoll(Unit attacker, Unit defender)
+    public static void AttackRoll(Unit attacker, Unit defender, int bonuses = 0)
     {
         ResetValues();
 
         int attack = attacker.unitInfo.currentAttack;
         int defence = defender.unitInfo.currentDefence;
 
-        AbilityCheck.CheckAbility(attack, defence);
+        AbilityCheck.CheckAbility(attack, defence, bonuses);
 
         if (AbilityCheck.baseResult >= 0)
         //hit goes here. 

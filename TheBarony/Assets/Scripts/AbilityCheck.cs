@@ -18,7 +18,6 @@ public class AbilityCheck
 
         //Work out active roll
         int activeRoll = BasicRoll(activeModifier);
-        Debug.Log("active roll is " + activeRoll);
 
         while (bonuses > 0)
         {
@@ -33,15 +32,12 @@ public class AbilityCheck
             
             baseResult -= Random.Range(1, 6);
             bonuses++;
-            Debug.Log("Penalty is " + baseResult);
         }
 
         //Work out passive check:
         int passiveRoll = BasicRoll(passiveModifier);
-        Debug.Log("passive roll is " + passiveRoll);
 
         baseResult += (activeRoll - passiveRoll);
-        Debug.Log("active total is " + baseResult);
     }
 
     static int BasicRoll(int stat)
