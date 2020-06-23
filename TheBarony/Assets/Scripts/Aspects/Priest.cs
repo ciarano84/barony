@@ -8,6 +8,11 @@ public class PriestData : AspectData
     {
         className = "Priest";
         unitInfo = unit;
+        unit.mainWeaponData = new ShortswordData();
+        unit.offHandData = new BlankItemData();
+        unit.armourData = new BlankItemData();
+        unit.accessory1 = new BlankItemData();
+        unit.accessory2 = new BlankItemData();
     }
 
     public override void Level1()

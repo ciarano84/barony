@@ -32,26 +32,9 @@ public class UnitInfoPanel : MonoBehaviour
     {
         unit = unitInfo;
         unitName.text = unit.unitName;
-        //This is where we will have to get it to choose WHAT weapon data it puts in. Should probably make an equipment manager's job.  
-        switch (unit.aspectData.className)
-        {
-            case "Defender":
-                unit.weaponData = new MeleeWeaponData();
-                unit.offHandData = new ShieldData();
-                unit.armourData = new LeatherArmourData();
-                break;
-            case "Scout":
-                unit.weaponData = new ShortbowData();
-                break;
-            case "Priest":
-                unit.weaponData = new MeleeWeaponData();
-                break;
-        }
 
-        Sprite sprite;
-        unit.weaponData.SetData(unit);
-        sprite = Resources.Load<Sprite>(unit.weaponData.imageFile);
-        unitWeaponImage.sprite = sprite;
+        unit.mainWeaponData.SetData(unit);
+        unitWeaponImage.sprite = unit.mainWeaponData.SetImage();
 
         //This is ultimately how I'll have to access the visual from gameassets. 
         Instantiate(unit.aspectData.GetVisual(), point.transform);

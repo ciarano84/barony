@@ -13,9 +13,11 @@ public class UnitInfo
     public AspectData aspectData;
     public Aspect aspect;
     public string className;
-    public WeaponData weaponData;
+    public WeaponData mainWeaponData;
     public ItemData offHandData;
     public ItemData armourData;
+    public ItemData accessory1;
+    public ItemData accessory2;
 
     //Base Stats
     public int baseBreath = 3;
@@ -39,7 +41,7 @@ public class Unit : MonoBehaviour
 {
     public UnitInfo unitInfo; 
     public Animator unitAnim;
-    public Weapon currentWeapon;
+    public Weapon mainWeapon;
     //how is this being populated?  
     public List<Action> actions = new List<Action>();
 

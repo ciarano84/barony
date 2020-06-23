@@ -378,7 +378,7 @@ public class TacticsMovement : Unit
         turn = true;
         //I've put this in to stop it firing constantly. Don't know why original vid had it on update, but I'm sure there's a good reason I'll find out. 
         GetComponent<PlayerCharacter>().FindSelectableTiles();  
-        GetComponent<PlayerCharacter>().currentWeapon.GetTargets();
+        GetComponent<PlayerCharacter>().mainWeapon.GetTargets();
     }
 
     public void EndTurn()
@@ -401,7 +401,7 @@ public class TacticsMovement : Unit
         }
         else if ((Initiative.currentUnit.remainingActions > 0) && (!Initiative.currentUnit.moving))
         {
-            foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().currentWeapon.targets)
+            foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().mainWeapon.targets)
             {
                 
                 if (target.unitTargeted == this && (Initiative.currentUnit != this))

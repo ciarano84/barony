@@ -22,12 +22,14 @@ public class ProxyRosta : MonoBehaviour
         else 
         {
             rosta = Instantiate(playerData).GetComponent<RostaInfo>();
+            //assign the squad first
             for (int n = 4; n > 0; n--)
             {
                 UnitInfo unit = new UnitInfo();
                 AssignStats(unit);
                 rosta.squad.Add(unit);
             }
+            //assign the rest of the rosta after. 
             for (int n = (numberOfStartingUnits-4); n > 0; n--)
             {
                 UnitInfo unit = new UnitInfo();
@@ -69,6 +71,12 @@ public class ProxyRosta : MonoBehaviour
                 break;
         }
         player.aspectData.SetAspectData(player);
+        if (player.mainWeaponData != null) player.mainWeaponData.SetData(player);
+        if (player.offHandData != null) player.offHandData.SetData(player);
+        if (player.armourData != null) player.armourData.SetData(player);
+        if (player.accessory1 != null) player.accessory1.SetData(player);
+        if (player.accessory2 != null) player.accessory2.SetData(player);
+
         player.aspectData.Level1();
     }
 }

@@ -3,26 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeWeaponData : WeaponData
+public abstract class MeleeWeaponData : WeaponData
 {
-    public override void SetData(UnitInfo unitInfo)
-    {
-        imageFile = "Shortsword";
-    }
-    public override void EquipItem(Unit unit)
-    {
-        MeleeWeapon weapon = unit.gameObject.AddComponent<MeleeWeapon>();
-        weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-        unit.unitInfo.weaponData = this;
-        unit.currentWeapon = weapon;
-        weapon.actionsPerAttack = 2;
-        weapon.rangeType = Weapon.Range.melee;
-    }
+    
 }
 
 public class MeleeWeapon : Weapon
 {
     List<Tile> selectableTiles = new List<Tile>();    //Target class to replace the dictionary, and associated list. 
+    public MeleeWeaponData meleeWeaponData;
 
     public override IEnumerator Attack(Target target)
     {

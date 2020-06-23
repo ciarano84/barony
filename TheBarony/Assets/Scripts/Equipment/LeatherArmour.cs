@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class LeatherArmourData : ItemData
 {
+    public override Sprite SetImage()
+    {
+        return GameAssets.i.LeatherArmour;
+    }
+
     public override void SetData(UnitInfo unitInfo)
     {
-        imageFile = "LeatherArmour";
+        name = "leather armour";
     }
 
     public override void EquipItem(Unit unit)
     {
         LeatherArmour shield = unit.gameObject.AddComponent<LeatherArmour>();
         shield.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        shield.itemData = this;
         unit.unitInfo.currentToughness += 1;
     }
 }

@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class ShieldData : ItemData
 {
+    public int defendModifier;
+
+    public override Sprite SetImage()
+    {
+        return GameAssets.i.Shield;
+    }
+
     public override void SetData(UnitInfo unitInfo)
     {
-        imageFile = "Shield";
+        name = "Shield";
+        defendModifier = 2;
     }
 
     public override void EquipItem(Unit unit)
     {
         Shield shield = unit.gameObject.AddComponent<Shield>();
         shield.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-        unit.unitInfo.currentDefence = unit.unitInfo.baseDefence + 2;
+        unit.unitInfo.currentDefence = unit.unitInfo.baseDefence + defendModifier;
     }
 }
 
 public class Shield : Item
 {
-    public int defendModifier = 2;
 }

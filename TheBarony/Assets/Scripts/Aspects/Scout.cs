@@ -8,6 +8,11 @@ public class ScoutData : AspectData
     {
         className = "Scout";
         unitInfo = unit;
+        unit.mainWeaponData = new ShortbowData();
+        unit.offHandData = new BlankItemData();
+        unit.armourData = new BlankItemData();
+        unit.accessory1 = new BlankItemData();
+        unit.accessory2 = new BlankItemData();
     }
 
     public override void Level1()
@@ -28,5 +33,4 @@ public class ScoutData : AspectData
 
 public class Scout : Aspect
 {
-    
 }

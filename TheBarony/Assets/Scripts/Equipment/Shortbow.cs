@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class ShortbowData : RangedWeaponData
 {
+    public override Sprite SetImage()
+    {
+        return GameAssets.i.ShortBow;
+    }
+
     public override void SetData(UnitInfo unitInfo)
     {
-        imageFile = "Shortbow";
-        unitInfo.offHandData = null;
+        name = "Shortbow";
+        //unitInfo.offHandData = null;
+        rangeType = WeaponData.Range.ranged;
+        range = 200;
+        actionsPerAttack = 1;
+        missDistance = 20;
+        maxAmmo = 1;
+        currentAmmo = 1;
+        rangedDamage = 2;
     }
 
     public override void EquipItem(Unit unit)
     {
-        RangedWeapon weapon = unit.gameObject.AddComponent<Shortbow>();
+        Shortbow weapon = unit.gameObject.AddComponent<Shortbow>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-        unit.unitInfo.weaponData = this;
-        unit.currentWeapon = weapon;
-        weapon.rangeType = Weapon.Range.ranged;
-        weapon.range = 200;
-        weapon.actionsPerAttack = 1;
-        weapon.missDistance = 20;
-        weapon.maxAmmo = 1;
-        weapon.currentAmmo = 1;
-        unit.unitInfo.currentDamage = 2;
+        weapon.rangedWeaponData = this;
+        weapon.weaponData = this;
+        unit.mainWeapon = weapon;
+        //unit.mainWeapon.rangedWeaponData = this;
 
         //Set up for an action. 
         Reload reload = new Reload();

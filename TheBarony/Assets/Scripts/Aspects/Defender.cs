@@ -9,6 +9,11 @@ public class DefenderData : AspectData
         className = "Defender";
         unitInfo = unit;
         unit.className = className;
+        unit.mainWeaponData = new ShortswordData();
+        unit.offHandData = new ShieldData();
+        unit.armourData = new LeatherArmourData();
+        unit.accessory1 = new BlankItemData();
+        unit.accessory2 = new BlankItemData();
     }
 
     public override void Level1()

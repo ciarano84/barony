@@ -19,7 +19,7 @@ public class ActionUIManager : MonoBehaviour
 
     List<Action> actions = new List<Action>();
 
-    //Weapon currentWeapon;
+    //Weapon mainWeapon;
 
     static Texture2D attackCursor;
 

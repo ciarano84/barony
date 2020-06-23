@@ -4,16 +4,17 @@ using UnityEngine;
 
 public abstract class WeaponData : ItemData
 {
-}
-
-public class Weapon : Item
-{
     public int actionsPerAttack;
     public int range;
     public int weaponAttack;
     public int weaponDamage;
     public enum Range { melee, ranged };
     public Range rangeType;
+}
+
+public class Weapon : Item
+{
+    public WeaponData weaponData;
 
     public class Target
     {

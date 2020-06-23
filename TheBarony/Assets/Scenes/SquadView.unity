@@ -467,6 +467,9 @@ MonoBehaviour:
   ScoutVisual: {fileID: 0}
   EnemyVisual: {fileID: 0}
   Bless: {fileID: 0}
+  LeatherArmour: {fileID: 21300000, guid: 0eefbaa893519704ebaa2259714f64d5, type: 3}
+  ShortSword: {fileID: 0}
+  ShortBow: {fileID: 0}
 --- !u!4 &414144200
 Transform:
   m_ObjectHideFlags: 0

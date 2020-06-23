@@ -2,34 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedWeaponData : WeaponData
-{
-    public override void SetData(UnitInfo unitInfo)
-    {
-        imageFile = "Shortbow";
-    }
-
-    public override void EquipItem(Unit unit)
-    {
-        RangedWeapon weapon = unit.gameObject.AddComponent<RangedWeapon>();
-        weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-        unit.unitInfo.weaponData = this;
-        unit.currentWeapon = weapon;
-        weapon.rangeType = Weapon.Range.ranged;
-        weapon.range = 200;
-        weapon.actionsPerAttack = 1;
-        weapon.missDistance = 20;
-        unit.unitInfo.currentDamage = 3;
-        weapon.maxAmmo = 1;
-        weapon.currentAmmo = 1;
-    }
-}
-
-public class RangedWeapon : Weapon
+public abstract class RangedWeaponData : WeaponData
 {
     public int missDistance = 20;
     public int maxAmmo;
     public int currentAmmo;
+    public int rangedDamage;
+}
+
+public class RangedWeapon : Weapon
+{
+    public int currentAmmo;
+    public RangedWeaponData rangedWeaponData;
 
     public override IEnumerator Attack(Target target)
     {
@@ -61,7 +45,10 @@ public class RangedWeapon : Weapon
             missile.GetComponent<Missile>().target = target.unitTargeted.transform.position;
             missile.GetComponent<Missile>().Launch(true);
             yield return new WaitForSeconds(1.2f);
+            int storedDamage = owner.unitInfo.currentDamage;
+            owner.unitInfo.currentDamage = rangedWeaponData.rangedDamage;
             AttackManager.DamageRoll(owner, target.unitTargeted.GetComponent<Unit>());
+            owner.unitInfo.currentDamage = storedDamage;
         }
         else
         {
@@ -104,7 +91,7 @@ public class RangedWeapon : Weapon
 
     public void Reload(bool asMainAction = false)
     {
-        currentAmmo = maxAmmo;
+        currentAmmo = rangedWeaponData.maxAmmo;
         DamagePopUp.Create(transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Arrow nocked", false);
         if (asMainAction)
         { owner.remainingActions -= 1; }

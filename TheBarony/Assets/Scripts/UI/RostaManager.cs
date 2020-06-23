@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class RostaManager : MonoBehaviour
 {
@@ -22,6 +23,31 @@ public class RostaManager : MonoBehaviour
     public Text damageText;
     public Text armourText;
     public Text speedText;
+
+    //Main Hand Item 
+    public TextMeshProUGUI mainHandText;
+    public Image mainHandImage;
+    public Button mainHandSelectButton;
+
+    //Off Hand Item
+    public TextMeshProUGUI offHandText;
+    public Image offHandImage;
+    public Button offHandSelectButton;
+
+    //Attire
+    public TextMeshProUGUI attireText;
+    public Image attireImage;
+    public Button attireSelectButton;
+
+    //Accessory 1
+    public TextMeshProUGUI accessory1Text;
+    public Image accessory1Image;
+    public Button accessory1SelectButton;
+
+    //Accessory 2
+    public TextMeshProUGUI accessory2Text;
+    public Image accessory2Image;
+    public Button accessory2Button;
 
     private void Start()
     {
@@ -57,6 +83,21 @@ public class RostaManager : MonoBehaviour
         damageText.text = (unit.baseStrength.ToString());
         armourText.text = (unit.baseToughness.ToString());
         speedText.text = (unit.baseMove.ToString());
+
+        mainHandText.text = unit.mainWeaponData.name;
+        mainHandImage.sprite = unit.mainWeaponData.SetImage();
+
+        offHandText.text = unit.offHandData.name;
+        offHandImage.sprite = unit.offHandData.SetImage();
+
+        attireText.text = unit.armourData.name;
+        attireImage.sprite = unit.armourData.SetImage();
+
+        accessory1Text.text = unit.accessory1.name;
+        accessory1Image.sprite = unit.accessory1.SetImage();
+
+        accessory2Text.text = unit.accessory2.name;
+        accessory2Image.sprite = unit.accessory2.SetImage();
     }
 
     public void OnRightButtonClick() { GetNextsUnit(); }

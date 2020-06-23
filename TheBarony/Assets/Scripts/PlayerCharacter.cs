@@ -18,27 +18,26 @@ public class PlayerCharacter : TacticsMovement
         if (unitInfo.unitName == "nobody")
         {
             unitInfo = new UnitInfo();
-            unitInfo.weaponData = new MeleeWeaponData();
+            unitInfo.mainWeaponData = new ShortswordData();
+            unitInfo.mainWeaponData.SetData(unitInfo);
             unitInfo.faction = Factions.enemies;
-            unitInfo.weaponData.EquipItem(GetComponent<Unit>());
+            unitInfo.mainWeaponData.EquipItem(GetComponent<Unit>());
             Instantiate(GameAssets.i.EnemyVisual, transform);
         }
         //This next section is just for when we start direct in a combat.  
-        if (this.unitInfo.weaponData == null)
+        if (this.unitInfo.mainWeaponData == null)
         {
-            unitInfo.weaponData = new MeleeWeaponData();
-            unitInfo.weaponData.EquipItem(GetComponent<Unit>());
+            unitInfo.mainWeaponData = new ShortswordData();
+
+            unitInfo.mainWeaponData.EquipItem(GetComponent<Unit>());
         }
 
         SetStats();
-        unitInfo.weaponData.EquipItem(GetComponent<Unit>());
+        unitInfo.mainWeaponData.EquipItem(GetComponent<Unit>());
         if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(GetComponent<Unit>());
         if (unitInfo.armourData != null) unitInfo.armourData.EquipItem(GetComponent<Unit>());
         if (unitInfo.aspectData != null) unitInfo.aspectData.GetAspect(GetComponent<Unit>());
         if (unitInfo.aspectData != null) Instantiate(unitInfo.aspectData.GetVisual(), transform);
-
-        //visual = Instantiate(Resources.Load(unitInfo.unitVisual), transform) as GameObject;
-        //visual.transform.position = transform.position;
     }
 
     private void FixedUpdate()
@@ -77,12 +76,12 @@ public class PlayerCharacter : TacticsMovement
 
                         if (remainingActions > 0)
                         {
-                            foreach (Weapon.Target target in currentWeapon.targets)
+                            foreach (Weapon.Target target in mainWeapon.targets)
                             {
                                 if (target.unitTargeted == UnitClickedOn)
                                 {
-                                    Initiative.queuedActions += currentWeapon.actionsPerAttack;
-                                    currentWeapon.StartCoroutine("Attack", target);
+                                    Initiative.queuedActions += mainWeapon.weaponData.actionsPerAttack;
+                                    mainWeapon.StartCoroutine("Attack", target);
                                     return;
                                 }
                             }
