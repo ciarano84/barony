@@ -12,6 +12,8 @@ public class RostaManager : MonoBehaviour
     RostaInfo rosta;
     public GameObject pedestal;
     GameObject unitVisual;
+    public GameObject itemInformationPanel;
+    UnitInfo unit;
 
     enum Direction {left, right};
 
@@ -71,7 +73,7 @@ public class RostaManager : MonoBehaviour
     public void ShowStats()
     {
         Destroy(unitVisual);
-        UnitInfo unit = rosta.rosta[rosta.currentUnitShown];
+        unit = rosta.rosta[rosta.currentUnitShown];
 
         unitVisual = Instantiate(unit.aspectData.GetVisual(), pedestal.transform);
 
@@ -142,5 +144,35 @@ public class RostaManager : MonoBehaviour
             }
         }
         ShowStats();
+    }
+
+    public void MainHandSelect()
+    {
+        itemInformationPanel.SetActive(true);
+        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.mainWeaponData);
+    }
+
+    public void OffHandSelect()
+    {
+        itemInformationPanel.SetActive(true);
+        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.offHandData);
+    }
+
+    public void ArmourSelect()
+    {
+        itemInformationPanel.SetActive(true);
+        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.armourData);
+    }
+
+    public void Accessory1Select()
+    {
+        itemInformationPanel.SetActive(true);
+        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.accessory1);
+    }
+
+    public void Accessory2Select()
+    {
+        itemInformationPanel.SetActive(true);
+        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.accessory2);
     }
 }

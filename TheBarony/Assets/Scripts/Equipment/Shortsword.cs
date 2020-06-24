@@ -13,7 +13,8 @@ public class ShortswordData : MeleeWeaponData
     {
         name = "Shortsword";
         actionsPerAttack = 2;
-        rangeType = Range.melee;   
+        rangeType = Range.melee;
+        description = "A short sword. \r\nWell made but really nothing to write home about.";
     }
 
     public override void EquipItem(Unit unit)

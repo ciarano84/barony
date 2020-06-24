@@ -11,6 +11,7 @@ public class ProxyRosta : MonoBehaviour
     public int numberOfStartingUnits = 8;
 
     RostaInfo rosta;
+    Inventory inventory;
     public GameObject playerData;
 
     void Awake()
@@ -37,6 +38,10 @@ public class ProxyRosta : MonoBehaviour
                 rosta.rosta.Add(unit);
             }
         }
+
+        //Build the intial inventory
+        inventory = playerData.GetComponent<Inventory>();
+        InitializeInventory();
     }
 
     void AssignStats(UnitInfo player)
@@ -78,5 +83,10 @@ public class ProxyRosta : MonoBehaviour
         if (player.accessory2 != null) player.accessory2.SetData(player);
 
         player.aspectData.Level1();
+    }
+
+    void InitializeInventory()
+    {
+        inventory.UpdateEntry(new ShortswordData(), 1, true);
     }
 }
