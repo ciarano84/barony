@@ -14,6 +14,7 @@ public class ShieldData : ItemData
     public override void SetData(UnitInfo unitInfo)
     {
         name = "Shield";
+        slot = Slot.offHand;
         defendModifier = 2;
     }
 

@@ -26,4 +26,5 @@ public class GameAssets : MonoBehaviour
     public Sprite ShortBow;
     public Sprite Shield;
     public Sprite BlankItem;
+    public Sprite Mace;
 }

@@ -8,11 +8,12 @@ using TMPro;
 
 public class RostaManager : MonoBehaviour
 {
-    //this class is totally borked as it's based on having game objects. Need to update it to use player data. 
-    RostaInfo rosta;
-    public GameObject pedestal;
-    GameObject unitVisual;
     public GameObject itemInformationPanel;
+    public GameObject pedestal;
+    public static Slot slotSelected;
+
+    RostaInfo rosta;
+    GameObject unitVisual;
     UnitInfo unit;
 
     enum Direction {left, right};
@@ -150,29 +151,34 @@ public class RostaManager : MonoBehaviour
     {
         itemInformationPanel.SetActive(true);
         itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.mainWeaponData);
+        slotSelected = Slot.mainHand;
     }
 
     public void OffHandSelect()
     {
         itemInformationPanel.SetActive(true);
         itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.offHandData);
+        slotSelected = Slot.offHand;
     }
 
     public void ArmourSelect()
     {
         itemInformationPanel.SetActive(true);
         itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.armourData);
+        slotSelected = Slot.armour;
     }
 
     public void Accessory1Select()
     {
         itemInformationPanel.SetActive(true);
         itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.accessory1);
+        slotSelected = Slot.accessory;
     }
 
     public void Accessory2Select()
     {
         itemInformationPanel.SetActive(true);
         itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.accessory2);
+        slotSelected = Slot.accessory;
     }
 }

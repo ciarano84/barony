@@ -12,6 +12,7 @@ public class LeatherArmourData : ItemData
     public override void SetData(UnitInfo unitInfo)
     {
         name = "leather armour";
+        slot = Slot.armour;
     }
 
     public override void EquipItem(Unit unit)

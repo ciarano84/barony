@@ -12,6 +12,7 @@ public class BlankItemData : ItemData
     public override void SetData(UnitInfo unitInfo)
     {
         name = "None";
+        slot = Slot.accessory;
     }
     
 

@@ -88,5 +88,11 @@ public class ProxyRosta : MonoBehaviour
     void InitializeInventory()
     {
         inventory.UpdateEntry(new ShortswordData(), 1, true);
+
+        inventory.UpdateEntry(new ShieldData(), 1, false);
+
+        inventory.UpdateEntry(new LeatherArmourData(), 1, false);
+
+        inventory.UpdateEntry(new MaceData(), 1, false);
     }
 }

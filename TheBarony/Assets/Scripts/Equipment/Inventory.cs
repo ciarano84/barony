@@ -6,10 +6,10 @@ public class ItemEntry
 {
     public bool infinite = false;
     public int amount = 0;
-    public ItemData item;
-    public ItemEntry(ItemData _item, int _count, bool _infinite = false)
+    public ItemData itemData;
+    public ItemEntry(ItemData _itemData, int _count, bool _infinite = false)
     {
-        item = _item;
+        itemData = _itemData;
         amount = _count;
     }
 }
@@ -17,7 +17,7 @@ public class ItemEntry
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
-    public List<ItemEntry> inventory = new List<ItemEntry>();
+    public static List<ItemEntry> inventory = new List<ItemEntry>();
 
 
     private void Awake()
@@ -25,7 +25,8 @@ public class Inventory : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void UpdateEntry(ItemData item, int amount, bool infinite = false)
+
+    public void UpdateEntry(ItemData itemData, int amount, bool infinite = false)
     {
         if (amount < -1)
         {
@@ -34,7 +35,7 @@ public class Inventory : MonoBehaviour
         bool itemInInventory = false;
         for (int count = 0; count < inventory.Count; count++)
         {
-            if (inventory[count].item == item)
+            if (inventory[count].itemData == itemData)
             {
                 itemInInventory = true;
                 inventory[count].amount += amount;
@@ -48,10 +49,8 @@ public class Inventory : MonoBehaviour
         if (!itemInInventory)
         {
             //This seems hacky but works for now. I'm supposed to set item data to a unit. But there's no unit, so setting it to null. 
-            item.SetData(null);
-            inventory.Add(new ItemEntry(item, amount, infinite));
+            itemData.SetData(null);
+            inventory.Add(new ItemEntry(itemData, amount, infinite));
         }
-
-        Debug.Log(inventory[0].item.name);
     }
 }

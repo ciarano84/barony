@@ -12,6 +12,7 @@ public class ShortbowData : RangedWeaponData
     public override void SetData(UnitInfo unitInfo)
     {
         name = "Shortbow";
+        slot = Slot.twoHanded;
         //unitInfo.offHandData = null;
         rangeType = WeaponData.Range.ranged;
         range = 200;
