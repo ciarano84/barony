@@ -1149,18 +1149,6 @@ MonoBehaviour:
   equipPanel: {fileID: 0}
   image: {fileID: 0}
   text: {fileID: 0}
---- !u!114 &219193372 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7270437163400699441, guid: cf1cc648b6ed2844d86dddeade5562f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 7270437163485675053}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 219193369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &233110468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4375,12 +4363,7 @@ MonoBehaviour:
   ItemSelectParentUI: {fileID: 1578305533}
   ItemEntryButtonPrefab: {fileID: 7270437163400699444, guid: cf1cc648b6ed2844d86dddeade5562f3,
     type: 3}
-  inventorySlots:
-  - {fileID: 219193372}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  equipButton: {fileID: 480762052}
 --- !u!1 &1464806261
 GameObject:
   m_ObjectHideFlags: 0

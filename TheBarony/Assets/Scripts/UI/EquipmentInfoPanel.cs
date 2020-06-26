@@ -14,6 +14,7 @@ public class EquipmentInfoPanel : MonoBehaviour
     public RostaManager rostaManager;
     public GameObject ItemSelectParentUI;
     public GameObject ItemEntryButtonPrefab;
+    public GameObject equipButton;
 
     ItemData itemToSwapOut;
     Slot slotToSwapOut;
@@ -35,6 +36,14 @@ public class EquipmentInfoPanel : MonoBehaviour
         itemName.text = item.name;
         itemDescription.text = item.description;
         itemImage.sprite = item.SetImage();
+        if (shownItem.name != itemToSwapOut.name)
+        {
+            equipButton.SetActive(true);
+        }
+        else 
+        {
+            equipButton.SetActive(false);
+        }
     }
 
     public void OnEnable()
@@ -84,9 +93,7 @@ public class EquipmentInfoPanel : MonoBehaviour
 
         //get the rostmanager to update to reflect the change, including shown item.
         rostaManager.ShowStats();
-        Clear();
-        SetData(shownItem);
-        ShowInventoryOptions();
+        UpdateEquipmentInfoPanel(shownItem, shownItem.slot);
     }
 
     void ShowInventoryOptions()

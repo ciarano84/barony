@@ -52,8 +52,10 @@ public class Inventory : MonoBehaviour
         {
             if (inventory[count].itemData.name == _itemData.name)
             {
+                Debug.Log("there are " + inventory[count].amount + " " + inventory[count].itemData.name);
                 itemInInventory = true;
                 inventory[count].amount += _amount;
+                Debug.Log("there are " + inventory[count].amount + " " + inventory[count].itemData.name);
 
                 //Clear the itementry from the inventory if it is reduced to 0. 
                 if ((inventory[count].amount == 0) && !inventory[count].infinite) { inventory.RemoveAt(count); }
