@@ -33,4 +33,10 @@ public class ItemEntryButton : MonoBehaviour
         else { text.text = _itemEntry.amount.ToString(); }
         
     }
+
+    public void UnsubscribeAndDestroy()
+    {
+        //unsubscribe
+        Destroy(this);
+    }
 }

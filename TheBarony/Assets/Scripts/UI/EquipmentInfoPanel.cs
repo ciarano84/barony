@@ -19,9 +19,8 @@ public class EquipmentInfoPanel : MonoBehaviour
     Slot slotToSwapOut;
     ItemData shownItem;
     Inventory inventory;
-    
 
-    public Image[] inventorySlots = new Image[5];
+    //public Image[] inventorySlots = new Image[5];
 
     public void SetItemToSwapOut(ItemData item)
     {
@@ -44,37 +43,22 @@ public class EquipmentInfoPanel : MonoBehaviour
         //UpdateEquipmentInfoPanel();
     }
 
+    public void UpdateEquipmentInfoPanel(ItemData itemData, Slot slot)
+    {
+        Clear();
+        SetItemToSwapOut(itemData);
+        slotToSwapOut = slot;
+        ShowInventoryOptions();
+    }
+
     public void CreateItemEntryButton(ItemEntry _itemEntry)
     {
         GameObject button = Instantiate(ItemEntryButtonPrefab);
-        
+
         button.transform.SetParent(ItemSelectParentUI.transform);
         //button.transform.parent = ItemSelectParentUI.transform;
 
         button.GetComponent<ItemEntryButton>().SetButtonData(_itemEntry);
-    }
-
-    public void UpdateEquipmentInfoPanel(ItemData itemData, Slot slot)
-    {
-        Clear();
-
-        SetItemToSwapOut(itemData);
-        slotToSwapOut = slot;
-        for (int count = 0; count < Inventory.inventory.Count; count++)
-        {
-            if (RostaManager.slotSelected == Inventory.inventory[count].itemData.slot)
-            {
-                CreateItemEntryButton(Inventory.inventory[count]);
-            }
-            else if (Inventory.inventory[count].itemData.slot == Slot.oneHanded && (RostaManager.slotSelected == Slot.mainHand || RostaManager.slotSelected == Slot.offHand))
-            {
-                CreateItemEntryButton(Inventory.inventory[count]);
-            }
-            else if (Inventory.inventory[count].itemData.slot == Slot.twoHanded && (RostaManager.slotSelected == Slot.mainHand))
-            {
-                CreateItemEntryButton(Inventory.inventory[count]);
-            }
-        }
     }
 
     void Clear()
@@ -100,5 +84,27 @@ public class EquipmentInfoPanel : MonoBehaviour
 
         //get the rostmanager to update to reflect the change, including shown item.
         rostaManager.ShowStats();
+        Clear();
+        SetData(shownItem);
+        ShowInventoryOptions();
+    }
+
+    void ShowInventoryOptions()
+    {
+        for (int count = 0; count < Inventory.inventory.Count; count++)
+        {
+            if (RostaManager.slotSelected == Inventory.inventory[count].itemData.slot)
+            {
+                CreateItemEntryButton(Inventory.inventory[count]);
+            }
+            else if (Inventory.inventory[count].itemData.slot == Slot.oneHanded && (RostaManager.slotSelected == Slot.mainHand || RostaManager.slotSelected == Slot.offHand))
+            {
+                CreateItemEntryButton(Inventory.inventory[count]);
+            }
+            else if (Inventory.inventory[count].itemData.slot == Slot.twoHanded && (RostaManager.slotSelected == Slot.mainHand))
+            {
+                CreateItemEntryButton(Inventory.inventory[count]);
+            }
+        }
     }
 }

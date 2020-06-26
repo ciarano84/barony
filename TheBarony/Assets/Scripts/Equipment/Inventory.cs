@@ -41,19 +41,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void UpdateEntry(ItemData itemData, int amount, bool _infinite = false)
+    public void UpdateEntry(ItemData _itemData, int _amount, bool _infinite = false)
     {
-        if (amount < -1)
+        if (_amount < -1)
         {
             Debug.LogError("the inventory has been asked to deduct more than 1 of an item. You only decrement the inventory by a maximum of 1.");
         }
         bool itemInInventory = false;
         for (int count = 0; count < inventory.Count; count++)
         {
-            if (inventory[count].itemData == itemData)
+            if (inventory[count].itemData.name == _itemData.name)
             {
                 itemInInventory = true;
-                inventory[count].amount += amount;
+                inventory[count].amount += _amount;
 
                 //Clear the itementry from the inventory if it is reduced to 0. 
                 if ((inventory[count].amount == 0) && !inventory[count].infinite) { inventory.RemoveAt(count); }
@@ -64,8 +64,8 @@ public class Inventory : MonoBehaviour
         if (!itemInInventory)
         {
             //This seems hacky but works for now. I'm supposed to set item data to a unit. But there's no unit, so setting it to null. 
-            itemData.SetData(null);
-            inventory.Add(new ItemEntry(itemData, amount, _infinite));
+            _itemData.SetData(null);
+            inventory.Add(new ItemEntry(_itemData, _amount, _infinite));
         }
     }
 }

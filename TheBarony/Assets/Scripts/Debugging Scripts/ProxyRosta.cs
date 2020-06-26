@@ -37,11 +37,10 @@ public class ProxyRosta : MonoBehaviour
                 AssignStats(unit);
                 rosta.rosta.Add(unit);
             }
+            //Build the intial inventory
+            inventory = playerData.GetComponent<Inventory>();
+            InitializeInventory();
         }
-
-        //Build the intial inventory
-        inventory = playerData.GetComponent<Inventory>();
-        InitializeInventory();
     }
 
     void AssignStats(UnitInfo player)
