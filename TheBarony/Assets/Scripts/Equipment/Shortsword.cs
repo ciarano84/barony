@@ -9,12 +9,31 @@ public class ShortswordData : MeleeWeaponData
         return GameAssets.i.ShortSword;
     }
 
-    public override void SetData(UnitInfo unitInfo)
+    public override void SetData(UnitInfo unitInfo, Slot slotToEquipTo = Slot.mainHand)
     {
         name = "Shortsword";
         actionsPerAttack = 2;
         rangeType = Range.melee;
+        slot = Slot.oneHanded;
         description = "A short sword. \r\nWell made but really nothing to write home about.";
+
+        //Create an instance
+        ShortswordData shortswordData = new ShortswordData();
+        if (unitInfo != null)
+        {
+            switch (slotToEquipTo)
+            {
+                case Slot.mainHand:
+                    unitInfo.mainWeaponData = shortswordData;
+                    break;
+                case Slot.offHand:
+                    unitInfo.offHandData = shortswordData;
+                    break;
+                default:
+                    unitInfo.mainWeaponData = shortswordData;
+                    break;
+            }
+        }
     }
 
     public override void EquipItem(Unit unit)

@@ -9,10 +9,18 @@ public class LeatherArmourData : ItemData
         return GameAssets.i.LeatherArmour;
     }
 
-    public override void SetData(UnitInfo unitInfo)
+    public override void SetData(UnitInfo unitInfo, Slot slotToEquipTo = Slot.offHand)
     {
         name = "leather armour";
         slot = Slot.armour;
+        description = "A rough, but thick leather jerkin.\r\nYour not entirely sure what it smells of, but some of it is definitely not you.";
+
+        //Create an instance
+        LeatherArmourData leatherArmourData = new LeatherArmourData();
+        if (unitInfo != null)
+        {
+            unitInfo.armourData = leatherArmourData;
+        }
     }
 
     public override void EquipItem(Unit unit)

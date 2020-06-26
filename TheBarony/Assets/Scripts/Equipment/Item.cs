@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Slot { mainHand, offHand, oneHanded, twoHanded, armour, accessory }
+public enum Slot { mainHand, offHand, oneHanded, twoHanded, armour, accessory, accessory1, accessory2}
 
 public abstract class ItemData
 {
@@ -12,7 +12,7 @@ public abstract class ItemData
     public Slot slot;
     public abstract Sprite SetImage();
 
-    public abstract void SetData(UnitInfo unitInfo);
+    public abstract void SetData(UnitInfo unitInfo, Slot slot = Slot.mainHand);
 
     public abstract void EquipItem(Unit unit);
 }

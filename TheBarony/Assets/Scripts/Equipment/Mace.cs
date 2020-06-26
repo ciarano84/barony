@@ -8,13 +8,31 @@ public class MaceData : MeleeWeaponData
         return GameAssets.i.Mace;
     }
 
-    public override void SetData(UnitInfo unitInfo)
+    public override void SetData(UnitInfo unitInfo, Slot slotToEquipTo = Slot.mainHand)
     {
         name = "Mace";
         actionsPerAttack = 2;
         rangeType = Range.melee;
         slot = Slot.oneHanded;
         description = "A metal club. \r\nSupposedly good against heavily armoured enemies. Supposedly.";
+
+        //Create an instance
+        MaceData maceData = new MaceData();
+        if (unitInfo != null)
+        {
+            switch (slotToEquipTo)
+            {
+                case Slot.mainHand:
+                    unitInfo.mainWeaponData = maceData;
+                    break;
+                case Slot.offHand:
+                    unitInfo.offHandData = maceData;
+                    break;
+                default:
+                    unitInfo.mainWeaponData = maceData;
+                    break;
+            }
+        }
     }
 
     public override void EquipItem(Unit unit)

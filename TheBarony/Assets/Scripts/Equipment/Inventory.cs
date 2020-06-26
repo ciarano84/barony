@@ -11,6 +11,7 @@ public class ItemEntry
     {
         itemData = _itemData;
         amount = _count;
+        infinite = _infinite; 
     }
 }
 
@@ -25,8 +26,22 @@ public class Inventory : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    //Debug method
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            foreach (ItemEntry i in inventory)
+            {
+                i.itemData.SetData(null);
+                Debug.Log(i.itemData.name);
+                Debug.Log(i.amount);
+                Debug.Log(i.infinite);
+            }
+        }
+    }
 
-    public void UpdateEntry(ItemData itemData, int amount, bool infinite = false)
+    public void UpdateEntry(ItemData itemData, int amount, bool _infinite = false)
     {
         if (amount < -1)
         {
@@ -50,7 +65,7 @@ public class Inventory : MonoBehaviour
         {
             //This seems hacky but works for now. I'm supposed to set item data to a unit. But there's no unit, so setting it to null. 
             itemData.SetData(null);
-            inventory.Add(new ItemEntry(itemData, amount, infinite));
+            inventory.Add(new ItemEntry(itemData, amount, _infinite));
         }
     }
 }

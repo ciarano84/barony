@@ -9,10 +9,11 @@ public class ShortbowData : RangedWeaponData
         return GameAssets.i.ShortBow;
     }
 
-    public override void SetData(UnitInfo unitInfo)
+    public override void SetData(UnitInfo unitInfo, Slot slotToEquipTo = Slot.mainHand)
     {
         name = "Shortbow";
         slot = Slot.twoHanded;
+        description = "A potentially ornemantal shortbow. \r\nLiable to break. But hopefully liable to hurt someone at least once beforehand.";
         //unitInfo.offHandData = null;
         rangeType = WeaponData.Range.ranged;
         range = 200;
@@ -21,6 +22,13 @@ public class ShortbowData : RangedWeaponData
         maxAmmo = 1;
         currentAmmo = 1;
         rangedDamage = 2;
+
+        //Create an instance
+        ShortbowData shortbowData = new ShortbowData();
+        if (unitInfo != null)
+        {
+            unitInfo.mainWeaponData = shortbowData;
+        }
     }
 
     public override void EquipItem(Unit unit)

@@ -34,7 +34,6 @@ public class MeleeWeapon : Weapon
                 Vector3 relOtherAttackerPosition = transform.InverseTransformPoint(unit.transform.position);
                 if (relOtherAttackerPosition.z > (relTargetPosition.z + 0.1f))
                 {
-                    Debug.Log("Enemy crowded");
                     bonuses++;
                     break;
                 } 

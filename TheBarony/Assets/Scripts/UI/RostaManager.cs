@@ -11,10 +11,12 @@ public class RostaManager : MonoBehaviour
     public GameObject itemInformationPanel;
     public GameObject pedestal;
     public static Slot slotSelected;
+    public UnitInfo unit;
 
+    EquipmentInfoPanel equipPanel;
     RostaInfo rosta;
     GameObject unitVisual;
-    UnitInfo unit;
+    
 
     enum Direction {left, right};
 
@@ -56,6 +58,7 @@ public class RostaManager : MonoBehaviour
     {
         rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
         StartCoroutine(WaitAndShowStats());
+        equipPanel = itemInformationPanel.GetComponent<EquipmentInfoPanel>();
     }
 
     IEnumerator WaitAndShowStats()
@@ -106,12 +109,14 @@ public class RostaManager : MonoBehaviour
     public void OnRightButtonClick() { GetNextsUnit(); }
     public void GetNextsUnit()
     {
+        itemInformationPanel.SetActive(false);
         ShowUnit(Direction.right);
     }
 
     public void OnLeftButtonClick() { GetPreviousUnit(); }
     public void GetPreviousUnit()
     {
+        itemInformationPanel.SetActive(false);
         ShowUnit(Direction.left);
     }
 
@@ -149,36 +154,37 @@ public class RostaManager : MonoBehaviour
 
     public void MainHandSelect()
     {
-        itemInformationPanel.SetActive(true);
-        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.mainWeaponData);
         slotSelected = Slot.mainHand;
+        SetEquipmentPanel(unit.mainWeaponData, Slot.mainHand);
     }
 
     public void OffHandSelect()
     {
-        itemInformationPanel.SetActive(true);
-        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.offHandData);
         slotSelected = Slot.offHand;
+        SetEquipmentPanel(unit.offHandData, Slot.offHand);
     }
 
     public void ArmourSelect()
     {
-        itemInformationPanel.SetActive(true);
-        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.armourData);
         slotSelected = Slot.armour;
+        SetEquipmentPanel(unit.armourData, Slot.armour);
     }
 
     public void Accessory1Select()
     {
-        itemInformationPanel.SetActive(true);
-        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.accessory1);
         slotSelected = Slot.accessory;
+        SetEquipmentPanel(unit.accessory1, Slot.accessory1);
     }
 
     public void Accessory2Select()
     {
-        itemInformationPanel.SetActive(true);
-        itemInformationPanel.GetComponent<EquipmentInfoPanel>().SetData(unit.accessory2);
         slotSelected = Slot.accessory;
+        SetEquipmentPanel(unit.accessory2, Slot.accessory2);
+    }
+
+    void SetEquipmentPanel(ItemData itemData, Slot slot)
+    {
+        itemInformationPanel.SetActive(true);
+        equipPanel.UpdateEquipmentInfoPanel(itemData, slot);
     }
 }
