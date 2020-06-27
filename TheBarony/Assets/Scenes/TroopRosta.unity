@@ -4393,6 +4393,7 @@ MonoBehaviour:
   ItemEntryButtonPrefab: {fileID: 7270437163400699444, guid: cf1cc648b6ed2844d86dddeade5562f3,
     type: 3}
   equipButton: {fileID: 480762052}
+  slotToSwapOut: 0
 --- !u!1 &1464806261
 GameObject:
   m_ObjectHideFlags: 0
