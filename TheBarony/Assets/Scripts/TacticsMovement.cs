@@ -395,6 +395,7 @@ public class TacticsMovement : Unit
 
     private void OnMouseOver()
     {
+        UnitMouseOverView.Display(this);
         if (Initiative.queuedActions > 0)
         {
             ActionUIManager.SetStandardCursor();
@@ -416,6 +417,7 @@ public class TacticsMovement : Unit
     private void OnMouseExit()
     {
         ActionUIManager.SetStandardCursor();
+        UnitMouseOverView.Hide();
     }
 
     public void FaceDirection(Vector3 target)

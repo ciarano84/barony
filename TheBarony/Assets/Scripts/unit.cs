@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class UnitInfo
 {
-    public string unitName = "nobody";
+    public string unitName = "goblin";
     public string unitVisual = "EnemyVisual";
     public Factions faction = Factions.enemies;
     public AspectData aspectData;

@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class ActionUIManager : MonoBehaviour
 {
     public static PlayerCharacter currentUnit;
+    public Text unitName;
+    public Image weaponImage;
+    public Slider firstBreathSlider;
+
     public Button endTurn;
     public Button ActionButton1;
     public Text ActionButtonText1;
@@ -26,13 +30,17 @@ public class ActionUIManager : MonoBehaviour
     private void Start()
     {
         endTurn.gameObject.SetActive(false);
-        attackCursor = Resources.Load<Texture2D>("Sword_Cursor");
+        //attackCursor = Resources.Load<Texture2D>("Sword_Cursor");
     }
 
     public void UpdateActions(PlayerCharacter unit)
     {
         Clear();
         currentUnit = unit;
+        unitName.text = unit.unitInfo.unitName;
+        weaponImage.sprite = unit.unitInfo.mainWeaponData.SetImage();
+        firstBreathSlider.maxValue = unit.unitInfo.baseBreath;
+        firstBreathSlider.value = unit.unitInfo.currentBreath;
 
         if (unit.GetComponent<PlayerCharacter>() != null)
         {

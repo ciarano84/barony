@@ -15,7 +15,7 @@ public class PlayerCharacter : TacticsMovement
     {
 
         //this should just read 'unitInfo.weaponData.CreateWeapon(this);' but has the rest to catch the proxy npcs. 
-        if (unitInfo.unitName == "nobody")
+        if (unitInfo.unitName == "goblin")
         {
             unitInfo = new UnitInfo();
             unitInfo.mainWeaponData = new ShortswordData();

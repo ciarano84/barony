@@ -72,6 +72,16 @@ PrefabInstance:
       propertyPath: unitInfo.move
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: unitInfo.unitName
+      value: goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: unitInfo.faction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4232902180161399285, guid: 6c152d632ebb9d448a7485221bbd4289,
         type: 3}
       propertyPath: m_Name
