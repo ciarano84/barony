@@ -11,6 +11,9 @@ public class ActionUIManager : MonoBehaviour
     public Image weaponImage;
     public Slider firstBreathSlider;
 
+    public GameObject mainActionButton;
+    public GameObject moveActionButton;
+
     public Button endTurn;
     public Button ActionButton1;
     public Text ActionButtonText1;
@@ -41,6 +44,13 @@ public class ActionUIManager : MonoBehaviour
         weaponImage.sprite = unit.unitInfo.mainWeaponData.SetImage();
         firstBreathSlider.maxValue = unit.unitInfo.baseBreath;
         firstBreathSlider.value = unit.unitInfo.currentBreath;
+        TacticsMovement unitTactics = unit.GetComponent<TacticsMovement>();
+        if (unitTactics.remainingMove >= unit.unitInfo.currentMove)
+        { moveActionButton.SetActive(true); }
+        else { moveActionButton.SetActive(false); }
+        if (unitTactics.remainingActions >= 1)
+        { mainActionButton.SetActive(true); }
+        else { mainActionButton.SetActive(false); }
 
         if (unit.GetComponent<PlayerCharacter>() != null)
         {
