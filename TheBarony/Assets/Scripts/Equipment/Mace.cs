@@ -16,20 +16,18 @@ public class MaceData : MeleeWeaponData
         slot = Slot.oneHanded;
         description = "A metal club. \r\nSupposedly good against heavily armoured enemies. Supposedly.";
 
-        //Create an instance
-        MaceData maceData = new MaceData();
         if (unitInfo != null)
         {
             switch (slotToEquipTo)
             {
                 case Slot.mainHand:
-                    unitInfo.mainWeaponData = maceData;
+                    unitInfo.mainWeaponData = this;
                     break;
                 case Slot.offHand:
-                    unitInfo.offHandData = maceData;
+                    unitInfo.offHandData = this;
                     break;
                 default:
-                    unitInfo.mainWeaponData = maceData;
+                    unitInfo.mainWeaponData = this;
                     break;
             }
         }

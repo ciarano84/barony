@@ -15,19 +15,17 @@ public class LeatherArmourData : ItemData
         slot = Slot.armour;
         description = "A rough, but thick leather jerkin.\r\nYour not entirely sure what it smells of, but some of it is definitely not you.";
 
-        //Create an instance
-        LeatherArmourData leatherArmourData = new LeatherArmourData();
         if (unitInfo != null)
         {
-            unitInfo.armourData = leatherArmourData;
+            unitInfo.armourData = this;
         }
     }
 
     public override void EquipItem(Unit unit)
     {
-        LeatherArmour shield = unit.gameObject.AddComponent<LeatherArmour>();
-        shield.owner = unit.gameObject.GetComponent<PlayerCharacter>();
-        shield.itemData = this;
+        LeatherArmour armour = unit.gameObject.AddComponent<LeatherArmour>();
+        armour.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        armour.itemData = this;
         unit.unitInfo.currentToughness += 1;
     }
 }

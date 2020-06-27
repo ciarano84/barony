@@ -13,6 +13,26 @@ public class BlankItemData : ItemData
     {
         name = "None";
         slot = Slot.accessory;
+
+        //Create an instance
+        if (unitInfo != null)
+        {
+            switch (slotToEquipTo)
+            {
+                case Slot.offHand:
+                    unitInfo.offHandData = this;
+                    break;
+                case Slot.armour:
+                    unitInfo.armourData = this;
+                    break;
+                case Slot.accessory1:
+                    unitInfo.accessory1 = this;
+                    break;
+                default:
+                    unitInfo.accessory2 = this;
+                    break;
+            }
+        }
     }
 
     public override void EquipItem(Unit unit) { }

@@ -17,20 +17,18 @@ public class ShortswordData : MeleeWeaponData
         slot = Slot.oneHanded;
         description = "A short sword. \r\nWell made but really nothing to write home about.";
 
-        //Create an instance
-        ShortswordData shortswordData = new ShortswordData();
         if (unitInfo != null)
         {
             switch (slotToEquipTo)
             {
                 case Slot.mainHand:
-                    unitInfo.mainWeaponData = shortswordData;
+                    unitInfo.mainWeaponData = this;
                     break;
                 case Slot.offHand:
-                    unitInfo.offHandData = shortswordData;
+                    unitInfo.offHandData = this;
                     break;
                 default:
-                    unitInfo.mainWeaponData = shortswordData;
+                    unitInfo.mainWeaponData = this;
                     break;
             }
         }

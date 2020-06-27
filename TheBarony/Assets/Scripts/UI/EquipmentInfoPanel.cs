@@ -90,6 +90,7 @@ public class EquipmentInfoPanel : MonoBehaviour
 
         //put the new itemData for what they WANT equipped onto the character. 
         shownItem.SetData(rostaManager.unit, slotToSwapOut);
+        HandleTwoHandedWeapons(shownItem);
 
         //get the rostmanager to update to reflect the change, including shown item.
         rostaManager.ShowStats();
@@ -111,6 +112,29 @@ public class EquipmentInfoPanel : MonoBehaviour
             else if (Inventory.inventory[count].itemData.slot == Slot.twoHanded && (RostaManager.slotSelected == Slot.mainHand))
             {
                 CreateItemEntryButton(Inventory.inventory[count]);
+            }
+        }
+    }
+
+    void HandleTwoHandedWeapons(ItemData newItemData)
+    {
+        if (newItemData.slot == Slot.twoHanded)
+        {
+            BlankItemData blank = new BlankItemData();
+            blank.SetData(null);
+            if (rostaManager.unit.offHandData.name != blank.name)
+            {
+                inventory.UpdateEntry(rostaManager.unit.offHandData, 1);
+                blank.SetData(rostaManager.unit, Slot.offHand);
+            }
+        }
+        if (slotToSwapOut == Slot.offHand)
+        {
+            if (rostaManager.unit.mainWeaponData.slot == Slot.twoHanded)
+            {
+                ShortswordData shortsword = new ShortswordData();
+                shortsword.SetData(rostaManager.unit, Slot.mainHand);
+                inventory.UpdateEntry(rostaManager.unit.mainWeaponData, 1);
             }
         }
     }

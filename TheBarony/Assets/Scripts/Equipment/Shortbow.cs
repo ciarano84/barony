@@ -23,11 +23,9 @@ public class ShortbowData : RangedWeaponData
         currentAmmo = 1;
         rangedDamage = 2;
 
-        //Create an instance
-        ShortbowData shortbowData = new ShortbowData();
         if (unitInfo != null)
         {
-            unitInfo.mainWeaponData = shortbowData;
+            unitInfo.mainWeaponData = this;
         }
     }
 
