@@ -33,32 +33,40 @@ public class RostaManager : MonoBehaviour
     public TextMeshProUGUI mainHandText;
     public Image mainHandImage;
     public Button mainHandSelectButton;
+    public GameObject mainHandSlotHighlight;
 
     //Off Hand Item
     public TextMeshProUGUI offHandText;
     public Image offHandImage;
     public Button offHandSelectButton;
+    public GameObject offHandSlotHighlight;
 
     //Attire
     public TextMeshProUGUI attireText;
     public Image attireImage;
     public Button attireSelectButton;
+    public GameObject armourSlotHighlight;
 
     //Accessory 1
     public TextMeshProUGUI accessory1Text;
     public Image accessory1Image;
     public Button accessory1SelectButton;
+    public GameObject accessory1SlotHighlight;
 
     //Accessory 2
     public TextMeshProUGUI accessory2Text;
     public Image accessory2Image;
     public Button accessory2Button;
+    public GameObject accessory2SlotHighlight;
+
+    GameObject[] highlights;
 
     private void Start()
     {
         rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
         StartCoroutine(WaitAndShowStats());
         equipPanel = itemInformationPanel.GetComponent<EquipmentInfoPanel>();
+        highlights = new GameObject[] { mainHandSlotHighlight, offHandSlotHighlight, armourSlotHighlight, accessory1SlotHighlight, accessory2SlotHighlight };
     }
 
     IEnumerator WaitAndShowStats()
@@ -104,6 +112,11 @@ public class RostaManager : MonoBehaviour
 
         accessory2Text.text = unit.accessory2.name;
         accessory2Image.sprite = unit.accessory2.SetImage();
+
+        if (equipPanel.isActiveAndEnabled)
+        {
+            SetHighlight(true, equipPanel.slotToSwapOut);
+        } else SetHighlight(false);
     }
 
     public void OnRightButtonClick() { GetNextsUnit(); }
@@ -186,5 +199,35 @@ public class RostaManager : MonoBehaviour
     {
         itemInformationPanel.SetActive(true);
         equipPanel.UpdateEquipmentInfoPanel(itemData, slot);
+        SetHighlight(true, slot);
+    }
+
+    public void SetHighlight(bool on, Slot slot = Slot.mainHand)
+    {
+        foreach (GameObject g in highlights)
+        {
+            g.SetActive(false);
+        }
+        if (on)
+        {
+            switch (slot)
+            {
+                case Slot.mainHand:
+                    mainHandSlotHighlight.SetActive(true);
+                    break;
+                case Slot.offHand:
+                    offHandSlotHighlight.SetActive(true);
+                    break;
+                case Slot.armour:
+                    armourSlotHighlight.SetActive(true);
+                    break;
+                case Slot.accessory1:
+                    accessory1SlotHighlight.SetActive(true);
+                    break;
+                case Slot.accessory2:
+                    accessory2SlotHighlight.SetActive(true);
+                    break;
+            }
+        }
     }
 }

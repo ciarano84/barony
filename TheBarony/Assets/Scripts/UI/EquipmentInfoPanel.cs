@@ -15,13 +15,11 @@ public class EquipmentInfoPanel : MonoBehaviour
     public GameObject ItemSelectParentUI;
     public GameObject ItemEntryButtonPrefab;
     public GameObject equipButton;
+    public Slot slotToSwapOut;
 
     ItemData itemToSwapOut;
-    Slot slotToSwapOut;
     ItemData shownItem;
     Inventory inventory;
-
-    //public Image[] inventorySlots = new Image[5];
 
     public void SetItemToSwapOut(ItemData item)
     {
