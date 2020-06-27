@@ -20,12 +20,15 @@ public class UnitMouseOverView : MonoBehaviour
         if (display)
         {
             canvass.SetActive(true);
-            transform.position = targetUnit.transform.position + new Vector3(0, offset);
-            transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
-            //transform.LookAt(cam.transform.position + cam.transform.forward);
-            unitMouseOverViewfirstBreathSlider.value = targetUnit.unitInfo.currentBreath;
-            unitMouseOverViewName.text = targetUnit.unitInfo.unitName;
-            unitMouseOverViewfirstBreathSlider.maxValue = targetUnit.unitInfo.baseBreath;
+            if (targetUnit != null)
+            {
+                transform.position = targetUnit.transform.position + new Vector3(0, offset);
+                transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
+                unitMouseOverViewfirstBreathSlider.value = targetUnit.unitInfo.currentBreath;
+                unitMouseOverViewName.text = targetUnit.unitInfo.unitName;
+                unitMouseOverViewfirstBreathSlider.maxValue = targetUnit.unitInfo.baseBreath;
+            }
+            else Hide();
         }
         else canvass.SetActive(false);
     }
