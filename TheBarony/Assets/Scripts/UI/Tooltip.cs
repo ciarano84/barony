@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class Tooltip : MonoBehaviour
 {
     public Camera cam;
-    
+
     Text toolTipText;
     RectTransform backgroundRectTransform;
+    
 
     private void Awake()
     {

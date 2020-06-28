@@ -27,4 +27,5 @@ public class GameAssets : MonoBehaviour
     public Sprite Shield;
     public Sprite BlankItem;
     public Sprite Mace;
+    public Sprite Reload;
 }

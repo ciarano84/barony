@@ -14,4 +14,6 @@ public abstract class Action
     public abstract void ExecuteAction();
 
     public abstract bool CheckAvailable();
+
+    public abstract Sprite SetImage();
 }

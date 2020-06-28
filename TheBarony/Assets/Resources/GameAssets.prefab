@@ -61,3 +61,4 @@ MonoBehaviour:
   Shield: {fileID: 21300000, guid: bda83b0c88f6d1c419544b044eca4142, type: 3}
   BlankItem: {fileID: 21300000, guid: 5fde4b026739c7842b234f5c04418cb5, type: 3}
   Mace: {fileID: 21300000, guid: 0ec4da753622bf644ae31a4569396c49, type: 3}
+  Reload: {fileID: 21300000, guid: 8bfd93d9ea27eb642b922ca1197d6f7d, type: 3}

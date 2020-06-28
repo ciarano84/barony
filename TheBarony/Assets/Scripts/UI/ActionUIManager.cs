@@ -13,16 +13,13 @@ public class ActionUIManager : MonoBehaviour
 
     public GameObject mainActionButton;
     public GameObject moveActionButton;
+    public GameObject actionButtonPrefab;
+    public GameObject customMainActions;
+    public GameObject customMoveActions;
+
+    public GameObject tooltip;
 
     public Button endTurn;
-    public Button ActionButton1;
-    public Text ActionButtonText1;
-    public Button ActionButton2;
-    public Text ActionButtonText2;
-    public Button ActionButton3;
-    public Text ActionButtonText3;
-    public Button ActionButton4;
-    public Text ActionButtonText4;
 
     List<Action> actions = new List<Action>();
 
@@ -33,12 +30,15 @@ public class ActionUIManager : MonoBehaviour
     private void Start()
     {
         endTurn.gameObject.SetActive(false);
+        tooltip.SetActive(false);
         //attackCursor = Resources.Load<Texture2D>("Sword_Cursor");
     }
 
     public void UpdateActions(PlayerCharacter unit)
     {
         Clear();
+        
+        //set all the info out for the selected unit
         currentUnit = unit;
         unitName.text = unit.unitInfo.unitName;
         weaponImage.sprite = unit.unitInfo.mainWeaponData.SetImage();
@@ -70,27 +70,15 @@ public class ActionUIManager : MonoBehaviour
 
                 for (int count = 0; count < actions.Count; count++)
                 {
-                    switch (count)
-                    {
-                        case 0:
-                            ActionButton1.gameObject.SetActive(true);
-                            SetActionButtonText(actions[0], ActionButtonText1);
-                            break;
-                        case 1:
-                            ActionButton2.gameObject.SetActive(true);
-                            SetActionButtonText(actions[1], ActionButtonText2);
-                            break;
-                        case 2:
-                            ActionButton3.gameObject.SetActive(true);
-                            SetActionButtonText(actions[2], ActionButtonText3);
-                            break;
-                        case 3:
-                            ActionButton4.gameObject.SetActive(true);
-                            SetActionButtonText(actions[3], ActionButtonText4);
-                            break;
-                        default:
-                            break;
-                    }
+                    ActionButton actionButton = Instantiate(actionButtonPrefab).GetComponent<ActionButton>();
+                    actionButton.gameObject.transform.SetParent(customMoveActions.transform, false);
+                    actionButton.tooltip = tooltip.GetComponent<Tooltip>();
+                    actions[count].SetActionButtonData(unit);
+                    actionButton.tooltipText = actions[count].buttonText;
+                    actionButton.action = actions[count];
+                    actionButton.image.sprite = actions[count].SetImage();
+
+                    //we will need to work out how and when to put things in EITHER or BOTH of main and move here. 
                 }
             }
             else Clear();
@@ -112,10 +100,14 @@ public class ActionUIManager : MonoBehaviour
         endTurn.gameObject.SetActive(false);
         //get rid of all Action UI. 
         actions.Clear();
-        ActionButton1.gameObject.SetActive(false);
-        ActionButton2.gameObject.SetActive(false);
-        ActionButton3.gameObject.SetActive(false);
-        ActionButton4.gameObject.SetActive(false);
+        foreach (Transform t in customMainActions.transform)
+        {
+            Destroy(t);
+        }
+        foreach (Transform t in customMoveActions.transform)
+        {
+            Destroy(t.gameObject);
+        }
     }
 
     public static void GetAttackCursor() {
@@ -125,11 +117,6 @@ public class ActionUIManager : MonoBehaviour
 
     public static void SetStandardCursor() {
         Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
-    }
-
-    void SetActionButtonText(Action action, Text text)
-    {
-        text.text = action.buttonText;
     }
 
     public void ActionButton1Press()

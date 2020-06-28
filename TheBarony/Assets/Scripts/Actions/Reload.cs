@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Reload : Action
 {
@@ -30,5 +31,10 @@ public class Reload : Action
         }
             
         else { return false; }
+    }
+
+    public override Sprite SetImage()
+    {
+        return GameAssets.i.Reload;
     }
 }
