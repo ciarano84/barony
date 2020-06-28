@@ -18,14 +18,34 @@ public class MeleeWeapon : Weapon
         targets.Clear();
         
         owner.remainingActions--;
-        
-        owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
+
+        //Find out what is adjacent to the target.
+        target.unitTargeted.FindAdjacentUnits();
+
+        bool adjacent = false;
+        foreach (Unit _unit in target.unitTargeted.adjacentUnits)
+        {
+            if (_unit == owner) adjacent = true;
+            
+        }
+
+        if (adjacent)
+        {
+            owner.GetComponent<TacticsMovement>().FaceDirection(target.unitTargeted.gameObject.transform.position);
+        }
+        else
+        {
+            Initiative.queuedActions++;
+            owner.MoveToTile(target.tileToAttackFrom, target.unitTargeted.currentTile.transform.position);
+        }
+
         yield return new WaitUntil(() => !owner.moving);
         owner.unitAnim.SetTrigger("melee");
         yield return new WaitForSeconds(0.3f);
 
         int bonuses = 0;
-        target.unitTargeted.FindAdjacentUnits();
+        
+        //See if any of the adjacent units to the target allow you to flank. 
         foreach (Unit unit in target.unitTargeted.adjacentUnits)
         {
             if (unit.unitInfo.faction != target.unitTargeted.unitInfo.faction)

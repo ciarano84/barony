@@ -132,7 +132,7 @@ public class TacticsMovement : Unit
         }
     }
 
-    //HAS AN OVERLOAD!!!!
+    //HAS AN OVERLOAD!!!! (should likely just solve this by setting the additional parameter as a default. 
     public void MoveToTile(Tile tile) 
     {
         path.Clear();
@@ -376,7 +376,6 @@ public class TacticsMovement : Unit
     public void BeginTurn() 
     {
         turn = true;
-        //I've put this in to stop it firing constantly. Don't know why original vid had it on update, but I'm sure there's a good reason I'll find out. 
         GetComponent<PlayerCharacter>().FindSelectableTiles();  
         GetComponent<PlayerCharacter>().mainWeapon.GetTargets();
     }

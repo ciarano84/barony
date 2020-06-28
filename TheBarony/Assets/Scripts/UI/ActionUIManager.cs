@@ -23,15 +23,12 @@ public class ActionUIManager : MonoBehaviour
 
     List<Action> actions = new List<Action>();
 
-    //Weapon mainWeapon;
-
     static Texture2D attackCursor;
 
     private void Start()
     {
         endTurn.gameObject.SetActive(false);
         tooltip.SetActive(false);
-        //attackCursor = Resources.Load<Texture2D>("Sword_Cursor");
     }
 
     public void UpdateActions(PlayerCharacter unit)
@@ -56,7 +53,6 @@ public class ActionUIManager : MonoBehaviour
         {
             if (unit.remainingMove > 0 || unit.remainingActions > 0)
             {
-                //need to make sure this gets turned off at some point. 
                 endTurn.gameObject.SetActive(true);
 
                 //Ensure conditions for actions are met. 
@@ -117,25 +113,5 @@ public class ActionUIManager : MonoBehaviour
 
     public static void SetStandardCursor() {
         Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
-    }
-
-    public void ActionButton1Press()
-    {
-        actions[0].ExecuteAction();
-    }
-
-    public void ActionButton2Press()
-    {
-        actions[1].ExecuteAction();
-    }
-
-    public void ActionButton3Press()
-    {
-        actions[2].ExecuteAction();
-    }
-
-    public void ActionButton4Press()
-    {
-        actions[3].ExecuteAction();
     }
 }

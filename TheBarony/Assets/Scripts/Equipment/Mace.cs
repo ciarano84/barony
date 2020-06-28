@@ -11,7 +11,7 @@ public class MaceData : MeleeWeaponData
     public override void SetData(UnitInfo unitInfo, Slot slotToEquipTo = Slot.mainHand)
     {
         name = "Mace";
-        actionsPerAttack = 2;
+        actionsPerAttack = 1;
         rangeType = Range.melee;
         slot = Slot.oneHanded;
         description = "A metal club. \r\nSupposedly good against heavily armoured enemies. Supposedly.";

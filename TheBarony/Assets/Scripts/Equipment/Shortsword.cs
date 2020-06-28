@@ -12,7 +12,7 @@ public class ShortswordData : MeleeWeaponData
     public override void SetData(UnitInfo unitInfo, Slot slotToEquipTo = Slot.mainHand)
     {
         name = "Shortsword";
-        actionsPerAttack = 2;
+        actionsPerAttack = 1;
         rangeType = Range.melee;
         slot = Slot.oneHanded;
         description = "A short sword. \r\nWell made but really nothing to write home about.";

@@ -470,6 +470,10 @@ MonoBehaviour:
   LeatherArmour: {fileID: 21300000, guid: 0eefbaa893519704ebaa2259714f64d5, type: 3}
   ShortSword: {fileID: 0}
   ShortBow: {fileID: 0}
+  Shield: {fileID: 0}
+  BlankItem: {fileID: 0}
+  Mace: {fileID: 0}
+  Reload: {fileID: 0}
 --- !u!4 &414144200
 Transform:
   m_ObjectHideFlags: 0
@@ -1893,6 +1897,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1326005802}
     m_Modifications:
+    - target: {fileID: 1906641019775917265, guid: 23e0785930b5e994aa7289fccf975953,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3038604259467776505, guid: 23e0785930b5e994aa7289fccf975953,
         type: 3}
       propertyPath: position

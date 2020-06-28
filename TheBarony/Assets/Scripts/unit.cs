@@ -35,6 +35,9 @@ public class UnitInfo
     public int currentToughness;
     public int currentDamage;
     public int currentMove;
+
+    //conditions 
+    public bool flagging;
 }
 
 public class Unit : MonoBehaviour
