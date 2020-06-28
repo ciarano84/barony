@@ -10,6 +10,9 @@ public abstract class ItemData
     public string name;
     public string description;
     public Slot slot;
+    public enum Weight { light, medium, heavy, cumbersome };
+    public Weight weight = Weight.light;
+
     public abstract Sprite SetImage();
 
     public abstract void SetData(UnitInfo unitInfo, Slot slot = Slot.mainHand);

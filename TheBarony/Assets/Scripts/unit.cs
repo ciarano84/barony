@@ -20,7 +20,9 @@ public class UnitInfo
     public ItemData accessory2;
 
     //Base Stats
-    public int baseBreath = 3;
+    public int baseBreath;
+    public int firstBreath = 3;
+    public int flaggingBreath = 0;
     public int baseAttack = 1;
     public int baseDefence = -3;
     public int baseToughness = -3;
@@ -38,6 +40,11 @@ public class UnitInfo
 
     //conditions 
     public bool flagging;
+
+    public UnitInfo()
+    {
+        baseBreath = firstBreath + flaggingBreath;
+    }
 }
 
 public class Unit : MonoBehaviour
@@ -71,14 +78,42 @@ public class Unit : MonoBehaviour
     {
     }
 
-    public void UpdateBreath(int amount)
+    public void UpdateBreath(int amount, bool _wear = false)
     {
+        if (amount < 0)
+        {
+            if (unitInfo.currentBreath == 0)
+            {
+                if (_wear)
+                {
+                    return;
+                }
+                else 
+                {
+                    DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Knocked out", false);
+                    StartCoroutine("KO");
+                }
+            }
+        }
+        
         unitInfo.currentBreath += amount;
         DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), amount.ToString(), false);
 
+        //check for flagging
+        if (unitInfo.currentBreath <= unitInfo.flaggingBreath)
+        {
+            if (!unitInfo.flagging)
+            {
+                unitInfo.flagging = true;
+                DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "flagging", false);
+            }
+        }
+
+        //ensure breath doesn't go beneath 0 and trigger KO
         if (unitInfo.currentBreath <= 0)
         {
-            StartCoroutine("KO");
+            unitInfo.currentBreath = 0;
+            
         }
     }
 
@@ -92,6 +127,7 @@ public class Unit : MonoBehaviour
             amount--;
             if ((unitInfo.currentBreath <= 0) || (unitInfo.wounds >= 3))
             {
+                unitInfo.currentBreath = 0;
                 StartCoroutine("KO");
             }
         }
@@ -118,13 +154,11 @@ public class Unit : MonoBehaviour
     public IEnumerator KO()
     {
         Initiative.queuedActions++;
-        unitInfo.currentBreath = 0;
         onKO(this);
 
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);
         
-
         //Tell the initiative order to remove this unit. 
         Initiative.RemoveUnit(this);
     }

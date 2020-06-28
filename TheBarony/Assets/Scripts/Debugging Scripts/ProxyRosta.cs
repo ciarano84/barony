@@ -46,7 +46,9 @@ public class ProxyRosta : MonoBehaviour
     void AssignStats(UnitInfo player)
     {
         player.unitName = (names[Random.Range(0, names.Length)] + " " + names[Random.Range(0, names.Length)]);
-        player.baseBreath = 4 + Random.Range(0, 5);
+        player.firstBreath = 4 + Random.Range(0, 4);
+        player.flaggingBreath = player.firstBreath;
+        player.baseBreath = player.firstBreath + player.flaggingBreath;
         player.baseAttack = -1 + Random.Range(0, 4);
         player.baseDefence = -1 + Random.Range(0, 4);
         player.baseStrength = -1 + Random.Range(0, 4);

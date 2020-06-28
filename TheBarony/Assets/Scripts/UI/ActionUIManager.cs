@@ -10,6 +10,7 @@ public class ActionUIManager : MonoBehaviour
     public Text unitName;
     public Image weaponImage;
     public Slider firstBreathSlider;
+    public Slider flaggingBreathSlider;
 
     public GameObject mainActionButton;
     public GameObject moveActionButton;
@@ -39,8 +40,10 @@ public class ActionUIManager : MonoBehaviour
         currentUnit = unit;
         unitName.text = unit.unitInfo.unitName;
         weaponImage.sprite = unit.unitInfo.mainWeaponData.SetImage();
-        firstBreathSlider.maxValue = unit.unitInfo.baseBreath;
-        firstBreathSlider.value = unit.unitInfo.currentBreath;
+        firstBreathSlider.maxValue = unit.unitInfo.firstBreath;
+        firstBreathSlider.value = unit.unitInfo.currentBreath - unit.unitInfo.flaggingBreath;
+        flaggingBreathSlider.maxValue = unit.unitInfo.flaggingBreath;
+        flaggingBreathSlider.value = unit.unitInfo.currentBreath;
         TacticsMovement unitTactics = unit.GetComponent<TacticsMovement>();
         if (unitTactics.remainingMove >= unit.unitInfo.currentMove)
         { moveActionButton.SetActive(true); }
@@ -98,11 +101,11 @@ public class ActionUIManager : MonoBehaviour
         actions.Clear();
         foreach (Transform t in customMainActions.transform)
         {
-            Destroy(t);
+            t.GetComponent<ActionButton>().RemoveSelf();
         }
         foreach (Transform t in customMoveActions.transform)
         {
-            Destroy(t.gameObject);
+            t.GetComponent<ActionButton>().RemoveSelf();
         }
     }
 

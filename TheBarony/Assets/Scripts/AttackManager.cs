@@ -16,13 +16,23 @@ public class AttackManager : MonoBehaviour
     //For now this will just be hitting or missing (no crits).
     //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. 
 
-    //This is the default and generally used for melee. 
+    //This is the default and should really only be used for melee. 
     public static void AttackRoll(Unit attacker, Unit defender, int bonuses = 0)
     {
         ResetValues();
 
         int attack = attacker.unitInfo.currentAttack;
         int defence = defender.unitInfo.currentDefence;
+
+        //check conditions
+        if (defender.unitInfo.flagging) { bonuses++; }
+
+        //check for weight
+        if (attacker.unitInfo.mainWeaponData.weight == ItemData.Weight.medium)
+        {
+            if (attacker.unitInfo.mainWeaponData.weight >= ItemData.Weight.heavy) bonuses--;
+            attacker.UpdateBreath(-1, true);
+        }
 
         AbilityCheck.CheckAbility(attack, defence, bonuses);
 
@@ -74,7 +84,7 @@ public class AttackManager : MonoBehaviour
         //assumes all are 'fated' for now. 
         if (result < -9)
         {
-            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "harmless", false);
+            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shrugged", false);
             return;
         }
         else if (result < 1)

@@ -9,6 +9,7 @@ public class UnitMouseOverView : MonoBehaviour
 
     public Text unitMouseOverViewName;
     public Slider unitMouseOverViewfirstBreathSlider;
+    public Slider unitMouseOverViewFlaggingBreathSlider;
     public GameObject canvass;
     public static Unit targetUnit;
     public Camera cam;
@@ -24,9 +25,12 @@ public class UnitMouseOverView : MonoBehaviour
             {
                 transform.position = targetUnit.transform.position + new Vector3(0, offset);
                 transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
-                unitMouseOverViewfirstBreathSlider.value = targetUnit.unitInfo.currentBreath;
                 unitMouseOverViewName.text = targetUnit.unitInfo.unitName;
-                unitMouseOverViewfirstBreathSlider.maxValue = targetUnit.unitInfo.baseBreath;
+
+                unitMouseOverViewfirstBreathSlider.maxValue = targetUnit.unitInfo.firstBreath;
+                unitMouseOverViewfirstBreathSlider.value = targetUnit.unitInfo.currentBreath - targetUnit.unitInfo.flaggingBreath;
+                unitMouseOverViewFlaggingBreathSlider.maxValue = targetUnit.unitInfo.flaggingBreath;
+                unitMouseOverViewFlaggingBreathSlider.value = targetUnit.unitInfo.currentBreath;
             }
             else Hide();
         }

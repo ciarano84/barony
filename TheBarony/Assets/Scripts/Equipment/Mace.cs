@@ -14,6 +14,7 @@ public class MaceData : MeleeWeaponData
         actionsPerAttack = 1;
         rangeType = Range.melee;
         slot = Slot.oneHanded;
+        weight = Weight.medium;
         description = "A metal club. \r\nSupposedly good against heavily armoured enemies. Supposedly.";
 
         if (unitInfo != null)

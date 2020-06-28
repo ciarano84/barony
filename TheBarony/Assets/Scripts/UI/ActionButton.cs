@@ -22,12 +22,17 @@ public class ActionButton : MonoBehaviour
 
     public void ShowTooltip()
     {
-        Debug.Log("OnMouseEnter recognised");
         tooltip.ShowToolTip(tooltipText);
     }
     
     public void HideTootip()
     {
         tooltip.HideToolTip();
+    }
+
+    public void RemoveSelf()
+    {
+        tooltip.HideToolTip();
+        Destroy(gameObject);
     }
 }

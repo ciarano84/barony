@@ -15,6 +15,7 @@ public class ShieldData : ItemData
     {
         name = "Shield";
         slot = Slot.offHand;
+        weight = Weight.medium;
         description = "A shield made up largely of planks. \r\nThe nails sticking out of it would be a real benefit if they weren't coming out both sides.";
         defendModifier = 2;
 

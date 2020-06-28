@@ -15,6 +15,7 @@ public class ShortswordData : MeleeWeaponData
         actionsPerAttack = 1;
         rangeType = Range.melee;
         slot = Slot.oneHanded;
+        weight = Weight.medium;
         description = "A short sword. \r\nWell made but really nothing to write home about.";
 
         if (unitInfo != null)

@@ -13,6 +13,7 @@ public class LeatherArmourData : ItemData
     {
         name = "leather armour";
         slot = Slot.armour;
+        weight = Weight.light;
         description = "A rough, but thick leather jerkin.\r\nYour not entirely sure what it smells of, but some of it is definitely not you.";
 
         if (unitInfo != null)
