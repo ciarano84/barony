@@ -25,6 +25,7 @@ public class DefenderData : AspectData
 
     public override void GetAspect(Unit unit)
     {
+        //not sure about this. for monsters it means they get the defender script added a second time. But they DO want the owner part. 
         Defender defenderAspect = unit.gameObject.AddComponent<Defender>();
         defenderAspect.owner = unit;
     }
@@ -55,6 +56,11 @@ public class Defender : Aspect
             AttackManager.OnGraze -= SoakDamage;
             Unit.onKO -= UnSubscribe;
         }
+    }
+
+    public override void GetAspectData()
+    {
+        aspectData = new DefenderData();
     }
 }
 

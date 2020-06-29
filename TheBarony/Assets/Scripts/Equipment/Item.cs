@@ -20,8 +20,10 @@ public abstract class ItemData
     public abstract void EquipItem(Unit unit);
 }
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
-    public PlayerCharacter owner;
+    public TacticsMovement owner;
     public ItemData itemData;
+
+    public abstract void GetItemData();
 }

@@ -36,4 +36,8 @@ public class ShieldData : ItemData
 
 public class Shield : Item
 {
+    public override void GetItemData()
+    {
+        itemData = new ShieldData();
+    }
 }

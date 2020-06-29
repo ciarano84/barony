@@ -22,7 +22,8 @@ public class EncounterManager : MonoBehaviour
 
     List<GameObject> playerSquad = new List<GameObject>();
     public GameObject playerPrefab;
-    public GameObject enemyPrefab;
+    public GameObject goblinCutters;
+    public GameObject orcBruisers;
 
     //This is all in lieu of an actual system of pulling in enemies. 
     List<List<GameObject>> enemyCells = new List<List<GameObject>>(); 
@@ -62,11 +63,19 @@ public class EncounterManager : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemyCells; i++)
         {
-            //is this overwriting? 
             enemyCells.Add(new List<GameObject>());
             for (int x = EnemiesPerCell; x > 0; x--)
             {
-                GameObject enemy = Instantiate(enemyPrefab);
+                int encounterRoll = Random.Range(0, 3);
+                GameObject enemy;
+                if (encounterRoll == 0)
+                {
+                    enemy = Instantiate(orcBruisers);
+                }
+                else
+                {
+                    enemy = Instantiate(goblinCutters);
+                }
                 enemyCells[i].Add(enemy);
             }
         }

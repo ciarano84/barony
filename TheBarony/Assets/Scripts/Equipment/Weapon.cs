@@ -43,4 +43,8 @@ public class Weapon : Item
         };
         targets.Add(target);
     }
+
+    public override void GetItemData()
+    {
+    }
 }

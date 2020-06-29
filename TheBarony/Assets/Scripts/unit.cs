@@ -66,6 +66,10 @@ public class Unit : MonoBehaviour
     public void SetStats()
     {
         unitInfo.currentBreath = unitInfo.baseBreath;
+        if (unitInfo.faction == Factions.enemies)
+        {
+            Debug.Log("currentBreath = " + unitInfo.currentBreath);
+        }
         unitInfo.currentAttack = unitInfo.baseAttack;
         unitInfo.currentDefence = unitInfo.baseDefence;
         unitInfo.currentToughness = unitInfo.baseToughness;

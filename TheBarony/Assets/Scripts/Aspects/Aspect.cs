@@ -17,7 +17,10 @@ public abstract class AspectData
     public abstract GameObject GetVisual();
 }
 
-public class Aspect : MonoBehaviour
+public abstract class Aspect : MonoBehaviour
 {
     public Unit owner;
+    public AspectData aspectData;
+
+    public abstract void GetAspectData();
 }

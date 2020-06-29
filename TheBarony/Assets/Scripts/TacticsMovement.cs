@@ -46,6 +46,11 @@ public class TacticsMovement : Unit
     public static OnEnterSquareDelegate OnEnterSquare;
 
     public void InitTacticsMovement() {
+        if (unitInfo.faction == Factions.enemies)
+        {
+            SetStats();
+            GetComponent<MonsterConstructor>().SetUpMonster();
+        }
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         unitAnim = GetComponent<Animator>();

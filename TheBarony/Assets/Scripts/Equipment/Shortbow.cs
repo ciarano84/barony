@@ -47,4 +47,8 @@ public class ShortbowData : RangedWeaponData
 
 public class Shortbow : RangedWeapon
 {
+    public override void GetItemData()
+    {
+        itemData = new ShortbowData();
+    }
 }

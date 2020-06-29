@@ -48,5 +48,8 @@ public class MaceData : MeleeWeaponData
 
 public class Mace : MeleeWeapon
 {
-
+    public override void GetItemData()
+    {
+        itemData = new MaceData();
+    }
 }

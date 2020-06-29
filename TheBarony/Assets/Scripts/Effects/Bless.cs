@@ -39,17 +39,21 @@ public class Bless : Effect
         Vector3 rayOrigin = owner.gameObject.transform.position;
 
         //Debug
-        Debug.DrawRay(transform.position, (blessingUnit.gameObject.transform.position - transform.position), Color.green, 3f);
-
-        // Declare a raycast hit to store information about what our raycast has hit
-        if (Physics.Raycast(rayOrigin, (blessingUnit.gameObject.transform.position - transform.position), out RaycastHit hit))
+        if (blessingUnit != null)
         {
-            if (blessingUnit == hit.collider.gameObject.GetComponent<Unit>())
+            Debug.DrawRay(transform.position, (blessingUnit.gameObject.transform.position - transform.position), Color.green, 3f);
+
+            // Declare a raycast hit to store information about what our raycast has hit
+            if (Physics.Raycast(rayOrigin, (blessingUnit.gameObject.transform.position - transform.position), out RaycastHit hit))
             {
-                return;
+                if (blessingUnit == hit.collider.gameObject.GetComponent<Unit>())
+                {
+                    return;
+                }
+                else { Remove(); }
             }
-            else { Remove(); }
         }
+        else { Remove(); }
     }
 
     public void UnSubscribe(Unit unit)

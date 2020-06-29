@@ -33,4 +33,8 @@ public class LeatherArmourData : ItemData
 
 public class LeatherArmour : Item
 {
+    public override void GetItemData()
+    {
+        itemData = new LeatherArmourData();
+    }
 }

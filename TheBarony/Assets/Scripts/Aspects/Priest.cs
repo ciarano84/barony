@@ -81,4 +81,8 @@ public class Priest : Aspect
         }
     }
 
+    public override void GetAspectData()
+    {
+        aspectData = new PriestData();
+    }
 }

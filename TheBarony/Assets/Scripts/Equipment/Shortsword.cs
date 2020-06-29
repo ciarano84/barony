@@ -42,7 +42,6 @@ public class ShortswordData : MeleeWeaponData
         weapon.weaponData = this; 
         
         unit.mainWeapon = weapon;
-        //unit.mainWeapon.itemData = this;
 
         //Will have to have an amendment when we get off hand weapons. 
     }
@@ -50,5 +49,8 @@ public class ShortswordData : MeleeWeaponData
 
 public class Shortsword : MeleeWeapon
 {
-    
+    public override void GetItemData()
+    {
+        itemData = new ShortswordData();
+    }
 }

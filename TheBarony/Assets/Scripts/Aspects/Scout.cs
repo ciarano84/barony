@@ -33,4 +33,8 @@ public class ScoutData : AspectData
 
 public class Scout : Aspect
 {
+    public override void GetAspectData()
+    {
+        aspectData = new ScoutData();
+    }
 }

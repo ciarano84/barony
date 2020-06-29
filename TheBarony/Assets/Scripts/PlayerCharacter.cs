@@ -7,37 +7,23 @@ public class PlayerCharacter : TacticsMovement
 {
     private void Start()
     {
+        Debug.Log("start on player character and unit info is " + unitInfo + ". also factions is " + unitInfo.faction);
         InitUnit();
+
         InitTacticsMovement();
     }
 
     public override void InitUnit()
     {
-
-        //this should just read 'unitInfo.weaponData.CreateWeapon(this);' but has the rest to catch the proxy npcs. 
-        if (unitInfo.unitName == "goblin")
+        if (unitInfo.faction == Factions.players)
         {
-            unitInfo = new UnitInfo();
-            unitInfo.mainWeaponData = new ShortswordData();
-            unitInfo.mainWeaponData.SetData(unitInfo);
-            unitInfo.faction = Factions.enemies;
+            SetStats();
             unitInfo.mainWeaponData.EquipItem(GetComponent<Unit>());
-            Instantiate(GameAssets.i.EnemyVisual, transform);
+            if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(GetComponent<Unit>());
+            if (unitInfo.armourData != null) unitInfo.armourData.EquipItem(GetComponent<Unit>());
+            if (unitInfo.aspectData != null) unitInfo.aspectData.GetAspect(GetComponent<Unit>());
+            if (unitInfo.aspectData != null) Instantiate(unitInfo.aspectData.GetVisual(), transform);
         }
-        //This next section is just for when we start direct in a combat.  
-        if (this.unitInfo.mainWeaponData == null)
-        {
-            unitInfo.mainWeaponData = new ShortswordData();
-
-            unitInfo.mainWeaponData.EquipItem(GetComponent<Unit>());
-        }
-
-        SetStats();
-        unitInfo.mainWeaponData.EquipItem(GetComponent<Unit>());
-        if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(GetComponent<Unit>());
-        if (unitInfo.armourData != null) unitInfo.armourData.EquipItem(GetComponent<Unit>());
-        if (unitInfo.aspectData != null) unitInfo.aspectData.GetAspect(GetComponent<Unit>());
-        if (unitInfo.aspectData != null) Instantiate(unitInfo.aspectData.GetVisual(), transform);
     }
 
     private void FixedUpdate()
