@@ -14,13 +14,11 @@ public class AttackManager : MonoBehaviour
 
 
     //For now this will just be hitting or missing (no crits).
-    //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. 
-
-    //This is the default and should really only be used for melee. 
-    public static void AttackRoll(Unit attacker, Unit defender, int bonuses = 0)
+    //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. s
+    public static bool AttackRoll(Unit attacker, Unit defender, int bonuses = 0)
     {
         ResetValues();
-
+        
         int attack = attacker.unitInfo.currentAttack;
         int defence = defender.unitInfo.currentDefence;
 
@@ -37,32 +35,10 @@ public class AttackManager : MonoBehaviour
         AbilityCheck.CheckAbility(attack, defence, bonuses);
 
         if (AbilityCheck.baseResult >= 0)
-        //hit goes here. 
-        {
-            DamageRoll(attacker, defender);
-        }
-        else
-        //miss goes here. 
-        {
-            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "miss", false);
-        }
-    }
-
-    //This is the ranged variation
-    public static bool RangedAttackRoll(Unit attacker, Unit defender, int bonuses = 0)
-    {
-        int attack = attacker.unitInfo.currentAttack;
-        int defence = defender.unitInfo.currentDefence;
-
-        AbilityCheck.CheckAbility(attack, defence, bonuses);
-
-        if (AbilityCheck.baseResult >= 0)
-        //hit goes here. 
         {
             return true;
         }
         else
-        //miss goes here. 
         {
             return false;
         }

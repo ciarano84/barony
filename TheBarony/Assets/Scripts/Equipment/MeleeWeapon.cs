@@ -26,7 +26,6 @@ public class MeleeWeapon : Weapon
         foreach (Unit _unit in target.unitTargeted.adjacentUnits)
         {
             if (_unit == owner) adjacent = true;
-            
         }
 
         if (adjacent)
@@ -60,7 +59,18 @@ public class MeleeWeapon : Weapon
             }
         }
 
-        AttackManager.AttackRoll(owner,target.unitTargeted.GetComponent<Unit>(), bonuses);
+        bool hit = AttackManager.AttackRoll(owner,target.unitTargeted.GetComponent<Unit>(), bonuses);
+
+        if (hit)
+        {
+            AttackManager.DamageRoll(owner, target.unitTargeted.GetComponent<Unit>());
+        }
+
+        if (!hit)
+        {
+            DamagePopUp.Create(target.unitTargeted.gameObject.transform.position + new Vector3(0, target.unitTargeted.gameObject.GetComponent<TacticsMovement>().halfHeight), "miss", false);
+        }
+
         yield return new WaitForSeconds(2f);
         
         Initiative.EndAction();

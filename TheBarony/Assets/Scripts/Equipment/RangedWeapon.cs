@@ -36,7 +36,7 @@ public class RangedWeapon : Weapon
         //Create this animation.
         owner.unitAnim.SetTrigger("rangedAttack");
 
-        bool hit = AttackManager.RangedAttackRoll(owner, target.unitTargeted.GetComponent<Unit>(), bonuses);
+        bool hit = AttackManager.AttackRoll(owner, target.unitTargeted.GetComponent<Unit>(), bonuses);
         yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length);
         GameObject missile = Instantiate(Resources.Load("Arrow"), owner.transform.position, owner.transform.rotation, owner.gameObject.transform) as GameObject;
 
