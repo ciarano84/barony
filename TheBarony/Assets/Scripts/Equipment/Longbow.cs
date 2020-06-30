@@ -2,28 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShortbowData : RangedWeaponData
+public class LongbowData : RangedWeaponData
 {
     public override Sprite SetImage()
     {
-        return GameAssets.i.ShortBow;
+        return GameAssets.i.Longbow;
     }
 
     public override void SetData(UnitInfo unitInfo, Slot slotToEquipTo = Slot.mainHand)
     {
-        name = "Shortbow";
+        name = "Longbow";
         actionsPerAttack = 1;
         slot = Slot.twoHanded;
         rangeType = WeaponData.Range.ranged;
-        weight = Weight.light;
-        description = "A potentially ornemantal shortbow. \r\nLiable to break. But hopefully liable to hurt someone at least once beforehand.";
-        
+        weight = Weight.medium;
+        description = "A potentially ornemantal longbow. \r\nIt is indeed long. A day of carrying this around and you'll wish you'd just been shot by it.";
+
         range = 200;
         missDistance = 20;
         maxAmmo = 1;
         currentAmmo = 1;
-        rangedDamage = 2;
-        reloadSpeed = ActionCost.move;
+        rangedDamage = 4;
+        reloadSpeed = ActionCost.main;
 
         if (unitInfo != null)
         {
@@ -47,10 +47,10 @@ public class ShortbowData : RangedWeaponData
     }
 }
 
-public class Shortbow : RangedWeapon
+public class Longbow : RangedWeapon
 {
     public override void GetItemData()
     {
-        itemData = new ShortbowData();
+        itemData = new LongbowData();
     }
 }

@@ -14,23 +14,18 @@ public class Reload : Action
         actioningUnit = unit;
         buttonText = "Reload";
         rangedWeapon = unit.gameObject.GetComponent<RangedWeapon>();
+        actionCost = rangedWeapon.rangedWeaponData.reloadSpeed; 
     }
 
-    public override void ExecuteAction()
+    public override void ExecuteAction(ActionCost actionCost)
     {
-        rangedWeapon.Reload();
+        rangedWeapon.Reload(actionCost);
     }
 
     //this bool is used to decide if the action is avialable to the player or not. 
     public override bool CheckAvailable()
     {
-        Debug.Log(actioningUnit);
-        Debug.Log(actioningUnit.GetComponent<RangedWeapon>());
-        Debug.Log(actioningUnit.GetComponent<RangedWeapon>().rangedWeaponData);
-        
-        
-        if (actioningUnit.GetComponent<RangedWeapon>().rangedWeaponData.currentAmmo < actioningUnit.GetComponent<RangedWeapon>().rangedWeaponData.maxAmmo
-            && actioningUnit.GetComponent<TacticsMovement>().remainingMove == actioningUnit.unitInfo.currentMove)
+        if (actioningUnit.GetComponent<RangedWeapon>().rangedWeaponData.currentAmmo < actioningUnit.GetComponent<RangedWeapon>().rangedWeaponData.maxAmmo)
         {
             return true;
         }

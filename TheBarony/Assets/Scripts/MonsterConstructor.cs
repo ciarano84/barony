@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AspectPack { SCOUT, DEFENDER, PRIEST };
+public enum AspectPack { SCOUT, DEFENDER, PRIEST, HUNTER};
 
 public class MonsterConstructor : MonoBehaviour
 {
@@ -23,6 +23,9 @@ public class MonsterConstructor : MonoBehaviour
                 break;
             case AspectPack.PRIEST:
                 unitInfo.aspectData = new PriestData();
+                break;
+            case AspectPack.HUNTER:
+                unitInfo.aspectData = new HunterData();
                 break;
             default:
                 break;

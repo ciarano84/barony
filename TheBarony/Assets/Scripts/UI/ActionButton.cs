@@ -9,6 +9,7 @@ public class ActionButton : MonoBehaviour
     public Image image;
     public string tooltipText;
     public Tooltip tooltip;
+    public ActionCost actionCost;
 
     public void Awake()
     {
@@ -17,7 +18,7 @@ public class ActionButton : MonoBehaviour
 
     public void TriggerAction()
     {
-        action.ExecuteAction();
+        action.ExecuteAction(actionCost);
     }
 
     public void ShowTooltip()

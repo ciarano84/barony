@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoutData : AspectData
+public class HunterData : AspectData
 {
     public override void SetAspectData(UnitInfo unit)
     {
-        className = "Scout";
+        className = "Hunter";
 
         //Do we need this next line, isn't it just setting A to be A?
         unitInfo = unit;
 
-        unit.mainWeaponData = new LongbowData();
+        unit.mainWeaponData = new ShortbowData();
         unit.offHandData = new BlankItemData();
-        unit.armourData = new BlankItemData();
+        unit.armourData = new LeatherArmourData();
         unit.accessory1 = new BlankItemData();
         unit.accessory2 = new BlankItemData();
     }
@@ -27,17 +27,18 @@ public class ScoutData : AspectData
 
     public override void GetAspect(Unit unit)
     {
-        Scout scoutAspect = unit.gameObject.AddComponent<Scout>();
-        scoutAspect.owner = unit;
+        Hunter hunterAspect = unit.gameObject.AddComponent<Hunter>();
+        hunterAspect.owner = unit;
     }
 
+    //this needs assigning to a new visual. 
     public override GameObject GetVisual() { return GameAssets.i.ScoutVisual; }
 }
 
-public class Scout : Aspect
+public class Hunter : Aspect
 {
     public override void GetAspectData()
     {
-        aspectData = new ScoutData();
+        aspectData = new HunterData();
     }
 }

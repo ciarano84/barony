@@ -8,6 +8,8 @@ public abstract class RangedWeaponData : WeaponData
     public int maxAmmo;
     public int currentAmmo;
     public int rangedDamage;
+
+    public ActionCost reloadSpeed;
 }
 
 public class RangedWeapon : Weapon
@@ -88,12 +90,13 @@ public class RangedWeapon : Weapon
         }
     }
 
-    public void Reload(bool asMainAction = false)
+    public void Reload(ActionCost actionCost)
     {
         rangedWeaponData.currentAmmo = rangedWeaponData.maxAmmo;
         DamagePopUp.Create(transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Arrow nocked", false);
-        if (asMainAction)
-        { owner.remainingActions -= 1; }
+        if (actionCost == ActionCost.main)
+        {
+            owner.remainingActions -= 1; }
         else 
         { owner.remainingMove = 0; }
         Initiative.EndAction();

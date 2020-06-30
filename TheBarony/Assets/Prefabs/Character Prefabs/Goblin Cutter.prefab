@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a07925fb3b1a8c408c1cd618f2f9496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aspectPack: 1
+  aspectPack: 3
 --- !u!1001 &6152930631349587526
 PrefabInstance:
   m_ObjectHideFlags: 0

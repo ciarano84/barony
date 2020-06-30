@@ -22,7 +22,12 @@ public class ActionUIManager : MonoBehaviour
 
     public Button endTurn;
 
-    List<Action> actions = new List<Action>();
+    bool moveAvailable;
+    bool mainAvailable;
+
+    //List<Action> actions = new List<Action>();
+    List<Action> moveActions = new List<Action>();
+    List<Action> mainActions = new List<Action>();
 
     static Texture2D attackCursor;
 
@@ -45,12 +50,16 @@ public class ActionUIManager : MonoBehaviour
         flaggingBreathSlider.maxValue = unit.unitInfo.flaggingBreath;
         flaggingBreathSlider.value = unit.unitInfo.currentBreath;
         TacticsMovement unitTactics = unit.GetComponent<TacticsMovement>();
-        if (unitTactics.remainingMove >= unit.unitInfo.currentMove)
-        { moveActionButton.SetActive(true); }
-        else { moveActionButton.SetActive(false); }
-        if (unitTactics.remainingActions >= 1)
-        { mainActionButton.SetActive(true); }
-        else { mainActionButton.SetActive(false); }
+        if (unitTactics.remainingMove >= unit.unitInfo.currentMove) moveAvailable = true;
+        else moveAvailable = false;
+        if (unitTactics.remainingActions >= 1) mainAvailable = true;
+        else mainAvailable = false;
+
+        if (moveAvailable) moveActionButton.SetActive(true);
+        else moveActionButton.SetActive(false);
+
+        if (mainAvailable) mainActionButton.SetActive(true);
+        else mainActionButton.SetActive(false);
 
         if (unit.GetComponent<PlayerCharacter>() != null)
         {
@@ -63,21 +72,33 @@ public class ActionUIManager : MonoBehaviour
                 {
                     if (a.CheckAvailable())
                     {
-                        actions.Add(a);
+                        if (moveAvailable)
+                        {
+                            if (a.actionCost == ActionCost.move)
+                            {
+                                Debug.Log("adding to moveActions");
+                                moveActions.Add(a);
+                            }
+                        }
+                        if (mainAvailable)
+                        {
+                            if (a.actionCost == ActionCost.main || a.actionCost == ActionCost.move)
+                            {
+                                Debug.Log("adding to mainActions");
+                                mainActions.Add(a);
+                            }
+                        }
                     }
                 }
 
-                for (int count = 0; count < actions.Count; count++)
+                for (int count = 0; count < moveActions.Count; count++)
                 {
-                    ActionButton actionButton = Instantiate(actionButtonPrefab).GetComponent<ActionButton>();
-                    actionButton.gameObject.transform.SetParent(customMoveActions.transform, false);
-                    actionButton.tooltip = tooltip.GetComponent<Tooltip>();
-                    actions[count].SetActionButtonData(unit);
-                    actionButton.tooltipText = actions[count].buttonText;
-                    actionButton.action = actions[count];
-                    actionButton.image.sprite = actions[count].SetImage();
+                    AddActionButton(moveActions, count, customMoveActions, ActionCost.move);
+                }
 
-                    //we will need to work out how and when to put things in EITHER or BOTH of main and move here. 
+                for (int count = 0; count < mainActions.Count; count++)
+                {
+                    AddActionButton(mainActions, count, customMainActions, ActionCost.main);
                 }
             }
             else Clear();
@@ -98,7 +119,8 @@ public class ActionUIManager : MonoBehaviour
     public void Clear() {
         endTurn.gameObject.SetActive(false);
         //get rid of all Action UI. 
-        actions.Clear();
+        moveActions.Clear();
+        mainActions.Clear();
         foreach (Transform t in customMainActions.transform)
         {
             t.GetComponent<ActionButton>().RemoveSelf();
@@ -116,5 +138,18 @@ public class ActionUIManager : MonoBehaviour
 
     public static void SetStandardCursor() {
         Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
+    }
+
+    public void AddActionButton(List<Action> list, int count, GameObject _parent, ActionCost _actionCost)
+    {
+        ActionButton actionButton = Instantiate(actionButtonPrefab).GetComponent<ActionButton>();
+        actionButton.gameObject.transform.SetParent(_parent.transform, false);
+        actionButton.tooltip = tooltip.GetComponent<Tooltip>();
+        //I don't think I need this line.
+        //actions[count].SetActionButtonData(unit);
+        actionButton.actionCost = _actionCost;
+        actionButton.tooltipText = list[count].buttonText;
+        actionButton.action = list[count];
+        actionButton.image.sprite = list[count].SetImage();
     }
 }

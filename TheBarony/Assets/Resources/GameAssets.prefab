@@ -57,8 +57,9 @@ MonoBehaviour:
   Bless: {fileID: 2017922947834362310, guid: 75d3f7fe088f1e34c9e925c774ee180d, type: 3}
   LeatherArmour: {fileID: 21300000, guid: 0eefbaa893519704ebaa2259714f64d5, type: 3}
   ShortSword: {fileID: 21300000, guid: 0cbfdb4978c99f046a96e9d6a543123e, type: 3}
-  ShortBow: {fileID: 21300000, guid: 8b8e614493e3f4b44b3aa26dfe845859, type: 3}
+  ShortBow: {fileID: 21300000, guid: 5b29463504d3b5b46bd528449b67db71, type: 3}
   Shield: {fileID: 21300000, guid: bda83b0c88f6d1c419544b044eca4142, type: 3}
   BlankItem: {fileID: 21300000, guid: 5fde4b026739c7842b234f5c04418cb5, type: 3}
   Mace: {fileID: 21300000, guid: 0ec4da753622bf644ae31a4569396c49, type: 3}
   Reload: {fileID: 21300000, guid: 8bfd93d9ea27eb642b922ca1197d6f7d, type: 3}
+  Longbow: {fileID: 21300000, guid: 8b8e614493e3f4b44b3aa26dfe845859, type: 3}
