@@ -24,6 +24,7 @@ public class EncounterManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject goblinCutters;
     public GameObject orcBruisers;
+    public GameObject goblinArchers;
 
     //This is all in lieu of an actual system of pulling in enemies. 
     List<List<GameObject>> enemyCells = new List<List<GameObject>>(); 
@@ -68,13 +69,18 @@ public class EncounterManager : MonoBehaviour
             {
                 int encounterRoll = Random.Range(0, 3);
                 GameObject enemy;
-                if (encounterRoll == 0)
+
+                switch (encounterRoll)
                 {
-                    enemy = Instantiate(orcBruisers);
-                }
-                else
-                {
-                    enemy = Instantiate(goblinCutters);
+                    case 0:
+                        enemy = Instantiate(orcBruisers);
+                        break;
+                    case 1:
+                        enemy = Instantiate(goblinCutters);
+                        break;
+                    default:
+                        enemy = Instantiate(goblinArchers);
+                        break;
                 }
                 enemyCells[i].Add(enemy);
             }

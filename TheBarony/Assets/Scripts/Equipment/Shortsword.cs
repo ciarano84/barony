@@ -13,8 +13,8 @@ public class ShortswordData : MeleeWeaponData
     {
         name = "Shortsword";
         actionsPerAttack = 1;
-        rangeType = Range.melee;
         slot = Slot.oneHanded;
+        rangeType = Range.melee;
         weight = Weight.medium;
         description = "A short sword. \r\nWell made but really nothing to write home about.";
 

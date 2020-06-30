@@ -7,9 +7,7 @@ public class PlayerCharacter : TacticsMovement
 {
     private void Start()
     {
-        Debug.Log("start on player character and unit info is " + unitInfo + ". also factions is " + unitInfo.faction);
         InitUnit();
-
         InitTacticsMovement();
     }
 

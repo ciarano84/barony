@@ -1405,6 +1405,8 @@ MonoBehaviour:
     type: 3}
   orcBruisers: {fileID: 5726284418059044258, guid: 906bb78ffb729234fa206c5d555582b4,
     type: 3}
+  goblinArchers: {fileID: 5726284418059044258, guid: 6b10b5b6b933ee1449a72dcef5d4ca78,
+    type: 3}
   numberOfEnemyCells: 2
   EnemiesPerCell: 4
 --- !u!1 &796440856

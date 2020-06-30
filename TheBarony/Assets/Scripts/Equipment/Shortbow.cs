@@ -12,12 +12,13 @@ public class ShortbowData : RangedWeaponData
     public override void SetData(UnitInfo unitInfo, Slot slotToEquipTo = Slot.mainHand)
     {
         name = "Shortbow";
-        slot = Slot.twoHanded;
-        description = "A potentially ornemantal shortbow. \r\nLiable to break. But hopefully liable to hurt someone at least once beforehand.";
-        //unitInfo.offHandData = null;
-        rangeType = WeaponData.Range.ranged;
-        range = 200;
         actionsPerAttack = 1;
+        slot = Slot.twoHanded;
+        rangeType = WeaponData.Range.ranged;
+        weight = Weight.light;
+        description = "A potentially ornemantal shortbow. \r\nLiable to break. But hopefully liable to hurt someone at least once beforehand.";
+        
+        range = 200;
         missDistance = 20;
         maxAmmo = 1;
         currentAmmo = 1;
@@ -34,9 +35,9 @@ public class ShortbowData : RangedWeaponData
         Shortbow weapon = unit.gameObject.AddComponent<Shortbow>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
         weapon.rangedWeaponData = this;
+        //this next line looks like it's not needed BUT IT REALLY IS
         weapon.weaponData = this;
         unit.mainWeapon = weapon;
-        //unit.mainWeapon.rangedWeaponData = this;
 
         //Set up for an action. 
         Reload reload = new Reload();

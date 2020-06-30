@@ -12,7 +12,6 @@ public abstract class RangedWeaponData : WeaponData
 
 public class RangedWeapon : Weapon
 {
-    public int currentAmmo;
     public RangedWeaponData rangedWeaponData;
 
     public override IEnumerator Attack(Target target)
@@ -59,7 +58,7 @@ public class RangedWeapon : Weapon
         }
 
         yield return new WaitForSeconds(1f);
-        currentAmmo--;
+        rangedWeaponData.currentAmmo--;
         Initiative.EndAction();
 
         yield break;
@@ -68,7 +67,7 @@ public class RangedWeapon : Weapon
     public override void GetTargets()
     {
         targets.Clear();
-        if (currentAmmo == 0) return;
+        if (rangedWeaponData.currentAmmo == 0) return;
 
         foreach (TacticsMovement unit in Initiative.order)
         {
@@ -91,7 +90,7 @@ public class RangedWeapon : Weapon
 
     public void Reload(bool asMainAction = false)
     {
-        currentAmmo = rangedWeaponData.maxAmmo;
+        rangedWeaponData.currentAmmo = rangedWeaponData.maxAmmo;
         DamagePopUp.Create(transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Arrow nocked", false);
         if (asMainAction)
         { owner.remainingActions -= 1; }

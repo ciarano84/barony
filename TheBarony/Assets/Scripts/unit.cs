@@ -51,14 +51,12 @@ public class Unit : MonoBehaviour
 {
     public UnitInfo unitInfo; 
     public Animator unitAnim;
+
     public Weapon mainWeapon;
-    //how is this being populated?  
+    
     public List<Action> actions = new List<Action>();
 
     public List<Unit> adjacentUnits = new List<Unit>();
-
-    //These should be chosen from "drugdge" "elite" "dangerous"
-    public string fate;
 
     public delegate void OnKODelegate(Unit unit);
     public static OnKODelegate onKO;
@@ -66,10 +64,6 @@ public class Unit : MonoBehaviour
     public void SetStats()
     {
         unitInfo.currentBreath = unitInfo.baseBreath;
-        if (unitInfo.faction == Factions.enemies)
-        {
-            Debug.Log("currentBreath = " + unitInfo.currentBreath);
-        }
         unitInfo.currentAttack = unitInfo.baseAttack;
         unitInfo.currentDefence = unitInfo.baseDefence;
         unitInfo.currentToughness = unitInfo.baseToughness;

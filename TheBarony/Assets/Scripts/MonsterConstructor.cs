@@ -2,34 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AspectPack { SCOUT, DEFENDER, PRIEST };
+
 public class MonsterConstructor : MonoBehaviour
 {
-    public Weapon mainWeapon;
-    public Item offHand;
-    public Item armour;
-    public Aspect aspect;
-    public int level;
+    public AspectPack aspectPack;
 
     public void SetUpMonster()
     {
-        mainWeapon.GetItemData();
-        mainWeapon.itemData.SetData(gameObject.GetComponent<Unit>().unitInfo, Slot.mainHand);
-        mainWeapon.itemData.EquipItem(gameObject.GetComponent<Unit>());
-        if (offHand != null)
+        UnitInfo unitInfo = GetComponent<Unit>().unitInfo;
+        Unit unit = gameObject.GetComponent<Unit>();
+
+        switch (aspectPack)
         {
-            offHand.GetItemData();
-            offHand.itemData.SetData(gameObject.GetComponent<Unit>().unitInfo, Slot.offHand);
-            offHand.itemData.EquipItem(gameObject.GetComponent<Unit>());
+            case AspectPack.SCOUT:
+                unitInfo.aspectData = new ScoutData();
+                break;
+            case AspectPack.DEFENDER:
+                unitInfo.aspectData = new DefenderData();
+                break;
+            case AspectPack.PRIEST:
+                unitInfo.aspectData = new PriestData();
+                break;
+            default:
+                break;
         }
-        if (armour != null)
-        {
-            armour.GetItemData();
-            armour.itemData.SetData(gameObject.GetComponent<Unit>().unitInfo, Slot.armour);
-            armour.itemData.EquipItem(gameObject.GetComponent<Unit>());
-        }
-        aspect.GetAspectData();
-        aspect.aspectData.SetAspectData(gameObject.GetComponent<Unit>().unitInfo);
-        aspect.owner = gameObject.GetComponent<Unit>();
-        aspect.aspectData.Level1();
+
+        
+        unitInfo.aspectData.SetAspectData(unitInfo);
+
+        if (unitInfo.mainWeaponData != null) unitInfo.mainWeaponData.SetData(unitInfo);
+        if (unitInfo.offHandData != null) unitInfo.offHandData.SetData(unitInfo);
+        if (unitInfo.armourData != null) unitInfo.armourData.SetData(unitInfo);
+        if (unitInfo.accessory1 != null) unitInfo.accessory1.SetData(unitInfo);
+        if (unitInfo.accessory2 != null) unitInfo.accessory2.SetData(unitInfo);
+
+        unitInfo.mainWeaponData.EquipItem(unit);
+        unitInfo.offHandData.EquipItem(unit);
+        unitInfo.armourData.EquipItem(unit);
+        unitInfo.aspectData.GetAspect(unit);
+
+        unitInfo.aspectData.Level1();
     }
 }
