@@ -19,6 +19,8 @@ public class DefenderData : AspectData
     public override void Level1()
     {
         unitInfo.baseBreath += 1;
+        unitInfo.firstBreath += 1;
+        //need to add to flagging breath in here for non-minions.
         unitInfo.baseStrength += 1;
         unitInfo.baseToughness += 1;
     }

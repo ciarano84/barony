@@ -33,7 +33,7 @@ public class Missile : MonoBehaviour
     private void Update()
     {
         transform.Translate(dir.normalized * step, Space.World);
-        if (Vector3.Distance(this.transform.position, target) < 0.02) Destroy(this.gameObject);
+        if (Vector3.Distance(this.transform.position, target) < 0.25) Destroy(this.gameObject);
 
         //Might need this to accomdate for aiming at the feet. 
         //Vector3 direction = target.unitTargeted.transform.position;
