@@ -63,3 +63,4 @@ MonoBehaviour:
   Mace: {fileID: 21300000, guid: 0ec4da753622bf644ae31a4569396c49, type: 3}
   Reload: {fileID: 21300000, guid: 8bfd93d9ea27eb642b922ca1197d6f7d, type: 3}
   Longbow: {fileID: 21300000, guid: 8b8e614493e3f4b44b3aa26dfe845859, type: 3}
+  Greataxe: {fileID: 21300000, guid: 323dcb274e7490341ab51af12239052d, type: 3}

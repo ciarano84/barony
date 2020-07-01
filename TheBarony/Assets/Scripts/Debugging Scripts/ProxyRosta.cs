@@ -95,5 +95,7 @@ public class ProxyRosta : MonoBehaviour
         inventory.UpdateEntry(new LeatherArmourData(), 1, false);
 
         inventory.UpdateEntry(new MaceData(), 1, false);
+
+        inventory.UpdateEntry(new GreataxeData(), 1, false);
     }
 }

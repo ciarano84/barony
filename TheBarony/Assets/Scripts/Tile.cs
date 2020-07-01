@@ -13,12 +13,13 @@ public class Tile : MonoBehaviour
     public List<Tile> adjacencyList = new List<Tile>();
     public List<Tile> diagonalAdjacencyList = new List<Tile>();
 
+    //will need to add scripts to barriers, and list of Barriers, in order to interact with them later on. 
+    public int barrierCount = 0;
+
     //Required for Breadth first search
     public bool visited = false;
     public Tile parent = null;
     public float distance = 0;
-
-    public bool foundABarrier = false;
 
     //diagonals
     Vector3 forwardAndLeft = new Vector3(-1, 0, 1);
@@ -50,6 +51,7 @@ public class Tile : MonoBehaviour
     {
         adjacencyList.Clear();
         diagonalAdjacencyList.Clear();
+        barrierCount = 0;
 
         current = false;
         target = false;
@@ -76,7 +78,7 @@ public class Tile : MonoBehaviour
         CheckTile(backAndRight, jumpHeight, true);
     }
 
-    public void CheckTile(Vector3 direction, float jumpHeight) {
+    public void CheckTile(Vector3 direction, float jumpHeight, bool diagonal = false) {
 
         //Barrier check overlapbox
         Vector3 barrierCheckRange = new Vector3(0.25f, 0.25f, 0.25f);
@@ -86,7 +88,7 @@ public class Tile : MonoBehaviour
         {
             if (boundary.gameObject.tag == "barrier")
             {
-                foundABarrier = true;
+                barrierCount++;
                 return;
             }
         }
@@ -102,40 +104,8 @@ public class Tile : MonoBehaviour
                 RaycastHit hit;
                 if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
                 {
-                    adjacencyList.Add(tile);
-                }
-            }
-        }
-    }
-
-    //We should be ditching this and just setting a default diagonal bool in CheckTile. 
-    public void CheckTile(Vector3 direction, float jumpHeight, bool diagonal)
-    {
-        //Barrier check overlapbox
-        Vector3 barrierCheckRange = new Vector3(0.25f, 0.25f, 0.25f);
-        Collider[] barrierCheckColliders = Physics.OverlapBox(transform.position + (direction / 2), barrierCheckRange);
-
-        foreach (Collider boundary in barrierCheckColliders)
-        {
-            if (boundary.gameObject.tag == "barrier")
-            {
-                foundABarrier = true;
-                return;
-            }
-        }
-
-        Vector3 halfExtents = new Vector3(0.25f, (1 + jumpHeight) / 2f, 0.25f);
-        Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
-
-        foreach (Collider item in colliders)
-        {
-            Tile tile = item.GetComponent<Tile>();
-            if (tile != null && tile.walkable)
-            {
-                RaycastHit hit;
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
-                {
-                    diagonalAdjacencyList.Add(tile);
+                    if (!diagonal) adjacencyList.Add(tile);
+                    else diagonalAdjacencyList.Add(tile);
                 }
             }
         }

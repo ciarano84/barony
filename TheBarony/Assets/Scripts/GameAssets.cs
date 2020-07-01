@@ -29,4 +29,5 @@ public class GameAssets : MonoBehaviour
     public Sprite Mace;
     public Sprite Reload;
     public Sprite Longbow;
+    public Sprite Greataxe;
 }
