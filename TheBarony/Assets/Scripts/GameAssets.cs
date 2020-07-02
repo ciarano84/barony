@@ -30,4 +30,5 @@ public class GameAssets : MonoBehaviour
     public Sprite Reload;
     public Sprite Longbow;
     public Sprite Greataxe;
+    public Sprite Dagger;
 }

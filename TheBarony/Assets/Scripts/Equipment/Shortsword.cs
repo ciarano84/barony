@@ -18,6 +18,8 @@ public class ShortswordData : MeleeWeaponData
         weight = Weight.medium;
         description = "A short sword. \r\nWell made but really nothing to write home about.";
 
+        weaponDamage = 1;
+
         if (unitInfo != null)
         {
             switch (slotToEquipTo)

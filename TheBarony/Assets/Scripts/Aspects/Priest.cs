@@ -31,13 +31,14 @@ public class PriestData : AspectData
 
 public class Priest : Aspect
 {
+    
     private void Start()
     {
         TacticsMovement.OnEnterSquare += Bless;
         Initiative.OnEncounterStart += Bless;
         Unit.onKO += UnSubscribe;
     }
-
+    
     public void Bless(Unit mover)
     {
         foreach (Unit unit in Initiative.order)

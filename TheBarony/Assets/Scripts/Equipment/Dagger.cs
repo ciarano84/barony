@@ -1,23 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class MaceData : MeleeWeaponData
+
+public class DaggerData : MeleeWeaponData
 {
     public override Sprite SetImage()
     {
-        return GameAssets.i.Mace;
+        return GameAssets.i.Dagger;
     }
 
     public override void SetData(UnitInfo unitInfo, Slot slotToEquipTo = Slot.mainHand)
     {
-        name = "Mace";
+        name = "Dagger";
         actionsPerAttack = 1;
-        rangeType = Range.melee;
         slot = Slot.oneHanded;
-        weight = Weight.medium;
-        description = "A metal club. \r\nSupposedly good against heavily armoured enemies. Supposedly.";
+        rangeType = Range.melee;
+        weight = Weight.light;
+        description = "A fancy dagger. \r\nYou're not sure how it got here. Someone probably wanted shot of it quick.";
 
-        weaponDamage = 1;
+        weaponDamage = -1;
 
         if (unitInfo != null)
         {
@@ -38,7 +39,7 @@ public class MaceData : MeleeWeaponData
 
     public override void EquipItem(Unit unit)
     {
-        Mace weapon = unit.gameObject.AddComponent<Mace>();
+        Dagger weapon = unit.gameObject.AddComponent<Dagger>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
         weapon.weaponData = this;
 
@@ -48,10 +49,10 @@ public class MaceData : MeleeWeaponData
     }
 }
 
-public class Mace : MeleeWeapon
+public class Dagger : MeleeWeapon
 {
     public override void GetItemData()
     {
-        itemData = new MaceData();
+        itemData = new DaggerData();
     }
 }
