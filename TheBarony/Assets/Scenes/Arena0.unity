@@ -166,6 +166,8 @@ MonoBehaviour:
   Mace: {fileID: 0}
   Reload: {fileID: 0}
   Longbow: {fileID: 0}
+  Greataxe: {fileID: 0}
+  Dagger: {fileID: 0}
 --- !u!4 &34183405
 Transform:
   m_ObjectHideFlags: 0
@@ -3109,6 +3111,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1513526109}
     m_Modifications:
+    - target: {fileID: 6299328249741955485, guid: 766600ed7d2a1ae469cded11f6b31c45,
+        type: 3}
+      propertyPath: m_TagString
+      value: barrier
+      objectReference: {fileID: 0}
     - target: {fileID: 7570889017074273384, guid: 766600ed7d2a1ae469cded11f6b31c45,
         type: 3}
       propertyPath: m_LocalPosition.x
