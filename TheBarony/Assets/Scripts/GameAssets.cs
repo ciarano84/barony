@@ -21,6 +21,8 @@ public class GameAssets : MonoBehaviour
     public GameObject ScoutVisual;
     public GameObject EnemyVisual;
     public GameObject Bless;
+    public GameObject TurnFocus;
+    public GameObject OutOfTurnFocus;
     public Sprite LeatherArmour;
     public Sprite ShortSword;
     public Sprite ShortBow;

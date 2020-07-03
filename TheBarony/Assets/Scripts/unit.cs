@@ -61,6 +61,8 @@ public class Unit : MonoBehaviour
     public delegate void OnKODelegate(Unit unit);
     public static OnKODelegate onKO;
 
+    public Unit focus;
+
     public void SetStats()
     {
         unitInfo.currentBreath = unitInfo.baseBreath;
@@ -198,3 +200,4 @@ public class Unit : MonoBehaviour
         }
     }
 }
+

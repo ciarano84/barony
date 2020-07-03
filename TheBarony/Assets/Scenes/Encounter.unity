@@ -610,36 +610,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371776631}
   m_CullTransparentMesh: 0
---- !u!1 &415978707
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 415978708}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &415978708
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 415978707}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 1, z: 10.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &452770556
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +930,9 @@ MonoBehaviour:
   encounterEndtext: {fileID: 275881934}
   arenaBlocks: []
   playerPrefab: {fileID: 0}
-  enemyPrefab: {fileID: 0}
+  goblinCutters: {fileID: 0}
+  orcBruisers: {fileID: 0}
+  goblinArchers: {fileID: 0}
   numberOfEnemyCells: 0
   EnemiesPerCell: 0
 --- !u!1 &927828506
@@ -1435,15 +1407,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8373135726cb84bbc5b55478161cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitName: {fileID: 0}
+  weaponImage: {fileID: 0}
+  firstBreathSlider: {fileID: 0}
+  flaggingBreathSlider: {fileID: 0}
+  mainActionButton: {fileID: 0}
+  moveActionButton: {fileID: 0}
+  actionButtonPrefab: {fileID: 0}
+  customMainActions: {fileID: 0}
+  customMoveActions: {fileID: 0}
+  tooltip: {fileID: 0}
   endTurn: {fileID: 371776633}
-  ActionButton1: {fileID: 0}
-  ActionButtonText1: {fileID: 0}
-  ActionButton2: {fileID: 0}
-  ActionButtonText2: {fileID: 0}
-  ActionButton3: {fileID: 0}
-  ActionButtonText3: {fileID: 0}
-  ActionButton4: {fileID: 0}
-  ActionButtonText4: {fileID: 0}
 --- !u!1001 &1574135247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2093,6 +2067,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 381056481599379711, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 381056481599379711, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8050b52a46c748b47ba297ed64044dee, type: 2}
+    - target: {fileID: 381056481599379711, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591787974054241909, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5285039928855715390, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: m_LocalPosition.x
