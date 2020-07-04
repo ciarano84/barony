@@ -25,6 +25,20 @@ public class AttackManager : MonoBehaviour
         //check conditions
         if (defender.unitInfo.flagging) { bonuses++; }
 
+        //check focus
+        if (attacker.focus != defender)
+        {
+            DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Unfocused", false);
+            bonuses--;
+            attacker.focus = defender;
+            attacker.SetFocus();
+        }
+        if (defender.focus != attacker)
+        {
+            DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Blindside", false);
+            bonuses++;
+        }
+
         //check for weight
         if (attacker.unitInfo.mainWeaponData.weight == ItemData.Weight.medium)
         {
@@ -74,6 +88,11 @@ public class AttackManager : MonoBehaviour
             else if (result > 4) wounds = 2;
             else { wounds = 3; }
             defender.UpdateWounds(wounds);
+        }
+        if (defender.focus != attacker)
+        {
+            defender.focus = attacker;
+            defender.SetFocus();
         }
     }
 

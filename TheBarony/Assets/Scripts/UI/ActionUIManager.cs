@@ -20,6 +20,8 @@ public class ActionUIManager : MonoBehaviour
 
     public GameObject tooltip;
 
+    public FocusRing TurnFocus;
+    public FocusRing OutOfTurnFocus;
     public Button endTurn;
 
     bool moveAvailable;
@@ -50,6 +52,14 @@ public class ActionUIManager : MonoBehaviour
         flaggingBreathSlider.maxValue = unit.unitInfo.flaggingBreath;
         flaggingBreathSlider.value = unit.unitInfo.currentBreath;
         TacticsMovement unitTactics = unit.GetComponent<TacticsMovement>();
+        if (currentUnit.focus != null)
+        { 
+            TurnFocus.SetFocus(currentUnit, currentUnit.focus.GetComponent<TacticsMovement>());
+            if (currentUnit.focus.focus != null) 
+            { OutOfTurnFocus.SetFocus(currentUnit.focus.GetComponent<TacticsMovement>(), currentUnit.focus.focus.GetComponent<TacticsMovement>()); }
+        }
+        else { TurnFocus.NoFocus(); OutOfTurnFocus.NoFocus(); }
+
         if (unitTactics.remainingMove >= unit.unitInfo.currentMove) moveAvailable = true;
         else moveAvailable = false;
         if (unitTactics.remainingActions >= 1) mainAvailable = true;

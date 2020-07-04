@@ -6,13 +6,53 @@ public class FocusRing : MonoBehaviour
 {
     public LineRenderer line;
     public GameObject ring;
-    public Unit startingCharacter;
-    public Unit finishingCharacter;
+    TacticsMovement startingCharacter;
+    TacticsMovement finishingCharacter;
+    bool focusSet = false;
+    bool hidden = false;
+    Vector3 hidePoint = new Vector3(0,-100,0);
 
-    void Start()
+    private void Update()
     {
-        ring.transform.position = finishingCharacter.transform.position + new Vector3(0, -finishingCharacter.GetComponent<TacticsMovement>().halfHeight);
-        line.SetPosition(0, startingCharacter.transform.position + new Vector3(0, -startingCharacter.GetComponent<TacticsMovement>().halfHeight + 0.2f));
-        line.SetPosition(1, finishingCharacter.transform.position + new Vector3(0, -finishingCharacter.GetComponent<TacticsMovement>().halfHeight + 0.2f));
+        if (focusSet)
+        {
+            if (startingCharacter != null && finishingCharacter != null)
+            {
+                line.SetPosition(0, startingCharacter.transform.position + new Vector3(0, -startingCharacter.halfHeight + 0.2f));
+                line.SetPosition(1, finishingCharacter.transform.position + new Vector3(0, -finishingCharacter.halfHeight + 0.2f));
+                ring.transform.position = finishingCharacter.transform.position + new Vector3(0, -finishingCharacter.halfHeight);
+            }
+        }
+        else
+        {
+            if (hidden)
+            {
+                return;
+            }
+            else
+            {
+                line.SetPosition(0, hidePoint);
+                line.SetPosition(1, hidePoint);
+                ring.transform.position = hidePoint;
+                hidden = true;
+            }
+        }
+    }
+
+    public void SetFocus(TacticsMovement _startingCharacter, TacticsMovement _finishingCharacter)
+    {
+        hidden = false;
+        focusSet = true;
+        startingCharacter = _startingCharacter;
+        finishingCharacter = _finishingCharacter;
+    }
+
+    public void NoFocus()
+    {
+        hidden = false;
+        focusSet = false;
+        startingCharacter = null;
+        finishingCharacter = null;
     }
 }
+

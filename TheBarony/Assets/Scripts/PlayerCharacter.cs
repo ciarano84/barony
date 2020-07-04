@@ -58,8 +58,6 @@ public class PlayerCharacter : TacticsMovement
                     {
                         TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
 
-                        ApplyFocus(UnitClickedOn);
-
                         if (remainingActions > 0)
                         {
                             foreach (Weapon.Target target in mainWeapon.targets)
@@ -86,12 +84,5 @@ public class PlayerCharacter : TacticsMovement
                 }
             }
         }
-    }
-
-    void ApplyFocus(Unit unit)
-    {
-        FocusRing focus = Instantiate(GameAssets.i.TurnFocus).GetComponent<FocusRing>();
-        focus.startingCharacter = this;
-        focus.finishingCharacter = unit;
     }
 }

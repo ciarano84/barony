@@ -51,12 +51,14 @@ public class TacticsMovement : Unit
             GetComponent<MonsterConstructor>().SetUpMonster();
             SetStats();
         }
+        GetFocusRings();
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         unitAnim = GetComponent<Animator>();
         CheckInitiative();
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
+        focusSwitched = false;
         Initiative.AddUnit(this);
     }
 
@@ -387,6 +389,7 @@ public class TacticsMovement : Unit
 
     public void EndTurn()
     {
+        AutoSetFocus();
         turn = false;
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;

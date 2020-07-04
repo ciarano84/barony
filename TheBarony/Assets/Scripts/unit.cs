@@ -49,11 +49,14 @@ public class UnitInfo
 
 public class Unit : MonoBehaviour
 {
-    public UnitInfo unitInfo; 
+    public UnitInfo unitInfo;
     public Animator unitAnim;
-
     public Weapon mainWeapon;
-    
+
+    //tracks if they have used a focus switch in their turn. 
+    public bool focusSwitched = false;
+    public bool canFocusSwitch = true;
+
     public List<Action> actions = new List<Action>();
 
     public List<Unit> adjacentUnits = new List<Unit>();
@@ -61,7 +64,10 @@ public class Unit : MonoBehaviour
     public delegate void OnKODelegate(Unit unit);
     public static OnKODelegate onKO;
 
+    //focus
     public Unit focus;
+    FocusRing TurnFocusRing;
+    FocusRing OutOfTurnFocusRing;
 
     public void SetStats()
     {
@@ -71,6 +77,12 @@ public class Unit : MonoBehaviour
         unitInfo.currentToughness = unitInfo.baseToughness;
         unitInfo.currentDamage = unitInfo.baseStrength;
         unitInfo.currentMove = unitInfo.baseMove;
+    }
+
+    public void GetFocusRings()
+    {
+        TurnFocusRing = GameObject.Find("TurnFocus").GetComponent<FocusRing>();
+        OutOfTurnFocusRing = GameObject.Find("OutOfTurnFocus").GetComponent<FocusRing>();
     }
 
     //was protected and not sure why. 
@@ -88,14 +100,14 @@ public class Unit : MonoBehaviour
                 {
                     return;
                 }
-                else 
+                else
                 {
                     DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Knocked out", false);
                     StartCoroutine("KO");
                 }
             }
         }
-        
+
         unitInfo.currentBreath += amount;
         DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), amount.ToString(), false);
 
@@ -113,7 +125,7 @@ public class Unit : MonoBehaviour
         if (unitInfo.currentBreath <= 0)
         {
             unitInfo.currentBreath = 0;
-            
+
         }
     }
 
@@ -133,7 +145,8 @@ public class Unit : MonoBehaviour
         }
         string woundedText;
         switch (amount)
-        {   case 1:
+        {
+            case 1:
                 woundedText = "wounded";
                 break;
             case 2:
@@ -158,7 +171,7 @@ public class Unit : MonoBehaviour
 
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);
-        
+
         //Tell the initiative order to remove this unit. 
         Initiative.RemoveUnit(this);
     }
@@ -199,5 +212,44 @@ public class Unit : MonoBehaviour
             }
         }
     }
+
+    //This should be changed so that it changes target based on who it can see as well as who is closest. 
+    public void AutoSetFocus()
+    {
+        if (focus == null)
+        {
+            float maxDistance = 200f;
+            foreach (TacticsMovement t in Initiative.order)
+            {
+                if (t.unitInfo.faction != this.unitInfo.faction)
+                {
+                    RaycastHit hit;
+                    Vector3 viewpoint = transform.position + new Vector3(0, GetComponent<TacticsMovement>().halfHeight, 0);
+
+                    //Debug
+                    Debug.DrawRay(transform.position, (t.gameObject.transform.position - transform.position), Color.green, 10f);
+
+                    if (Physics.Raycast(viewpoint, t.gameObject.transform.position - transform.position, out hit, 100f))
+                    {
+                        if (hit.collider.GetComponent<Unit>() != null)
+                        {
+                            //this finds the nearest
+                            if (Vector3.Distance(transform.position, t.transform.position) < maxDistance)
+                            {
+                                maxDistance = Vector3.Distance(transform.position, t.transform.position);
+                                focus = t;
+                            }
+                            SetFocus();
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void SetFocus()
+    { TurnFocusRing.SetFocus(this.GetComponent<TacticsMovement>(), focus.GetComponent<TacticsMovement>()); }
 }
+
 
