@@ -6,53 +6,22 @@ public class FocusRing : MonoBehaviour
 {
     public LineRenderer line;
     public GameObject ring;
-    TacticsMovement startingCharacter;
-    TacticsMovement finishingCharacter;
-    bool focusSet = false;
-    bool hidden = false;
     Vector3 hidePoint = new Vector3(0,-100,0);
 
     private void Update()
     {
-        if (focusSet)
+        if (Initiative.currentUnit != null && Initiative.currentUnit.focus != null)
         {
-            if (startingCharacter != null && finishingCharacter != null)
-            {
-                line.SetPosition(0, startingCharacter.transform.position + new Vector3(0, -startingCharacter.halfHeight + 0.2f));
-                line.SetPosition(1, finishingCharacter.transform.position + new Vector3(0, -finishingCharacter.halfHeight + 0.2f));
-                ring.transform.position = finishingCharacter.transform.position + new Vector3(0, -finishingCharacter.halfHeight);
-            }
+            line.SetPosition(0, Initiative.currentUnit.transform.position + new Vector3(0, -Initiative.currentUnit.halfHeight + 0.2f));
+            line.SetPosition(1, Initiative.currentUnit.focus.transform.position + new Vector3(0, -Initiative.currentUnit.focus.GetComponent<TacticsMovement>().halfHeight + 0.2f));
+            ring.transform.position = Initiative.currentUnit.focus.transform.position + new Vector3(0, -Initiative.currentUnit.focus.GetComponent<TacticsMovement>().halfHeight);
         }
         else
         {
-            if (hidden)
-            {
-                return;
-            }
-            else
-            {
-                line.SetPosition(0, hidePoint);
-                line.SetPosition(1, hidePoint);
-                ring.transform.position = hidePoint;
-                hidden = true;
-            }
+            line.SetPosition(0, hidePoint);
+            line.SetPosition(1, hidePoint);
+            ring.transform.position = hidePoint;
         }
-    }
-
-    public void SetFocus(TacticsMovement _startingCharacter, TacticsMovement _finishingCharacter)
-    {
-        hidden = false;
-        focusSet = true;
-        startingCharacter = _startingCharacter;
-        finishingCharacter = _finishingCharacter;
-    }
-
-    public void NoFocus()
-    {
-        hidden = false;
-        focusSet = false;
-        startingCharacter = null;
-        finishingCharacter = null;
     }
 }
 

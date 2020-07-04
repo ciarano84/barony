@@ -41,6 +41,7 @@ public class TacticsMovement : Unit
     bool jumpingUp = false;
     bool movingEdge = false;
     bool fallingDown = false;
+    bool mouseOver = false;
 
     public delegate void OnEnterSquareDelegate(Unit mover);
     public static OnEnterSquareDelegate OnEnterSquare;
@@ -51,7 +52,6 @@ public class TacticsMovement : Unit
             GetComponent<MonsterConstructor>().SetUpMonster();
             SetStats();
         }
-        GetFocusRings();
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         unitAnim = GetComponent<Animator>();
@@ -402,6 +402,7 @@ public class TacticsMovement : Unit
 
     private void OnMouseOver()
     {
+        mousedOverUnit = this;
         UnitMouseOverView.Display(this);
         if (Initiative.queuedActions > 0)
         {
@@ -425,6 +426,7 @@ public class TacticsMovement : Unit
     {
         ActionUIManager.SetStandardCursor();
         UnitMouseOverView.Hide();
+        mousedOverUnit = null;
     }
 
     public void FaceDirection(Vector3 target)

@@ -66,8 +66,7 @@ public class Unit : MonoBehaviour
 
     //focus
     public Unit focus;
-    FocusRing TurnFocusRing;
-    FocusRing OutOfTurnFocusRing;
+    public static Unit mousedOverUnit;
 
     public void SetStats()
     {
@@ -79,13 +78,6 @@ public class Unit : MonoBehaviour
         unitInfo.currentMove = unitInfo.baseMove;
     }
 
-    public void GetFocusRings()
-    {
-        TurnFocusRing = GameObject.Find("TurnFocus").GetComponent<FocusRing>();
-        OutOfTurnFocusRing = GameObject.Find("OutOfTurnFocus").GetComponent<FocusRing>();
-    }
-
-    //was protected and not sure why. 
     public virtual void InitUnit()
     {
     }
@@ -213,7 +205,6 @@ public class Unit : MonoBehaviour
         }
     }
 
-    //This should be changed so that it changes target based on who it can see as well as who is closest. 
     public void AutoSetFocus()
     {
         if (focus == null)
@@ -231,7 +222,7 @@ public class Unit : MonoBehaviour
 
                     if (Physics.Raycast(viewpoint, t.gameObject.transform.position - transform.position, out hit, 100f))
                     {
-                        if (hit.collider.GetComponent<Unit>() != null)
+                        if (hit.collider.GetComponent<Unit>() == t)
                         {
                             //this finds the nearest
                             if (Vector3.Distance(transform.position, t.transform.position) < maxDistance)
@@ -239,7 +230,6 @@ public class Unit : MonoBehaviour
                                 maxDistance = Vector3.Distance(transform.position, t.transform.position);
                                 focus = t;
                             }
-                            SetFocus();
                         }
                     }
                 }
@@ -247,9 +237,6 @@ public class Unit : MonoBehaviour
         }
 
     }
-
-    public void SetFocus()
-    { TurnFocusRing.SetFocus(this.GetComponent<TacticsMovement>(), focus.GetComponent<TacticsMovement>()); }
 }
 
 
