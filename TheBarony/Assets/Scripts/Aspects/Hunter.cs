@@ -37,6 +37,35 @@ public class HunterData : AspectData
 
 public class Hunter : Aspect
 {
+    private void Start()
+    {
+        AttackManager.OnAttack += Ghosting;
+        Unit.onKO += UnSubscribe;
+    }
+
+    public void Ghosting(Unit attacker, Unit defender)
+    {
+        if (attacker == owner && defender == owner.focus)
+        {
+            bool focusedOn = false;
+            foreach (Unit u in Initiative.order)
+            {
+                if (u.focus == owner) focusedOn = true;
+            }
+            if (!focusedOn) AttackManager.damage += 2;
+            Debug.Log("Ghosting attack");
+        }
+    }
+
+    public void UnSubscribe(Unit unit)
+    {
+        if (unit == owner)
+        {
+            AttackManager.OnGraze -= Ghosting;
+            Unit.onKO -= UnSubscribe;
+        }
+    }
+
     public override void GetAspectData()
     {
         aspectData = new HunterData();

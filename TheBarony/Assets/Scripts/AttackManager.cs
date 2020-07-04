@@ -7,11 +7,14 @@ public class AttackManager : MonoBehaviour
 {
     //The values that can be manipulated by other classes. 
     public static int grazeDamage = -2;
+    public static int damage = 0;
 
     //These are the delegate handlers that class features and items can subscribe to. 
     public delegate void OnGrazeDelegate(Unit attacker, Unit defender);
     public static OnGrazeDelegate OnGraze;
 
+    public delegate void OnAttackDelegate(Unit attacker, Unit defender);
+    public static OnAttackDelegate OnAttack;
 
     //For now this will just be hitting or missing (no crits).
     //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. s
@@ -21,6 +24,8 @@ public class AttackManager : MonoBehaviour
         
         int attack = attacker.unitInfo.currentAttack;
         int defence = defender.unitInfo.currentDefence;
+
+        OnAttack(attacker, defender);
 
         //check conditions
         if (defender.unitInfo.flagging) { bonuses++; }
@@ -59,11 +64,10 @@ public class AttackManager : MonoBehaviour
 
     public static void DamageRoll(Unit attacker, Unit defender)
     {
-        int damage;
         int resiliance;
         int wounds;
 
-        damage = attacker.unitInfo.currentDamage;
+        damage += attacker.unitInfo.currentDamage;
         resiliance = defender.unitInfo.currentToughness;
 
         AbilityCheck.CheckAbility(damage, resiliance);
@@ -97,5 +101,6 @@ public class AttackManager : MonoBehaviour
     private static void ResetValues()
     {
         grazeDamage = -2;
+        damage = 0;
     }
 }

@@ -47,20 +47,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitInfo:
     unitName: nobody
-    move: 15
-    className: 
-    maxBreath: 0
-    currentBreath: 0
-    Resiliance: 0
-    damageModifier: 0
-    attackModifier: 0
-    defendModifier: 0
-    wounds: 0
-    faction: 0
     unitVisual: PlayerVisual
+    faction: 0
+    aspect: {fileID: 0}
+    className: 
+    baseBreath: 3
+    firstBreath: 3
+    flaggingBreath: 0
+    baseAttack: 1
+    baseDefence: -3
+    baseToughness: -3
+    baseStrength: 0
+    baseMove: 4
+    wounds: 0
+    currentBreath: 0
+    currentAttack: 0
+    currentDefence: 0
+    currentToughness: 0
+    currentDamage: 0
+    currentMove: 0
+    flagging: 0
   unitAnim: {fileID: 0}
-  weapon1: {fileID: 0}
-  fate: 
+  mainWeapon: {fileID: 0}
+  focusSwitched: 0
+  canFocusSwitch: 1
+  adjacentUnits: []
+  focus: {fileID: 0}
   turn: 0
   selectableTiles: []
   currentTile: {fileID: 0}
