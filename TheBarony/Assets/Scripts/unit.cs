@@ -55,7 +55,7 @@ public class Unit : MonoBehaviour
 
     //tracks if they have used a focus switch in their turn. 
     public bool focusSwitched = false;
-    public bool canFocusSwitch = true;
+    public bool canFocusSwitch = false;
 
     public List<Action> actions = new List<Action>();
 

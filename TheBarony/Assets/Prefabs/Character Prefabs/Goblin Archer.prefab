@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a07925fb3b1a8c408c1cd618f2f9496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aspectPack: 0
 --- !u!1001 &6152930631349587526
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,6 +203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: unitInfo.baseMove
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776180033427457308, guid: 6c152d632ebb9d448a7485221bbd4289,
+        type: 3}
+      propertyPath: canFocusSwitch
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4232902180161399285, guid: 6c152d632ebb9d448a7485221bbd4289,
         type: 3}

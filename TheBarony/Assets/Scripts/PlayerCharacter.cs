@@ -62,8 +62,13 @@ public class PlayerCharacter : TacticsMovement
                         {
                             //ActionUI should show the focus icon.
                             SetFocus(UnitClickedOn);
-                            if (remainingActions > 0) remainingActions--;
-                            Initiative.CheckForTurnEnd();
+                            if (remainingActions > 0)
+                            {
+                                remainingActions--;
+                            } 
+                            //i have a bad feeling about this line. 
+                            Initiative.queuedActions++;
+                            StartCoroutine(Initiative.CheckForTurnEnd());
                         }
                         else if (remainingActions > 0)
                         {

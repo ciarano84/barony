@@ -41,7 +41,7 @@ public class TacticsMovement : Unit
     bool jumpingUp = false;
     bool movingEdge = false;
     bool fallingDown = false;
-    bool mouseOver = false;
+    //bool mouseOver = false;
 
     public delegate void OnEnterSquareDelegate(Unit mover);
     public static OnEnterSquareDelegate OnEnterSquare;
@@ -394,6 +394,7 @@ public class TacticsMovement : Unit
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
         focusSwitched = false;
+        canFocusSwitch = false;
     }
 
     void CheckInitiative()

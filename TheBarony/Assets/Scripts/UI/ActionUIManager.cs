@@ -22,6 +22,7 @@ public class ActionUIManager : MonoBehaviour
     public GameObject tooltip;
 
     public GameObject focusSwitch;
+    public GameObject focusActiveIndicator;
     public Button endTurn;
     static bool focusBeingSelected = false;
 
@@ -65,7 +66,12 @@ public class ActionUIManager : MonoBehaviour
         if (mainAvailable) mainActionButton.SetActive(true);
         else mainActionButton.SetActive(false);
 
-        if (!currentUnit.focusSwitched) focusSwitch.gameObject.SetActive(true);
+        focusBeingSelected = false;
+        if (!currentUnit.focusSwitched)
+        {
+            focusSwitch.gameObject.SetActive(true);
+            focusActiveIndicator.SetActive(false);
+        }
         else focusSwitch.gameObject.SetActive(false);
 
         if (unit.GetComponent<PlayerCharacter>() != null)
@@ -161,7 +167,7 @@ public class ActionUIManager : MonoBehaviour
                 foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().mainWeapon.targets)
                 {
 
-                    if (target.unitTargeted == currentUnit && (Initiative.currentUnit != currentUnit))
+                    if (target.unitTargeted == TacticsMovement.mousedOverUnit)
                     {
                         Cursor.SetCursor(GameAssets.i.Sword_Cursor, Vector2.zero, CursorMode.Auto);
                     }
@@ -172,8 +178,11 @@ public class ActionUIManager : MonoBehaviour
                 Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
             }
         }
-        else { UnitMouseOverView.Hide(); }
-        
+        else 
+        { 
+            UnitMouseOverView.Hide();
+            Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
+        }
     }
 
     /*
@@ -202,10 +211,12 @@ public class ActionUIManager : MonoBehaviour
     {
         if (!focusBeingSelected)
         {
+            Debug.Log("FocusButton pressed");
             //turn it red.
+            focusActiveIndicator.SetActive(true);
             //turn the mouseover icon to the eye.
             //set focus as being switchable on the unit. 
-
+            currentUnit.canFocusSwitch = true;
         }
 
         if (!focusBeingSelected) focusBeingSelected = true;
