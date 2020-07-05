@@ -30,6 +30,13 @@ public class PlayerCharacter : TacticsMovement
 
         if (!turn)
         {
+            if (focus != null)
+            {
+                if (RangeFinder.LineOfSight(this, focus) == true)
+                {
+                    FaceDirection(focus.transform.position);
+                }
+            }       
             return;
         }
 
@@ -38,9 +45,10 @@ public class PlayerCharacter : TacticsMovement
             CheckMouse();
         }
         else 
-        {
+        {   
             Move();
         }
+        
     }
 
     void CheckMouse()
@@ -60,15 +68,16 @@ public class PlayerCharacter : TacticsMovement
 
                         if (canFocusSwitch)
                         {
-                            //ActionUI should show the focus icon.
-                            SetFocus(UnitClickedOn);
-                            if (remainingActions > 0)
+                            if (RangeFinder.LineOfSight(this, UnitClickedOn) == true)
                             {
-                                remainingActions--;
-                            } 
-                            //i have a bad feeling about this line. 
-                            Initiative.queuedActions++;
-                            StartCoroutine(Initiative.CheckForTurnEnd());
+                                SetFocus(UnitClickedOn);
+                                if (remainingActions > 0)
+                                {
+                                    remainingActions--;
+                                }
+                                Initiative.queuedActions++;
+                                StartCoroutine(Initiative.CheckForTurnEnd());
+                            }  
                         }
                         else if (remainingActions > 0)
                         {

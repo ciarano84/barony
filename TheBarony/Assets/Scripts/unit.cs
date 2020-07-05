@@ -117,24 +117,11 @@ public class Unit : MonoBehaviour
         if (unitInfo.currentBreath <= 0)
         {
             unitInfo.currentBreath = 0;
-
         }
     }
 
     public void UpdateWounds(int amount)
     {
-        unitInfo.wounds += amount;
-        while (amount > 0)
-        {
-            unitInfo.currentBreath -= 5;
-            unitInfo.wounds++;
-            amount--;
-            if ((unitInfo.currentBreath <= 0) || (unitInfo.wounds >= 3))
-            {
-                unitInfo.currentBreath = 0;
-                StartCoroutine("KO");
-            }
-        }
         string woundedText;
         switch (amount)
         {
@@ -150,6 +137,17 @@ public class Unit : MonoBehaviour
             default:
                 woundedText = "wounded";
                 break;
+        }
+        while (amount > 0)
+        {
+            unitInfo.currentBreath -= 5;
+            unitInfo.wounds++;
+            amount--;
+            if ((unitInfo.currentBreath <= 0) || (unitInfo.wounds >= 3))
+            {
+                unitInfo.currentBreath = 0;
+                StartCoroutine("KO");
+            }
         }
 
         DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), woundedText, true);

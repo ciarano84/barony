@@ -153,12 +153,8 @@ public class ActionUIManager : MonoBehaviour
             UnitMouseOverView.Display(TacticsMovement.mousedOverUnit.GetComponent<TacticsMovement>());
             if (focusBeingSelected)
             {
-                RaycastHit hit;
-                Vector3 viewpoint = currentUnit.transform.position + new Vector3(0, currentUnit.GetComponent<TacticsMovement>().halfHeight, 0);
-
-                if (Physics.Raycast(viewpoint, TacticsMovement.mousedOverUnit.gameObject.transform.position - TacticsMovement.mousedOverUnit.transform.position, out hit, 100f))
+                if (RangeFinder.LineOfSight(currentUnit, TacticsMovement.mousedOverUnit) == true)
                 {
-
                     Cursor.SetCursor(GameAssets.i.Eye_Cursor, Vector2.zero, CursorMode.Auto);
                 }
             }
@@ -185,17 +181,6 @@ public class ActionUIManager : MonoBehaviour
         }
     }
 
-    /*
-    public static void GetAttackCursor()
-    {
-        Cursor.SetCursor(GameAssets.i.Sword_Cursor, Vector2.zero, CursorMode.Auto);
-    }
-
-    public static void SetStandardCursor()
-    {
-        Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
-    }
-    */
     public void AddActionButton(List<Action> list, int count, GameObject _parent, ActionCost _actionCost)
     {
         ActionButton actionButton = Instantiate(actionButtonPrefab).GetComponent<ActionButton>();
@@ -215,7 +200,6 @@ public class ActionUIManager : MonoBehaviour
             //turn it red.
             focusActiveIndicator.SetActive(true);
             //turn the mouseover icon to the eye.
-            //set focus as being switchable on the unit. 
             currentUnit.canFocusSwitch = true;
         }
 
@@ -223,6 +207,7 @@ public class ActionUIManager : MonoBehaviour
     }
 
     //the POINT of this (no idea if it will work) is to always de-activate the focus select button if something else in the UI is clicked on. 
+    //not sure if it's even getting used. 
     void CheckMouse()
     {
         if (Input.GetMouseButtonUp(0))

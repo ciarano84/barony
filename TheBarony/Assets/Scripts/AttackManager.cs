@@ -36,6 +36,7 @@ public class AttackManager : MonoBehaviour
             DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Unfocused", false);
             bonuses--;
             attacker.focus = defender;
+            attacker.focusSwitched = true;
         }
         if (defender.focus != attacker)
         {

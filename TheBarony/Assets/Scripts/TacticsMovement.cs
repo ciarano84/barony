@@ -64,6 +64,13 @@ public class TacticsMovement : Unit
 
     public void GetCurrentTile() {
         currentTile = GetTargetTile(gameObject);
+
+        //trying to catch the original fucker of a bug:
+        if (currentTile == null)
+            {
+            Debug.Log("Bug no 1 found on " + this);
+            }
+
         if (turn) currentTile.current = true;
     }
 
@@ -256,10 +263,26 @@ public class TacticsMovement : Unit
         else
         {
             RemoveSelectableTiles();
+
+            if (focus != null)
+            {
+                if (RangeFinder.LineOfSight(this, focus) == true)
+                {
+                    FaceDirection(focus.transform.position);
+                    
+                    /*Vector3 targetHeading = focus.transform.position;
+                    targetHeading.y = transform.position.y;
+                    tileToFace.y = transform.position.y;
+                    transform.LookAt(targetHeading);*/
+                }
+            }
+            
             if (turnRequired)
             {
-                tileToFace.y = transform.position.y;
-                transform.LookAt(tileToFace);
+                FaceDirection(tileToFace);
+                
+                //tileToFace.y = transform.position.y;
+                //transform.LookAt(tileToFace);
                 turnRequired = false;
             }
             moving = false;
