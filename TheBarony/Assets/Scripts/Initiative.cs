@@ -106,10 +106,14 @@ public class Initiative : MonoBehaviour
                 if (currentUnit.focusSwitched == false)
                 {
                     currentUnit.canFocusSwitch = true;
+                    queuedActions--;
                 }
-                EndTurn();
-                queuedActions--;
-                yield break;
+                else
+                {
+                    EndTurn();
+                    queuedActions--;
+                    yield break;
+                }
             }
         }
     }

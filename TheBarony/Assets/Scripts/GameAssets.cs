@@ -16,6 +16,7 @@ public class GameAssets : MonoBehaviour
 
     public Transform damagePopUp;
     public Texture2D Sword_Cursor;
+    public Texture2D Eye_Cursor;
     public GameObject PriestVisual;
     public GameObject DefenderVisual;
     public GameObject ScoutVisual;

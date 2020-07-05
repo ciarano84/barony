@@ -58,7 +58,14 @@ public class PlayerCharacter : TacticsMovement
                     {
                         TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
 
-                        if (remainingActions > 0)
+                        if (canFocusSwitch)
+                        {
+                            //ActionUI should show the focus icon.
+                            SetFocus(UnitClickedOn);
+                            if (remainingActions > 0) remainingActions--;
+                            Initiative.CheckForTurnEnd();
+                        }
+                        else if (remainingActions > 0)
                         {
                             foreach (Weapon.Target target in mainWeapon.targets)
                             {
@@ -70,6 +77,7 @@ public class PlayerCharacter : TacticsMovement
                                 }
                             }
                         }
+                        
                     }
                     else if (hit.collider.tag == "tile")
                     {

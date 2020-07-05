@@ -228,14 +228,20 @@ public class Unit : MonoBehaviour
                             if (Vector3.Distance(transform.position, t.transform.position) < maxDistance)
                             {
                                 maxDistance = Vector3.Distance(transform.position, t.transform.position);
-                                focus = t;
+                                SetFocus(t);
                             }
                         }
                     }
                 }
             }
         }
+    }
 
+    public void SetFocus(Unit unit)
+    {
+        focus = unit;
+        focusSwitched = true;
+        canFocusSwitch = false;
     }
 }
 

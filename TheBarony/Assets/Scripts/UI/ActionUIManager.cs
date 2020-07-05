@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ActionUIManager : MonoBehaviour
 {
@@ -20,7 +21,9 @@ public class ActionUIManager : MonoBehaviour
 
     public GameObject tooltip;
 
+    public GameObject focusSwitch;
     public Button endTurn;
+    static bool focusBeingSelected = false;
 
     bool moveAvailable;
     bool mainAvailable;
@@ -40,7 +43,7 @@ public class ActionUIManager : MonoBehaviour
     public void UpdateActions(PlayerCharacter unit)
     {
         Clear();
-        
+
         //set all the info out for the selected unit
         currentUnit = unit;
         unitName.text = unit.unitInfo.unitName;
@@ -61,6 +64,9 @@ public class ActionUIManager : MonoBehaviour
 
         if (mainAvailable) mainActionButton.SetActive(true);
         else mainActionButton.SetActive(false);
+
+        if (!currentUnit.focusSwitched) focusSwitch.gameObject.SetActive(true);
+        else focusSwitch.gameObject.SetActive(false);
 
         if (unit.GetComponent<PlayerCharacter>() != null)
         {
@@ -104,7 +110,8 @@ public class ActionUIManager : MonoBehaviour
             }
             else Clear();
         }
-        else {
+        else
+        {
             //This is for NPC actions, so not really needed atm.
             Clear();
             return;
@@ -117,7 +124,8 @@ public class ActionUIManager : MonoBehaviour
         Initiative.EndTurn();
     }
 
-    public void Clear() {
+    public void Clear()
+    {
         endTurn.gameObject.SetActive(false);
         //get rid of all Action UI. 
         moveActions.Clear();
@@ -132,15 +140,53 @@ public class ActionUIManager : MonoBehaviour
         }
     }
 
-    public static void GetAttackCursor() {
-        //Testing a change here. 
+    public static void SetCursor()
+    {
+        if (TacticsMovement.mousedOverUnit != null)
+        {
+            UnitMouseOverView.Display(TacticsMovement.mousedOverUnit.GetComponent<TacticsMovement>());
+            if (focusBeingSelected)
+            {
+                RaycastHit hit;
+                Vector3 viewpoint = currentUnit.transform.position + new Vector3(0, currentUnit.GetComponent<TacticsMovement>().halfHeight, 0);
+
+                if (Physics.Raycast(viewpoint, TacticsMovement.mousedOverUnit.gameObject.transform.position - TacticsMovement.mousedOverUnit.transform.position, out hit, 100f))
+                {
+
+                    Cursor.SetCursor(GameAssets.i.Eye_Cursor, Vector2.zero, CursorMode.Auto);
+                }
+            }
+            else if ((Initiative.currentUnit.remainingActions > 0) && (!Initiative.currentUnit.moving))
+            {
+                foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().mainWeapon.targets)
+                {
+
+                    if (target.unitTargeted == currentUnit && (Initiative.currentUnit != currentUnit))
+                    {
+                        Cursor.SetCursor(GameAssets.i.Sword_Cursor, Vector2.zero, CursorMode.Auto);
+                    }
+                }
+            }
+            else
+            {
+                Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
+            }
+        }
+        else { UnitMouseOverView.Hide(); }
+        
+    }
+
+    /*
+    public static void GetAttackCursor()
+    {
         Cursor.SetCursor(GameAssets.i.Sword_Cursor, Vector2.zero, CursorMode.Auto);
     }
 
-    public static void SetStandardCursor() {
+    public static void SetStandardCursor()
+    {
         Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
     }
-
+    */
     public void AddActionButton(List<Action> list, int count, GameObject _parent, ActionCost _actionCost)
     {
         ActionButton actionButton = Instantiate(actionButtonPrefab).GetComponent<ActionButton>();
@@ -150,5 +196,33 @@ public class ActionUIManager : MonoBehaviour
         actionButton.tooltipText = list[count].buttonText;
         actionButton.action = list[count];
         actionButton.image.sprite = list[count].SetImage();
+    }
+
+    public void FocusButton()
+    {
+        if (!focusBeingSelected)
+        {
+            //turn it red.
+            //turn the mouseover icon to the eye.
+            //set focus as being switchable on the unit. 
+
+        }
+
+        if (!focusBeingSelected) focusBeingSelected = true;
+    }
+
+    //the POINT of this (no idea if it will work) is to always de-activate the focus select button if something else in the UI is clicked on. 
+    void CheckMouse()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (focusBeingSelected)
+            {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    FocusButton();
+                }
+            }
+        }
     }
 }

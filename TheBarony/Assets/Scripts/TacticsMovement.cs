@@ -393,6 +393,7 @@ public class TacticsMovement : Unit
         turn = false;
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
+        focusSwitched = false;
     }
 
     void CheckInitiative()
@@ -400,6 +401,19 @@ public class TacticsMovement : Unit
         currentInitiative = (Random.Range(1, 20) + initiativeMod);
     }
 
+    void OnMouseOver()
+    {
+        mousedOverUnit = this;
+        ActionUIManager.SetCursor();
+    }
+
+    void OnMouseExit()
+    {
+        mousedOverUnit = null;
+        ActionUIManager.SetCursor();
+    }
+
+    /*
     private void OnMouseOver()
     {
         mousedOverUnit = this;
@@ -421,6 +435,7 @@ public class TacticsMovement : Unit
             }
         }
     }
+    
 
     private void OnMouseExit()
     {
@@ -428,6 +443,7 @@ public class TacticsMovement : Unit
         UnitMouseOverView.Hide();
         mousedOverUnit = null;
     }
+    */
 
     public void FaceDirection(Vector3 target)
     {
