@@ -405,6 +405,12 @@ public class TacticsMovement : Unit
 
     public void BeginTurn() 
     {
+        if (!turn)
+        {
+            //put stuff that should only happen at the start of their turn in here (as opposed to the beginning of each time they choose a new action/move). 
+            CheckFocus();
+        }
+        
         turn = true;
         GetComponent<PlayerCharacter>().FindSelectableTiles();  
         GetComponent<PlayerCharacter>().mainWeapon.GetTargets();
@@ -437,37 +443,6 @@ public class TacticsMovement : Unit
         ActionUIManager.SetCursor();
     }
 
-    /*
-    private void OnMouseOver()
-    {
-        mousedOverUnit = this;
-        UnitMouseOverView.Display(this);
-        if (Initiative.queuedActions > 0)
-        {
-            ActionUIManager.SetStandardCursor();
-        }
-        else if ((Initiative.currentUnit.remainingActions > 0) && (!Initiative.currentUnit.moving))
-        {
-            foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().mainWeapon.targets)
-            {
-                
-                if (target.unitTargeted == this && (Initiative.currentUnit != this))
-                {
-                    //change mouse pointer.
-                    ActionUIManager.GetAttackCursor();
-                }
-            }
-        }
-    }
-    
-
-    private void OnMouseExit()
-    {
-        ActionUIManager.SetStandardCursor();
-        UnitMouseOverView.Hide();
-        mousedOverUnit = null;
-    }
-    */
 
     public void FaceDirection(Vector3 target)
     {

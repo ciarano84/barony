@@ -212,22 +212,13 @@ public class Unit : MonoBehaviour
             {
                 if (t.unitInfo.faction != this.unitInfo.faction)
                 {
-                    RaycastHit hit;
-                    Vector3 viewpoint = transform.position + new Vector3(0, GetComponent<TacticsMovement>().halfHeight, 0);
-
-                    //Debug
-                    Debug.DrawRay(transform.position, (t.gameObject.transform.position - transform.position), Color.green, 10f);
-
-                    if (Physics.Raycast(viewpoint, t.gameObject.transform.position - transform.position, out hit, 100f))
+                    if (RangeFinder.LineOfSight(this, t))
                     {
-                        if (hit.collider.GetComponent<Unit>() == t)
+                        //this finds the nearest
+                        if (Vector3.Distance(transform.position, t.transform.position) < maxDistance)
                         {
-                            //this finds the nearest
-                            if (Vector3.Distance(transform.position, t.transform.position) < maxDistance)
-                            {
-                                maxDistance = Vector3.Distance(transform.position, t.transform.position);
-                                SetFocus(t);
-                            }
+                            maxDistance = Vector3.Distance(transform.position, t.transform.position);
+                            SetFocus(t);
                         }
                     }
                 }
@@ -240,6 +231,17 @@ public class Unit : MonoBehaviour
         focus = unit;
         focusSwitched = true;
         canFocusSwitch = false;
+    }
+
+    public void CheckFocus()
+    {
+        if (focus != null)
+        {
+            if (!RangeFinder.LineOfSight(this, focus))
+            {
+                focus = null;
+            }
+        } 
     }
 }
 
