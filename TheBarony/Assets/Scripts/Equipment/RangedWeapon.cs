@@ -15,6 +15,7 @@ public abstract class RangedWeaponData : WeaponData
 public class RangedWeapon : Weapon
 {
     public RangedWeaponData rangedWeaponData;
+    Animator rootAnim;
 
     public override IEnumerator Attack(Target target)
     {
@@ -30,7 +31,12 @@ public class RangedWeapon : Weapon
         }
 
         owner.remainingActions--;
+
+        //root animation nonsense so it doesn't fire to the side. 
         owner.FaceDirection(target.unitTargeted.gameObject.transform.position);
+        rootAnim = owner.GetComponent<Animator>();
+        rootAnim.SetTrigger("turnRight");
+        
         yield return new WaitForSeconds(0.3f);
 
         //Create this animation.
@@ -60,6 +66,7 @@ public class RangedWeapon : Weapon
         }
 
         yield return new WaitForSeconds(1f);
+        rootAnim.SetTrigger("turnLeft");
         rangedWeaponData.currentAmmo--;
         Initiative.EndAction();
 

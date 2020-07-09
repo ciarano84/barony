@@ -21,7 +21,7 @@ public class DamagePopUp : MonoBehaviour
     //Create a damage popup
     public static DamagePopUp Create(Vector3 position, string effect, bool isWounding)
     {
-        Transform damagePopUpTransform = Instantiate(GameAssets.i.damagePopUp, position, Camera.main.transform.rotation);
+        Transform damagePopUpTransform = Instantiate(GameAssets.i.damagePopUp, position + new Vector3(0, 0.5f), Camera.main.transform.rotation);
         DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
         damagePopUp.Setup(effect, isWounding);
         return damagePopUp;

@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: affd632f94894674d835cc65ba66e995
+guid: 989f6e44180d4be478ca8f12551f145f
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Sword And Shield Idle
+    second: mixamo.com
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,18 +35,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sword And Shield Idle
+      name: mixamo.com
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 76
+      lastFrame: 156
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -281,35 +281,35 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Mixamo_Simple_Guy@Sword And Shield Idle(Clone)
+    - name: 2H Melee(Clone)
       parentName: 
-      position: {x: -0.124683425, y: -0.17810372, z: -0.1162083}
-      rotation: {x: 0.073490635, y: 0.45428962, z: -0.032130264, w: 0.88723606}
+      position: {x: -0.062332887, y: -0.12499069, z: 0.0009944391}
+      rotation: {x: -0.020953858, y: 0.63393396, z: -0.02848578, w: 0.7725783}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamo:MS_Terrorist_01
-      parentName: Mixamo_Simple_Guy@Sword And Shield Idle(Clone)
+      parentName: 2H Melee(Clone)
       position: {x: 0.000002, y: 1.41348, z: 0.0016339999}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Hips_jnt
-      parentName: Mixamo_Simple_Guy@Sword And Shield Idle(Clone)
-      position: {x: 0.0012892336, y: 1.1754122, z: -0.021087006}
-      rotation: {x: 0.2352283, y: -0.39258295, z: -0.63154966, w: 0.6258526}
+      parentName: 2H Melee(Clone)
+      position: {x: 0.0039854012, y: 1.107345, z: 0.041816927}
+      rotation: {x: 0.37817016, y: -0.48229244, z: -0.59086156, w: 0.5246561}
       scale: {x: 1, y: 1, z: 1}
     - name: UpperLeg_Left_jnt
       parentName: Hips_jnt
       position: {x: 0.135423, y: -0.221588, z: -0.017864}
-      rotation: {x: -0.052288476, y: -0.4384492, z: 0.894382, w: 0.07147764}
+      rotation: {x: 0.017545342, y: -0.12492037, z: 0.9880783, w: 0.088252366}
       scale: {x: 1, y: 1, z: 1}
     - name: LowerLeg_Left_jnt
       parentName: UpperLeg_Left_jnt
       position: {x: -0.379309, y: -0.000004, z: -0.000104}
-      rotation: {x: -0.5447476, y: -0.21542773, z: -0.21761437, w: 0.78069526}
+      rotation: {x: -0.671858, y: -0.15283754, z: -0.22455898, w: 0.68907243}
       scale: {x: 1, y: 1, z: 1}
     - name: Foot_Left_jnt
       parentName: LowerLeg_Left_jnt
       position: {x: -0.393017, y: 0.000092, z: -0.000004}
-      rotation: {x: 0.38295865, y: 0.63950294, z: -0.25959906, w: 0.61399275}
+      rotation: {x: 0.42772797, y: 0.5049245, z: -0.26388216, w: 0.7017594}
       scale: {x: 1, y: 1, z: 1}
     - name: Toe_Left_jnt
       parentName: Foot_Left_jnt
@@ -319,17 +319,17 @@ ModelImporter:
     - name: UpperLeg_Right_jnt
       parentName: Hips_jnt
       position: {x: 0.13542199, y: 0.221588, z: 0.017864}
-      rotation: {x: 0.94965357, y: 0.14256075, z: 0.033605546, w: 0.27695704}
+      rotation: {x: 0.9895331, y: 0.08696506, z: -0.014422179, w: 0.1142511}
       scale: {x: 1, y: 1, z: 1}
     - name: LowerLeg_Right_jnt
       parentName: UpperLeg_Right_jnt
       position: {x: 0.379309, y: 0.000006, z: -0.000104}
-      rotation: {x: -0.6463388, y: -0.20143943, z: -0.22670692, w: 0.70019454}
+      rotation: {x: -0.6284613, y: -0.23736277, z: -0.21972495, w: 0.7074011}
       scale: {x: 1, y: 1, z: 1}
     - name: Foot_Right_jnt
       parentName: LowerLeg_Right_jnt
       position: {x: 0.393017, y: 0.000092, z: 0.000004}
-      rotation: {x: 0.45374215, y: 0.5502342, z: -0.19631161, w: 0.67292064}
+      rotation: {x: 0.29598105, y: 0.5916779, z: -0.30439964, w: 0.68531257}
       scale: {x: 1, y: 1, z: 1}
     - name: Toe_Right_jnt
       parentName: Foot_Right_jnt
@@ -339,32 +339,32 @@ ModelImporter:
     - name: Spine_jnt
       parentName: Hips_jnt
       position: {x: -0.024497, y: 0, z: 0}
-      rotation: {x: 0.030398412, y: 0.063697, z: 0.02711057, w: 0.9971378}
+      rotation: {x: -0.019962924, y: 0.1077593, z: -0.0074355556, w: 0.99394876}
       scale: {x: 1, y: 1, z: 1}
     - name: Spine_jnt1
       parentName: Spine_jnt
       position: {x: -0.34211397, y: 0, z: 0}
-      rotation: {x: 0.012161175, y: 0.010800685, z: -0.020430032, w: 0.999659}
+      rotation: {x: -0.0035830624, y: 0.014593175, z: 0.0106697185, w: 0.9998302}
       scale: {x: 1, y: 1, z: 1}
     - name: Chest_jnt
       parentName: Spine_jnt1
       position: {x: -0.338906, y: 0, z: 0}
-      rotation: {x: 0.011236017, y: 0.0019301721, z: -0.009227582, w: 0.9998925}
+      rotation: {x: -0.0039306814, y: 0.014519875, z: 0.010619341, w: 0.9998305}
       scale: {x: 1, y: 1, z: 1}
     - name: Shoulder_Right_jnt
       parentName: Chest_jnt
       position: {x: -0.219108, y: 0.277103, z: -0.0076429998}
-      rotation: {x: -0.67057794, y: 0.7199016, z: -0.16505076, w: -0.069463186}
+      rotation: {x: 0.7065277, y: -0.6886682, z: -0.13635556, w: -0.089229435}
       scale: {x: 1, y: 1, z: 1}
     - name: Arm_Right_jnt
       parentName: Shoulder_Right_jnt
       position: {x: -0.296811, y: 0, z: -0.0076429998}
-      rotation: {x: 0.026223943, y: -0.12844358, z: -0.022982318, w: 0.99110365}
+      rotation: {x: -0.12539582, y: 0.079376616, z: 0.04927116, w: 0.9876982}
       scale: {x: 1, y: 1, z: 1}
     - name: Forearm_Right_jnt
       parentName: Arm_Right_jnt
       position: {x: -0.47537997, y: 0, z: 0}
-      rotation: {x: 0.04442503, y: -0.016610572, z: -0.016399844, w: 0.99873996}
+      rotation: {x: -0.029757734, y: -0.020436823, z: 0.013971885, w: -0.99925053}
       scale: {x: 1, y: 1, z: 1}
     - name: Hand_Right_jnt
       parentName: Forearm_Right_jnt
@@ -374,17 +374,17 @@ ModelImporter:
     - name: Shoulder_Left_jnt
       parentName: Chest_jnt
       position: {x: -0.219108, y: -0.277962, z: 0.0076429998}
-      rotation: {x: 0.72783756, y: -0.6799612, z: 0.07424162, w: 0.048922703}
+      rotation: {x: -0.70466465, y: 0.7088817, z: 0.021551242, w: 0.021680214}
       scale: {x: 1, y: 1, z: 1}
     - name: Arm_Left_jnt
       parentName: Shoulder_Left_jnt
       position: {x: 0.299054, y: 0, z: 0.0076429998}
-      rotation: {x: 0.9986276, y: -0.0018033973, z: 0.040161837, w: 0.033566773}
+      rotation: {x: 0.9803862, y: -0.008535205, z: 0.022372855, w: 0.19562596}
       scale: {x: 1, y: 1, z: 1}
     - name: Forearm_Left_jnt
       parentName: Arm_Left_jnt
       position: {x: 0.47694498, y: 0, z: 0}
-      rotation: {x: 0.3142621, y: -0.000026338776, z: -0.019755622, w: 0.9491307}
+      rotation: {x: 0.004250958, y: -0.0047597084, z: -0.0055308905, w: 0.99996436}
       scale: {x: 1, y: 1, z: 1}
     - name: Hand_Left_jnt
       parentName: Forearm_Left_jnt
@@ -394,7 +394,7 @@ ModelImporter:
     - name: Neck_jnt
       parentName: Chest_jnt
       position: {x: -0.23399799, y: 0, z: 0}
-      rotation: {x: 0.085084386, y: -0.017270504, z: 0.015028386, w: 0.99611074}
+      rotation: {x: 0.040129296, y: 0.18030578, z: 0.1455046, w: 0.9719609}
       scale: {x: 1, y: 1, z: 1}
     - name: Head_jnt
       parentName: Neck_jnt

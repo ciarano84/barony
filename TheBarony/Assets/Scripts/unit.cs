@@ -161,7 +161,7 @@ public class Unit : MonoBehaviour
         onKO(this);
 
         unitAnim.SetBool("dead", true);
-        yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length + 2);
 
         //Tell the initiative order to remove this unit. 
         Initiative.RemoveUnit(this);

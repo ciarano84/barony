@@ -72,7 +72,7 @@ public class Greataxe : MeleeWeapon
         }
 
         yield return new WaitUntil(() => !owner.moving);
-        owner.unitAnim.SetTrigger("melee");
+        owner.unitAnim.SetTrigger("2Hmelee");
         yield return new WaitForSeconds(0.3f);
 
         int bonuses = 0;

@@ -1385,6 +1385,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 229067625, guid: 8a15472a1f78a474d8d276d04799ad3f, type: 3}
+      propertyPath: aspectPack
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1202535369076960860, guid: 8a15472a1f78a474d8d276d04799ad3f,
         type: 3}
       propertyPath: canFocusSwitch
@@ -4073,11 +4077,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1202535369076960860, guid: 8a15472a1f78a474d8d276d04799ad3f,
-        type: 3}
-      propertyPath: canFocusSwitch
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2191465398959735477, guid: 8a15472a1f78a474d8d276d04799ad3f,
         type: 3}
       propertyPath: m_Name
