@@ -55,6 +55,8 @@ MonoBehaviour:
     type: 3}
   EnemyVisual: {fileID: 3775126955254116175, guid: 12c155818b5894040a98bcaf39ce9ae2,
     type: 3}
+  TestGoblin: {fileID: 2191465398959735477, guid: 8a15472a1f78a474d8d276d04799ad3f,
+    type: 3}
   Bless: {fileID: 2017922947834362310, guid: 75d3f7fe088f1e34c9e925c774ee180d, type: 3}
   TurnFocus: {fileID: 9197654441900456091, guid: 04c3d97e6f3ac994894ed3ca1b6fa8b8,
     type: 3}

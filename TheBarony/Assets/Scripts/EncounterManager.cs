@@ -76,10 +76,12 @@ public class EncounterManager : MonoBehaviour
                         enemy = Instantiate(orcBruisers);
                         break;
                     case 1:
+                        //enemy = Instantiate(GameAssets.i.GoblinArcher);
                         enemy = Instantiate(goblinCutters);
                         break;
                     default:
-                        enemy = Instantiate(goblinArchers);
+                        enemy = Instantiate(GameAssets.i.TestGoblin);
+                        //enemy = Instantiate(goblinArchers);
                         break;
                 }
                 enemyCells[i].Add(enemy);
@@ -106,7 +108,6 @@ public class EncounterManager : MonoBehaviour
             PlaceUnitsOnSpawnPoints(cell, arenaBlocks[blockToPlaceOn].GetComponent<ArenaBlock>());
             blockToPlaceOn++;
         }
-
     }
 
     public static void CheckForFactionDeath()

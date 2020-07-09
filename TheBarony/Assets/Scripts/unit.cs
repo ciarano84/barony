@@ -51,6 +51,7 @@ public class Unit : MonoBehaviour
 {
     public UnitInfo unitInfo;
     public Animator unitAnim;
+    public GameObject rig;
     public Weapon mainWeapon;
 
     //tracks if they have used a focus switch in their turn. 

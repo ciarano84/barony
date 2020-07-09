@@ -462,11 +462,15 @@ MonoBehaviour:
   damagePopUp: {fileID: 7401985853768158229, guid: 9d0f9ef1dfcce5f438b66c7d20d46006,
     type: 3}
   Sword_Cursor: {fileID: 0}
+  Eye_Cursor: {fileID: 0}
   PriestVisual: {fileID: 0}
   DefenderVisual: {fileID: 0}
   ScoutVisual: {fileID: 0}
   EnemyVisual: {fileID: 0}
   Bless: {fileID: 0}
+  TurnFocus: {fileID: 0}
+  OutOfTurnFocus: {fileID: 0}
+  GoblinArcher: {fileID: 0}
   LeatherArmour: {fileID: 21300000, guid: 0eefbaa893519704ebaa2259714f64d5, type: 3}
   ShortSword: {fileID: 0}
   ShortBow: {fileID: 0}
@@ -474,6 +478,9 @@ MonoBehaviour:
   BlankItem: {fileID: 0}
   Mace: {fileID: 0}
   Reload: {fileID: 0}
+  Longbow: {fileID: 0}
+  Greataxe: {fileID: 0}
+  Dagger: {fileID: 0}
 --- !u!4 &414144200
 Transform:
   m_ObjectHideFlags: 0

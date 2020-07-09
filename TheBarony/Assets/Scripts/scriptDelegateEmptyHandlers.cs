@@ -10,6 +10,7 @@ public class scriptDelegateEmptyHandlers : MonoBehaviour
         Initiative.OnEncounterStart += OnEncounterStartEmptyHandler;
         TacticsMovement.OnEnterSquare += OnEncounterStartEmptyHandler;
         AttackManager.OnGraze += OnGrazeEmptyHandler;
+        AttackManager.OnAttack += OnGrazeEmptyHandler;
     }
 
     void OnEncounterStartEmptyHandler(Unit unit) { }

@@ -54,7 +54,7 @@ public class TacticsMovement : Unit
         }
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
-        unitAnim = GetComponent<Animator>();
+        unitAnim = rig.GetComponent<Animator>();
         CheckInitiative();
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
@@ -78,6 +78,8 @@ public class TacticsMovement : Unit
         RaycastHit hit;
 
         Tile tile = null;
+
+        Debug.DrawRay(target.transform.position, -Vector3.up, Color.blue, 5f);
 
         if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
         {  
@@ -153,6 +155,7 @@ public class TacticsMovement : Unit
         moveGate = true;
         tile.target = true;
         moving = true;
+        unitAnim.SetBool("moving", true);
 
         Tile next = tile;
         while (next != null)
@@ -181,6 +184,7 @@ public class TacticsMovement : Unit
         moveGate = true;
         tile.target = true;
         moving = true;
+        unitAnim.SetBool("moving", true);
 
         Tile next = tile;
         while (next != null)
@@ -206,7 +210,7 @@ public class TacticsMovement : Unit
             Vector3 target = t.transform.position;
 
             //Calculate the unit's position on top of target tile. 
-            target.y += halfHeight + t.GetComponent<Collider>().bounds.extents.y;
+            target.y += /*halfHeight  + */ t.GetComponent<Collider>().bounds.extents.y + 0.02f;
 
             //Failsafe I've put in to catch unit's who's movement has gone wrong
             if (Vector3.Distance(transform.position, target) >= 1.6f)
@@ -286,6 +290,7 @@ public class TacticsMovement : Unit
                 turnRequired = false;
             }
             moving = false;
+            unitAnim.SetBool("moving", false);
             moveGate = false;
             Initiative.EndAction();
         }
