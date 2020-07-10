@@ -20,7 +20,7 @@ public class PlayerCharacter : TacticsMovement
             if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(GetComponent<Unit>());
             if (unitInfo.armourData != null) unitInfo.armourData.EquipItem(GetComponent<Unit>());
             if (unitInfo.aspectData != null) unitInfo.aspectData.GetAspect(GetComponent<Unit>());
-            if (unitInfo.aspectData != null) Instantiate(unitInfo.aspectData.GetVisual(), transform);
+            if (unitInfo.aspectData != null) rig = Instantiate(unitInfo.aspectData.GetVisual(), transform); 
         }
     }
 

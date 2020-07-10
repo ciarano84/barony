@@ -227,10 +227,10 @@ MonoBehaviour:
   DefenderVisual: {fileID: 0}
   ScoutVisual: {fileID: 0}
   EnemyVisual: {fileID: 0}
+  TestGoblin: {fileID: 0}
   Bless: {fileID: 0}
   TurnFocus: {fileID: 0}
   OutOfTurnFocus: {fileID: 0}
-  GoblinArcher: {fileID: 0}
   LeatherArmour: {fileID: 0}
   ShortSword: {fileID: 0}
   ShortBow: {fileID: 0}
@@ -1551,7 +1551,7 @@ MonoBehaviour:
   - {fileID: 2067660290}
   - {fileID: 1284521942}
   - {fileID: 1512913059}
-  playerPrefab: {fileID: 6211376839704097251, guid: 2df62ea2db2494941ab843993de30677,
+  playerPrefab: {fileID: 161662132890573409, guid: dba9681c49669134389ca7210d9d717c,
     type: 3}
   goblinCutters: {fileID: 5726284418059044258, guid: 959214cbb7d6896478b7ea0d5f30d059,
     type: 3}
