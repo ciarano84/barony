@@ -21,7 +21,9 @@ public class GameAssets : MonoBehaviour
     public GameObject DefenderVisual;
     public GameObject ScoutVisual;
     public GameObject EnemyVisual;
-    public GameObject TestGoblin;
+    public GameObject GoblinHunter;
+    public GameObject GoblinScout;
+    public GameObject OrcDefender;
     public GameObject Bless;
     public GameObject TurnFocus;
     public GameObject OutOfTurnFocus;

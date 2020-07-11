@@ -70,22 +70,20 @@ public class EncounterManager : MonoBehaviour
                 int encounterRoll = Random.Range(0, 3);
                 GameObject enemy;
 
-                enemy = Instantiate(GameAssets.i.TestGoblin);
-
-                /*switch (encounterRoll)
+                switch (encounterRoll)
                 {
                     case 0:
-                        enemy = Instantiate(orcBruisers);
+                        enemy = Instantiate(GameAssets.i.OrcDefender);
                         break;
                     case 1:
                         //enemy = Instantiate(GameAssets.i.GoblinArcher);
-                        enemy = Instantiate(goblinCutters);
+                        enemy = Instantiate(GameAssets.i.GoblinScout);
                         break;
                     default:
-                        enemy = Instantiate(GameAssets.i.TestGoblin);
+                        enemy = Instantiate(GameAssets.i.GoblinHunter);
                         //enemy = Instantiate(goblinArchers);
                         break;
-                }*/
+                }
                 enemyCells[i].Add(enemy);
             }
         }
