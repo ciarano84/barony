@@ -9,7 +9,7 @@ public class RangeFinder
     {
         Vector3 POV = origin.transform.position + new Vector3(0, origin.GetComponent<TacticsMovement>().halfHeight);
 
-        if (Physics.Raycast(POV, (target.gameObject.transform.position - POV), out RaycastHit hit))
+        if (Physics.Raycast(POV, (target.gameObject.transform.position + new Vector3(0, target.GetComponent<TacticsMovement>().halfHeight) - POV), out RaycastHit hit))
         {
             if (target == hit.collider.gameObject.GetComponent<TacticsMovement>())
             {

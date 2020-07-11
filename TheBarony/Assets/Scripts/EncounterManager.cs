@@ -170,7 +170,7 @@ public class EncounterManager : MonoBehaviour
         {
             Vector3 p = arenaBlock.spawnPoints[i].transform.position;
             //The following includes a hack. I'm not ACTUALLY working out where to place them on the Y, I'm just putting in a value that works for basic units as is. Will need remidying. 
-            units[i].transform.position = new Vector3 (p.x, p.y + 0.5f/*2 * (p.y + units[i].GetComponent<TacticsMovement>().halfHeight)*/, p.z);
+            units[i].transform.position = new Vector3 (p.x, p.y + 0.05f, p.z);
         }
     }
 }

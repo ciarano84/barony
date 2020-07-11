@@ -12,9 +12,9 @@ public class FocusRing : MonoBehaviour
     {
         if (Initiative.currentUnit != null && Initiative.currentUnit.focus != null)
         {
-            line.SetPosition(0, Initiative.currentUnit.transform.position + new Vector3(0, -Initiative.currentUnit.halfHeight + 0.2f));
-            line.SetPosition(1, Initiative.currentUnit.focus.transform.position + new Vector3(0, -Initiative.currentUnit.focus.GetComponent<TacticsMovement>().halfHeight + 0.2f));
-            ring.transform.position = Initiative.currentUnit.focus.transform.position + new Vector3(0, -Initiative.currentUnit.focus.GetComponent<TacticsMovement>().halfHeight);
+            line.SetPosition(0, Initiative.currentUnit.transform.position + new Vector3(0, 0.2f));
+            line.SetPosition(1, Initiative.currentUnit.focus.transform.position + new Vector3(0, 0.2f));
+            ring.transform.position = Initiative.currentUnit.focus.transform.position;
         }
         else
         {

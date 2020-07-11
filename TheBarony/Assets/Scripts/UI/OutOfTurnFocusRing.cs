@@ -12,9 +12,9 @@ public class OutOfTurnFocusRing : MonoBehaviour
     {
         if (Unit.mousedOverUnit != null && Unit.mousedOverUnit.focus != null)
         {
-            line.SetPosition(0, Unit.mousedOverUnit.transform.position + new Vector3(0, -Unit.mousedOverUnit.GetComponent<TacticsMovement>().halfHeight + 0.2f));
-            line.SetPosition(1, Unit.mousedOverUnit.focus.transform.position + new Vector3(0, -Unit.mousedOverUnit.focus.GetComponent<TacticsMovement>().halfHeight + 0.2f));
-            ring.transform.position = Unit.mousedOverUnit.focus.transform.position + new Vector3(0, -Unit.mousedOverUnit.focus.GetComponent<TacticsMovement>().halfHeight);
+            line.SetPosition(0, Unit.mousedOverUnit.transform.position + new Vector3(0, 0.2f));
+            line.SetPosition(1, Unit.mousedOverUnit.focus.transform.position + new Vector3(0, 0.2f));
+            ring.transform.position = Unit.mousedOverUnit.focus.transform.position;
         }
         else
         {
