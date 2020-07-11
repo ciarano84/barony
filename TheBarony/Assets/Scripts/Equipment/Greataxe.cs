@@ -28,6 +28,9 @@ public class GreataxeData : MeleeWeaponData
 
     public override void EquipItem(Unit unit)
     {
+        GameObject model = GameObject.Instantiate(GameAssets.i.GreataxeModel, unit.mainHandSlot);
+        model.transform.position = unit.mainHandSlot.position;
+
         Greataxe weapon = unit.gameObject.AddComponent<Greataxe>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
         weapon.weaponData = this;

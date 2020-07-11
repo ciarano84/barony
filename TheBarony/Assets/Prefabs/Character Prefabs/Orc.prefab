@@ -381,6 +381,8 @@ MonoBehaviour:
   unitAnim: {fileID: 4533148834310164113}
   rig: {fileID: 4592577925220514949}
   mainWeapon: {fileID: 0}
+  mainHandSlot: {fileID: 64152343595138639}
+  offHandSlot: {fileID: 0}
   focusSwitched: 0
   canFocusSwitch: 0
   adjacentUnits: []
@@ -1018,6 +1020,36 @@ Transform:
   m_Father: {fileID: 3788737950671771498}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5139027332625123208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8116918499806093841}
+  m_Layer: 0
+  m_Name: Off Hand Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8116918499806093841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5139027332625123208}
+  m_LocalRotation: {x: -0.045604683, y: -0.019069277, z: 0.43338844, w: 0.8998506}
+  m_LocalPosition: {x: -14.5268955, y: 4.1900916, z: -10.742819}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8283118693262763830}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -3.7580001, y: -4.2440004, z: 51.572002}
 --- !u!1 &5457561445159813175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,6 +1110,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2496936209219356447}
+  - {fileID: 64152343595138639}
   m_Father: {fileID: 3788737950671771498}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1109,6 +1142,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8666253286198171099}
+  - {fileID: 8116918499806093841}
   m_Father: {fileID: 4842873518208606047}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1328,6 +1362,36 @@ Transform:
   m_Father: {fileID: 7860857170950689311}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7840838472718607212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64152343595138639}
+  m_Layer: 0
+  m_Name: Main Hand Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &64152343595138639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7840838472718607212}
+  m_LocalRotation: {x: -0.72243494, y: -0.00000010430808, z: 0.0000001341104, w: 0.691439}
+  m_LocalPosition: {x: -13.884932, y: 6.0559855, z: 10.92556}
+  m_LocalScale: {x: 0.8333331, y: 0.8333337, z: 0.83333355}
+  m_Children: []
+  m_Father: {fileID: 5692739194640047343}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -92.51199, y: 0.0009918213, z: -0.0009765625}
 --- !u!1 &7928912756585241061
 GameObject:
   m_ObjectHideFlags: 0

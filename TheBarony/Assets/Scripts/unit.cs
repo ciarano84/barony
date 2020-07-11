@@ -54,6 +54,10 @@ public class Unit : MonoBehaviour
     public GameObject rig;
     public Weapon mainWeapon;
 
+    //slots
+    public Transform mainHandSlot;
+    public Transform offHandSlot;
+
     //tracks if they have used a focus switch in their turn. 
     public bool focusSwitched = false;
     public bool canFocusSwitch = false;
@@ -77,6 +81,12 @@ public class Unit : MonoBehaviour
         unitInfo.currentToughness = unitInfo.baseToughness;
         unitInfo.currentDamage = unitInfo.baseStrength;
         unitInfo.currentMove = unitInfo.baseMove;
+    }
+
+    public void SetSlots()
+    {
+        mainHandSlot = transform.Find("Main Hand Slot");
+        offHandSlot = transform.Find("Off Hand Slot");
     }
 
     public virtual void InitUnit()

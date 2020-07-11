@@ -227,7 +227,9 @@ MonoBehaviour:
   DefenderVisual: {fileID: 0}
   ScoutVisual: {fileID: 0}
   EnemyVisual: {fileID: 0}
-  TestGoblin: {fileID: 0}
+  GoblinHunter: {fileID: 0}
+  GoblinScout: {fileID: 0}
+  OrcDefender: {fileID: 0}
   Bless: {fileID: 0}
   TurnFocus: {fileID: 0}
   OutOfTurnFocus: {fileID: 0}
@@ -241,6 +243,13 @@ MonoBehaviour:
   Longbow: {fileID: 0}
   Greataxe: {fileID: 0}
   Dagger: {fileID: 0}
+  DaggerModel: {fileID: 0}
+  ShortswordModel: {fileID: 0}
+  ShortbowModel: {fileID: 0}
+  LongbowModel: {fileID: 0}
+  ShieldModel: {fileID: 0}
+  MaceModel: {fileID: 0}
+  GreataxeModel: {fileID: 0}
 --- !u!4 &34183405
 Transform:
   m_ObjectHideFlags: 0

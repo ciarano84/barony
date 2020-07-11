@@ -37,4 +37,11 @@ public class GameAssets : MonoBehaviour
     public Sprite Longbow;
     public Sprite Greataxe;
     public Sprite Dagger;
+    public GameObject DaggerModel;
+    public GameObject ShortswordModel;
+    public GameObject ShortbowModel;
+    public GameObject LongbowModel;
+    public GameObject ShieldModel;
+    public GameObject MaceModel;
+    public GameObject GreataxeModel;
 }

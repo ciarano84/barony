@@ -27,6 +27,9 @@ public class ShieldData : ItemData
 
     public override void EquipItem(Unit unit)
     {
+        GameObject model = GameObject.Instantiate(GameAssets.i.ShieldModel, unit.offHandSlot);
+        model.transform.position = unit.offHandSlot.position;
+
         Shield shield = unit.gameObject.AddComponent<Shield>();
         shield.owner = unit.gameObject.GetComponent<PlayerCharacter>();
         shield.itemData = this;

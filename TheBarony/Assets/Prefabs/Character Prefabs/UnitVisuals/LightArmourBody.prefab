@@ -274,6 +274,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7036384281553084048}
+  - {fileID: 5164124695815563886}
   m_Father: {fileID: 2142356159847163193}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -433,6 +434,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9166289920875396528}
+  - {fileID: 5488073003454859104}
   m_Father: {fileID: 7487643348204542996}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -977,6 +979,36 @@ Transform:
   m_Father: {fileID: 8704475486228234527}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6365936055974004850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5164124695815563886}
+  m_Layer: 0
+  m_Name: Main Hand Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5164124695815563886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365936055974004850}
+  m_LocalRotation: {x: 0.04706685, y: -0.37494543, z: -0.019064434, w: 0.925655}
+  m_LocalPosition: {x: 0.02900035, y: 0.008999942, z: -0.022999955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8619549549777735618}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 4.177, y: -44.250004, z: -4.059}
 --- !u!1 &6381300007530652555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,6 +1195,36 @@ Transform:
   m_Father: {fileID: 3321745326063073485}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7970261831728949612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5488073003454859104}
+  m_Layer: 0
+  m_Name: Off Hand Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5488073003454859104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970261831728949612}
+  m_LocalRotation: {x: -0.04560457, y: -0.019069217, z: 0.43338844, w: 0.89985067}
+  m_LocalPosition: {x: -0.04100152, y: -0.015999597, z: 0.00800007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 890079405326644195}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -3.7580001, y: -4.2440004, z: 51.572002}
 --- !u!1 &8001328719220938746
 GameObject:
   m_ObjectHideFlags: 0

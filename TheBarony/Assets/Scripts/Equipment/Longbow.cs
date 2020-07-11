@@ -33,6 +33,9 @@ public class LongbowData : RangedWeaponData
 
     public override void EquipItem(Unit unit)
     {
+        GameObject model = GameObject.Instantiate(GameAssets.i.LongbowModel, unit.offHandSlot);
+        model.transform.position = unit.offHandSlot.position;
+
         Shortbow weapon = unit.gameObject.AddComponent<Shortbow>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
         weapon.rangedWeaponData = this;

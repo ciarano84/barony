@@ -39,6 +39,9 @@ public class ShortswordData : MeleeWeaponData
 
     public override void EquipItem(Unit unit)
     {
+        GameObject model = GameObject.Instantiate(GameAssets.i.ShortswordModel, unit.mainHandSlot);
+        model.transform.position = unit.mainHandSlot.position;
+
         Shortsword weapon = unit.gameObject.AddComponent<Shortsword>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
         weapon.weaponData = this; 

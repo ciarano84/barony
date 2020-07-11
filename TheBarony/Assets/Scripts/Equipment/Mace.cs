@@ -38,6 +38,9 @@ public class MaceData : MeleeWeaponData
 
     public override void EquipItem(Unit unit)
     {
+        GameObject model = GameObject.Instantiate(GameAssets.i.MaceModel, unit.mainHandSlot);
+        model.transform.position = unit.mainHandSlot.position;
+
         Mace weapon = unit.gameObject.AddComponent<Mace>();
         weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
         weapon.weaponData = this;
