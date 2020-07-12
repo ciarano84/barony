@@ -223,6 +223,7 @@ MonoBehaviour:
     type: 3}
   Sword_Cursor: {fileID: 0}
   Eye_Cursor: {fileID: 0}
+  PlayerUnit: {fileID: 0}
   PriestVisual: {fileID: 0}
   DefenderVisual: {fileID: 0}
   ScoutVisual: {fileID: 0}
@@ -250,6 +251,9 @@ MonoBehaviour:
   ShieldModel: {fileID: 0}
   MaceModel: {fileID: 0}
   GreataxeModel: {fileID: 0}
+  MediumArmourMesh: {fileID: 0}
+  LightArmourMesh: {fileID: 0}
+  PriestRobesMesh: {fileID: 0}
 --- !u!4 &34183405
 Transform:
   m_ObjectHideFlags: 0
@@ -257,11 +261,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34183403}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 9.064427, y: 1.5032398, z: 2.6958323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 599003870}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &78316028
@@ -1198,6 +1202,7 @@ Transform:
   - {fileID: 1984157383}
   - {fileID: 1302937858}
   - {fileID: 533577055}
+  - {fileID: 34183405}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

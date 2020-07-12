@@ -47,6 +47,8 @@ MonoBehaviour:
     type: 3}
   Sword_Cursor: {fileID: 2800000, guid: 3ea26815491cfdc43969475b606dd477, type: 3}
   Eye_Cursor: {fileID: 2800000, guid: 379df0ac62f309f478312f3d18ae33df, type: 3}
+  PlayerUnit: {fileID: 291289741134957168, guid: e2e274311c9183d478e332a96fa71d56,
+    type: 3}
   PriestVisual: {fileID: 5604245165900477955, guid: 3ddf71215edd910478b7e8ad98cfbc9c,
     type: 3}
   DefenderVisual: {fileID: -4270110541547465895, guid: d44cb04f2aa51dd4faca02f8f0f3ca2d,
@@ -55,11 +57,11 @@ MonoBehaviour:
     type: 3}
   EnemyVisual: {fileID: 3775126955254116175, guid: 12c155818b5894040a98bcaf39ce9ae2,
     type: 3}
-  GoblinHunter: {fileID: 977936436235952256, guid: 81e45441cd585184c99308767028a683,
+  GoblinHunter: {fileID: 1824500698016003355, guid: cc140f762d6524c4ea65d4a7d2cb33fe,
     type: 3}
-  GoblinScout: {fileID: 3458940474358778092, guid: 2918b9d680ded7145a6596da10ab7aa4,
+  GoblinScout: {fileID: 9099598839442947167, guid: 6d9c567010b0d564b9b3246bda323521,
     type: 3}
-  OrcDefender: {fileID: 7730601684680638542, guid: 00f79ca5b4aafad48afcb749da75de31,
+  OrcDefender: {fileID: 1862647173987473636, guid: 0aae096141b18e14a91a214f816320c0,
     type: 3}
   Bless: {fileID: 2017922947834362310, guid: 75d3f7fe088f1e34c9e925c774ee180d, type: 3}
   TurnFocus: {fileID: 9197654441900456091, guid: 04c3d97e6f3ac994894ed3ca1b6fa8b8,
