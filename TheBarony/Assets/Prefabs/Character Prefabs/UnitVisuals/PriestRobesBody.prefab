@@ -306,7 +306,7 @@ Transform:
   m_GameObject: {fileID: 2944192062178776289}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 3497098014915576768}
   m_Father: {fileID: 3021499201725310766}
@@ -489,9 +489,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3518122936167983587}
-  m_LocalRotation: {x: 0.04706687, y: -0.37494546, z: -0.019064551, w: 0.92565507}
-  m_LocalPosition: {x: -0.19301754, y: 0.49460858, z: -0.029706925}
-  m_LocalScale: {x: 0.5999999, y: 0.60000014, z: 0.6000002}
+  m_LocalRotation: {x: 0.04706686, y: -0.37494537, z: -0.019064454, w: 0.92565507}
+  m_LocalPosition: {x: 0.029, y: 0.009, z: -0.023}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2155858773550196198}
   m_RootOrder: 0
@@ -723,6 +723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3021499201725310766}
   - component: {fileID: -3043764653281236431}
+  - component: {fileID: 4640329107488285203}
   m_Layer: 0
   m_Name: PriestRobesBody
   m_TagString: Untagged
@@ -765,6 +766,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4640329107488285203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604245165900477955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c79a8c68f033840b1eb4c285056a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainHandSlot: {fileID: 5497725558578483299}
+  offHandSlot: {fileID: 5098571402050321967}
 --- !u!1 &5611924080463839097
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,9 +1019,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6560816701003494975}
-  m_LocalRotation: {x: -0.045604683, y: -0.019069277, z: 0.43338844, w: 0.8998506}
-  m_LocalPosition: {x: 0.18581772, y: -0.4988088, z: 0.020706862}
-  m_LocalScale: {x: 0.6, y: 0.6000002, z: 0.59999985}
+  m_LocalRotation: {x: -0.04560465, y: -0.019069333, z: 0.43338832, w: 0.89985067}
+  m_LocalPosition: {x: -0.041, y: -0.016, z: 0.008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5755738782993921955}
   m_RootOrder: 1

@@ -85,8 +85,8 @@ public class Unit : MonoBehaviour
 
     public void SetSlots()
     {
-        mainHandSlot = transform.Find("Main Hand Slot");
-        offHandSlot = transform.Find("Off Hand Slot");
+        mainHandSlot = rig.GetComponent<UnitBody>().mainHandSlot;
+        offHandSlot = rig.GetComponent<UnitBody>().offHandSlot;
     }
 
     public virtual void InitUnit()
