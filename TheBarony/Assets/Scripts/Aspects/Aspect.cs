@@ -14,7 +14,7 @@ public abstract class AspectData
     //level up()s
 
     public abstract void GetAspect(Unit unit);
-    public abstract GameObject GetVisual();
+    public abstract Mesh GetVisual();
 }
 
 public abstract class Aspect : MonoBehaviour

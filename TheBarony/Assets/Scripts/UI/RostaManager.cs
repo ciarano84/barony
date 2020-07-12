@@ -87,7 +87,7 @@ public class RostaManager : MonoBehaviour
         Destroy(unitVisual);
         unit = rosta.rosta[rosta.currentUnitShown];
 
-        unitVisual = Instantiate(unit.aspectData.GetVisual(), pedestal.transform);
+        //unitVisual = Instantiate(unit.aspectData.GetVisual(), pedestal.transform);
 
         nameText.text = (unit.unitName);
         classText.text = (unit.aspectData.className);

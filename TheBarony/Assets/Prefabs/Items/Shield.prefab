@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33610430412601510}
   - component: {fileID: 23989963243899180}
   m_Layer: 0
-  m_Name: Prop_ShieldViking_01
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028550697772930}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.5858878, y: 0.3876916, z: -0.22598809, w: 0.6748038}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -37.988003, y: 89.065, z: -74.44701}
 --- !u!33 &33610430412601510
 MeshFilter:
   m_ObjectHideFlags: 0

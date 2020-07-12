@@ -53,6 +53,7 @@ public class Unit : MonoBehaviour
     public Animator unitAnim;
     public GameObject rig;
     public Weapon mainWeapon;
+    public GameObject body;
 
     //slots
     public Transform mainHandSlot;

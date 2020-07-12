@@ -32,7 +32,7 @@ public class HunterData : AspectData
     }
 
     //this needs assigning to a new visual. 
-    public override GameObject GetVisual() { return GameAssets.i.ScoutVisual; }
+    public override Mesh GetVisual() { return GameAssets.i.LightArmourMesh; }
 }
 
 public class Hunter : Aspect

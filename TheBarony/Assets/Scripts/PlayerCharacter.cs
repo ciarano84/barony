@@ -16,7 +16,7 @@ public class PlayerCharacter : TacticsMovement
         if (unitInfo.faction == Factions.players)
         {
             SetStats();
-            if (unitInfo.aspectData != null) rig = Instantiate(unitInfo.aspectData.GetVisual(), transform);
+            if (unitInfo.aspectData != null) body.GetComponent<SkinnedMeshRenderer>().sharedMesh = unitInfo.aspectData.GetVisual();
             SetSlots();
             unitInfo.mainWeaponData.EquipItem(GetComponent<Unit>());
             if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(GetComponent<Unit>());

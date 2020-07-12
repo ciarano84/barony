@@ -44,4 +44,7 @@ public class GameAssets : MonoBehaviour
     public GameObject ShieldModel;
     public GameObject MaceModel;
     public GameObject GreataxeModel;
+    public Mesh MediumArmourMesh;
+    public Mesh LightArmourMesh;
+    public Mesh PriestRobesMesh;
 }

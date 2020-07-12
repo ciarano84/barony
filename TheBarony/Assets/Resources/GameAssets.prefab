@@ -89,3 +89,6 @@ MonoBehaviour:
   MaceModel: {fileID: 1033858192197048, guid: ed94d56bcbcca6a45903a422599d73cd, type: 3}
   GreataxeModel: {fileID: 1688207647419120, guid: 9e7134bd16b21cc4a8551794a16703c4,
     type: 3}
+  MediumArmourMesh: {fileID: 4300062, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
+  LightArmourMesh: {fileID: 4300050, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
+  PriestRobesMesh: {fileID: 4300048, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}

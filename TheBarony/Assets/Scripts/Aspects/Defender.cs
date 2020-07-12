@@ -32,7 +32,7 @@ public class DefenderData : AspectData
         defenderAspect.owner = unit;
     }
 
-    public override GameObject GetVisual() { return GameAssets.i.DefenderVisual; }
+    public override Mesh GetVisual() { return GameAssets.i.MediumArmourMesh; }
 }
 
 public class Defender : Aspect

@@ -26,7 +26,7 @@ public class PriestData : AspectData
         priestAspect.owner = unit;
     }
 
-    public override GameObject GetVisual() { return GameAssets.i.PriestVisual; }
+    public override Mesh GetVisual() { return GameAssets.i.PriestRobesMesh; }
 }
 
 public class Priest : Aspect

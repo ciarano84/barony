@@ -7,14 +7,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 229067625, guid: 6b67a3594c39f4f4280f7825f1e1903e, type: 3}
-      propertyPath: aspectPack
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 1202535369076960860, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+        type: 3}
+      propertyPath: offHandSlot
+      value: 
+      objectReference: {fileID: 397492367308759274}
+    - target: {fileID: 1202535369076960860, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+        type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 6018941470284174149}
     - target: {fileID: 2191465398959735477, guid: 6b67a3594c39f4f4280f7825f1e1903e,
         type: 3}
       propertyPath: m_Name
-      value: Orc Defender
+      value: Unit
       objectReference: {fileID: 0}
     - target: {fileID: 2191465398959735482, guid: 6b67a3594c39f4f4280f7825f1e1903e,
         type: 3}
@@ -71,5 +77,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2785098196949717438, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+        type: 3}
+      propertyPath: m_Name
+      value: Body
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b67a3594c39f4f4280f7825f1e1903e, type: 3}
+--- !u!1 &6018941470284174149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2785098196949717438, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8440092517917197051}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &397492367308759274 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8116918499806093841, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8440092517917197051}
+  m_PrefabAsset: {fileID: 0}

@@ -31,7 +31,7 @@ public class ScoutData : AspectData
         scoutAspect.owner = unit;
     }
 
-    public override GameObject GetVisual() { return GameAssets.i.ScoutVisual; }
+    public override Mesh GetVisual() { return GameAssets.i.LightArmourMesh; }
 }
 
 public class Scout : Aspect
