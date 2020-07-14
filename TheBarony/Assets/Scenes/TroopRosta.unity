@@ -935,7 +935,6 @@ MonoBehaviour:
     unitVisual: EnemyVisual
     faction: 1
     aspect: {fileID: 0}
-    className: 
     baseBreath: 3
     firstBreath: 3
     flaggingBreath: 0
@@ -952,6 +951,7 @@ MonoBehaviour:
     currentDamage: 0
     currentMove: 0
     flagging: 0
+  unitPrefab: {fileID: 0}
   nameText: {fileID: 212508669}
   classText: {fileID: 904623577}
   breathText: {fileID: 2138914087}

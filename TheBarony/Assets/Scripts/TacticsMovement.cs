@@ -59,7 +59,7 @@ public class TacticsMovement : Unit
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
         focusSwitched = false;
-        Initiative.AddUnit(this);
+        if (EncounterManager.encounter) Initiative.AddUnit(this);
     }
 
     public void GetCurrentTile() {
@@ -439,13 +439,13 @@ public class TacticsMovement : Unit
     void OnMouseOver()
     {
         mousedOverUnit = this;
-        ActionUIManager.SetCursor();
+        if (EncounterManager.encounter) ActionUIManager.SetCursor();
     }
 
     void OnMouseExit()
     {
         mousedOverUnit = null;
-        ActionUIManager.SetCursor();
+        if (EncounterManager.encounter) ActionUIManager.SetCursor();
     }
 
 

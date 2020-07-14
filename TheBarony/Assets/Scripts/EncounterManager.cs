@@ -13,6 +13,7 @@ public class EncounterManager : MonoBehaviour
 
     public GameObject encounterEndPanel;
     static GameObject staticEncounterPanel;
+    public static bool encounter = false;
 
     public Text encounterEndtext;
     static Text staticEncounterEndtext;
@@ -33,6 +34,7 @@ public class EncounterManager : MonoBehaviour
 
     private void Start()
     {
+        encounter = true;
         rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
         staticEncounterPanel = encounterEndPanel;
         staticEncounterEndtext = encounterEndtext;

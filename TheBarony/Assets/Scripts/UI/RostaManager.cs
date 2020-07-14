@@ -12,10 +12,10 @@ public class RostaManager : MonoBehaviour
     public GameObject pedestal;
     public static Slot slotSelected;
     public UnitInfo unit;
+    public GameObject unitPrefab;
 
     EquipmentInfoPanel equipPanel;
     RostaInfo rosta;
-    GameObject unitVisual;
     
 
     enum Direction {left, right};
@@ -84,8 +84,14 @@ public class RostaManager : MonoBehaviour
 
     public void ShowStats()
     {
-        Destroy(unitVisual);
+        Destroy(unitPrefab);
         unit = rosta.rosta[rosta.currentUnitShown];
+        unit.mainWeaponData.SetData(unit);
+        unitPrefab = Instantiate(GameAssets.i.PlayerUnit, pedestal.transform);
+        unitPrefab.GetComponent<Unit>().unitInfo = unit;
+
+        //Destroy(unitVisual);
+        //unit = rosta.rosta[rosta.currentUnitShown];
 
         //unitVisual = Instantiate(unit.aspectData.GetVisual(), pedestal.transform);
 

@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Body
       objectReference: {fileID: 0}
+    - target: {fileID: 7318763801079180455, guid: 923239b3514fabd48947ef7725db0d19,
+        type: 3}
+      propertyPath: unitInfo.faction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7730601684680638529, guid: 923239b3514fabd48947ef7725db0d19,
         type: 3}
       propertyPath: m_LocalPosition.x

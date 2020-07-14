@@ -12,7 +12,6 @@ public class UnitInfo
     public Factions faction = Factions.enemies;
     public AspectData aspectData;
     public Aspect aspect;
-    public string className;
     public WeaponData mainWeaponData;
     public ItemData offHandData;
     public ItemData armourData;

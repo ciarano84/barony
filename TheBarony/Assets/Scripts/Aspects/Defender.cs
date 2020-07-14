@@ -6,9 +6,7 @@ public class DefenderData : AspectData
 {
     public override void SetAspectData(UnitInfo unit)
     {
-        className = "Defender";
         unitInfo = unit;
-        unit.className = className;
         unit.mainWeaponData = new ShortswordData();
         unit.offHandData = new ShieldData();
         unit.armourData = new LeatherArmourData();
@@ -20,7 +18,6 @@ public class DefenderData : AspectData
     {
         unitInfo.baseBreath += 1;
         unitInfo.firstBreath += 1;
-        //need to add to flagging breath in here for non-minions.
         unitInfo.baseStrength += 1;
         unitInfo.baseToughness += 1;
     }

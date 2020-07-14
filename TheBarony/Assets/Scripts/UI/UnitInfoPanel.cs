@@ -33,11 +33,15 @@ public class UnitInfoPanel : MonoBehaviour
         unit = unitInfo;
         unitName.text = unit.unitName;
 
+        //Destroy(unitPrefab);
+        GameObject unitPrefab = Instantiate(GameAssets.i.PlayerUnit, point.transform, false);
+        unitPrefab.GetComponent<Unit>().unitInfo = unitInfo;
+
         unit.mainWeaponData.SetData(unit);
+        unit.mainWeaponData.EquipItem(unitPrefab.GetComponent<Unit>());
         unitWeaponImage.sprite = unit.mainWeaponData.SetImage();
 
-        //This is ultimately how I'll have to access the visual from gameassets. 
-        Instantiate(unit.aspectData.GetVisual(), point.transform);
+        //point.GetComponent<SkinnedMeshRenderer>().sharedMesh = unit.aspectData.GetVisual();
     }
 
     public void SelectUnit()
