@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public abstract class WeaponData : ItemData
@@ -8,6 +9,7 @@ public abstract class WeaponData : ItemData
     public int range;
     public int weaponAttack;
     public int weaponDamage;
+
     public enum Range { melee, ranged };
     public Range rangeType;
 }

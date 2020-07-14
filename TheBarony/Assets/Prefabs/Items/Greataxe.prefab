@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23393180606018752}
   - component: {fileID: 95675362274646332}
   m_Layer: 0
-  m_Name: Prop_Axe_01
+  m_Name: Greataxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688207647419120}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.6965385, y: -0.17116345, z: 0.67444354, w: 0.17510876}
+  m_LocalPosition: {x: -0.088, y: -0.086, z: 0.003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 28.348001, y: 91.883, z: 180.146}
 --- !u!33 &33719281750152830
 MeshFilter:
   m_ObjectHideFlags: 0

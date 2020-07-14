@@ -94,3 +94,5 @@ MonoBehaviour:
   MediumArmourMesh: {fileID: 4300062, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
   LightArmourMesh: {fileID: 4300050, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
   PriestRobesMesh: {fileID: 4300048, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
+  TwoHanded: {fileID: 9100000, guid: ddcfad943c4c3ed4aad710c1f8a4c878, type: 2}
+  OneHanded: {fileID: 9100000, guid: a76e04cfc3f1cc64f91b9f7e2451d533, type: 2}

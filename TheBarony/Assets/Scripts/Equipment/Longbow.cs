@@ -43,6 +43,10 @@ public class LongbowData : RangedWeaponData
         weapon.weaponData = this;
         unit.mainWeapon = weapon;
 
+        //not sure what we're gonna do when they have TWO shortswords. 
+        Animator animator = weapon.owner.rig.gameObject.GetComponent<Animator>();
+        animator.runtimeAnimatorController = GameAssets.i.OneHanded as RuntimeAnimatorController;
+
         //Set up for an action. 
         Reload reload = new Reload();
         reload.SetActionButtonData(unit);
