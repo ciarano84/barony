@@ -79,8 +79,8 @@ public class Greataxe : MeleeWeapon
         }
 
         yield return new WaitUntil(() => !owner.moving);
-        owner.unitAnim.SetTrigger("2Hmelee");
-        yield return new WaitForSeconds(0.3f);
+        owner.unitAnim.SetTrigger("melee");
+        yield return new WaitForSeconds(1.35f);
 
         int bonuses = 0;
 
@@ -99,6 +99,7 @@ public class Greataxe : MeleeWeapon
             }
         }
 
+        //This next bit is greatweapon specific for when they attack next to obstacles. 
         owner.GetComponent<TacticsMovement>().GetCurrentTile();
         if (owner.currentTile.barrierCount > 0)
         {

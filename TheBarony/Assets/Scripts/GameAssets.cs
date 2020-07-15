@@ -15,20 +15,25 @@ public class GameAssets : MonoBehaviour
         }
     }
 
+    //UI
     public Transform damagePopUp;
     public Texture2D Sword_Cursor;
     public Texture2D Eye_Cursor;
+    public GameObject Bless;
+    public GameObject TurnFocus;
+    public GameObject OutOfTurnFocus;
+
+    //Units and unit visuals
     public GameObject PlayerUnit;
     public GameObject PriestVisual;
     public GameObject DefenderVisual;
     public GameObject ScoutVisual;
-    public GameObject EnemyVisual;
+    //public GameObject EnemyVisual;
     public GameObject GoblinHunter;
     public GameObject GoblinScout;
     public GameObject OrcDefender;
-    public GameObject Bless;
-    public GameObject TurnFocus;
-    public GameObject OutOfTurnFocus;
+
+    //Item Sprites
     public Sprite LeatherArmour;
     public Sprite ShortSword;
     public Sprite ShortBow;
@@ -39,6 +44,8 @@ public class GameAssets : MonoBehaviour
     public Sprite Longbow;
     public Sprite Greataxe;
     public Sprite Dagger;
+
+    //Item models
     public GameObject DaggerModel;
     public GameObject ShortswordModel;
     public GameObject ShortbowModel;
@@ -46,9 +53,12 @@ public class GameAssets : MonoBehaviour
     public GameObject ShieldModel;
     public GameObject MaceModel;
     public GameObject GreataxeModel;
+    public GameObject ArrowModel;
     public Mesh MediumArmourMesh;
     public Mesh LightArmourMesh;
     public Mesh PriestRobesMesh;
+
+    //Animators
     public AnimatorController TwoHanded;
     public AnimatorController OneHanded;
 }

@@ -44,7 +44,7 @@ public class RangedWeapon : Weapon
 
         bool hit = AttackManager.AttackRoll(owner, target.unitTargeted.GetComponent<Unit>(), bonuses);
         yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length);
-        GameObject missile = Instantiate(Resources.Load("Arrow"), owner.transform.position, owner.transform.rotation, owner.gameObject.transform) as GameObject;
+        GameObject missile = Instantiate(GameAssets.i.ArrowModel, owner.offHandSlot.position, owner.transform.rotation, owner.offHandSlot) as GameObject;
 
         if (hit)
         {

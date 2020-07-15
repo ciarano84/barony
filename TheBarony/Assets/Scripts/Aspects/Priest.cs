@@ -34,13 +34,19 @@ public class Priest : Aspect
     
     private void Start()
     {
-        TacticsMovement.OnEnterSquare += Bless;
-        Initiative.OnEncounterStart += Bless;
-        Unit.onKO += UnSubscribe;
+        if (EncounterManager.encounter)
+        {
+            TacticsMovement.OnEnterSquare += Bless;
+            Initiative.OnEncounterStart += Bless;
+            Unit.onKO += UnSubscribe;
+        }
     }
     
     public void Bless(Unit mover)
     {
+        Debug.Log(transform.position);
+        Debug.Log(owner);
+        
         foreach (Unit unit in Initiative.order)
         {
             if (RangeFinder.LineOfSight(owner, unit))

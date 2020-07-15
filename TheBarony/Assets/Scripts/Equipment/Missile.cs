@@ -25,6 +25,7 @@ public class Missile : MonoBehaviour
         {
             dir = (target + missVariance) - transform.position;
         }
+        transform.LookAt(dir);
         launched = true;
         step = speed * Time.deltaTime;
         Destroy(this.gameObject, 2);
@@ -34,6 +35,7 @@ public class Missile : MonoBehaviour
     {
         transform.Translate(dir.normalized * step, Space.World);
         if (Vector3.Distance(this.transform.position, target) < 0.25) Destroy(this.gameObject);
+        transform.forward = dir;
 
         //Might need this to accomdate for aiming at the feet. 
         //Vector3 direction = target.unitTargeted.transform.position;
