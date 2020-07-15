@@ -1300,7 +1300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340834798}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.55, y: 0.75, z: -7}
+  m_LocalPosition: {x: -0.4, y: 0.9, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1442816496}
@@ -1525,17 +1525,16 @@ MonoBehaviour:
     type: 3}
   Sword_Cursor: {fileID: 0}
   Eye_Cursor: {fileID: 0}
+  Bless: {fileID: 0}
+  TurnFocus: {fileID: 0}
+  OutOfTurnFocus: {fileID: 0}
   PlayerUnit: {fileID: 0}
   PriestVisual: {fileID: 0}
   DefenderVisual: {fileID: 0}
   ScoutVisual: {fileID: 0}
-  EnemyVisual: {fileID: 0}
   GoblinHunter: {fileID: 0}
   GoblinScout: {fileID: 0}
   OrcDefender: {fileID: 0}
-  Bless: {fileID: 0}
-  TurnFocus: {fileID: 0}
-  OutOfTurnFocus: {fileID: 0}
   LeatherArmour: {fileID: 21300000, guid: 0eefbaa893519704ebaa2259714f64d5, type: 3}
   ShortSword: {fileID: 0}
   ShortBow: {fileID: 0}
@@ -1553,9 +1552,12 @@ MonoBehaviour:
   ShieldModel: {fileID: 0}
   MaceModel: {fileID: 0}
   GreataxeModel: {fileID: 0}
+  ArrowModel: {fileID: 0}
   MediumArmourMesh: {fileID: 0}
   LightArmourMesh: {fileID: 0}
   PriestRobesMesh: {fileID: 0}
+  TwoHanded: {fileID: 0}
+  OneHanded: {fileID: 0}
 --- !u!4 &414144200
 Transform:
   m_ObjectHideFlags: 0
@@ -2881,7 +2883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773254888}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.55, y: 0.75, z: -7}
+  m_LocalPosition: {x: 0.4, y: 0.9, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1547732289}
@@ -3715,7 +3717,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022338848}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.6, y: 0.75, z: -7}
+  m_LocalPosition: {x: -1.1, y: 0.9, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 771036785}
@@ -6422,7 +6424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865637955}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 1.6, y: 0.75, z: -7}
+  m_LocalPosition: {x: 1.1, y: 0.9, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1759404617}
