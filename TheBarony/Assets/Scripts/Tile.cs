@@ -10,6 +10,7 @@ public class Tile : MonoBehaviour
     public bool selectable = false;
     public bool diagonal = false;
     public Renderer renderer;
+    public GameObject selectPlane;
 
     public List<Tile> adjacencyList = new List<Tile>();
     public List<Tile> diagonalAdjacencyList = new List<Tile>();
@@ -38,7 +39,17 @@ public class Tile : MonoBehaviour
 
     void Update()
     {
-        if (current)
+        if (current && selectable || target)
+        {
+            selectPlane.SetActive(true);
+        }
+        else
+        {
+            selectPlane.SetActive(false);
+        }
+
+
+        /*if (current)
         {
             renderer.material.color = Color.magenta;
         }
@@ -53,7 +64,7 @@ public class Tile : MonoBehaviour
         else
         {
             renderer.material.color = Color.white;
-        }
+        }*/
     }
 
     public void Reset()
