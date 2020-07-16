@@ -44,9 +44,6 @@ public class Priest : Aspect
     
     public void Bless(Unit mover)
     {
-        Debug.Log(transform.position);
-        Debug.Log(owner);
-        
         foreach (Unit unit in Initiative.order)
         {
             if (RangeFinder.LineOfSight(owner, unit))

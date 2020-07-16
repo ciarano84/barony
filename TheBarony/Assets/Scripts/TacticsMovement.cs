@@ -92,15 +92,17 @@ public class TacticsMovement : Unit
         return tile;
     }
 
-    public void ComputeAdjacencyList() {
+    public void ComputeAdjacencyList() 
+    {
         //required if the map is to change size after initializing. 
         //tiles = GameObject.FindGameObjectsWithTag("tile");
         
         foreach (GameObject tile in tiles)
-            {
+        {
             Tile t = tile.GetComponent<Tile>();
+
             t.FindNeighbours(jumpHeight);
-            }
+        }
     }
 
     public void FindSelectableTiles()

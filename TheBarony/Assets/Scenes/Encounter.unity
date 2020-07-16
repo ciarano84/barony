@@ -1489,16 +1489,16 @@ MonoBehaviour:
     type: 3}
   Sword_Cursor: {fileID: 0}
   Eye_Cursor: {fileID: 0}
-  PriestVisual: {fileID: 0}
-  DefenderVisual: {fileID: 0}
-  ScoutVisual: {fileID: 0}
-  EnemyVisual: {fileID: 0}
-  GoblinHunter: {fileID: 0}
-  GoblinScout: {fileID: 0}
-  OrcDefender: {fileID: 0}
   Bless: {fileID: 0}
   TurnFocus: {fileID: 0}
   OutOfTurnFocus: {fileID: 0}
+  PlayerUnit: {fileID: 0}
+  PriestVisual: {fileID: 0}
+  DefenderVisual: {fileID: 0}
+  ScoutVisual: {fileID: 0}
+  GoblinHunter: {fileID: 0}
+  GoblinScout: {fileID: 0}
+  OrcDefender: {fileID: 0}
   LeatherArmour: {fileID: 0}
   ShortSword: {fileID: 0}
   ShortBow: {fileID: 0}
@@ -1516,7 +1516,12 @@ MonoBehaviour:
   ShieldModel: {fileID: 0}
   MaceModel: {fileID: 0}
   GreataxeModel: {fileID: 0}
-  DefenderMesh: {fileID: 0}
+  ArrowModel: {fileID: 0}
+  MediumArmourMesh: {fileID: 0}
+  LightArmourMesh: {fileID: 0}
+  PriestRobesMesh: {fileID: 0}
+  TwoHanded: {fileID: 0}
+  OneHanded: {fileID: 0}
 --- !u!4 &573223962
 Transform:
   m_ObjectHideFlags: 0
@@ -2080,7 +2085,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.40000004, g: 0.40000004, b: 0.40000004, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
     public bool target = false;
     public bool selectable = false;
     public bool diagonal = false;
+    public Renderer renderer;
 
     public List<Tile> adjacencyList = new List<Tile>();
     public List<Tile> diagonalAdjacencyList = new List<Tile>();
@@ -27,23 +28,31 @@ public class Tile : MonoBehaviour
     Vector3 backAndLeft = new Vector3(-1, 0, -1);
     Vector3 backAndRight = new Vector3(1, 0, -1);
 
+    private void Start()
+    {
+        if (renderer == null)
+        {
+            renderer = GetComponent<Renderer>();
+        }
+    }
+
     void Update()
     {
         if (current)
         {
-            GetComponent<Renderer>().material.color = Color.magenta;
+            renderer.material.color = Color.magenta;
         }
         else if (target)
         {
-            GetComponent<Renderer>().material.color = Color.green;
+            renderer.material.color = Color.green;
         }
         else if (selectable)
         {
-            GetComponent<Renderer>().material.color = Color.red;
+            renderer.material.color = Color.red;
         }
         else
         {
-            GetComponent<Renderer>().material.color = Color.white;
+            renderer.material.color = Color.white;
         }
     }
 

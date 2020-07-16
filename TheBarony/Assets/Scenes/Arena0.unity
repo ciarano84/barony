@@ -223,17 +223,16 @@ MonoBehaviour:
     type: 3}
   Sword_Cursor: {fileID: 0}
   Eye_Cursor: {fileID: 0}
+  Bless: {fileID: 0}
+  TurnFocus: {fileID: 0}
+  OutOfTurnFocus: {fileID: 0}
   PlayerUnit: {fileID: 0}
   PriestVisual: {fileID: 0}
   DefenderVisual: {fileID: 0}
   ScoutVisual: {fileID: 0}
-  EnemyVisual: {fileID: 0}
   GoblinHunter: {fileID: 0}
   GoblinScout: {fileID: 0}
   OrcDefender: {fileID: 0}
-  Bless: {fileID: 0}
-  TurnFocus: {fileID: 0}
-  OutOfTurnFocus: {fileID: 0}
   LeatherArmour: {fileID: 0}
   ShortSword: {fileID: 0}
   ShortBow: {fileID: 0}
@@ -251,9 +250,12 @@ MonoBehaviour:
   ShieldModel: {fileID: 0}
   MaceModel: {fileID: 0}
   GreataxeModel: {fileID: 0}
+  ArrowModel: {fileID: 0}
   MediumArmourMesh: {fileID: 0}
   LightArmourMesh: {fileID: 0}
   PriestRobesMesh: {fileID: 0}
+  TwoHanded: {fileID: 0}
+  OneHanded: {fileID: 0}
 --- !u!4 &34183405
 Transform:
   m_ObjectHideFlags: 0
@@ -1452,7 +1454,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1491,16 +1493,16 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0.2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
-  m_ShadowAngle: 19.1
+  m_ShadowAngle: 14.3
 --- !u!4 &705507995
 Transform:
   m_ObjectHideFlags: 0
@@ -1823,7 +1825,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.5943396, g: 0.21867211, b: 0.21867211, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1848,7 +1850,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -3696,6 +3698,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ArenaBlock (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8674871199514263306, guid: 6f6b944a620892a4580556b299648826,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8674871199514263306, guid: 6f6b944a620892a4580556b299648826,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8674871199514263306, guid: 6f6b944a620892a4580556b299648826,
+        type: 3}
+      propertyPath: m_Range
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919889846730827607, guid: 6f6b944a620892a4580556b299648826,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919889846730827607, guid: 6f6b944a620892a4580556b299648826,
+        type: 3}
+      propertyPath: m_Range
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919889846730827607, guid: 6f6b944a620892a4580556b299648826,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919889846730827607, guid: 6f6b944a620892a4580556b299648826,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f6b944a620892a4580556b299648826, type: 3}
