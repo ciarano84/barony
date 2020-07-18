@@ -9,6 +9,7 @@ TagManager:
   - NPC
   - selector
   - barrier
+  - Tile Select
   layers:
   - Default
   - TransparentFX

@@ -96,12 +96,21 @@ public class TacticsMovement : Unit
     {
         //required if the map is to change size after initializing. 
         //tiles = GameObject.FindGameObjectsWithTag("tile");
-        
+
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
 
-            t.FindNeighbours(jumpHeight);
+            //Debug
+            if (t != null)
+            {
+                t.FindNeighbours(jumpHeight);
+            }
+            else
+            {
+                Debug.LogError("Tile tag set without tile component");
+                tile.transform.position = new Vector3(0, 10, 0);
+            }
         }
     }
 

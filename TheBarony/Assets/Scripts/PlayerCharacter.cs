@@ -63,6 +63,7 @@ public class PlayerCharacter : TacticsMovement
                 if (Physics.Raycast(ray, out hit))
                 {
                     //Work out if a TacticsMovement has been selected.
+                    Debug.Log(hit.collider.name);
                     if (hit.collider.GetComponent<TacticsMovement>() != null)
                     {
                         TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();
@@ -94,9 +95,9 @@ public class PlayerCharacter : TacticsMovement
                         }
                         
                     }
-                    else if (hit.collider.tag == "tile")
+                    else if (hit.collider.tag == "Tile Select")
                     {
-                        Tile t = hit.collider.GetComponent<Tile>();
+                        Tile t = hit.collider.transform.parent.GetComponent<Tile>();
                         if (t.selectable)
                         {
                             Initiative.queuedActions++;

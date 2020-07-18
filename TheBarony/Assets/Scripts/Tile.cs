@@ -39,7 +39,7 @@ public class Tile : MonoBehaviour
 
     void Update()
     {
-        if (current && selectable || target)
+        if (selectable || target)
         {
             selectPlane.SetActive(true);
         }
