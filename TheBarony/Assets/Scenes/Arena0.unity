@@ -406,11 +406,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArenaBlock Barns Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 8239291930931159548, guid: 9aaa9336f1c7faa4fb86489550eed39a,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9aaa9336f1c7faa4fb86489550eed39a, type: 3}
 --- !u!4 &156841675 stripped
