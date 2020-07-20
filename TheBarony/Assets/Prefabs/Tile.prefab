@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1176853923881030973}
   - component: {fileID: 5179343459895454560}
   - component: {fileID: 4616616606355274901}
-  - component: {fileID: 3967751004333633965}
+  - component: {fileID: 142102523108175000}
   m_Layer: 0
   m_Name: Selecting Plane
   m_TagString: Tile Select
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3967751004333633965
+--- !u!64 &142102523108175000
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 2383863021545219195}
   - component: {fileID: 7295802303325674127}
   - component: {fileID: 5286969805760095722}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tile
   m_TagString: tile
   m_Icon: {fileID: 0}

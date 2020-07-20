@@ -27,8 +27,6 @@ public class PlayerCharacter : TacticsMovement
 
     private void FixedUpdate()
     {
-        Debug.DrawRay(transform.position, transform.forward);
-
         if (!turn)
         {
             if (focus != null)
@@ -63,7 +61,6 @@ public class PlayerCharacter : TacticsMovement
                 if (Physics.Raycast(ray, out hit))
                 {
                     //Work out if a TacticsMovement has been selected.
-                    Debug.Log(hit.collider.name);
                     if (hit.collider.GetComponent<TacticsMovement>() != null)
                     {
                         TacticsMovement UnitClickedOn = hit.collider.GetComponent<TacticsMovement>();

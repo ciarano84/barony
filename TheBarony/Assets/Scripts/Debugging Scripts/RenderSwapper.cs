@@ -12,7 +12,6 @@ public class RenderSwapper : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            Debug.Log("fired");
             character.GetComponent<SkinnedMeshRenderer>().sharedMesh = replacement;
         }
     }

@@ -53,7 +53,6 @@ public class Hunter : Aspect
                 if (u.focus == owner) focusedOn = true;
             }
             if (!focusedOn) AttackManager.damage += 2;
-            Debug.Log("Ghosting attack");
         }
     }
 

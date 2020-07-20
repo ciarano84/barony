@@ -89,7 +89,6 @@ public class ActionUIManager : MonoBehaviour
                         {
                             if (a.actionCost == ActionCost.move)
                             {
-                                Debug.Log("adding to moveActions");
                                 moveActions.Add(a);
                             }
                         }
@@ -97,7 +96,6 @@ public class ActionUIManager : MonoBehaviour
                         {
                             if (a.actionCost == ActionCost.main || a.actionCost == ActionCost.move)
                             {
-                                Debug.Log("adding to mainActions");
                                 mainActions.Add(a);
                             }
                         }
@@ -196,7 +194,6 @@ public class ActionUIManager : MonoBehaviour
     {
         if (!focusBeingSelected)
         {
-            Debug.Log("FocusButton pressed");
             //turn it red.
             focusActiveIndicator.SetActive(true);
             //turn the mouseover icon to the eye.

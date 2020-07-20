@@ -68,6 +68,7 @@ public class TacticsMovement : Unit
         //trying to catch the original fucker of a bug:
         if (currentTile == null)
             {
+            Debug.DrawRay(transform.position, -Vector3.up, Color.blue, 50f);
             Debug.Log("Bug no 1 found on " + this);
             }
 
@@ -76,19 +77,15 @@ public class TacticsMovement : Unit
 
     public Tile GetTargetTile(GameObject target) {
         RaycastHit hit;
+        int layerMask = 1 << 9;
 
         Tile tile = null;
 
-        Debug.DrawRay(target.transform.position, -Vector3.up, Color.blue, 5f);
-
-        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
-        {  
+        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1, layerMask))
+        {
             tile = hit.collider.GetComponent<Tile>();
         }
-        if ((tile == null) && turn) 
-        {
-            Debug.Log("no current tile found"); //This to help track down bug 1. 
-        }
+
         return tile;
     }
 

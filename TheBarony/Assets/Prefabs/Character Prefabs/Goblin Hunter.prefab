@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 913384515094806684, guid: 0593fc0b7baafdf4ab7a4ece9e413dc5,
+        type: 3}
+      propertyPath: aspectPack
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7331409199596109557, guid: 0593fc0b7baafdf4ab7a4ece9e413dc5,
         type: 3}
       propertyPath: m_LocalPosition.x
