@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7023929707143316714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862647173987473636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f652d1bb48d9646a0f96c2c9cfb05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitInfo:
+    unitName: goblin
+    unitVisual: EnemyVisual
+    faction: 1
+    aspect: {fileID: 0}
+    baseBreath: 3
+    firstBreath: 3
+    flaggingBreath: 0
+    baseAttack: 1
+    baseDefence: -3
+    baseToughness: -3
+    baseStrength: 0
+    baseMove: 4
+    wounds: 0
+    currentBreath: 0
+    currentAttack: 0
+    currentDefence: 0
+    currentToughness: 0
+    currentDamage: 0
+    currentMove: 0
+    flagging: 0
+  unitAnim: {fileID: 4132104678067279040}
+  rig: {fileID: 4038823818800080596}
+  mainWeapon: {fileID: 0}
+  body: {fileID: 2384231156810927087}
+  mainHandSlot: {fileID: 527835539816686622}
+  offHandSlot: {fileID: 8580979936340981824}
+  focusSwitched: 0
+  canFocusSwitch: 0
+  adjacentUnits: []
+  focus: {fileID: 0}
+  turn: 0
+  selectableTiles: []
+  currentTile: {fileID: 0}
+  actualTargetTile: {fileID: 0}
+  moving: 0
+  jumpHeight: 2
+  moveSpeed: 2
+  jumpVelocity: 4.5
+  initiativeMod: 0
+  currentInitiative: 0
+  remainingMove: 0
+  remainingActions: 0
+  halfHeight: 0
 --- !u!1001 &1767083304990597992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67,10 +123,52 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc Defender
       objectReference: {fileID: 0}
+    - target: {fileID: 1118413313851955045, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7515972219155056106, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
         type: 3}
       propertyPath: aspectPack
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1118413313851955045, guid: 6de6a71e5f3640b4ba692dc5b826fe7f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6de6a71e5f3640b4ba692dc5b826fe7f, type: 3}
+--- !u!1 &1862647173987473636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 98097719315561356, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1767083304990597992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4038823818800080596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2344466903311566268, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1767083304990597992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4132104678067279040 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2440352488379053992, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1767083304990597992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2384231156810927087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4148815252271573127, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1767083304990597992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8580979936340981824 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8038981609802128168, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1767083304990597992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &527835539816686622 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2294248964861806454, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1767083304990597992}
+  m_PrefabAsset: {fileID: 0}

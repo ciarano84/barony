@@ -43,7 +43,7 @@ public class ShortswordData : MeleeWeaponData
         model.transform.position = unit.mainHandSlot.position;
 
         Shortsword weapon = unit.gameObject.AddComponent<Shortsword>();
-        weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        weapon.owner = unit.gameObject.GetComponent<TacticsMovement>();
         weapon.weaponData = this; 
         
         unit.mainWeapon = weapon;

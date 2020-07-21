@@ -25,7 +25,7 @@ public class LeatherArmourData : ItemData
     public override void EquipItem(Unit unit)
     {
         LeatherArmour armour = unit.gameObject.AddComponent<LeatherArmour>();
-        armour.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        armour.owner = unit.gameObject.GetComponent<TacticsMovement>();
         armour.itemData = this;
         unit.unitInfo.currentToughness += 1;
     }

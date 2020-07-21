@@ -47,7 +47,6 @@ public class PlayerCharacter : TacticsMovement
         {   
             Move();
         }
-        
     }
 
     void CheckMouse()

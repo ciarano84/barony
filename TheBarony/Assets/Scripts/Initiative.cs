@@ -68,7 +68,7 @@ public class Initiative : MonoBehaviour
         currentUnit = order.Peek();
         GameObject selector = GameObject.FindGameObjectWithTag("selector");
         selector.transform.SetParent(currentUnit.transform, false);
-        actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
+        actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
     }
 
     public static void EndTurn()
@@ -97,7 +97,7 @@ public class Initiative : MonoBehaviour
             if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
                 currentUnit.GetComponent<TacticsMovement>().BeginTurn();
-                actionUIManager.UpdateActions(currentUnit.GetComponent<PlayerCharacter>());
+                actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
                 queuedActions--;
                 yield break;
             }

@@ -37,7 +37,7 @@ public class ShortbowData : RangedWeaponData
         model.transform.position = unit.offHandSlot.position;
 
         Shortbow weapon = unit.gameObject.AddComponent<Shortbow>();
-        weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        weapon.owner = unit.gameObject.GetComponent<TacticsMovement>();
         weapon.rangedWeaponData = this;
         //this next line looks like it's not needed BUT IT REALLY IS
         weapon.weaponData = this;

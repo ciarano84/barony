@@ -43,7 +43,7 @@ public class DaggerData : MeleeWeaponData
         model.transform.position = unit.mainHandSlot.position;
 
         Dagger weapon = unit.gameObject.AddComponent<Dagger>();
-        weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        weapon.owner = unit.gameObject.GetComponent<TacticsMovement>();
         weapon.weaponData = this;
 
         unit.mainWeapon = weapon;

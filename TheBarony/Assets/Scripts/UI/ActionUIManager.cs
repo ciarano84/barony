@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class ActionUIManager : MonoBehaviour
 {
-    public static PlayerCharacter currentUnit;
+    public static Unit currentUnit;
     public Text unitName;
     public Image weaponImage;
     public Slider firstBreathSlider;
@@ -41,7 +41,7 @@ public class ActionUIManager : MonoBehaviour
         tooltip.SetActive(false);
     }
 
-    public void UpdateActions(PlayerCharacter unit)
+    public void UpdateActions(TacticsMovement unit)
     {
         Clear();
 
@@ -74,7 +74,7 @@ public class ActionUIManager : MonoBehaviour
         }
         else focusSwitch.gameObject.SetActive(false);
 
-        if (unit.GetComponent<PlayerCharacter>() != null)
+        if (unit.GetComponent<TacticsMovement>() != null)
         {
             if (unit.remainingMove > 0 || unit.remainingActions > 0)
             {
@@ -158,7 +158,7 @@ public class ActionUIManager : MonoBehaviour
             }
             else if ((Initiative.currentUnit.remainingActions > 0) && (!Initiative.currentUnit.moving))
             {
-                foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<PlayerCharacter>().mainWeapon.targets)
+                foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<TacticsMovement>().mainWeapon.targets)
                 {
 
                     if (target.unitTargeted == TacticsMovement.mousedOverUnit)

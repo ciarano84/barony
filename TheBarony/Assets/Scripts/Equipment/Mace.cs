@@ -42,7 +42,7 @@ public class MaceData : MeleeWeaponData
         model.transform.position = unit.mainHandSlot.position;
 
         Mace weapon = unit.gameObject.AddComponent<Mace>();
-        weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        weapon.owner = unit.gameObject.GetComponent<TacticsMovement>();
         weapon.weaponData = this;
 
         unit.mainWeapon = weapon;

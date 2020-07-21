@@ -18,6 +18,9 @@ public class TacticsMovement : Unit
     //Used to ensure the first tile doesn't count against movement.
     Tile firstTileInPath;
 
+    //Needed for A*
+    public Tile actualTargetTile;
+
     public bool moving = false;
     public float jumpHeight = 2f;
     public float moveSpeed = 2;
@@ -89,7 +92,7 @@ public class TacticsMovement : Unit
         return tile;
     }
 
-    public void ComputeAdjacencyList() 
+    public void ComputeAdjacencyList(float jumpHeight, Tile targetTile) 
     {
         //required if the map is to change size after initializing. 
         //tiles = GameObject.FindGameObjectsWithTag("tile");
@@ -101,7 +104,7 @@ public class TacticsMovement : Unit
             //Debug
             if (t != null)
             {
-                t.FindNeighbours(jumpHeight);
+                t.FindNeighbours(jumpHeight, targetTile);
             }
             else
             {
@@ -113,7 +116,7 @@ public class TacticsMovement : Unit
 
     public void FindSelectableTiles()
     {
-        ComputeAdjacencyList();
+        ComputeAdjacencyList(jumpHeight, null);
         GetCurrentTile();
 
         Queue<Tile> process = new Queue<Tile>();
@@ -281,20 +284,12 @@ public class TacticsMovement : Unit
                 if (RangeFinder.LineOfSight(this, focus) == true)
                 {
                     FaceDirection(focus.transform.position);
-                    
-                    /*Vector3 targetHeading = focus.transform.position;
-                    targetHeading.y = transform.position.y;
-                    tileToFace.y = transform.position.y;
-                    transform.LookAt(targetHeading);*/
                 }
             }
             
             if (turnRequired)
             {
                 FaceDirection(tileToFace);
-                
-                //tileToFace.y = transform.position.y;
-                //transform.LookAt(tileToFace);
                 turnRequired = false;
             }
             moving = false;
@@ -425,8 +420,8 @@ public class TacticsMovement : Unit
         }
         
         turn = true;
-        GetComponent<PlayerCharacter>().FindSelectableTiles();  
-        GetComponent<PlayerCharacter>().mainWeapon.GetTargets();
+        FindSelectableTiles();  
+        mainWeapon.GetTargets();
     }
 
     public void EndTurn()
@@ -456,10 +451,125 @@ public class TacticsMovement : Unit
         if (EncounterManager.encounter) ActionUIManager.SetCursor();
     }
 
-
     public void FaceDirection(Vector3 target)
     {
         target.y = transform.position.y;
         transform.LookAt(target);
+    }
+
+    //The A* formula. 
+    protected void FindPath(Tile targetTile)
+    {
+        ComputeAdjacencyList(jumpHeight, targetTile);
+        GetCurrentTile();
+
+        List<Tile> openList = new List<Tile>();
+        List<Tile> closedList = new List<Tile>();
+
+        openList.Add(currentTile);
+        //currentTile.parent = ??
+
+        currentTile.h = Vector3.Distance(currentTile.transform.position, targetTile.transform.position);
+        currentTile.f = currentTile.h;
+
+        while (openList.Count > 0)
+        {
+            Tile t = FindLowestF(openList);
+            closedList.Add(t);
+
+            if (t == targetTile)
+            {
+                actualTargetTile = FindEndTile(t);
+
+                //This next line is mine. 
+                Initiative.queuedActions++;
+
+                MoveToTile(actualTargetTile);
+                return;
+            }
+
+            //Here in order to put both adjacency and diagonal into one. 
+            List<Tile> combinedAdjacencyList = new List<Tile>();
+            if (combinedAdjacencyList.Count > 0) Debug.LogError("combined adjacency list needs resetting as it still has members.");
+            foreach (Tile x in t.adjacencyList) combinedAdjacencyList.Add(x);
+            foreach (Tile x in t.diagonalAdjacencyList) combinedAdjacencyList.Add(x);
+
+            foreach (Tile tile in combinedAdjacencyList)
+            {
+                if (closedList.Contains(tile))
+                {
+                    //Do Nothing.
+                }
+                else if (openList.Contains(tile))
+                {
+                    float tempG = t.g + Vector3.Distance(tile.transform.position, t.transform.position);
+
+                    if (tempG < tile.g)
+                    {
+                        tile.parent = t;
+
+                        tile.g = tempG;
+                        tile.f = tile.g + tile.h;
+                    }
+
+                }
+                else
+                {
+                    tile.parent = t;
+
+                    tile.g = t.g + Vector3.Distance(tile.transform.position, t.transform.position);
+                    tile.h = Vector3.Distance(tile.transform.position, targetTile.transform.position);
+                    tile.f = tile.g + tile.h;
+
+                    openList.Add(tile);
+                }
+            }
+        }
+
+
+        //todo: come up with a way of handling when their is no path, or when the tile next to the target tile is blocked. 
+        Debug.LogError("NPC path not found");
+    }
+
+    //Needed for A*
+    protected Tile FindLowestF(List<Tile> list)
+    {
+        Tile lowest = list[0];
+
+        foreach (Tile t in list)
+        {
+            if (t.f < lowest.f)
+            {
+                lowest = t;
+            }
+        }
+        list.Remove(lowest);
+
+        return lowest;
+    }
+
+    protected Tile FindEndTile(Tile t)
+    {
+        Stack<Tile> tempPath = new Stack<Tile>();
+
+        Tile next = t.parent;
+        while (next != null)
+        {
+            tempPath.Push(next);
+            next = next.parent;
+        }
+
+        if (tempPath.Count <= remainingMove)
+        {
+            return t.parent;
+        }
+
+        Tile endTile = null;
+        for (int i = 0; i <= remainingMove; i++)
+        {
+            endTile = tempPath.Pop();
+        }
+
+        return endTile;
     }
 }

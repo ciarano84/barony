@@ -31,7 +31,7 @@ public class ShieldData : ItemData
         model.transform.position = unit.offHandSlot.position;
 
         Shield shield = unit.gameObject.AddComponent<Shield>();
-        shield.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        shield.owner = unit.gameObject.GetComponent<TacticsMovement>();
         shield.itemData = this;
         unit.unitInfo.currentDefence = unit.unitInfo.baseDefence + defendModifier;
     }

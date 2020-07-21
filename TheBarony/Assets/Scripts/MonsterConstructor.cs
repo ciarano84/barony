@@ -40,6 +40,7 @@ public class MonsterConstructor : MonoBehaviour
         if (unitInfo.accessory1 != null) unitInfo.accessory1.SetData(unitInfo);
         if (unitInfo.accessory2 != null) unitInfo.accessory2.SetData(unitInfo);
 
+        //Do I need this any more? 
         unit.SetSlots();
         unitInfo.mainWeaponData.EquipItem(unit);
         unitInfo.offHandData.EquipItem(unit);

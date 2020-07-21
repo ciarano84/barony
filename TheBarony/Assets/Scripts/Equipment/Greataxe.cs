@@ -32,7 +32,7 @@ public class GreataxeData : MeleeWeaponData
         model.transform.position = unit.mainHandSlot.position;
 
         Greataxe weapon = unit.gameObject.AddComponent<Greataxe>();
-        weapon.owner = unit.gameObject.GetComponent<PlayerCharacter>();
+        weapon.owner = unit.gameObject.GetComponent<TacticsMovement>();
         weapon.weaponData = this;
 
         unit.mainWeapon = weapon;

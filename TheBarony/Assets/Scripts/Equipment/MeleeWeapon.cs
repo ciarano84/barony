@@ -91,7 +91,7 @@ public class MeleeWeapon : Weapon
             if (unit != owner.GetComponent<TacticsMovement>())
             {
                 unit.GetCurrentTile();
-                float maxDistance = 200f;
+                float maxDistance = Mathf.Infinity;
                 bool targetFound = false;
 
                 //This way of finding adjacents by distance is flawed, particularly if and when they are up or down. But kinda works.  
@@ -102,7 +102,9 @@ public class MeleeWeapon : Weapon
 
                 else
                 {
-                foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
+                    //I should really do this somewhere else.
+                    //tileToMeleeAttackFrom = RangeFinder.FindTileNextToTarget(unit.gameobject);
+                    foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
                     {
 
                         foreach (Tile tileCanBeWalkedTo in selectableTiles)

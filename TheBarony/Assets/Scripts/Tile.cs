@@ -23,6 +23,11 @@ public class Tile : MonoBehaviour
     public Tile parent = null;
     public float distance = 0;
 
+    //Required for A*
+    public float f = 0;
+    public float g = 0;
+    public float h = 0;
+
     //diagonals
     Vector3 forwardAndLeft = new Vector3(-1, 0, 1);
     Vector3 forwardAndRight = new Vector3(1, 0, 1);
@@ -47,24 +52,6 @@ public class Tile : MonoBehaviour
         {
             selectPlane.SetActive(false);
         }
-
-
-        /*if (current)
-        {
-            renderer.material.color = Color.magenta;
-        }
-        else if (target)
-        {
-            renderer.material.color = Color.green;
-        }
-        else if (selectable)
-        {
-            renderer.material.color = Color.red;
-        }
-        else
-        {
-            renderer.material.color = Color.white;
-        }*/
     }
 
     public void Reset()
@@ -80,25 +67,27 @@ public class Tile : MonoBehaviour
         diagonal = false;
         parent = null;
         distance = 0;
+
+        f = g = h = 0;
     }
 
-    public void FindNeighbours(float jumpHeight)
+    public void FindNeighbours(float jumpHeight, Tile targetTile)
     {
         Reset();
 
-        CheckTile(Vector3.forward, jumpHeight);
-        CheckTile(-Vector3.forward, jumpHeight);
-        CheckTile(Vector3.right, jumpHeight);
-        CheckTile(-Vector3.right, jumpHeight);
+        CheckTile(Vector3.forward, jumpHeight, targetTile, false);
+        CheckTile(-Vector3.forward, jumpHeight, targetTile, false);
+        CheckTile(Vector3.right, jumpHeight, targetTile, false);
+        CheckTile(-Vector3.right, jumpHeight, targetTile, false);
 
         //Diagonals
-        CheckTile(forwardAndLeft, jumpHeight, true);
-        CheckTile(forwardAndRight, jumpHeight, true);
-        CheckTile(backAndLeft, jumpHeight, true);
-        CheckTile(backAndRight, jumpHeight, true);
+        CheckTile(forwardAndLeft, jumpHeight, targetTile, true);
+        CheckTile(forwardAndRight, jumpHeight, targetTile, true);
+        CheckTile(backAndLeft, jumpHeight, targetTile, true);
+        CheckTile(backAndRight, jumpHeight, targetTile, true);
     }
 
-    public void CheckTile(Vector3 direction, float jumpHeight, bool diagonal = false) {
+    public void CheckTile(Vector3 direction, float jumpHeight, Tile targetTile, bool diagonal = false) {
 
         //Barrier check overlapbox
         Vector3 barrierCheckRange = new Vector3(0.25f, 0.25f, 0.25f);
@@ -122,7 +111,7 @@ public class Tile : MonoBehaviour
             if (tile != null && tile.walkable)
             {
                 RaycastHit hit;
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == targetTile))
                 {
                     if (!diagonal) adjacencyList.Add(tile);
                     else diagonalAdjacencyList.Add(tile);
