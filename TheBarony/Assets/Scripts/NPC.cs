@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class NPC : TacticsMovement
 {
-    GameObject destination;
+    public GameObject destination;
+    public AI ai;
 
     private void Start()
     {
@@ -28,11 +29,10 @@ public class NPC : TacticsMovement
 
         if (!moving && Initiative.queuedActions < 1)
         {
-            //This function literally just gets the nearest enemy and sets that as the destination. The AI script should do this work and pick a destination.
-            //In addition, the 'find the nearest' method should be moved to RangeFinder as it will likely be needed by several things. 
-            FindNearestDestination();
+             ai.DoTurn();
 
-            if (remainingMove > 0)
+            //This section DOES the move, but once the tile has been decided. 
+            if (remainingMove > 0 && turn)
             {
                 CalculatePath();
                 actualTargetTile.target = true;

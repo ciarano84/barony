@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 4861493547287551773, guid: 0dd5e9e6b721a194488f2d990b5bc585,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Orc
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dd5e9e6b721a194488f2d990b5bc585, type: 3}

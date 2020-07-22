@@ -12,7 +12,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a07925fb3b1a8c408c1cd618f2f9496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aspectPack: 0
+  aspectPack: 1
+--- !u!114 &-7023929707143316714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861493547287551773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f652d1bb48d9646a0f96c2c9cfb05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitInfo:
+    unitName: goblin
+    unitVisual: EnemyVisual
+    faction: 1
+    aspect: {fileID: 0}
+    baseBreath: 3
+    firstBreath: 3
+    flaggingBreath: 0
+    baseAttack: 1
+    baseDefence: -3
+    baseToughness: -3
+    baseStrength: 0
+    baseMove: 4
+    wounds: 0
+    currentBreath: 0
+    currentAttack: 0
+    currentDefence: 0
+    currentToughness: 0
+    currentDamage: 0
+    currentMove: 0
+    flagging: 0
+  unitAnim: {fileID: 7202982501385179961}
+  rig: {fileID: 7107460858895278381}
+  mainWeapon: {fileID: 0}
+  body: {fileID: 8914999402463448086}
+  mainHandSlot: {fileID: 6772624955711202279}
+  offHandSlot: {fileID: 3295455057085906873}
+  focusSwitched: 0
+  canFocusSwitch: 0
+  adjacentUnits: []
+  focus: {fileID: 0}
+  turn: 0
+  selectableTiles: []
+  currentTile: {fileID: 0}
+  actualTargetTile: {fileID: 0}
+  moving: 0
+  jumpHeight: 2
+  moveSpeed: 2
+  jumpVelocity: 4.5
+  initiativeMod: 0
+  currentInitiative: 0
+  remainingMove: 0
+  remainingActions: 0
+  halfHeight: 0
 --- !u!1001 &2900287209024298835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83,13 +139,44 @@ PrefabInstance:
     - target: {fileID: 7730601684680638542, guid: 923239b3514fabd48947ef7725db0d19,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Orc
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7318763801079180455, guid: 923239b3514fabd48947ef7725db0d19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 923239b3514fabd48947ef7725db0d19, type: 3}
 --- !u!1 &4861493547287551773 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7730601684680638542, guid: 923239b3514fabd48947ef7725db0d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 2900287209024298835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7107460858895278381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5376495479866703486, guid: 923239b3514fabd48947ef7725db0d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 2900287209024298835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7202982501385179961 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5461109009231350890, guid: 923239b3514fabd48947ef7725db0d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 2900287209024298835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8914999402463448086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6018941470284174149, guid: 923239b3514fabd48947ef7725db0d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 2900287209024298835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3295455057085906873 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 397492367308759274, guid: 923239b3514fabd48947ef7725db0d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 2900287209024298835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6772624955711202279 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8485574832440491188, guid: 923239b3514fabd48947ef7725db0d19,
     type: 3}
   m_PrefabInstance: {fileID: 2900287209024298835}
   m_PrefabAsset: {fileID: 0}
