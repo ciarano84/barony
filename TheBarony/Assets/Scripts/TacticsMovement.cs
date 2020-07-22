@@ -422,6 +422,10 @@ public class TacticsMovement : Unit
         turn = true;
         FindSelectableTiles();  
         mainWeapon.GetTargets();
+        if (gameObject.GetComponent<AI>() != null)
+        {
+            gameObject.GetComponent<AI>().SetTask();
+        }
     }
 
     public void EndTurn()
@@ -458,7 +462,7 @@ public class TacticsMovement : Unit
     }
 
     //The A* formula. 
-    protected void FindPath(Tile targetTile)
+    public Tile FindPath(Tile targetTile)
     {
         ComputeAdjacencyList(jumpHeight, targetTile);
         GetCurrentTile();
@@ -479,13 +483,13 @@ public class TacticsMovement : Unit
 
             if (t == targetTile)
             {
-                actualTargetTile = FindEndTile(t);
+                return FindEndTile(t);
 
                 //This next line is mine. 
-                Initiative.queuedActions++;
+                //Initiative.queuedActions++;
 
-                MoveToTile(actualTargetTile);
-                return;
+                //MoveToTile(actualTargetTile);
+                //return;
             }
 
             //Here in order to put both adjacency and diagonal into one. 
@@ -529,6 +533,13 @@ public class TacticsMovement : Unit
 
         //todo: come up with a way of handling when their is no path, or when the tile next to the target tile is blocked. 
         Debug.LogError("NPC path not found");
+        return null;
+    }
+
+    protected void NPCMove()
+    { 
+        Initiative.queuedActions++;
+        MoveToTile(actualTargetTile);
     }
 
     //Needed for A*

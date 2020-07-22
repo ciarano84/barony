@@ -93,7 +93,7 @@ PrefabInstance:
     - target: {fileID: 6678276267370962823, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
         type: 3}
       propertyPath: unitInfo.baseMove
-      value: 30
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6de6a71e5f3640b4ba692dc5b826fe7f, type: 3}

@@ -35,6 +35,7 @@ public class NPC : TacticsMovement
             if (remainingMove > 0 && turn)
             {
                 CalculatePath();
+                NPCMove();
                 actualTargetTile.target = true;
             }
         }
@@ -47,39 +48,14 @@ public class NPC : TacticsMovement
     void CalculatePath()
     {
         Tile targetTile = GetTargetTile(destination);
-        FindPath(targetTile);
+        actualTargetTile = FindPath(targetTile);
     }
 
-    //This currently only works for finding PCs, but should be expanded to get other destinations. 
-    void FindNearestDestination()
+    public void EndNPCTurn()
     {
-        List<GameObject> destinations = new List<GameObject>();
-
-        //Add all the players to the list of destinations. 
-        foreach (TacticsMovement c in Initiative.order)
-        {
-            if (c.unitInfo.faction == Factions.players)
-            {
-                destinations.Add(c.gameObject);
-            }
-        }
-
-        //Here is where you need to add anything to filter or weight that list. 
-
-        GameObject nearest = null;
-        float distance = Mathf.Infinity;
-
-        foreach (GameObject go in destinations)
-        {
-            float d = Vector3.Distance(transform.position, go.transform.position);
-
-            if (d < distance)
-            {
-                distance = d;
-                nearest = go;
-            }
-        }
-
-        destination = nearest;
+        destination = null;
+        ai.tasks.Clear();
+        ai.task = null;
+        Initiative.EndTurn();
     }
 }
