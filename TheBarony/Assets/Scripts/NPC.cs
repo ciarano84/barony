@@ -29,7 +29,7 @@ public class NPC : TacticsMovement
 
         if (!moving && Initiative.queuedActions < 1)
         {
-             ai.DoTurn();
+            ai.DoTurn();
 
             //This section DOES the move, but once the tile has been decided. 
             if (remainingMove > 0 && turn)

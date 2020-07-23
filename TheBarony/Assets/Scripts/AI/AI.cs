@@ -25,6 +25,11 @@ public class AI : MonoBehaviour
 
     public void DoTurn()
     {
+        if (task == null)
+        {
+            Debug.LogWarning("task is null");
+        }
+        
         task.DoTask(unit);
     }
 
@@ -40,6 +45,7 @@ public class AI : MonoBehaviour
     {
         basicTask.EvaluateCandidates(unit);
         RandomizeValues();
+        unit.actualTargetTile = null;
 
         //Pick the Winner;
         float highestValue = -100f;
@@ -62,17 +68,18 @@ public abstract class Task
 
     public abstract void EvaluateCandidates(NPC unit);
     
-    public abstract void DoTask(NPC unit);
+    public abstract void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null);
 }
 
 public class t_SimpleMeleeAttack : Task
 {
     public override void EvaluateCandidates(NPC unit)
     {
-        Debug.Log("evaluating");
         if (unit.focus != null)
         {
-            target = unit.focus;
+            Task task = new t_SimpleMeleeAttack();
+            task.target = unit.focus;
+            unit.GetComponent<AI>().tasks.Add(task);
         }
         else 
         {
@@ -97,6 +104,7 @@ public class t_SimpleMeleeAttack : Task
                 Task task = new t_SimpleMeleeAttack();
                 task.value = 1 / Vector3.Distance(unit.transform.position, enemy.transform.position);
                 task.tile = t;
+                task.target = enemy.GetComponent<Unit>();
                 if (!RangeFinder.LineOfSight(unit, enemy.GetComponent<Unit>()))
                 {
                     task.value -= 1;
@@ -106,44 +114,27 @@ public class t_SimpleMeleeAttack : Task
         }
     }
 
-    public override void DoTask(NPC unit)
+    public override void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null)
     {
-        if (unit.destination == null)
-        {
-            if (unit.focus != null)
-            {
-                unit.GetComponent<AI>().targetUnit = unit.focus;
-            }
-            else
-            {
-                List<GameObject> enemies = new List<GameObject>();
-                foreach (TacticsMovement c in Initiative.order)
-                {
-                    if (c.unitInfo.faction == Factions.players)
-                    {
-                        enemies.Add(c.gameObject);
-                    }
-                }
-
-                unit.GetComponent<AI>().targetUnit = RangeFinder.FindNearestDestination(unit.gameObject, enemies).GetComponent<Unit>();
-            }
-            unit.destination = unit.GetComponent<AI>().targetUnit.gameObject;
-            return;
-        }
+        unit.destination = target.gameObject;
 
         //after move is set, the attack is carried out, when possible. 
         if (unit.remainingActions > 0)
         {
             unit.FindAdjacentUnits();
-            if (unit.adjacentUnits.Contains(unit.GetComponent<AI>().targetUnit))
+            if (target != null)
             {
-                foreach (Weapon.Target t in unit.mainWeapon.targets)
+                if (unit.adjacentUnits.Contains(target))
+                //if (unit.adjacentUnits.Contains(unit.GetComponent<AI>().targetUnit))
                 {
-                    if (t.unitTargeted == unit.GetComponent<AI>().targetUnit)
+                    foreach (Weapon.Target t in unit.mainWeapon.targets)
                     {
-                        Initiative.queuedActions += 1;
-                        unit.mainWeapon.StartCoroutine("Attack", t);
-                        return;
+                        if (t.unitTargeted == target)
+                        {
+                            Initiative.queuedActions += 1;
+                            unit.mainWeapon.StartCoroutine("Attack", t);
+                            return;
+                        }
                     }
                 }
             }

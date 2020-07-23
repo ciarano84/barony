@@ -218,7 +218,7 @@ public class Unit : MonoBehaviour
     {
         if (focus == null)
         {
-            float maxDistance = 200f;
+            float maxDistance = Mathf.Infinity;
             foreach (TacticsMovement t in Initiative.order)
             {
                 if (t.unitInfo.faction != this.unitInfo.faction)

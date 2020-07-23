@@ -32,6 +32,11 @@ public class EncounterManager : MonoBehaviour
     public int numberOfEnemyCells;
     public int EnemiesPerCell;
 
+    //Debug
+    public enum EncounterSettings { Standard, Test };
+    public EncounterSettings encounterSettings = EncounterSettings.Standard;
+    public int playerCount;
+
     private void Start()
     {
         encounter = true;
@@ -54,11 +59,24 @@ public class EncounterManager : MonoBehaviour
 
     void GetPlayers()
     {
-        for (int i = 0; i < rosta.squad.Count; i++)
+        if (encounterSettings == EncounterSettings.Standard)
         {
-            GameObject player = Instantiate(GameAssets.i.PlayerUnit);
-            player.GetComponent<Unit>().unitInfo = rosta.squad[i];
-            playerSquad.Add(player);
+            for (int i = 0; i < rosta.squad.Count; i++)
+            {
+                GameObject player = Instantiate(GameAssets.i.PlayerUnit);
+                player.GetComponent<Unit>().unitInfo = rosta.squad[i];
+                playerSquad.Add(player);
+            }
+        }
+
+        if (encounterSettings == EncounterSettings.Test)
+        {
+            for (int i = 0; i < playerCount; i++)
+            {
+                GameObject player = Instantiate(GameAssets.i.PlayerUnit);
+                player.GetComponent<Unit>().unitInfo = rosta.squad[i];
+                playerSquad.Add(player);
+            }
         }
     }
 
@@ -100,12 +118,12 @@ public class EncounterManager : MonoBehaviour
         foreach (GameObject a in arenaBlocks)
         {
             ArenaBlock arenaBlockScript = a.GetComponent<ArenaBlock>();
-            arenaBlockScript.spawnPoints = ShuffleArray(arenaBlockScript.spawnPoints);  
+            arenaBlockScript.spawnPoints = ShuffleArray(arenaBlockScript.spawnPoints);
         }
 
         PlaceUnitsOnSpawnPoints(playerSquad, arenaBlocks[0].GetComponent<ArenaBlock>());
 
-            int blockToPlaceOn = 1;
+        int blockToPlaceOn = 1;
         foreach (List<GameObject> cell in enemyCells)
         {
             PlaceUnitsOnSpawnPoints(cell, arenaBlocks[blockToPlaceOn].GetComponent<ArenaBlock>());

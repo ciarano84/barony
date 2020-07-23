@@ -413,18 +413,25 @@ public class TacticsMovement : Unit
 
     public void BeginTurn() 
     {
+        bool firstTurn = false;
         if (!turn)
         {
             //put stuff that should only happen at the start of their turn in here (as opposed to the beginning of each time they choose a new action/move). 
+            firstTurn = true;
             CheckFocus();
         }
         
         turn = true;
         FindSelectableTiles();  
         mainWeapon.GetTargets();
-        if (gameObject.GetComponent<AI>() != null)
+
+        //So this needs to not get checked every time it comes to the end of an action AND has to be after turn is set to work. 
+        if (firstTurn)
         {
-            gameObject.GetComponent<AI>().SetTask();
+            if (gameObject.GetComponent<AI>() != null)
+            {
+                gameObject.GetComponent<AI>().SetTask();
+            }
         }
     }
 
