@@ -105,4 +105,45 @@ public class RangeFinder
         }
         return filteredTiles;
     }
+
+    public static List<Tile> FindTilesNotNextToEnemy(TacticsMovement origin, List<Tile> tiles, TacticsMovement target)
+    {
+        List<Tile> filteredTiles = new List<Tile>();
+        target.currentTile.FindNeighbours(target.jumpHeight, null);
+        
+        foreach (Tile t in tiles)
+        {
+            bool found = false;
+            foreach (Tile orthagonalTile in target.currentTile.adjacencyList)
+            {
+                if (t == orthagonalTile) found = true;
+            }
+            foreach (Tile diagonalTile in target.currentTile.diagonalAdjacencyList)
+            {
+                if (t == diagonalTile) found = true;
+            }
+            if (!found) filteredTiles.Add(t);
+        }
+        return filteredTiles;
+    }
+
+    public static Tile FindTileFurthestFromOpponents(TacticsMovement origin, List<Tile> tiles)
+    {
+        Tile furthest = null;
+        float highestRunValue = 0f;
+        foreach (Tile t in tiles)
+        {
+            float runValue = 0f;
+            foreach (Unit opponent in Initiative.players)
+            {
+                runValue += Vector3.Distance(opponent.transform.position, t.transform.position);
+            }
+            if (runValue > highestRunValue)
+            {
+                furthest = t;
+                highestRunValue = runValue;
+            }  
+        }
+        return furthest;
+    }
 }

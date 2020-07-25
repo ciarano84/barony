@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AI_goblinScout : AI
 {
-    Task goblinTask = new t_simpleRangedAttackTask();
+    //Task goblinTask = new t_simpleRangedAttackTask();
+    Task goblinTask = new t_runAway();
 
     public override void SetTask()
     {
