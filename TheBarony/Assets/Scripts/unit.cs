@@ -177,43 +177,6 @@ public class Unit : MonoBehaviour
         Initiative.RemoveUnit(this);
     }
 
-    public void FindAdjacentUnits()
-    {
-        adjacentUnits.Clear();
-
-        float jumpHeight = GetComponent<TacticsMovement>().jumpHeight;
-
-        //diagonals
-        Vector3 forwardAndLeft = new Vector3(-1, 0, 1);
-        Vector3 forwardAndRight = new Vector3(1, 0, 1);
-        Vector3 backAndLeft = new Vector3(-1, 0, -1);
-        Vector3 backAndRight = new Vector3(1, 0, -1);
-
-        CheckForUnit(Vector3.forward, jumpHeight);
-        CheckForUnit(-Vector3.forward, jumpHeight);
-        CheckForUnit(Vector3.right, jumpHeight);
-        CheckForUnit(-Vector3.right, jumpHeight);
-
-        //Diagonals
-        CheckForUnit(forwardAndLeft, jumpHeight);
-        CheckForUnit(forwardAndRight, jumpHeight);
-        CheckForUnit(backAndLeft, jumpHeight);
-        CheckForUnit(backAndRight, jumpHeight);
-    }
-
-    void CheckForUnit(Vector3 direction, float jumpHeight)
-    {
-        RaycastHit hit;
-        Vector3 viewpoint = transform.position + new Vector3(0, GetComponent<TacticsMovement>().halfHeight, 0);
-        if (Physics.Raycast(viewpoint, direction, out hit, 1.5f))
-        {
-            if (hit.collider.GetComponent<Unit>() != null)
-            {
-                adjacentUnits.Add(hit.collider.GetComponent<Unit>());
-            }
-        }
-    }
-
     public void AutoSetFocus()
     {
         if (focus == null)

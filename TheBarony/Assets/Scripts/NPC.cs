@@ -31,8 +31,8 @@ public class NPC : TacticsMovement
         {
             ai.DoTurn();
 
-            //This section DOES the move, but once the tile has been decided. 
-            if (remainingMove > 0 && turn)
+            //This section DOES the A* move, but once the tile has been decided. 
+            if (remainingMove > 0 && turn && destination != null)
             {
                 CalculatePath();
                 NPCMove();

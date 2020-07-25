@@ -1572,6 +1572,8 @@ MonoBehaviour:
     type: 3}
   numberOfEnemyCells: 2
   EnemiesPerCell: 4
+  encounterSettings: 0
+  playerCount: 0
 --- !u!1 &796440856
 GameObject:
   m_ObjectHideFlags: 0

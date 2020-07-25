@@ -20,7 +20,8 @@ public class RangedWeapon : Weapon
     public override IEnumerator Attack(Target target)
     {
         int bonuses = 0;
-        owner.FindAdjacentUnits();
+        //owner.FindAdjacentUnits();
+        RangeFinder.FindAdjacentUnits(owner);
         foreach (Unit unit in owner.adjacentUnits)
         {
             if (unit.unitInfo.faction != owner.unitInfo.faction)

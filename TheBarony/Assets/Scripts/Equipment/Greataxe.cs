@@ -60,7 +60,8 @@ public class Greataxe : MeleeWeapon
         owner.remainingActions--;
 
         //Find out what is adjacent to the target.
-        target.unitTargeted.FindAdjacentUnits();
+        //target.unitTargeted.FindAdjacentUnits();
+        RangeFinder.FindAdjacentUnits(target.unitTargeted);
 
         bool adjacent = false;
         foreach (Unit _unit in target.unitTargeted.adjacentUnits)

@@ -9,7 +9,6 @@ public class Tile : MonoBehaviour
     public bool target = false;
     public bool selectable = false;
     public bool diagonal = false;
-    public Renderer renderer;
     public GameObject selectPlane;
 
     public List<Tile> adjacencyList = new List<Tile>();
@@ -33,14 +32,6 @@ public class Tile : MonoBehaviour
     Vector3 forwardAndRight = new Vector3(1, 0, 1);
     Vector3 backAndLeft = new Vector3(-1, 0, -1);
     Vector3 backAndRight = new Vector3(1, 0, -1);
-
-    private void Start()
-    {
-        if (renderer == null)
-        {
-            renderer = GetComponent<Renderer>();
-        }
-    }
 
     void Update()
     {

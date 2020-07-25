@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
-    NPC unit;
+    public NPC unit;
 
     public Unit targetUnit;
     public t_SimpleMeleeAttack basicTask = new t_SimpleMeleeAttack();
@@ -33,7 +33,7 @@ public class AI : MonoBehaviour
         task.DoTask(unit);
     }
 
-    void RandomizeValues()
+    public void RandomizeValues()
     {
         foreach (Task t in tasks)
         {
@@ -41,7 +41,7 @@ public class AI : MonoBehaviour
         }
     }
 
-    public void SetTask()
+    public virtual void SetTask()
     {
         basicTask.EvaluateCandidates(unit);
         RandomizeValues();
@@ -83,29 +83,21 @@ public class t_SimpleMeleeAttack : Task
         }
         else 
         {
-            List<GameObject> enemies = new List<GameObject>();
-            foreach (TacticsMovement c in Initiative.order)
-            {
-                if (c.unitInfo.faction == Factions.players)
-                {
-                    enemies.Add(c.gameObject);
-                }
-            }
-
-            foreach (GameObject enemy in enemies)
+            foreach (Unit target in Initiative.players)
             {
                 //check it can find a route. 
-                unit.destination = enemy;
-                enemy.GetComponent<TacticsMovement>().GetCurrentTile();
-                Tile t = unit.FindPath(enemy.GetComponent<TacticsMovement>().currentTile);
-                if (t == null) return;
+
+                unit.destination = target.gameObject;
+                target.GetComponent<TacticsMovement>().GetCurrentTile();
+                Tile t = unit.FindPath(target.GetComponent<TacticsMovement>().currentTile);
                 unit.destination = null;
+                if (t == null) return;
 
                 Task task = new t_SimpleMeleeAttack();
-                task.value = 1 / Vector3.Distance(unit.transform.position, enemy.transform.position);
+                task.value = 1 / Vector3.Distance(unit.transform.position, target.transform.position);
                 task.tile = t;
-                task.target = enemy.GetComponent<Unit>();
-                if (!RangeFinder.LineOfSight(unit, enemy.GetComponent<Unit>()))
+                task.target = target.GetComponent<Unit>();
+                if (!RangeFinder.LineOfSight(unit, target.GetComponent<Unit>()))
                 {
                     task.value -= 1;
                 }
@@ -121,7 +113,8 @@ public class t_SimpleMeleeAttack : Task
         //after move is set, the attack is carried out, when possible. 
         if (unit.remainingActions > 0)
         {
-            unit.FindAdjacentUnits();
+            //unit.FindAdjacentUnits();
+            RangeFinder.FindAdjacentUnits(unit);
             if (target != null)
             {
                 if (unit.adjacentUnits.Contains(target))

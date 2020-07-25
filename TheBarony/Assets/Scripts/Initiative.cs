@@ -15,6 +15,10 @@ public class Initiative : MonoBehaviour
     public static List<TacticsMovement> sortedUnits = new List<TacticsMovement>();
     public static Queue<TacticsMovement> order = new Queue<TacticsMovement>();
 
+    //Faction Lists for other scripts to use. 
+    public static List<Unit> players = new List<Unit>();
+    public static List<Unit> enemies = new List<Unit>();
+
     public static TacticsMovement currentUnit; 
     static ActionUIManager actionUIManager;
 
@@ -52,6 +56,12 @@ public class Initiative : MonoBehaviour
             order.Enqueue(u);
         }
         OnEncounterStart(order.Peek()); //Alert all that the encounter has started. 
+
+        foreach (Unit u in order)
+        {
+            if (u.unitInfo.faction == Factions.players) players.Add(u);
+            if (u.unitInfo.faction == Factions.enemies) enemies.Add(u);
+        }
 
         StartTurn();
         yield break;
@@ -121,6 +131,11 @@ public class Initiative : MonoBehaviour
     public static void RemoveUnit(Unit unit)
     {
         order = new Queue<TacticsMovement>(order.Where(x => x != unit));
+
+        //ensure the unit is removed from the relevant faction lists. 
+        if (unit.unitInfo.faction == Factions.players) players.Remove(unit);
+        if (unit.unitInfo.faction == Factions.enemies) enemies.Remove(unit);
+        
         Destroy(unit.gameObject);
         EncounterManager.CheckForFactionDeath();
         EndAction();
@@ -129,19 +144,5 @@ public class Initiative : MonoBehaviour
     public static void EndAction()
     {
         initiativeManager.StartCoroutine(CheckForTurnEnd());
-    }
-
-    void AddUnitMidCombat()
-    {
-        //This is likely to be a lot more complex. the below throws an error. 
-
-        /*foreach (TacticsMovement u in sortedUnits)
-        {
-            if (u.currentInitiative > initiativeCount)
-            {
-                sortedUnits.Remove(u);
-                sortedUnits.Add(u);
-            }
-        }*/
     }
 }
