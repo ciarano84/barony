@@ -109,6 +109,7 @@ public class RangeFinder
     public static List<Tile> FindTilesNotNextToEnemy(TacticsMovement origin, List<Tile> tiles, TacticsMovement target)
     {
         List<Tile> filteredTiles = new List<Tile>();
+        target.GetCurrentTile();
         target.currentTile.FindNeighbours(target.jumpHeight, null);
         
         foreach (Tile t in tiles)
@@ -145,5 +146,39 @@ public class RangeFinder
             }  
         }
         return furthest;
+    }
+
+    public static Tile FindFlankingTile(TacticsMovement origin, List<Tile> tiles, TacticsMovement target)
+    {
+        Tile flankingTile = null;
+
+        RangeFinder.FindAdjacentUnits(target);
+        foreach (TacticsMovement u in target.adjacentUnits)
+        {
+            u.GetCurrentTile();
+            Tile allyTile = u.currentTile;
+            foreach (Tile t in target.currentTile.adjacencyList)
+            {
+                Vector3 relTargetPosition = t.transform.InverseTransformPoint(target.currentTile.transform.position);
+                Vector3 relOtherAttackerPosition = t.transform.InverseTransformPoint(allyTile.transform.position);
+                if (relOtherAttackerPosition.z > (relTargetPosition.z + 0.1f))
+                {
+                    flankingTile = t;
+                    break;
+                }
+            }
+            foreach (Tile t in target.currentTile.diagonalAdjacencyList)
+            {
+                Vector3 relTargetPosition = t.transform.InverseTransformPoint(target.currentTile.transform.position);
+                Vector3 relOtherAttackerPosition = t.transform.InverseTransformPoint(allyTile.transform.position);
+                if (relOtherAttackerPosition.z > (relTargetPosition.z + 0.1f))
+                {
+                    flankingTile = t;
+                    break;
+                }
+            }
+        }
+        if (tiles.Contains(flankingTile)) return flankingTile;
+        else return null;
     }
 }

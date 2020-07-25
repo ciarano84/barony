@@ -238,8 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785acc3a3bfe5c448a10fcc48d2653eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  encounterEndPanel: {fileID: 0}
-  encounterEndtext: {fileID: 0}
+  encounterEndPanel: {fileID: 401606790}
+  encounterEndtext: {fileID: 1702854069}
   arenaBlocks:
   - {fileID: 1276813085}
   - {fileID: 1113979565}

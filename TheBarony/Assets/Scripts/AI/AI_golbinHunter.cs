@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_goblinScout : AI
+public class AI_golbinHunter : AI
 {
     //Task goblinTask = new t_simpleRangedAttackTask();
-    Task goblinTask = new t_simpleRangedAttackTask();
+    Task goblinTask = new t_sneakyMeleeAttack();
 
     public override void SetTask()
     {
