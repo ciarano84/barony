@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class t_sneakyMeleeAttack : Task
 {
+    bool flagEndofTurn = false;
+
     public override void EvaluateCandidates(NPC unit)
     {
+
         foreach (Unit target in Initiative.players)
         {
             //check it can find a route. 
@@ -32,7 +35,16 @@ public class t_sneakyMeleeAttack : Task
 
     public override void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null)
     {
+        Debug.Log("enters doTask");
+        if (flagEndofTurn)
+        {
+            flagEndofTurn = false;
+            unit.EndNPCTurn();
+        }
+
+
         //if a flank is available, move to it. 
+        Debug.Log("looks for flank");
         Tile flankingTile = RangeFinder.FindFlankingTile(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
         if (flankingTile != null && unit.remainingMove > 0)
         {
@@ -42,6 +54,7 @@ public class t_sneakyMeleeAttack : Task
         }
 
         //Move as close as possible if main action is available and you're not next to the target. 
+        Debug.Log("move close to the target if able and has an attack");
         RangeFinder.FindAdjacentUnits(unit);
         if (!unit.adjacentUnits.Contains(target))
         {
@@ -53,6 +66,7 @@ public class t_sneakyMeleeAttack : Task
         }
 
         //Attack if in the right position
+        Debug.Log("attacks if able");
         if (unit.remainingActions > 0)
         {
             if (unit.adjacentUnits.Contains(target))
@@ -70,6 +84,7 @@ public class t_sneakyMeleeAttack : Task
         }
 
         //Move away if you have move left
+        Debug.Log("moves away if able");
         if (unit.remainingMove > 0)
         {
             unit.FindSelectableTiles();
@@ -78,8 +93,10 @@ public class t_sneakyMeleeAttack : Task
             {
                 Initiative.queuedActions++;
                 unit.MoveToTile(preferedTiles[Random.Range(0, preferedTiles.Count)]);
+                flagEndofTurn = true;
                 return;
             }
+            flagEndofTurn = true;
         }
 
         unit.EndNPCTurn();

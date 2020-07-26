@@ -29,6 +29,8 @@ public class NPC : TacticsMovement
 
         if (!moving && Initiative.queuedActions < 1)
         {
+            //this next line could proper fuck everything. 
+            destination = null;
             ai.DoTurn();
 
             //This section DOES the A* move, but once the tile has been decided. 
@@ -53,6 +55,7 @@ public class NPC : TacticsMovement
 
     public void EndNPCTurn()
     {
+        Debug.Log("End of turn called");
         destination = null;
         ai.tasks.Clear();
         ai.task = null;
