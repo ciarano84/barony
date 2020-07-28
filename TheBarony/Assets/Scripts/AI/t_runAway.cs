@@ -10,6 +10,7 @@ public class t_runAway : Task
         {
             Task task = new t_runAway();
             task.target = unit.focus;
+
             unit.GetComponent<AI>().tasks.Add(task);
         }
         else
@@ -24,6 +25,10 @@ public class t_runAway : Task
                 {
                     task.value -= 1;
                 }
+
+                //Debug
+                task.value += 10;
+
                 unit.GetComponent<AI>().tasks.Add(task);
             }
         }
@@ -34,6 +39,7 @@ public class t_runAway : Task
         //just runs.  
         if (unit.remainingMove > 0)
         {
+            unit.FindSelectableTiles();
             Initiative.queuedActions++;
             unit.MoveToTile(RangeFinder.FindTileFurthestFromOpponents(unit, unit.selectableTiles));
             flagEndofTurn = true;

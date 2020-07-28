@@ -4,28 +4,30 @@ using UnityEngine;
 
 public class t_sneakyMeleeAttack : Task
 {
+    bool inFlankingPosition = false;
+    
     public override void EvaluateCandidates(NPC unit)
     {
-
-        foreach (Unit target in Initiative.players)
+        foreach (Unit u in Initiative.players)
         {
             //check it can find a route. 
 
-            unit.destination = target.gameObject;
-            target.GetComponent<TacticsMovement>().GetCurrentTile();
-            Tile t = unit.FindPath(target.GetComponent<TacticsMovement>().currentTile);
+            unit.destination = u.gameObject;
+            u.GetComponent<TacticsMovement>().GetCurrentTile();
+            Tile t = unit.FindPath(u.GetComponent<TacticsMovement>().currentTile);
             unit.destination = null;
+            attacked = false;
             if (t == null) return;
 
             Task task = new t_sneakyMeleeAttack();
-            task.value = 1 / Vector3.Distance(unit.transform.position, target.transform.position);
+            task.value = 1 / Vector3.Distance(unit.transform.position, u.transform.position);
             task.tile = t;
-            task.target = target.GetComponent<Unit>();
+            task.target = u.GetComponent<Unit>();
             
-            if (!RangeFinder.LineOfSight(unit, target.GetComponent<Unit>())) task.value -= 1;
-            if (unit.focus == target) task.value += 0.2f;
-            if (target.focus == unit) task.value -= 0.3f;
-            if (RangeFinder.FindFlankingTile(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>()) != null) task.value += 0.2f;
+            if (!RangeFinder.LineOfSight(unit, u.GetComponent<Unit>())) task.value -= 1;
+            if (unit.focus == u) task.value += 0.2f;
+            if (u.focus == unit) task.value -= 0.3f;
+            if (RangeFinder.FindFlankingTile(unit, unit.selectableTiles, u.GetComponent<TacticsMovement>()) != null) task.value += 0.2f;
 
             unit.GetComponent<AI>().tasks.Add(task);
         }
@@ -33,13 +35,24 @@ public class t_sneakyMeleeAttack : Task
 
     public override void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null)
     {
-        //if a flank is available, move to it. 
-        Tile flankingTile = RangeFinder.FindFlankingTile(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
-        if (flankingTile != null && unit.remainingMove > 0)
+        if (target == null && attacked == true)
         {
-            Initiative.queuedActions++;
-            unit.MoveToTile(flankingTile);
+            flagEndofTurn = true;
             return;
+        }
+
+        //if a flank is available, move to it. 
+        if (!inFlankingPosition)
+        {
+            unit.FindSelectableTiles();
+            Tile flankingTile = RangeFinder.FindFlankingTile(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
+            if (flankingTile != null && unit.remainingMove > 0)
+            {
+                inFlankingPosition = true;
+                Initiative.queuedActions++;
+                unit.MoveToTile(flankingTile);
+                return;
+            }
         }
 
         //Move as close as possible if main action is available and you're not next to the target. 
@@ -64,10 +77,7 @@ public class t_sneakyMeleeAttack : Task
                     {
                         Initiative.queuedActions += 1;
                         unit.mainWeapon.StartCoroutine("Attack", t);
-                        if (target == null)
-                        {
-                            flagEndofTurn = true;
-                        }
+                        attacked = true;
                         return;
                     }
                 }

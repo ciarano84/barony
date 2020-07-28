@@ -169,6 +169,7 @@ public class RangeFinder
 
     public static Tile FindFlankingTile(TacticsMovement origin, List<Tile> tiles, TacticsMovement target)
     {
+        Debug.Log("Looking for flanking tile");
         Tile flankingTile = null;
 
         RangeFinder.FindAdjacentUnits(target);

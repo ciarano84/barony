@@ -72,6 +72,7 @@ public abstract class Task
     public Tile tile;
     public Unit target;
     public bool flagEndofTurn = false;
+    public bool attacked = false;
 
     public abstract void EvaluateCandidates(NPC unit);
     
