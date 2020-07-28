@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class AI_golbinHunter : AI
 {
-    //Task goblinTask = new t_simpleRangedAttackTask();
-    Task goblinTask = new t_sneakyMeleeAttack();
+    Task sneakyAttack = new t_sneakyMeleeAttack();
+    Task run = new t_runAway();
+    Task defaultTask = new DefaultTask();
 
     public override void SetTask()
     {
-        goblinTask.EvaluateCandidates(unit);
+        sneakyAttack.EvaluateCandidates(unit);
+        defaultTask.EvaluateCandidates(unit);
+
+        foreach (Unit opponent in Initiative.players)
+        {
+            if (opponent.focus == unit)
+            {
+                run.EvaluateCandidates(unit);
+            }
+        }
         RandomizeValues();
         unit.actualTargetTile = null;
 

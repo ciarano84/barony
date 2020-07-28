@@ -87,7 +87,7 @@ public class EncounterManager : MonoBehaviour
             enemyCells.Add(new List<GameObject>());
             for (int x = EnemiesPerCell; x > 0; x--)
             {
-                int encounterRoll = Random.Range(0, 3);
+                int encounterRoll = Random.Range(-1,1);
                 GameObject enemy;
 
                 switch (encounterRoll)
@@ -96,12 +96,10 @@ public class EncounterManager : MonoBehaviour
                         enemy = Instantiate(GameAssets.i.OrcDefender);
                         break;
                     case 1:
-                        //enemy = Instantiate(GameAssets.i.GoblinArcher);
                         enemy = Instantiate(GameAssets.i.GoblinScout);
                         break;
                     default:
                         enemy = Instantiate(GameAssets.i.GoblinHunter);
-                        //enemy = Instantiate(goblinArchers);
                         break;
                 }
                 enemyCells[i].Add(enemy);

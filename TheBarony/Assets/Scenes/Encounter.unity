@@ -252,7 +252,7 @@ MonoBehaviour:
   goblinArchers: {fileID: 5726284418059044258, guid: 6b10b5b6b933ee1449a72dcef5d4ca78,
     type: 3}
   numberOfEnemyCells: 1
-  EnemiesPerCell: 1
+  EnemiesPerCell: 4
   encounterSettings: 1
   playerCount: 1
 --- !u!1001 &47112884

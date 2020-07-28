@@ -35,7 +35,8 @@ public class t_runAway : Task
         if (unit.remainingMove > 0)
         {
             Initiative.queuedActions++;
-            unit.MoveToTile(RangeFinder.FindTileFurthestFromOpponents(unit, unit.selectableTiles));   
+            unit.MoveToTile(RangeFinder.FindTileFurthestFromOpponents(unit, unit.selectableTiles));
+            flagEndofTurn = true;
         }
     }
 }

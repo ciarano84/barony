@@ -106,24 +106,43 @@ public class RangeFinder
         return filteredTiles;
     }
 
-    public static List<Tile> FindTilesNotNextToEnemy(TacticsMovement origin, List<Tile> tiles, TacticsMovement target)
+    public static List<Tile> FindTilesNotNextToEnemy(TacticsMovement origin, List<Tile> tiles, Factions opposingFaction)
     {
         List<Tile> filteredTiles = new List<Tile>();
-        target.GetCurrentTile();
-        target.currentTile.FindNeighbours(target.jumpHeight, null);
+
+        List<Unit> opponents = new List<Unit>();
+        switch (opposingFaction)
+        {
+            case Factions.players:
+                opponents = Initiative.players;
+                break;
+            case Factions.enemies:
+                opponents = Initiative.enemies;
+                break;
+            default:
+                break;
+        }
         
         foreach (Tile t in tiles)
         {
             bool found = false;
-            foreach (Tile orthagonalTile in target.currentTile.adjacencyList)
+
+            foreach (Unit opponent in opponents)
             {
-                if (t == orthagonalTile) found = true;
+                TacticsMovement opponentTactics = opponent.GetComponent<TacticsMovement>();
+                opponentTactics.GetCurrentTile();
+                opponentTactics.currentTile.FindNeighbours(opponentTactics.jumpHeight, null);
+
+                foreach (Tile orthagonalTile in opponentTactics.currentTile.adjacencyList)
+                {
+                    if (t == orthagonalTile) found = true;
+                }
+                foreach (Tile diagonalTile in opponentTactics.currentTile.diagonalAdjacencyList)
+                {
+                    if (t == diagonalTile) found = true;
+                }
+                if (!found) filteredTiles.Add(t);
             }
-            foreach (Tile diagonalTile in target.currentTile.diagonalAdjacencyList)
-            {
-                if (t == diagonalTile) found = true;
-            }
-            if (!found) filteredTiles.Add(t);
         }
         return filteredTiles;
     }

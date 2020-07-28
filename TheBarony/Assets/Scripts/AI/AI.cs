@@ -29,7 +29,13 @@ public class AI : MonoBehaviour
         {
             Debug.LogWarning("task is null");
         }
-        
+
+        if (task.flagEndofTurn == true)
+        {
+            task.flagEndofTurn = false;
+            unit.EndNPCTurn();
+            return;
+        }
         task.DoTask(unit);
     }
 
@@ -65,77 +71,25 @@ public abstract class Task
     public float value;
     public Tile tile;
     public Unit target;
+    public bool flagEndofTurn = false;
 
     public abstract void EvaluateCandidates(NPC unit);
     
     public abstract void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null);
 }
 
-public class t_SimpleMeleeAttack : Task
+public class DefaultTask : Task
 {
     public override void EvaluateCandidates(NPC unit)
     {
-        if (unit.focus != null)
-        {
-            Task task = new t_SimpleMeleeAttack();
-            task.target = unit.focus;
-            unit.GetComponent<AI>().tasks.Add(task);
-        }
-        else 
-        {
-            foreach (Unit target in Initiative.players)
-            {
-                //check it can find a route. 
-
-                unit.destination = target.gameObject;
-                target.GetComponent<TacticsMovement>().GetCurrentTile();
-                Tile t = unit.FindPath(target.GetComponent<TacticsMovement>().currentTile);
-                unit.destination = null;
-                if (t == null) return;
-
-                Task task = new t_SimpleMeleeAttack();
-                task.value = 1 / Vector3.Distance(unit.transform.position, target.transform.position);
-                task.tile = t;
-                task.target = target.GetComponent<Unit>();
-                if (!RangeFinder.LineOfSight(unit, target.GetComponent<Unit>()))
-                {
-                    task.value -= 1;
-                }
-                unit.GetComponent<AI>().tasks.Add(task);
-            }
-        }
+        Task task = new DefaultTask();
+        task.value = -10;
+        unit.GetComponent<AI>().tasks.Add(task);
     }
 
     public override void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null)
     {
-        unit.destination = target.gameObject;
-
-        //after move is set, the attack is carried out, when possible. 
-        if (unit.remainingActions > 0)
-        {
-            //unit.FindAdjacentUnits();
-            RangeFinder.FindAdjacentUnits(unit);
-            if (target != null)
-            {
-                if (unit.adjacentUnits.Contains(target))
-                //if (unit.adjacentUnits.Contains(unit.GetComponent<AI>().targetUnit))
-                {
-                    foreach (Weapon.Target t in unit.mainWeapon.targets)
-                    {
-                        if (t.unitTargeted == target)
-                        {
-                            Initiative.queuedActions += 1;
-                            unit.mainWeapon.StartCoroutine("Attack", t);
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-        unit.GetCurrentTile();
-        if (unit.currentTile == unit.actualTargetTile)
-        {
-            unit.EndNPCTurn();
-        }
+        Debug.LogWarning(unit.name + " has nothing to do this turn");
+        flagEndofTurn = true;
     }
 }

@@ -539,12 +539,12 @@ public class TacticsMovement : Unit
 
 
         //todo: come up with a way of handling when their is no path, or when the tile next to the target tile is blocked. 
-        Debug.LogError("NPC path not found");
+        Debug.LogWarning("NPC path not found");
         return null;
     }
 
     protected void NPCMove()
-    { 
+    {
         Initiative.queuedActions++;
         MoveToTile(actualTargetTile);
     }

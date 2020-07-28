@@ -42,7 +42,7 @@ public class t_simpleRangedAttackTask : Task
                 if (u.unitInfo.faction != unit.unitInfo.faction)
                 {
                     List<Tile> tiles = RangeFinder.FindTilesWithLineOfSight(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
-                    tiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, target.GetComponent<TacticsMovement>());
+                    tiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, Factions.players);
                     if (tiles.Count > 0)
                     {
                         Initiative.queuedActions++;
@@ -86,7 +86,7 @@ public class t_simpleRangedAttackTask : Task
                 List<Tile> tiles = RangeFinder.FindTilesWithLineOfSight(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
                 if (tiles.Count > 0)
                 {
-                    List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, target.GetComponent<TacticsMovement>());
+                    List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, Factions.players);
                     if (preferedTiles.Count > 0)
                     {
                         Initiative.queuedActions++;
@@ -122,7 +122,7 @@ public class t_simpleRangedAttackTask : Task
             List<Tile> tiles = RangeFinder.FindTilesWithLineOfSight(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
             if (tiles.Count > 0)
             {
-                List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, target.GetComponent<TacticsMovement>());
+                List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, Factions.players);
                 if (preferedTiles.Count > 0)
                 {
                     Initiative.queuedActions++;

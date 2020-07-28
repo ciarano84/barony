@@ -55,7 +55,6 @@ public class NPC : TacticsMovement
 
     public void EndNPCTurn()
     {
-        Debug.Log("End of turn called");
         destination = null;
         ai.tasks.Clear();
         ai.task = null;
