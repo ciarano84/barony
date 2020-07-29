@@ -37,7 +37,7 @@ public class EncounterManager : MonoBehaviour
     public EncounterSettings encounterSettings = EncounterSettings.Standard;
     public int playerCount;
 
-    private void Start()
+    private void Awake()
     {
         encounter = true;
         rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
@@ -87,7 +87,7 @@ public class EncounterManager : MonoBehaviour
             enemyCells.Add(new List<GameObject>());
             for (int x = EnemiesPerCell; x > 0; x--)
             {
-                int encounterRoll = Random.Range(-1,1);
+                int encounterRoll = 1; //Random.Range(0,3);
                 GameObject enemy;
 
                 switch (encounterRoll)

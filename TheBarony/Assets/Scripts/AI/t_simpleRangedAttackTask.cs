@@ -33,6 +33,13 @@ public class t_simpleRangedAttackTask : Task
     {
         RangedWeapon weapon = unit.GetComponent<RangedWeapon>();
 
+        //Check to see if you've killed the enemy. 
+        if (target == null)
+        {
+            flagEndofTurn = true;
+            return;
+        }
+
         //check to see if an enemy is adjacent and then move. 
         if (unit.remainingMove > 0)
         {
@@ -58,12 +65,16 @@ public class t_simpleRangedAttackTask : Task
         {
             if (weapon.rangedWeaponData.reloadSpeed == ActionCost.move && (unit.remainingMove == unit.unitInfo.currentMove))
             {
+                Initiative.queuedActions++;
                 weapon.Reload(ActionCost.move);
+                flagEndofTurn = true;
                 return;
             }
             else if (unit.remainingActions > 0)
             {
+                Initiative.queuedActions++;
                 weapon.Reload(ActionCost.main);
+                flagEndofTurn = true;
                 return;
             }
             else
@@ -83,6 +94,7 @@ public class t_simpleRangedAttackTask : Task
             if (!RangeFinder.LineOfSight(unit, target) && unit.remainingMove > 0)
             {
                 //Find a tile to move to that has LoS, ideally one that isn't next to an enemy.
+                unit.FindSelectableTiles();
                 List<Tile> tiles = RangeFinder.FindTilesWithLineOfSight(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
                 if (tiles.Count > 0)
                 {
@@ -104,13 +116,15 @@ public class t_simpleRangedAttackTask : Task
                 {
                     //if you can't get to a place you can see from, A* toward the target. 
                     unit.destination = target.gameObject;
+                    flagEndofTurn = true;
                     return;
                 }
             }
             else if (RangeFinder.LineOfSight(unit, target))
             {
                 unit.SetFocus(target);
-                unit.EndNPCTurn();
+                flagEndofTurn = true;
+                return;
             }
         }
         
@@ -144,7 +158,7 @@ public class t_simpleRangedAttackTask : Task
             }
         }
 
-        if (RangeFinder.LineOfSight(unit, target) && unit.remainingActions > 0 && weapon.rangedWeaponData.currentAmmo > 0)
+        if (RangeFinder.LineOfSight(unit, target) && unit.remainingActions > 0 && weapon.rangedWeaponData.currentAmmo > 0 && target == unit.focus)
         {
             foreach (Weapon.Target t in unit.mainWeapon.targets)
             {
@@ -152,11 +166,11 @@ public class t_simpleRangedAttackTask : Task
                 {
                     Initiative.queuedActions += 1;
                     unit.mainWeapon.StartCoroutine("Attack", t);
-                    unit.EndNPCTurn();
+                    flagEndofTurn = true;
                     return;
                 }
             }
         }
-        unit.EndNPCTurn();
+        flagEndofTurn = true;
     }
 }

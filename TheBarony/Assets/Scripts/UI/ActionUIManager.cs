@@ -24,6 +24,7 @@ public class ActionUIManager : MonoBehaviour
     public GameObject focusSwitch;
     public GameObject focusActiveIndicator;
     public Button endTurn;
+    public Button focusButton;
     static bool focusBeingSelected = false;
 
     bool moveAvailable;
@@ -38,6 +39,7 @@ public class ActionUIManager : MonoBehaviour
     private void Start()
     {
         endTurn.gameObject.SetActive(false);
+        focusButton.gameObject.SetActive(false);
         tooltip.SetActive(false);
     }
 
@@ -74,11 +76,12 @@ public class ActionUIManager : MonoBehaviour
         }
         else focusSwitch.gameObject.SetActive(false);
 
-        if (unit.GetComponent<TacticsMovement>() != null)
+        if (unit != null && unit.unitInfo.faction == Factions.players)
         {
             if (unit.remainingMove > 0 || unit.remainingActions > 0)
             {
                 endTurn.gameObject.SetActive(true);
+                focusButton.gameObject.SetActive(true);
 
                 //Ensure conditions for actions are met. 
                 foreach (Action a in unit.actions)
@@ -131,6 +134,7 @@ public class ActionUIManager : MonoBehaviour
     public void Clear()
     {
         endTurn.gameObject.SetActive(false);
+        focusButton.gameObject.SetActive(false);
         //get rid of all Action UI. 
         moveActions.Clear();
         mainActions.Clear();

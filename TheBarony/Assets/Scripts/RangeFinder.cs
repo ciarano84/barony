@@ -141,8 +141,8 @@ public class RangeFinder
                 {
                     if (t == diagonalTile) found = true;
                 }
-                if (!found) filteredTiles.Add(t);
             }
+            if (!found) filteredTiles.Add(t);
         }
         return filteredTiles;
     }
@@ -169,7 +169,6 @@ public class RangeFinder
 
     public static Tile FindFlankingTile(TacticsMovement origin, List<Tile> tiles, TacticsMovement target)
     {
-        Debug.Log("Looking for flanking tile");
         Tile flankingTile = null;
 
         RangeFinder.FindAdjacentUnits(target);

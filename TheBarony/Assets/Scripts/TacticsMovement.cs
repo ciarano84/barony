@@ -62,7 +62,10 @@ public class TacticsMovement : Unit
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
         focusSwitched = false;
-        if (EncounterManager.encounter) Initiative.AddUnit(this);
+        if (EncounterManager.encounter)
+        {
+            Initiative.AddUnit(this);
+        }
     }
 
     public void GetCurrentTile() {

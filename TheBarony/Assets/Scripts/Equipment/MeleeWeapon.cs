@@ -40,6 +40,7 @@ public class MeleeWeapon : Weapon
         }
 
         yield return new WaitUntil(() => !owner.moving);
+
         owner.unitAnim.SetTrigger("melee");
         yield return new WaitForSeconds(0.3f);
 
@@ -54,7 +55,6 @@ public class MeleeWeapon : Weapon
                 Vector3 relOtherAttackerPosition = transform.InverseTransformPoint(unit.transform.position);
                 if (relOtherAttackerPosition.z > (relTargetPosition.z + 0.1f))
                 {
-                    Debug.Log("flanking bonus given");
                     bonuses++;
                     break;
                 } 
