@@ -87,7 +87,7 @@ public class EncounterManager : MonoBehaviour
             enemyCells.Add(new List<GameObject>());
             for (int x = EnemiesPerCell; x > 0; x--)
             {
-                int encounterRoll = 1; //Random.Range(0,3);
+                int encounterRoll = Random.Range(0,3);
                 GameObject enemy;
 
                 switch (encounterRoll)

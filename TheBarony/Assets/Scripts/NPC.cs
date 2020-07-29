@@ -29,10 +29,7 @@ public class NPC : TacticsMovement
 
         if (!moving && Initiative.queuedActions < 1)
         {
-            //this next line could proper fuck everything. 
             destination = null;
-
-            Debug.Log(ai.task);
             ai.DoTurn();
 
             //This section DOES the A* move, but once the tile has been decided. 

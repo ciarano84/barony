@@ -7,6 +7,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7023929707143316714, guid: 0dd5e9e6b721a194488f2d990b5bc585,
+        type: 3}
+      propertyPath: unitInfo.baseDefence
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7023929707143316714, guid: 0dd5e9e6b721a194488f2d990b5bc585,
+        type: 3}
+      propertyPath: unitInfo.baseAttack
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7023929707143316714, guid: 0dd5e9e6b721a194488f2d990b5bc585,
+        type: 3}
+      propertyPath: unitInfo.baseToughness
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7023929707143316714, guid: 0dd5e9e6b721a194488f2d990b5bc585,
+        type: 3}
+      propertyPath: unitInfo.baseStrength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7023929707143316714, guid: 0dd5e9e6b721a194488f2d990b5bc585,
+        type: 3}
+      propertyPath: unitInfo.baseBreath
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -7023929707143316714, guid: 0dd5e9e6b721a194488f2d990b5bc585,
+        type: 3}
+      propertyPath: unitInfo.firstBreath
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4861493547287551762, guid: 0dd5e9e6b721a194488f2d990b5bc585,
         type: 3}
       propertyPath: m_LocalPosition.x

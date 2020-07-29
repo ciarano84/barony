@@ -52,8 +52,8 @@ public class TacticsMovement : Unit
     public void InitTacticsMovement() {
         if (unitInfo.faction == Factions.enemies)
         {
-            GetComponent<MonsterConstructor>().SetUpMonster();
             SetStats();
+            GetComponent<MonsterConstructor>().SetUpMonster();
         }
         tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;

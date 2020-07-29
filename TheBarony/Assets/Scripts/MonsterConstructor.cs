@@ -43,6 +43,10 @@ public class MonsterConstructor : MonoBehaviour
         //Do I need this any more? 
         unit.SetSlots();
         unitInfo.mainWeaponData.EquipItem(unit);
+        if (gameObject.name == "Orc Defender(Clone)")
+        {
+            //Debug
+        }
         unitInfo.offHandData.EquipItem(unit);
         unitInfo.armourData.EquipItem(unit);
         unitInfo.aspectData.GetAspect(unit);
