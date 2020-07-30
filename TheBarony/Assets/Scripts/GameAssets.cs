@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+//using UnityEditor;
+//using UnityEditor.Animations;
 using UnityEngine;
 
 public class GameAssets : MonoBehaviour
@@ -59,6 +60,6 @@ public class GameAssets : MonoBehaviour
     public Mesh PriestRobesMesh;
 
     //Animators
-    public AnimatorController TwoHanded;
-    public AnimatorController OneHanded;
+    public RuntimeAnimatorController TwoHanded;
+    public RuntimeAnimatorController OneHanded;
 }
