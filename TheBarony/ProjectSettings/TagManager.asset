@@ -10,6 +10,7 @@ TagManager:
   - selector
   - barrier
   - Tile Select
+  - Site
   layers:
   - Default
   - TransparentFX
