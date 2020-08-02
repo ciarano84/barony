@@ -8,10 +8,17 @@ public class MapManager : MonoBehaviour
 {
     public List<EncounterSite> sites = new List<EncounterSite>();
     public static List<Encounter> encounters = new List<Encounter>();
+    public List<Company> companies = new List<Company>();
+    public static EncounterSite theCastle;
     public Text date;
 
     //simple day tracker till a calander is in place. 
     public int day = 1;
+
+    private void Awake()
+    {
+        theCastle = GameObject.Find("The Castle").GetComponent<EncounterSite>();
+    }
 
     private void Update()
     {
@@ -24,14 +31,12 @@ public class MapManager : MonoBehaviour
     void NewDay()
     {
         day++;
-        Debug.Log("encounters.count is equal to " + encounters.Count);
         date.text = ("Day " + day);
         GenerateEncounters();
         foreach (EncounterSite site in sites)
         {
             if (site.encounter != null)
             {
-                Debug.Log(site.SiteName + " has an encounter");
                 site.encounter.DaysRemaining--;
                 if (site.encounter.DaysRemaining < 0)
                 {
@@ -44,12 +49,12 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
+        MoveCompanys();
     }
 
     void GenerateEncounters()
     {
         int roll = Random.Range(1, 11);
-        //Debug.Log("roll is " + roll);
         switch (encounters.Count)
         {
             case 0:
@@ -65,7 +70,6 @@ public class MapManager : MonoBehaviour
         //Debug.Log("modified roll is " + roll);
         if (roll >= 10)
         {
-            Debug.Log("encounter created");
             CreateEncounter();
         }
     }
@@ -106,6 +110,18 @@ public class MapManager : MonoBehaviour
             EncounterSite selectedSite = availableSites[Random.Range(0, availableSites.Count)];
             selectedSite.encounter = encounter;
             encounter.site = selectedSite;
+        }
+    }
+
+    void MoveCompanys()
+    {
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("company"))
+        {
+            companies.Add(go.GetComponent<Company>());
+        }
+        foreach (Company company in companies)
+        {
+            company.Travel();
         }
     }
 }
