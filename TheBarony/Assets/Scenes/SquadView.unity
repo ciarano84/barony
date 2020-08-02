@@ -2253,6 +2253,7 @@ MonoBehaviour:
   infoPanel2: {fileID: 1653520573}
   infoPanel3: {fileID: 431230131}
   infoPanel4: {fileID: 188132555}
+  proceedText: {fileID: 751368146}
 --- !u!1 &643850596
 GameObject:
   m_ObjectHideFlags: 0

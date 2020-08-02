@@ -8,7 +8,7 @@ public class ProxyRosta : MonoBehaviour
 
     string[] names = { "bob", "Sandy", "Rex", "Bill", "Helen", "Walter", "Elsa", "Reiner", "Daz", "Peter", "Lucy" };
 
-    public int numberOfStartingUnits = 8;
+    public int numberOfStartingUnits = 10;
 
     RostaInfo rosta;
     Inventory inventory;
@@ -23,19 +23,12 @@ public class ProxyRosta : MonoBehaviour
         else 
         {
             rosta = Instantiate(playerData).GetComponent<RostaInfo>();
-            //assign the squad first
-            for (int n = 4; n > 0; n--)
-            {
-                UnitInfo unit = new UnitInfo();
-                AssignStats(unit);
-                rosta.squad.Add(unit);
-            }
             //assign the rest of the rosta after. 
-            for (int n = (numberOfStartingUnits-4); n > 0; n--)
+            for (int n = (numberOfStartingUnits); n > 0; n--)
             {
                 UnitInfo unit = new UnitInfo();
                 AssignStats(unit);
-                rosta.rosta.Add(unit);
+                rosta.castle.Add(unit);
             }
             //Build the intial inventory
             inventory = playerData.GetComponent<Inventory>();

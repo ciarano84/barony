@@ -26,21 +26,6 @@ public class Inventory : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    //Debug method
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            foreach (ItemEntry i in inventory)
-            {
-                i.itemData.SetData(null);
-                Debug.Log(i.itemData.name);
-                Debug.Log(i.amount);
-                Debug.Log(i.infinite);
-            }
-        }
-    }
-
     public void UpdateEntry(ItemData _itemData, int _amount, bool _infinite = false)
     {
         if (_amount < -1)

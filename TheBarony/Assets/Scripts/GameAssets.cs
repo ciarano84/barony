@@ -16,7 +16,10 @@ public class GameAssets : MonoBehaviour
         }
     }
 
-    //UI
+    //map UI
+    public GameObject company;
+    
+    //encounter UI
     public Transform damagePopUp;
     public Texture2D Sword_Cursor;
     public Texture2D Eye_Cursor;
@@ -29,7 +32,6 @@ public class GameAssets : MonoBehaviour
     public GameObject PriestVisual;
     public GameObject DefenderVisual;
     public GameObject ScoutVisual;
-    //public GameObject EnemyVisual;
     public GameObject GoblinHunter;
     public GameObject GoblinScout;
     public GameObject OrcDefender;

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CompanySelectManager : MonoBehaviour
 {
@@ -10,11 +10,14 @@ public class CompanySelectManager : MonoBehaviour
     public UnitInfoPanel infoPanel2;
     public UnitInfoPanel infoPanel3;
     public UnitInfoPanel infoPanel4;
+    public Text proceedText;
     List<UnitInfoPanel> unitInfoPanels = new List<UnitInfoPanel>();
 
     void Start()
     {
+        proceedText.text = RostaInfo.currentEncounter.CompanySelectProceedText;
         StartCoroutine(SetInfoPanels());
+        RostaInfo.currentEncounter.AssignCompany();
     }
 
     IEnumerator SetInfoPanels()
@@ -39,6 +42,6 @@ public class CompanySelectManager : MonoBehaviour
 
     public void BeginEncounter()
     {
-        SceneManager.LoadScene("Arena0");
+        RostaInfo.currentEncounter.ProceedFromCompanySelect();
     }
 }
