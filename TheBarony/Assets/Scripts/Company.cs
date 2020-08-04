@@ -8,6 +8,9 @@ public class CompanyInfo
     public string companyName;
     public Transform origin;
     public Transform destination;
+    public TransformSave originSave;
+    public TransformSave destinationSave;
+    public TransformSave currentLocationSave;
     public Encounter targetEncounter;
     public List<UnitInfo> units = new List<UnitInfo>();
     public float travelSpeed = 0.01f;
@@ -19,7 +22,13 @@ public class CompanyInfo
         Company newCompany = go.GetComponent<Company>();
         newCompany.companyInfo = this;
         company = newCompany;
-        newCompany.transform.position = origin.transform.position;
+        origin = TransformSave.ReturnTransform(originSave);
+        destination = TransformSave.ReturnTransform(destinationSave);
+        if (currentLocationSave != null)
+        {
+            newCompany.transform.position = TransformSave.ReturnTransform(currentLocationSave).position;
+        }
+        else newCompany.transform.position = origin.position;
     }
 }
 
@@ -35,6 +44,8 @@ public class Company : MonoBehaviour
         if (!moving) return;
         else 
         {
+            bool endMove = false;
+
             if (companyInfo.targetEncounter == null)
             {
                 Debug.LogWarning("No encounter to travel to, heading back");
@@ -42,9 +53,28 @@ public class Company : MonoBehaviour
             }
             
             transform.position = Vector3.MoveTowards(transform.position, companyInfo.destination.position, companyInfo.travelSpeed);
-            timer += Time.deltaTime;
-            if (timer > 1)
+            
+            //check to see if it has reached its destination. 
+            if (Vector3.Distance(transform.position, companyInfo.destination.transform.position) <= 0.01f)
             {
+                companyInfo.currentLocationSave = TransformSave.StoreTransform(companyInfo.destination.gameObject);
+
+                //handle returning to the castle
+
+                //handle arriving at an encounter
+                if (Vector3.Distance(transform.position, companyInfo.targetEncounter.site.transform.position) <= 0.01f)
+                {
+                    companyInfo.targetEncounter.CompanyAtSite(companyInfo);
+                    endMove = true;
+                }
+            }
+            
+            timer += Time.deltaTime;
+            if (timer > 1) endMove = true;
+            
+            if (endMove)
+            {
+                companyInfo.currentLocationSave = TransformSave.StoreTransform(gameObject);
                 moving = false;
                 timer = 0;
                 return;

@@ -910,10 +910,9 @@ MonoBehaviour:
   - {fileID: 1338493134}
   - {fileID: 1723493266}
   - {fileID: 307168249}
-  - {fileID: 307168249}
   companies: []
+  rosta: {fileID: 0}
   date: {fileID: 12745455}
-  day: 1
 --- !u!4 &890855147
 Transform:
   m_ObjectHideFlags: 0
@@ -1007,7 +1006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2198,7 +2197,7 @@ PrefabInstance:
     - target: {fileID: 1731472596612225439, guid: f73de65d029f44f42a850fbcc2e75f44,
         type: 3}
       propertyPath: SiteName
-      value: Craggley Tower
+      value: The Castle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f73de65d029f44f42a850fbcc2e75f44, type: 3}

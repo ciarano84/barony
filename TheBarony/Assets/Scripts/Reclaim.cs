@@ -42,8 +42,12 @@ public class Reclaim : Encounter
         MapManager.uiState = MapManager.UIState.standard;
         ConfirmationPopUp.onConfirm -= GoToCompanySelect;
         ConfirmationPopUp.onCancel -= CancelRally;
+
         origin = GameObject.Find("The Castle").transform;
         if (origin == null) Debug.LogError("encounter can't find the castle");
+
+        RostaInfo.CreateCompanyInfo(this, origin.gameObject, site.gameObject);
+
         RostaInfo.currentEncounter = this;
         base.GoToCompanySelect();
     }
@@ -57,7 +61,8 @@ public class Reclaim : Encounter
 
     public override void ProceedFromCompanySelect()
     {
-        CreateCompanyInfo();
+        selectedCompany.units = rosta.squad;
+        rosta.squad.Clear();
         SceneManager.LoadScene("Map");
     }
 }

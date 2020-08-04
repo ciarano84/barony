@@ -18,6 +18,7 @@ public class EncounterSite : MonoBehaviour, IPointerClickHandler
 
     public void ShowEncounter()
     {
+        if (buttonIcon == null) Debug.Log("buttonIcon comes up as null, and this gameobject has the name of " + SiteName);
         buttonIcon.SetActive(true);
     }
 
@@ -34,6 +35,4 @@ public class EncounterSite : MonoBehaviour, IPointerClickHandler
             encounter.Selected();
         }
     }
-
-
 }

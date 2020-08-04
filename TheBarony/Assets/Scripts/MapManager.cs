@@ -9,7 +9,6 @@ using UnityEditor.PackageManager;
 public class MapManager : MonoBehaviour
 {
     public List<EncounterSite> sites = new List<EncounterSite>();
-    public static List<Encounter> encounters = new List<Encounter>();
     public List<Company> companies = new List<Company>();
     public static EncounterSite theCastle;
     public RostaInfo rosta;
@@ -17,54 +16,59 @@ public class MapManager : MonoBehaviour
     public enum UIState { standard, confirmation };
     public static UIState uiState = UIState.standard;
 
-    //simple day tracker till a calander is in place. 
-    public int day = 1;
-
     private void Start()
     {
         theCastle = GameObject.Find("The Castle").GetComponent<EncounterSite>();
         rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
         if (rosta == null) Debug.LogError("Encounter could not find the player data");
 
-        foreach (Encounter e in encounters) e.runCompanySelectSetUp = false;
-        foreach (CompanyInfo c in rosta.companies)
+        foreach (Encounter e in RostaInfo.encounters)
+        {
+            e.GetReferences();
+            e.runCompanySelectSetUp = false;
+            e.site = GameObject.Find(e.site.SiteName).GetComponent<EncounterSite>(); 
+            e.site.ShowEncounter();
+        }
+            
+        foreach (CompanyInfo c in RostaInfo.companies)
         {
             c.CreateCompany();
             companies.Add(c.company);
         }
-
-                //add to list of companies
+        date.text = ("Day " + RostaInfo.date);
     }
 
     public void NewDay()
     {
         if (uiState == UIState.standard)
-        day++;
-        date.text = ("Day " + day);
-        GenerateEncounters();
-        foreach (EncounterSite site in sites)
         {
-            if (site.encounter != null)
+            RostaInfo.date++;
+            date.text = ("Day " + RostaInfo.date);
+            GenerateEncounters();
+            foreach (EncounterSite site in sites)
             {
-                site.encounter.DaysRemaining--;
-                if (site.encounter.DaysRemaining < 0)
+                if (site.encounter != null)
                 {
-                    encounters.Remove(site.encounter);
-                    site.ClearEncounter();
-                }
-                else
-                {
-                    site.ShowEncounter();
+                    site.encounter.DaysRemaining--;
+                    if (site.encounter.DaysRemaining < 0)
+                    {
+                        RostaInfo.encounters.Remove(site.encounter);
+                        site.ClearEncounter();
+                    }
+                    else
+                    {
+                        site.ShowEncounter();
+                    }
                 }
             }
-        }
-        MoveCompanys();
+            MoveCompanys();
+        } 
     }
 
     void GenerateEncounters()
     {
         int roll = Random.Range(1, 11);
-        switch (encounters.Count)
+        switch (RostaInfo.encounters.Count)
         {
             case 0:
                 roll += 6;
@@ -88,7 +92,7 @@ public class MapManager : MonoBehaviour
         encounter.DaysRemaining = Random.Range(6, 15);
         encounter.GetReferences();
         FindLocation(encounter);
-        encounters.Add(encounter);
+        RostaInfo.encounters.Add(encounter);
     }
 
     void FindLocation(Encounter encounter)
@@ -119,8 +123,6 @@ public class MapManager : MonoBehaviour
     }
 }
 
-//public enum EncounterType { RECLAIM };
-
 public abstract class Encounter
 {
     public MapManager mapManager;
@@ -128,6 +130,7 @@ public abstract class Encounter
     public RostaInfo rosta;
     public int DaysRemaining;
     public EncounterSite site;
+    public CompanyInfo selectedCompany;
 
     //This is used to record the starting point of a company. 
     public Transform origin;
@@ -190,14 +193,8 @@ public abstract class Encounter
         runCompanySelectSetUp = true;
     }
 
-    public void CreateCompanyInfo()
+    public virtual void CompanyAtSite(CompanyInfo companyInfo)
     {
-        CompanyInfo companyInfo = new CompanyInfo();
-        companyInfo.units = rosta.squad;
-        companyInfo.targetEncounter = this;
-        companyInfo.origin = origin;
-        companyInfo.destination = site.transform;
-        rosta.squad.Clear();
-        rosta.companies.Add(companyInfo);
+        //Do this. 
     }
 }
