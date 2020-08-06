@@ -74,7 +74,7 @@ public class RostaManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         //Move the troop out the squad and into the rosta
-        rosta.castle.Add(rosta.squad[rosta.companyPosition]);
+        rosta.castle.Add(RostaInfo.squad[rosta.companyPosition]);
         //rosta.squad.Remove(rosta.squad[rosta.companyPosition]);
         rosta.currentUnitShown = rosta.castle.Count-1;
 
@@ -142,7 +142,7 @@ public class RostaManager : MonoBehaviour
     public void SelectUnit()
     {
         //Add unit to squad.
-        rosta.squad[rosta.companyPosition] = rosta.castle[rosta.currentUnitShown];
+        RostaInfo.squad[rosta.companyPosition] = rosta.castle[rosta.currentUnitShown];
 
         //Remove it from rosta.
         rosta.castle.Remove(rosta.castle[rosta.currentUnitShown]);

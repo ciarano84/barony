@@ -6,7 +6,7 @@ using UnityEngine;
 public class RostaInfo : MonoBehaviour
 {
     public List<UnitInfo> castle = new List<UnitInfo>();
-    public List<UnitInfo> squad = new List<UnitInfo>();
+    public static List<UnitInfo> squad = new List<UnitInfo>();
     public static List<CompanyInfo> companies = new List<CompanyInfo>();
     public static List<Encounter> encounters = new List<Encounter>();
 

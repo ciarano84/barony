@@ -61,10 +61,10 @@ public class EncounterManager : MonoBehaviour
     {
         if (encounterSettings == EncounterSettings.Standard)
         {
-            for (int i = 0; i < rosta.squad.Count; i++)
+            for (int i = 0; i < RostaInfo.squad.Count; i++)
             {
                 GameObject player = Instantiate(GameAssets.i.PlayerUnit);
-                player.GetComponent<Unit>().unitInfo = rosta.squad[i];
+                player.GetComponent<Unit>().unitInfo = RostaInfo.squad[i];
                 playerSquad.Add(player);
             }
         }
@@ -74,7 +74,7 @@ public class EncounterManager : MonoBehaviour
             for (int i = 0; i < playerCount; i++)
             {
                 GameObject player = Instantiate(GameAssets.i.PlayerUnit);
-                player.GetComponent<Unit>().unitInfo = rosta.squad[i];
+                player.GetComponent<Unit>().unitInfo = RostaInfo.squad[i];
                 playerSquad.Add(player);
             }
         }

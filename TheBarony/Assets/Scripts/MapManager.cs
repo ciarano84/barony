@@ -13,8 +13,9 @@ public class MapManager : MonoBehaviour
     public static EncounterSite theCastle;
     public RostaInfo rosta;
     public Text date;
-    public enum UIState { standard, confirmation };
+    public enum UIState { standard, confirmation, noInput };
     public static UIState uiState = UIState.standard;
+    public GameObject encounterPanel;
 
     private void Start()
     {
@@ -33,9 +34,9 @@ public class MapManager : MonoBehaviour
         foreach (CompanyInfo c in RostaInfo.companies)
         {
             c.CreateCompany();
-            companies.Add(c.company);
         }
         date.text = ("Day " + RostaInfo.date);
+        CheckForAvailableEncounters();
     }
 
     public void NewDay()
@@ -62,6 +63,7 @@ public class MapManager : MonoBehaviour
                 }
             }
             MoveCompanys();
+            CheckForAvailableEncounters();
         } 
     }
 
@@ -112,13 +114,33 @@ public class MapManager : MonoBehaviour
 
     void MoveCompanys()
     {
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("company"))
-        {
-            companies.Add(go.GetComponent<Company>());
-        }
         foreach (Company company in companies)
         {
             company.Travel();
+        }
+    }
+
+    public void CheckForAvailableEncounters()
+    {
+        foreach (Transform child in encounterPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Encounter encounter in RostaInfo.encounters)
+        {
+            foreach (Company company in companies)
+            {
+                if (company.companyInfo.targetEncounter == encounter)
+                {
+                    if (Vector3.Distance(company.transform.position, encounter.site.transform.position) <= 0.01f)
+                    {
+                        EncounterButton encounterButton = Instantiate(GameAssets.i.encounterButton, encounterPanel.transform).GetComponent<EncounterButton>();
+                        encounterButton.company = company;
+                        encounterButton.encounter = encounter;
+                        encounterButton.buttonText.text = encounter.encounterButtonText;
+                    }
+                } 
+            }
         }
     }
 }
@@ -136,10 +158,14 @@ public abstract class Encounter
     public Transform origin;
 
     //Data about the encounter
-    public string ConfirmationQuestionText;
-    public string ConfirmationYesText;
-    public string ConfirmationNoText;
+    public string RallyConfirmationQuestionText;
+    public string RallyConfirmationYesText;
+    public string RallyConfirmationNoText;
     public string CompanySelectProceedText;
+    public string EncounterStartConfirmationQuestionText;
+    public string EncounterStartConfirmationYesText;
+    public string EncounterStartConfirmationNoText;
+    public string encounterButtonText;
 
     public bool runCompanySelectSetUp;
 
@@ -165,7 +191,12 @@ public abstract class Encounter
     }
 
     public virtual void StartEncounter()
-    { }
+    {
+        RostaInfo.squad.Clear();
+        RostaInfo.squad = selectedCompany.units;
+        RostaInfo.currentEncounter = this;
+        SceneManager.LoadScene("Arena0");
+    }
 
     public virtual List<EncounterSite> FindSuitableSites()
     {
@@ -185,7 +216,7 @@ public abstract class Encounter
             if (rosta.castle[count] == null) Debug.LogError("No Units left in the castle");
 
             //Add unit to squad.
-            rosta.squad.Add(rosta.castle[count]);
+            RostaInfo.squad.Add(rosta.castle[count]);
 
             //Remove it from rosta.
             rosta.castle.Remove(rosta.castle[count]);
@@ -193,8 +224,7 @@ public abstract class Encounter
         runCompanySelectSetUp = true;
     }
 
-    public virtual void CompanyAtSite(CompanyInfo companyInfo)
+    public virtual void EncounterButtonSelected()
     {
-        //Do this. 
     }
 }

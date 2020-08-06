@@ -13,7 +13,7 @@ public class CompanyInfo
     public TransformSave currentLocationSave;
     public Encounter targetEncounter;
     public List<UnitInfo> units = new List<UnitInfo>();
-    public float travelSpeed = 0.01f;
+    public float travelSpeed = 0.04f;
     public Company company;
 
     public void CreateCompany()
@@ -29,6 +29,8 @@ public class CompanyInfo
             newCompany.transform.position = TransformSave.ReturnTransform(currentLocationSave).position;
         }
         else newCompany.transform.position = origin.position;
+        company.mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
+        company.mapManager.companies.Add(company);
     }
 }
 
@@ -36,7 +38,8 @@ public class Company : MonoBehaviour
 {
     public CompanyInfo companyInfo;
     bool moving = false;
-    
+    public MapManager mapManager;
+
     float timer = 0;
 
     private void Update()
@@ -45,6 +48,7 @@ public class Company : MonoBehaviour
         else 
         {
             bool endMove = false;
+            MapManager.uiState = MapManager.UIState.noInput;
 
             if (companyInfo.targetEncounter == null)
             {
@@ -62,11 +66,7 @@ public class Company : MonoBehaviour
                 //handle returning to the castle
 
                 //handle arriving at an encounter
-                if (Vector3.Distance(transform.position, companyInfo.targetEncounter.site.transform.position) <= 0.01f)
-                {
-                    companyInfo.targetEncounter.CompanyAtSite(companyInfo);
-                    endMove = true;
-                }
+                //this should be dealt with by the map manager. 
             }
             
             timer += Time.deltaTime;
@@ -75,6 +75,8 @@ public class Company : MonoBehaviour
             if (endMove)
             {
                 companyInfo.currentLocationSave = TransformSave.StoreTransform(gameObject);
+                MapManager.uiState = MapManager.UIState.standard;
+                mapManager.CheckForAvailableEncounters();
                 moving = false;
                 timer = 0;
                 return;

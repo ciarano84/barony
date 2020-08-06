@@ -18,6 +18,7 @@ public class GameAssets : MonoBehaviour
 
     //map UI
     public GameObject company;
+    public GameObject encounterButton;
     
     //encounter UI
     public Transform damagePopUp;

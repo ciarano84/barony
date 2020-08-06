@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   company: {fileID: 5636601994533947136, guid: f9c1c452ad5044241a101fddca717e6c, type: 3}
+  encounterButton: {fileID: 8457752749189117204, guid: 0ccbea0ebb4cdaf4e8d144997808fb0e,
+    type: 3}
   damagePopUp: {fileID: 7401985853768158229, guid: 9d0f9ef1dfcce5f438b66c7d20d46006,
     type: 3}
   Sword_Cursor: {fileID: 2800000, guid: 3ea26815491cfdc43969475b606dd477, type: 3}

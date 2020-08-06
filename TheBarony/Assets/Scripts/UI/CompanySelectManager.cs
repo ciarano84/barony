@@ -35,7 +35,7 @@ public class CompanySelectManager : MonoBehaviour
         rosta = GameObject.Find("PlayerData"+"(Clone)").GetComponent<RostaInfo>();
         for (int count = 0; count < 4; count++)
         {
-            unitInfoPanels[count].SetUnit(rosta.squad[count]);
+            unitInfoPanels[count].SetUnit(RostaInfo.squad[count]);
         }
         yield break;
     }
