@@ -8,7 +8,8 @@ public class ProxyRosta : MonoBehaviour
 
     string[] names = { "bob", "Sandy", "Rex", "Bill", "Helen", "Walter", "Elsa", "Reiner", "Daz", "Peter", "Lucy" };
 
-    public int numberOfStartingUnits = 10;
+    //set in the editor.
+    public int numberOfStartingUnits;
 
     RostaInfo rosta;
     Inventory inventory;

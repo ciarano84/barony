@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +34,8 @@ public class CompanySelectManager : MonoBehaviour
         unitInfoPanels[3].position = 3;
 
         rosta = GameObject.Find("PlayerData"+"(Clone)").GetComponent<RostaInfo>();
-        for (int count = 0; count < 4; count++)
+        int max = Math.Min(4, RostaInfo.squad.Count);
+        for (int count = 0; count < max; count++)
         {
             unitInfoPanels[count].SetUnit(RostaInfo.squad[count]);
         }

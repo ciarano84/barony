@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEditor.PackageManager;
+using System;
 
 public class MapManager : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class MapManager : MonoBehaviour
     public static EncounterSite theCastle;
     public RostaInfo rosta;
     public Text date;
-    public enum UIState { standard, confirmation, noInput };
-    public static UIState uiState = UIState.standard;
     public GameObject encounterPanel;
 
     private void Start()
@@ -27,7 +26,8 @@ public class MapManager : MonoBehaviour
         {
             e.GetReferences();
             e.runCompanySelectSetUp = false;
-            e.site = GameObject.Find(e.site.SiteName).GetComponent<EncounterSite>(); 
+            e.site = GameObject.Find(e.site.SiteName).GetComponent<EncounterSite>();
+            e.site.encounter = e;
             e.site.ShowEncounter();
         }
             
@@ -41,7 +41,7 @@ public class MapManager : MonoBehaviour
 
     public void NewDay()
     {
-        if (uiState == UIState.standard)
+        if (MapUIManager.uiState == MapUIManager.UIState.standard)
         {
             RostaInfo.date++;
             date.text = ("Day " + RostaInfo.date);
@@ -67,9 +67,32 @@ public class MapManager : MonoBehaviour
         } 
     }
 
+    public void ReturnCompanysToCastle()
+    {
+        //This list is used to rebuild the company list after it's been cleared out. 
+        List<Company> tempList = new List<Company>();
+
+        foreach (Company company in companies)
+        {
+            if (Vector3.Distance(company.transform.position, theCastle.transform.position) <= 0.01f && company.companyInfo.targetEncounter == null)
+            {
+                foreach (UnitInfo unitInfo in company.companyInfo.units)
+                {
+                    rosta.castle.Add(unitInfo);
+                }
+                Destroy(company.gameObject);
+            } else tempList.Add(company);
+        }
+        companies.Clear();
+        foreach (Company c in tempList)
+        {
+            companies.Add(c);
+        }
+    }
+
     void GenerateEncounters()
     {
-        int roll = Random.Range(1, 11);
+        int roll = UnityEngine.Random.Range(1, 11);
         switch (RostaInfo.encounters.Count)
         {
             case 0:
@@ -91,7 +114,7 @@ public class MapManager : MonoBehaviour
     void CreateEncounter()
     {
         Encounter encounter = new Reclaim();
-        encounter.DaysRemaining = Random.Range(6, 15);
+        encounter.DaysRemaining = UnityEngine.Random.Range(6, 15);
         encounter.GetReferences();
         FindLocation(encounter);
         RostaInfo.encounters.Add(encounter);
@@ -105,7 +128,7 @@ public class MapManager : MonoBehaviour
         { Debug.LogWarning("no available site found"); }
         else
         {
-            EncounterSite selectedSite = availableSites[Random.Range(0, availableSites.Count)];
+            EncounterSite selectedSite = availableSites[UnityEngine.Random.Range(0, availableSites.Count)];
             selectedSite.encounter = encounter;
             encounter.site = selectedSite;
             encounter.SetEncounterData();
@@ -143,12 +166,13 @@ public class MapManager : MonoBehaviour
             }
         }
     }
+
+
 }
 
 public abstract class Encounter
 {
     public MapManager mapManager;
-    public ConfirmationPopUp confirmationPopUp;
     public RostaInfo rosta;
     public int DaysRemaining;
     public EncounterSite site;
@@ -173,8 +197,6 @@ public abstract class Encounter
     {
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         if (mapManager == null) Debug.LogError("Encounter couldn't get reference to map manager");
-        confirmationPopUp = GameObject.Find("ConfirmationPopUp").GetComponent<ConfirmationPopUp>();
-        if (confirmationPopUp == null) Debug.LogError("Encounter could not find the confirmation popup");
         rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
         if (rosta == null) Debug.LogError("Encounter could not find the player data");
     }
@@ -183,7 +205,8 @@ public abstract class Encounter
     { }
 
     public virtual void Selected()
-    { }
+    {
+    }
 
     public virtual void GoToCompanySelect()
     {
@@ -210,11 +233,9 @@ public abstract class Encounter
     {
         if (runCompanySelectSetUp) return;
 
-        int unitLimit = 4;
-        for (int count = 0; count < unitLimit; count++)
+        int unitLimit = Math.Min(3, rosta.castle.Count - 1);
+        for (int count = unitLimit; count >= 0; count--)
         {
-            if (rosta.castle[count] == null) Debug.LogError("No Units left in the castle");
-
             //Add unit to squad.
             RostaInfo.squad.Add(rosta.castle[count]);
 

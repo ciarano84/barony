@@ -30,7 +30,7 @@ public class EncounterSite : MonoBehaviour, IPointerClickHandler
 
     private void OnMouseDown()
     {
-        if (encounter != null && MapManager.uiState == MapManager.UIState.standard && !EventSystem.current.IsPointerOverGameObject())
+        if (encounter != null && MapUIManager.uiState == MapUIManager.UIState.standard && !EventSystem.current.IsPointerOverGameObject())
         {
             encounter.Selected();
         }

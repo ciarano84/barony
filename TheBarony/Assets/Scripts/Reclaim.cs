@@ -35,15 +35,19 @@ public class Reclaim : Encounter
 
     public override void Selected()
     {
-        confirmationPopUp.GetConfirmation(RallyConfirmationQuestionText, RallyConfirmationYesText, RallyConfirmationNoText);
-        MapManager.uiState = MapManager.UIState.confirmation;
+        if (rosta.castle.Count == 0)
+        {
+            Debug.Log("no troop issue!");
+            MapUIManager.RequestAlert("You have no available troops.", "Return");
+            return;
+        }
+        MapUIManager.RequestConfirmation(RallyConfirmationQuestionText, RallyConfirmationYesText, RallyConfirmationNoText);
         ConfirmationPopUp.onConfirm += GoToCompanySelect;
         ConfirmationPopUp.onCancel += CancelRally;
     }
 
     public override void GoToCompanySelect()
     {
-        MapManager.uiState = MapManager.UIState.standard;
         ConfirmationPopUp.onConfirm -= GoToCompanySelect;
         ConfirmationPopUp.onCancel -= CancelRally;
 
@@ -58,7 +62,6 @@ public class Reclaim : Encounter
 
     void CancelRally()
     {
-        MapManager.uiState = MapManager.UIState.standard;
         ConfirmationPopUp.onConfirm -= GoToCompanySelect;
         ConfirmationPopUp.onCancel -= CancelRally;
     }
@@ -80,8 +83,7 @@ public class Reclaim : Encounter
 
     public override void EncounterButtonSelected()
     {
-        confirmationPopUp.GetConfirmation(EncounterStartConfirmationQuestionText, EncounterStartConfirmationYesText, EncounterStartConfirmationNoText);
-        MapManager.uiState = MapManager.UIState.confirmation;
+        MapUIManager.RequestConfirmation(EncounterStartConfirmationQuestionText, EncounterStartConfirmationYesText, EncounterStartConfirmationNoText);
         ConfirmationPopUp.onConfirm += StartEncounter;
         ConfirmationPopUp.onCancel += CancelEncounter;
     }
@@ -91,5 +93,6 @@ public class Reclaim : Encounter
         ConfirmationPopUp.onConfirm -= StartEncounter;
         ConfirmationPopUp.onCancel -= CancelEncounter;
         selectedCompany.targetEncounter = null;
+        mapManager.CheckForAvailableEncounters();
     }
 }

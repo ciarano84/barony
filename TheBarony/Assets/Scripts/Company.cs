@@ -48,7 +48,7 @@ public class Company : MonoBehaviour
         else 
         {
             bool endMove = false;
-            MapManager.uiState = MapManager.UIState.noInput;
+            MapUIManager.uiState = MapUIManager.UIState.noInput;
 
             if (companyInfo.targetEncounter == null)
             {
@@ -62,11 +62,6 @@ public class Company : MonoBehaviour
             if (Vector3.Distance(transform.position, companyInfo.destination.transform.position) <= 0.01f)
             {
                 companyInfo.currentLocationSave = TransformSave.StoreTransform(companyInfo.destination.gameObject);
-
-                //handle returning to the castle
-
-                //handle arriving at an encounter
-                //this should be dealt with by the map manager. 
             }
             
             timer += Time.deltaTime;
@@ -75,8 +70,9 @@ public class Company : MonoBehaviour
             if (endMove)
             {
                 companyInfo.currentLocationSave = TransformSave.StoreTransform(gameObject);
-                MapManager.uiState = MapManager.UIState.standard;
+                MapUIManager.uiState = MapUIManager.UIState.standard;
                 mapManager.CheckForAvailableEncounters();
+                mapManager.ReturnCompanysToCastle();
                 moving = false;
                 timer = 0;
                 return;

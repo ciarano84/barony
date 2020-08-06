@@ -19,6 +19,7 @@ public class ConfirmationPopUp : MonoBehaviour
     public void GetConfirmation(string _question, string _yesText, string _noText)
     {
         UI.SetActive(true);
+        MapUIManager.uiState = MapUIManager.UIState.confirmation;
         question.text = _question;
         yesText.text = _yesText;
         noText.text = _noText;
@@ -27,12 +28,14 @@ public class ConfirmationPopUp : MonoBehaviour
     public void ReturnConfirmation()
     {
         UI.SetActive(false);
+        MapUIManager.uiState = MapUIManager.UIState.standard;
         onConfirm();
     }
 
     public void Cancel()
     {
         UI.SetActive(false);
+        MapUIManager.uiState = MapUIManager.UIState.standard;
         onCancel();
     }
 }
