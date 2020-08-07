@@ -22,25 +22,38 @@ public class MapManager : MonoBehaviour
         rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
         if (rosta == null) Debug.LogError("Encounter could not find the player data");
 
+        if (RostaInfo.currentEncounter != null)
+        {
+            if (RostaInfo.currentEncounter.completionState == Encounter.CompletionState.VICTORY)
+            {
+                MapUIManager.RequestAlert(RostaInfo.currentEncounter.victoryMapText, "Return");
+                RostaInfo.currentEncounter.selectedCompany.targetEncounter = null;
+            }
+            else if (RostaInfo.currentEncounter.completionState == Encounter.CompletionState.DEFEAT)
+            {
+                MapUIManager.RequestAlert(RostaInfo.currentEncounter.defeatMapText, "Return");
+                RostaInfo.currentEncounter.selectedCompany.targetEncounter = null;
+            }
+        }
+
         foreach (Encounter e in RostaInfo.encounters)
         {
-            if (e.completionState == Encounter.CompletionState.VICTORY)
-            {
-                MapUIManager.RequestAlert(e.victoryMapText, "Return");
-                e.selectedCompany.targetEncounter = null;
-                break;
-            }
             e.GetReferences();
             e.runCompanySelectSetUp = false;
             e.site = GameObject.Find(e.site.SiteName).GetComponent<EncounterSite>();
             e.site.encounter = e;
             e.site.ShowEncounter();
         }
-            
-        foreach (CompanyInfo c in RostaInfo.companies)
+
+        for (int i = RostaInfo.companies.Count - 1; i >= 0; i--)
         {
-            c.CreateCompany();
+            if (RostaInfo.companies[i].units.Count == 0)
+            {
+                RostaInfo.companies.RemoveAt(i);
+            }
+            else RostaInfo.companies[i].CreateCompany();
         }
+
         date.text = ("Day " + RostaInfo.date);
         CheckForAvailableEncounters();
     }

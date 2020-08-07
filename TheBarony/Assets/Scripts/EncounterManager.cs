@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum Factions {players, enemies, allies}
@@ -10,6 +11,7 @@ public enum Factions {players, enemies, allies}
 public class EncounterManager : MonoBehaviour
 {
     RostaInfo rosta;
+    public static EncounterManager encounterManager;
 
     public GameObject encounterEndPanel;
     static GameObject staticEncounterPanel;
@@ -41,6 +43,7 @@ public class EncounterManager : MonoBehaviour
     {
         encounter = true;
         rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
+        encounterManager = this;
         staticEncounterPanel = encounterEndPanel;
         staticEncounterEndtext = encounterEndtext;
         StartCoroutine(PositioningUnits());
@@ -144,7 +147,7 @@ public class EncounterManager : MonoBehaviour
         if (playerVictory) 
         {
             RostaInfo.currentEncounter.completionState = Encounter.CompletionState.VICTORY;
-            //EncounterEnd(Factions.players);
+            encounterManager.StartCoroutine(encounterManager.EncounterEnd(Factions.players));
             return;
         }
 
@@ -153,10 +156,7 @@ public class EncounterManager : MonoBehaviour
             if (unit.unitInfo.faction == Factions.players) return;
         }
         RostaInfo.currentEncounter.completionState = Encounter.CompletionState.DEFEAT;
-        
-
-
-        //EncounterEnd(Factions.enemies);
+        encounterManager.StartCoroutine(encounterManager.EncounterEnd(Factions.enemies));
     }
 
     static void CheckForOtherWinCondition()
@@ -173,9 +173,13 @@ public class EncounterManager : MonoBehaviour
         RostaInfo.currentEncounter.selectedCompany.units.Clear();
         foreach (GameObject unit in playerSquad)
         {
-            UnitInfo info = unit.GetComponent<Unit>().unitInfo;
-            RostaInfo.currentEncounter.selectedCompany.units.Add(info);
+            if (unit != null)
+            {
+                UnitInfo info = unit.GetComponent<Unit>().unitInfo;
+                RostaInfo.currentEncounter.selectedCompany.units.Add(info);
+            }
         }
+        SceneManager.LoadScene("Map");
         yield break;
     }
 
