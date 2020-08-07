@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -78,15 +79,19 @@ public class Tile : MonoBehaviour
         CheckTile(backAndRight, jumpHeight, targetTile, true);
     }
 
+    Collider[] barrierCheckColliders = new Collider[16];
+
     public void CheckTile(Vector3 direction, float jumpHeight, Tile targetTile, bool diagonal = false) {
 
-        //Barrier check overlapbox
-        Vector3 barrierCheckRange = new Vector3(0.25f, 0.25f, 0.25f);
-        Collider[] barrierCheckColliders = Physics.OverlapBox(transform.position + (direction/2), barrierCheckRange);
+        int count;
 
-        foreach (Collider boundary in barrierCheckColliders)
+        //Barrier check overlapbox with nonAlloc
+        Vector3 barrierCheckRange = new Vector3(0.25f, 0.25f, 0.25f);
+        count = Physics.OverlapBoxNonAlloc(transform.position + (direction/2), barrierCheckRange, barrierCheckColliders);
+
+        for (int i = 0; i < count; i++)
         {
-            if (boundary.gameObject.tag == "barrier")
+            if (barrierCheckColliders[i].gameObject.tag == "barrier")
             {
                 barrierCount++;
                 return;
@@ -94,11 +99,11 @@ public class Tile : MonoBehaviour
         }
 
         Vector3 halfExtents = new Vector3(0.25f, (1 + jumpHeight) / 2f, 0.25f);
-        Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
+        count = Physics.OverlapBoxNonAlloc(transform.position + direction, halfExtents, barrierCheckColliders);
 
-        foreach (Collider item in colliders) 
-        {   
-            Tile tile = item.GetComponent<Tile>();
+        for (int i = 0; i < count; i++)
+        {
+            Tile tile = barrierCheckColliders[i].gameObject.GetComponent<Tile>();
             if (tile != null && tile.walkable)
             {
                 RaycastHit hit;
