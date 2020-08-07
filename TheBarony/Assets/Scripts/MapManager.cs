@@ -24,6 +24,12 @@ public class MapManager : MonoBehaviour
 
         foreach (Encounter e in RostaInfo.encounters)
         {
+            if (e.completionState == Encounter.CompletionState.VICTORY)
+            {
+                MapUIManager.RequestAlert(e.victoryMapText, "Return");
+                e.selectedCompany.targetEncounter = null;
+                break;
+            }
             e.GetReferences();
             e.runCompanySelectSetUp = false;
             e.site = GameObject.Find(e.site.SiteName).GetComponent<EncounterSite>();
@@ -50,16 +56,17 @@ public class MapManager : MonoBehaviour
             {
                 if (site.encounter != null)
                 {
-                    site.encounter.DaysRemaining--;
-                    if (site.encounter.DaysRemaining < 0)
+                    if (!site.encounter.permanent)
                     {
-                        RostaInfo.encounters.Remove(site.encounter);
-                        site.ClearEncounter();
+                        site.encounter.DaysRemaining--;
+                        if (site.encounter.DaysRemaining < 0)
+                        {
+                            RostaInfo.encounters.Remove(site.encounter);
+                            site.ClearEncounter();
+                        }
+                        else site.ShowEncounter();
                     }
-                    else
-                    {
-                        site.ShowEncounter();
-                    }
+                    else site.ShowEncounter();
                 }
             }
             MoveCompanys();
@@ -114,7 +121,7 @@ public class MapManager : MonoBehaviour
     void CreateEncounter()
     {
         Encounter encounter = new Reclaim();
-        encounter.DaysRemaining = UnityEngine.Random.Range(6, 15);
+        encounter.permanent = true;
         encounter.GetReferences();
         FindLocation(encounter);
         RostaInfo.encounters.Add(encounter);
@@ -175,8 +182,13 @@ public abstract class Encounter
     public MapManager mapManager;
     public RostaInfo rosta;
     public int DaysRemaining;
+    public bool permanent;
     public EncounterSite site;
     public CompanyInfo selectedCompany;
+
+    //This tracks the victory/defeat state of the encounter.
+    public enum CompletionState { INPROGRESS, VICTORY, DEFEAT, ESCAPED };
+    public CompletionState completionState = CompletionState.INPROGRESS;
 
     //This is used to record the starting point of a company. 
     public Transform origin;
@@ -190,6 +202,8 @@ public abstract class Encounter
     public string EncounterStartConfirmationYesText;
     public string EncounterStartConfirmationNoText;
     public string encounterButtonText;
+    public string victoryMapText;
+    public string defeatMapText;
 
     public bool runCompanySelectSetUp;
 

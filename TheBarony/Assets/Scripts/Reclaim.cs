@@ -15,6 +15,7 @@ public class Reclaim : Encounter
         EncounterStartConfirmationYesText = "Proceed";
         EncounterStartConfirmationNoText = "Return";
         encounterButtonText = "Reclaim " + site.SiteName;
+        victoryMapText = site.SiteName + " is now an inhabitable district.";
     }
 
     public override List<EncounterSite> FindSuitableSites()

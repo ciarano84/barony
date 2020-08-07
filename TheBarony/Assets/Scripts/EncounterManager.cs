@@ -143,7 +143,8 @@ public class EncounterManager : MonoBehaviour
 
         if (playerVictory) 
         {
-            EncounterEnd(Factions.players);
+            RostaInfo.currentEncounter.completionState = Encounter.CompletionState.VICTORY;
+            //EncounterEnd(Factions.players);
             return;
         }
 
@@ -151,7 +152,11 @@ public class EncounterManager : MonoBehaviour
         {
             if (unit.unitInfo.faction == Factions.players) return;
         }
-        EncounterEnd(Factions.enemies);
+        RostaInfo.currentEncounter.completionState = Encounter.CompletionState.DEFEAT;
+        
+
+
+        //EncounterEnd(Factions.enemies);
     }
 
     static void CheckForOtherWinCondition()
@@ -159,12 +164,28 @@ public class EncounterManager : MonoBehaviour
         //have other win conditions added as methods, then do a delegate in the start to decide which is going to get called.     
     }
 
-    static void EncounterEnd(Factions faction)
+    public IEnumerator EncounterEnd(Factions faction)
     {
         Initiative.queuedActions++;
         staticEncounterPanel.SetActive(true);
         staticEncounterEndtext.text = (faction + " are victorious!");
+        yield return new WaitForSeconds(3f);
+        RostaInfo.currentEncounter.selectedCompany.units.Clear();
+        foreach (GameObject unit in playerSquad)
+        {
+            UnitInfo info = unit.GetComponent<Unit>().unitInfo;
+            RostaInfo.currentEncounter.selectedCompany.units.Add(info);
+        }
+        yield break;
     }
+
+
+    /*static void EncounterEnd(Factions faction)
+    {
+        Initiative.queuedActions++;
+        staticEncounterPanel.SetActive(true);
+        staticEncounterEndtext.text = (faction + " are victorious!");
+    }*/
 
     //Randomize arrays of gameobjects
     GameObject[] ShuffleArray(GameObject[] source)
@@ -176,7 +197,6 @@ public class EncounterManager : MonoBehaviour
             source[positionOfArray] = source[randomizeArray];
             source[randomizeArray] = obj;
         }
-
         return source;
     }
 
