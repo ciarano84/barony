@@ -28,6 +28,8 @@ public class MapManager : MonoBehaviour
             {
                 MapUIManager.RequestAlert(RostaInfo.currentEncounter.victoryMapText, "Return");
                 RostaInfo.currentEncounter.selectedCompany.targetEncounter = null;
+                RostaInfo.currentEncounter.site.encounter = null;
+                RostaInfo.encounters.Remove(RostaInfo.currentEncounter);
             }
             else if (RostaInfo.currentEncounter.completionState == Encounter.CompletionState.DEFEAT)
             {
@@ -245,6 +247,7 @@ public abstract class Encounter
         RostaInfo.squad.Clear();
         RostaInfo.squad = selectedCompany.units;
         RostaInfo.currentEncounter = this;
+        RostaInfo.encounter = true;
         SceneManager.LoadScene("Arena0");
     }
 

@@ -39,7 +39,6 @@ public class Reclaim : Encounter
     {
         if (rosta.castle.Count == 0)
         {
-            Debug.Log("no troop issue!");
             MapUIManager.RequestAlert("You have no available troops.", "Return");
             return;
         }
@@ -80,6 +79,8 @@ public class Reclaim : Encounter
 
     public override void StartEncounter()
     {
+        ConfirmationPopUp.onConfirm -= StartEncounter;
+        ConfirmationPopUp.onCancel -= CancelEncounter;
         base.StartEncounter();
     }
 

@@ -62,7 +62,7 @@ public class TacticsMovement : Unit
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
         focusSwitched = false;
-        if (EncounterManager.encounter)
+        if (RostaInfo.encounter)
         {
             Initiative.AddUnit(this);
         }
@@ -456,13 +456,13 @@ public class TacticsMovement : Unit
     void OnMouseOver()
     {
         mousedOverUnit = this;
-        if (EncounterManager.encounter) ActionUIManager.SetCursor();
+        if (RostaInfo.encounter) ActionUIManager.SetCursor();
     }
 
     void OnMouseExit()
     {
         mousedOverUnit = null;
-        if (EncounterManager.encounter) ActionUIManager.SetCursor();
+        if (RostaInfo.encounter) ActionUIManager.SetCursor();
     }
 
     public void FaceDirection(Vector3 target)
@@ -494,12 +494,6 @@ public class TacticsMovement : Unit
             if (t == targetTile)
             {
                 return FindEndTile(t);
-
-                //This next line is mine. 
-                //Initiative.queuedActions++;
-
-                //MoveToTile(actualTargetTile);
-                //return;
             }
 
             //Here in order to put both adjacency and diagonal into one. 

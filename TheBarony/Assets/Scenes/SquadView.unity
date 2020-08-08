@@ -1521,6 +1521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5033cd13a9a994d8445492cb62e516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  company: {fileID: 0}
+  encounterButton: {fileID: 0}
   damagePopUp: {fileID: 7401985853768158229, guid: 9d0f9ef1dfcce5f438b66c7d20d46006,
     type: 3}
   Sword_Cursor: {fileID: 0}

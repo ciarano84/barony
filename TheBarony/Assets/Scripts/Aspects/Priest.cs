@@ -34,7 +34,7 @@ public class Priest : Aspect
     
     private void Start()
     {
-        if (EncounterManager.encounter)
+        if (RostaInfo.encounter)
         {
             TacticsMovement.OnEnterSquare += Bless;
             Initiative.OnEncounterStart += Bless;

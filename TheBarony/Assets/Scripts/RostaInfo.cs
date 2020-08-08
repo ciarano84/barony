@@ -17,6 +17,9 @@ public class RostaInfo : MonoBehaviour
     //The encounter currently being handled. 
     public static Encounter currentEncounter;
 
+    //whether an encounter is active or not
+    public static bool encounter;
+
     //Calander Info
     public static int date = 1;
 

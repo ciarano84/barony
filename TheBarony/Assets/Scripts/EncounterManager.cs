@@ -15,7 +15,6 @@ public class EncounterManager : MonoBehaviour
 
     public GameObject encounterEndPanel;
     static GameObject staticEncounterPanel;
-    public static bool encounter = false;
 
     public Text encounterEndtext;
     static Text staticEncounterEndtext;
@@ -23,7 +22,7 @@ public class EncounterManager : MonoBehaviour
     public GameObject[] arenaBlocks;
     GameObject[] arenaBlocksToBeAssignedTo;
 
-    List<GameObject> playerSquad = new List<GameObject>();
+    public List<GameObject> playerSquad = new List<GameObject>();
     public GameObject playerPrefab;
     public GameObject goblinCutters;
     public GameObject orcBruisers;
@@ -41,12 +40,14 @@ public class EncounterManager : MonoBehaviour
 
     private void Awake()
     {
-        encounter = true;
-        rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
-        encounterManager = this;
-        staticEncounterPanel = encounterEndPanel;
-        staticEncounterEndtext = encounterEndtext;
-        StartCoroutine(PositioningUnits());
+        if (RostaInfo.encounter == true)
+        {
+            rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
+            encounterManager = this;
+            staticEncounterPanel = encounterEndPanel;
+            staticEncounterEndtext = encounterEndtext;
+            StartCoroutine(PositioningUnits());
+        }
     }
 
     IEnumerator PositioningUnits()
@@ -169,6 +170,7 @@ public class EncounterManager : MonoBehaviour
         Initiative.queuedActions++;
         staticEncounterPanel.SetActive(true);
         staticEncounterEndtext.text = (faction + " are victorious!");
+        RostaInfo.encounter = false;
         yield return new WaitForSeconds(3f);
         RostaInfo.currentEncounter.selectedCompany.units.Clear();
         foreach (GameObject unit in playerSquad)
@@ -182,14 +184,6 @@ public class EncounterManager : MonoBehaviour
         SceneManager.LoadScene("Map");
         yield break;
     }
-
-
-    /*static void EncounterEnd(Factions faction)
-    {
-        Initiative.queuedActions++;
-        staticEncounterPanel.SetActive(true);
-        staticEncounterEndtext.text = (faction + " are victorious!");
-    }*/
 
     //Randomize arrays of gameobjects
     GameObject[] ShuffleArray(GameObject[] source)
