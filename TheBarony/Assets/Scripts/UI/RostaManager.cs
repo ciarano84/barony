@@ -72,9 +72,9 @@ public class RostaManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        //Move the troop out the company and into the castle
+        //Move the troop into the castle (but keep them in the company as well, for this scene);
         rosta.castle.Add(RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition]);
-        RostaInfo.currentEncounter.selectedCompany.units.Remove(RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition]);
+        //RostaInfo.currentEncounter.selectedCompany.units.Remove(RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition]);
         rosta.currentUnitShown = rosta.castle.Count-1;
 
         ShowStats();
