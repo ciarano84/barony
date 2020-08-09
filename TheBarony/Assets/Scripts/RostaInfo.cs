@@ -36,12 +36,4 @@ public class RostaInfo : MonoBehaviour
         encounter.selectedCompany = companyInfo;
         companies.Add(companyInfo);
     }
-
-    private void Update()
-    {
-        foreach (CompanyInfo c in companies)
-        {
-            Debug.Log(c.units.Count);
-        }
-    }
 }
