@@ -33,15 +33,12 @@ public class UnitInfoPanel : MonoBehaviour
         unit = unitInfo;
         unitName.text = unit.unitName;
 
-        //Destroy(unitPrefab);
         GameObject unitPrefab = Instantiate(GameAssets.i.PlayerUnit, point.transform, false);
         unitPrefab.GetComponent<Unit>().unitInfo = unitInfo;
 
         unit.mainWeaponData.SetData(unit);
         unit.mainWeaponData.EquipItem(unitPrefab.GetComponent<Unit>());
         unitWeaponImage.sprite = unit.mainWeaponData.SetImage();
-
-        //point.GetComponent<SkinnedMeshRenderer>().sharedMesh = unit.aspectData.GetVisual();
     }
 
     public void SelectUnit()

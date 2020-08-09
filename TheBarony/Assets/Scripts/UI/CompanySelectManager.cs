@@ -34,10 +34,11 @@ public class CompanySelectManager : MonoBehaviour
         unitInfoPanels[3].position = 3;
 
         rosta = GameObject.Find("PlayerData"+"(Clone)").GetComponent<RostaInfo>();
-        int max = Math.Min(4, RostaInfo.squad.Count);
-        for (int count = 0; count < max; count++)
+        CompanyInfo company = RostaInfo.currentEncounter.selectedCompany;
+        int max = Math.Min(3, company.units.Count);
+        for (int count = max; count >= 0; count--)
         {
-            unitInfoPanels[count].SetUnit(RostaInfo.squad[count]);
+            unitInfoPanels[count].SetUnit(company.units[count]);
         }
         yield break;
     }

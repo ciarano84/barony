@@ -16,7 +16,6 @@ public class RostaManager : MonoBehaviour
 
     EquipmentInfoPanel equipPanel;
     RostaInfo rosta;
-    
 
     enum Direction {left, right};
 
@@ -73,9 +72,9 @@ public class RostaManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        //Move the troop out the squad and into the rosta
-        rosta.castle.Add(RostaInfo.squad[rosta.companyPosition]);
-        //rosta.squad.Remove(rosta.squad[rosta.companyPosition]);
+        //Move the troop out the company and into the castle
+        rosta.castle.Add(RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition]);
+        RostaInfo.currentEncounter.selectedCompany.units.Remove(RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition]);
         rosta.currentUnitShown = rosta.castle.Count-1;
 
         ShowStats();
@@ -89,11 +88,6 @@ public class RostaManager : MonoBehaviour
         unit.mainWeaponData.SetData(unit);
         unitPrefab = Instantiate(GameAssets.i.PlayerUnit, pedestal.transform);
         unitPrefab.GetComponent<Unit>().unitInfo = unit;
-
-        //Destroy(unitVisual);
-        //unit = rosta.rosta[rosta.currentUnitShown];
-
-        //unitVisual = Instantiate(unit.aspectData.GetVisual(), pedestal.transform);
 
         nameText.text = (unit.unitName);
         classText.text = (unit.aspectData.className);
@@ -141,8 +135,8 @@ public class RostaManager : MonoBehaviour
 
     public void SelectUnit()
     {
-        //Add unit to squad.
-        RostaInfo.squad[rosta.companyPosition] = rosta.castle[rosta.currentUnitShown];
+        //Add unit to company.
+        RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition] = rosta.castle[rosta.currentUnitShown];
 
         //Remove it from rosta.
         rosta.castle.Remove(rosta.castle[rosta.currentUnitShown]);

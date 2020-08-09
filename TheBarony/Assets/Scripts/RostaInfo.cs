@@ -6,7 +6,6 @@ using UnityEngine;
 public class RostaInfo : MonoBehaviour
 {
     public List<UnitInfo> castle = new List<UnitInfo>();
-    public static List<UnitInfo> squad = new List<UnitInfo>();
     public static List<CompanyInfo> companies = new List<CompanyInfo>();
     public static List<Encounter> encounters = new List<Encounter>();
 
@@ -36,5 +35,13 @@ public class RostaInfo : MonoBehaviour
         companyInfo.destinationSave = TransformSave.StoreTransform(destination);
         encounter.selectedCompany = companyInfo;
         companies.Add(companyInfo);
+    }
+
+    private void Update()
+    {
+        foreach (CompanyInfo c in companies)
+        {
+            Debug.Log(c.units.Count);
+        }
     }
 }

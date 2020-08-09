@@ -35,6 +35,8 @@ public class MapManager : MonoBehaviour
             {
                 MapUIManager.RequestAlert(RostaInfo.currentEncounter.defeatMapText, "Return");
                 RostaInfo.currentEncounter.selectedCompany.targetEncounter = null;
+                RostaInfo.currentEncounter.selectedCompany = null;
+                RostaInfo.currentEncounter.completionState = Encounter.CompletionState.UNASSIGNED;
             }
         }
 
@@ -202,7 +204,7 @@ public abstract class Encounter
     public CompanyInfo selectedCompany;
 
     //This tracks the victory/defeat state of the encounter.
-    public enum CompletionState { INPROGRESS, VICTORY, DEFEAT, ESCAPED };
+    public enum CompletionState { INPROGRESS, VICTORY, DEFEAT, ESCAPED, UNASSIGNED };
     public CompletionState completionState = CompletionState.INPROGRESS;
 
     //This is used to record the starting point of a company. 
@@ -219,6 +221,7 @@ public abstract class Encounter
     public string encounterButtonText;
     public string victoryMapText;
     public string defeatMapText;
+    public string companyAlreadyAssignedText;
 
     public bool runCompanySelectSetUp;
 
@@ -244,8 +247,6 @@ public abstract class Encounter
 
     public virtual void StartEncounter()
     {
-        RostaInfo.squad.Clear();
-        RostaInfo.squad = selectedCompany.units;
         RostaInfo.currentEncounter = this;
         RostaInfo.encounter = true;
         SceneManager.LoadScene("Arena0");
@@ -266,8 +267,8 @@ public abstract class Encounter
         int unitLimit = Math.Min(3, rosta.castle.Count - 1);
         for (int count = unitLimit; count >= 0; count--)
         {
-            //Add unit to squad.
-            RostaInfo.squad.Add(rosta.castle[count]);
+            //Add unit to company.
+            selectedCompany.units.Add(rosta.castle[count]);
 
             //Remove it from rosta.
             rosta.castle.Remove(rosta.castle[count]);

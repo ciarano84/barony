@@ -63,25 +63,26 @@ public class EncounterManager : MonoBehaviour
 
     void GetPlayers()
     {
+        CompanyInfo companyInfo = RostaInfo.currentEncounter.selectedCompany;
         if (encounterSettings == EncounterSettings.Standard)
         {
-            for (int i = 0; i < RostaInfo.squad.Count; i++)
+            for (int i = 0; i < companyInfo.units.Count; i++)
             {
                 GameObject player = Instantiate(GameAssets.i.PlayerUnit);
-                player.GetComponent<Unit>().unitInfo = RostaInfo.squad[i];
+                player.GetComponent<Unit>().unitInfo = companyInfo.units[i];
                 playerSquad.Add(player);
             }
         }
 
-        if (encounterSettings == EncounterSettings.Test)
-        {
-            for (int i = 0; i < playerCount; i++)
-            {
-                GameObject player = Instantiate(GameAssets.i.PlayerUnit);
-                player.GetComponent<Unit>().unitInfo = RostaInfo.squad[i];
-                playerSquad.Add(player);
-            }
-        }
+        //if (encounterSettings == EncounterSettings.Test)
+        //{
+        //    for (int i = 0; i < playerCount; i++)
+        //    {
+        //        GameObject player = Instantiate(GameAssets.i.PlayerUnit);
+        //        player.GetComponent<Unit>().unitInfo = RostaInfo.castle[i];
+        //        playerSquad.Add(player);
+        //    }
+        //}
     }
 
     void GetEnemies()
@@ -181,6 +182,7 @@ public class EncounterManager : MonoBehaviour
                 RostaInfo.currentEncounter.selectedCompany.units.Add(info);
             }
         }
+        Initiative.ResetStatics();
         SceneManager.LoadScene("Map");
         yield break;
     }

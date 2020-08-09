@@ -17,6 +17,7 @@ public class Reclaim : Encounter
         encounterButtonText = "Reclaim " + site.SiteName;
         victoryMapText = site.SiteName + " is now an inhabitable district.";
         defeatMapText = "Your company was defeated at " + site.SiteName;
+        companyAlreadyAssignedText = "A company has already been dispatched to reclaim " + site.SiteName + ".";
     }
 
     public override List<EncounterSite> FindSuitableSites()
@@ -37,14 +38,21 @@ public class Reclaim : Encounter
 
     public override void Selected()
     {
-        if (rosta.castle.Count == 0)
+        if (selectedCompany == null)
         {
-            MapUIManager.RequestAlert("You have no available troops.", "Return");
-            return;
+            if (rosta.castle.Count == 0)
+            {
+                MapUIManager.RequestAlert("You have no available troops.", "Return");
+                return;
+            }
+            MapUIManager.RequestConfirmation(RallyConfirmationQuestionText, RallyConfirmationYesText, RallyConfirmationNoText);
+            ConfirmationPopUp.onConfirm += GoToCompanySelect;
+            ConfirmationPopUp.onCancel += CancelRally;
         }
-        MapUIManager.RequestConfirmation(RallyConfirmationQuestionText, RallyConfirmationYesText, RallyConfirmationNoText);
-        ConfirmationPopUp.onConfirm += GoToCompanySelect;
-        ConfirmationPopUp.onCancel += CancelRally;
+        else
+        {
+            MapUIManager.RequestAlert(companyAlreadyAssignedText, EncounterStartConfirmationNoText);
+        }
     }
 
     public override void GoToCompanySelect()
@@ -69,11 +77,6 @@ public class Reclaim : Encounter
 
     public override void ProceedFromCompanySelect()
     {
-        foreach (UnitInfo u in RostaInfo.squad)
-        {
-            selectedCompany.units.Add(u);
-        }
-        RostaInfo.squad.Clear();
         SceneManager.LoadScene("Map");
     }
 
@@ -96,6 +99,7 @@ public class Reclaim : Encounter
         ConfirmationPopUp.onConfirm -= StartEncounter;
         ConfirmationPopUp.onCancel -= CancelEncounter;
         selectedCompany.targetEncounter = null;
+        selectedCompany = null;
         mapManager.CheckForAvailableEncounters();
     }
 }

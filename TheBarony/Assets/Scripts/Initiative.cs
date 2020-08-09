@@ -8,7 +8,6 @@ public class Initiative : MonoBehaviour
 {
     public static int queuedActions = 0;
     public int publicQueuedActions;
-
     
     //I can likely strip this down to just be a list and a queue. 
     static List<TacticsMovement> unsortedUnits = new List<TacticsMovement>();
@@ -144,5 +143,18 @@ public class Initiative : MonoBehaviour
     public static void EndAction()
     {
         initiativeManager.StartCoroutine(CheckForTurnEnd());
+    }
+
+    public static void ResetStatics()
+    {
+        currentUnit = null;
+        enemies.Clear();
+        queuedActions = 0;
+        sortedUnits.Clear();
+        unsortedUnits.Clear();
+        order.Clear();
+        players.Clear();
+        initiativeManager = null;
+        OnEncounterStart = null;
     }
 }
