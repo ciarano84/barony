@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum Fate { Drudge, Elite, Fated };
+
 [System.Serializable]
 public class UnitInfo
 {
@@ -17,6 +19,7 @@ public class UnitInfo
     public ItemData armourData;
     public ItemData accessory1;
     public ItemData accessory2;
+    public Fate fate = Fate.Fated;
 
     //Base Stats
     public int baseBreath;

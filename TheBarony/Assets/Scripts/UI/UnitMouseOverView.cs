@@ -29,8 +29,11 @@ public class UnitMouseOverView : MonoBehaviour
 
                 unitMouseOverViewfirstBreathSlider.maxValue = targetUnit.unitInfo.firstBreath;
                 unitMouseOverViewfirstBreathSlider.value = targetUnit.unitInfo.currentBreath - targetUnit.unitInfo.flaggingBreath;
+                //unitMouseOverViewfirstBreathSlider.value = targetUnit.unitInfo.currentBreath - targetUnit.unitInfo.flaggingBreath;
+
                 unitMouseOverViewFlaggingBreathSlider.maxValue = targetUnit.unitInfo.flaggingBreath;
                 unitMouseOverViewFlaggingBreathSlider.value = targetUnit.unitInfo.currentBreath;
+                //unitMouseOverViewFlaggingBreathSlider.value = targetUnit.unitInfo.currentBreath;
             }
             else Hide();
         }

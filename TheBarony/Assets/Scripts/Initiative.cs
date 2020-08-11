@@ -28,7 +28,7 @@ public class Initiative : MonoBehaviour
     public delegate void OnEncounterStartDelegate(Unit unit);
     public static OnEncounterStartDelegate OnEncounterStart;
 
-
+    //Debug.
     private void Update()
     {
         publicQueuedActions = queuedActions;

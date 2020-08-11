@@ -40,8 +40,9 @@ public class EncounterManager : MonoBehaviour
 
     private void Awake()
     {
-        if (RostaInfo.encounter == true)
+        if (RostaInfo.encounter == true || encounterSettings == EncounterSettings.Test)
         {
+            RostaInfo.encounter = true;
             rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
             encounterManager = this;
             staticEncounterPanel = encounterEndPanel;
@@ -63,9 +64,10 @@ public class EncounterManager : MonoBehaviour
 
     void GetPlayers()
     {
-        CompanyInfo companyInfo = RostaInfo.currentEncounter.selectedCompany;
+        
         if (encounterSettings == EncounterSettings.Standard)
         {
+            CompanyInfo companyInfo = RostaInfo.currentEncounter.selectedCompany;
             for (int i = 0; i < companyInfo.units.Count; i++)
             {
                 GameObject player = Instantiate(GameAssets.i.PlayerUnit);
@@ -74,15 +76,15 @@ public class EncounterManager : MonoBehaviour
             }
         }
 
-        //if (encounterSettings == EncounterSettings.Test)
-        //{
-        //    for (int i = 0; i < playerCount; i++)
-        //    {
-        //        GameObject player = Instantiate(GameAssets.i.PlayerUnit);
-        //        player.GetComponent<Unit>().unitInfo = RostaInfo.castle[i];
-        //        playerSquad.Add(player);
-        //    }
-        //}
+        if (encounterSettings == EncounterSettings.Test)
+        {
+            for (int i = 0; i < playerCount; i++)
+            {
+                GameObject player = Instantiate(GameAssets.i.PlayerUnit);
+                player.GetComponent<Unit>().unitInfo = rosta.castle[i];
+                playerSquad.Add(player);
+            }
+        }
     }
 
     void GetEnemies()
