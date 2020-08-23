@@ -35,6 +35,7 @@ public class t_sneakyMeleeAttack : Task
 
     public override void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null)
     {
+        //Check to see if the target has been removed. If so, end turn. 
         if (target == null && attacked == true)
         {
             flagEndofTurn = true;

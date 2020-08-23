@@ -69,6 +69,7 @@ MonoBehaviour:
     type: 3}
   OrcDefender: {fileID: 1862647173987473636, guid: 0aae096141b18e14a91a214f816320c0,
     type: 3}
+  cubeTest: {fileID: 2100000, guid: 6f3e37ef4df7d4f4fbf94513e8ee5708, type: 2}
   LeatherArmour: {fileID: 21300000, guid: 0eefbaa893519704ebaa2259714f64d5, type: 3}
   ShortSword: {fileID: 21300000, guid: 0cbfdb4978c99f046a96e9d6a543123e, type: 3}
   ShortBow: {fileID: 21300000, guid: 5b29463504d3b5b46bd528449b67db71, type: 3}

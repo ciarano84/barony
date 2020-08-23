@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 public class Initiative : MonoBehaviour
 {
+    //Debug
+    public bool test;
+
     public static int queuedActions = 0;
     public int publicQueuedActions;
     

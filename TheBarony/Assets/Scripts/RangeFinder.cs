@@ -43,7 +43,14 @@ public class RangeFinder
     {
         unit.adjacentUnits.Clear();
 
-        float halfHeight = unit.GetComponent<TacticsMovement>().halfHeight;
+        //Debug
+        Initiative init = GameObject.Find("TurnManager").GetComponent<Initiative>();
+        if (init.test)
+        {
+            
+        }
+
+        /*float halfHeight = unit.GetComponent<TacticsMovement>().halfHeight;
 
         //diagonals
         Vector3 forwardAndLeft = new Vector3(-1, 0, 1);
@@ -60,14 +67,38 @@ public class RangeFinder
         CheckForUnit(unit, forwardAndLeft, halfHeight);
         CheckForUnit(unit, forwardAndRight, halfHeight);
         CheckForUnit(unit, backAndLeft, halfHeight);
-        CheckForUnit(unit, backAndRight, halfHeight);
+        CheckForUnit(unit, backAndRight, halfHeight);*/
+
+        Tile OriginTile = unit.GetComponent<TacticsMovement>().currentTile;
+        foreach (Tile t in OriginTile.adjacencyList)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(t.gameObject.transform.position, Vector3.up, out hit, 1.5f, ~9))
+            {
+                if (hit.collider.GetComponent<Unit>() != null)
+                {
+                    unit.adjacentUnits.Add(hit.collider.GetComponent<Unit>());
+                }
+            }
+        }
+        foreach (Tile t in OriginTile.diagonalAdjacencyList)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(t.gameObject.transform.position, Vector3.up, out hit, 1.5f, ~9))
+            {
+                if (hit.collider.GetComponent<Unit>() != null)
+                {
+                    unit.adjacentUnits.Add(hit.collider.GetComponent<Unit>());
+                }
+            }
+        }
     }
 
     static void CheckForUnit(Unit unit, Vector3 direction, float halfHeight)
     {
         RaycastHit hit;
         Vector3 viewpoint = unit.transform.position + new Vector3(0, halfHeight, 0);
-        if (Physics.Raycast(viewpoint, direction, out hit, 1.5f))
+        if (Physics.Raycast(viewpoint, direction, out hit, 1.5f, ~9))
         {
             if (hit.collider.GetComponent<Unit>() != null)
             {
@@ -171,29 +202,25 @@ public class RangeFinder
     {
         Tile flankingTile = null;
 
-        RangeFinder.FindAdjacentUnits(target);
+        FindAdjacentUnits(target);
         foreach (TacticsMovement u in target.adjacentUnits)
         {
-            u.GetCurrentTile();
-            Tile allyTile = u.currentTile;
-            foreach (Tile t in target.currentTile.adjacencyList)
+            if (u != origin)
             {
-                Vector3 relTargetPosition = t.transform.InverseTransformPoint(target.currentTile.transform.position);
-                Vector3 relOtherAttackerPosition = t.transform.InverseTransformPoint(allyTile.transform.position);
-                if (relOtherAttackerPosition.z > (relTargetPosition.z + 0.1f))
+                if (u.unitInfo.faction == origin.unitInfo.faction)
                 {
-                    flankingTile = t;
-                    break;
-                }
-            }
-            foreach (Tile t in target.currentTile.diagonalAdjacencyList)
-            {
-                Vector3 relTargetPosition = t.transform.InverseTransformPoint(target.currentTile.transform.position);
-                Vector3 relOtherAttackerPosition = t.transform.InverseTransformPoint(allyTile.transform.position);
-                if (relOtherAttackerPosition.z > (relTargetPosition.z + 0.1f))
-                {
-                    flankingTile = t;
-                    break;
+                    u.GetCurrentTile();
+                    Tile allyTile = u.currentTile;
+                    Vector3 flankingTileLocation = allyTile.transform.position + ((target.currentTile.transform.position - allyTile.transform.position) * 2);
+                    Vector3 overlapBoxSize = new Vector3(.25f, origin.jumpHeight * 4, .25f);
+                    Collider[] colliders = Physics.OverlapBox(flankingTileLocation, overlapBoxSize);
+                    foreach (Collider collider in colliders)
+                    {
+                        if (collider.tag == "tile")
+                        {
+                            flankingTile = collider.gameObject.GetComponent<Tile>();
+                        }
+                    }
                 }
             }
         }

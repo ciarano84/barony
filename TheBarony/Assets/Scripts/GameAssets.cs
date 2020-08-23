@@ -36,6 +36,7 @@ public class GameAssets : MonoBehaviour
     public GameObject GoblinHunter;
     public GameObject GoblinScout;
     public GameObject OrcDefender;
+    public Material cubeTest;
 
     //Item Sprites
     public Sprite LeatherArmour;
