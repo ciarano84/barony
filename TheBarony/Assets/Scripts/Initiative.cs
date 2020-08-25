@@ -55,6 +55,7 @@ public class Initiative : MonoBehaviour
         sortedUnits = unsortedUnits.OrderByDescending(o => o.currentInitiative).ToList();
         foreach (TacticsMovement u in sortedUnits)
         {
+            u.AllocateTile();
             order.Enqueue(u);
         }
         OnEncounterStart(order.Peek()); //Alert all that the encounter has started. 

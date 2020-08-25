@@ -39,57 +39,15 @@ public class RangeFinder
         return nearest;
     }
 
-    public static void FindAdjacentUnits(Unit unit)
+    public static void FindAdjacentUnits(TacticsMovement unit)
     {
         unit.adjacentUnits.Clear();
 
-        //Debug
-        Initiative init = GameObject.Find("TurnManager").GetComponent<Initiative>();
-        if (init.test)
+        foreach (Neighbour n in unit.currentTile.neighbours)
         {
-            
-        }
-
-        /*float halfHeight = unit.GetComponent<TacticsMovement>().halfHeight;
-
-        //diagonals
-        Vector3 forwardAndLeft = new Vector3(-1, 0, 1);
-        Vector3 forwardAndRight = new Vector3(1, 0, 1);
-        Vector3 backAndLeft = new Vector3(-1, 0, -1);
-        Vector3 backAndRight = new Vector3(1, 0, -1);
-
-        CheckForUnit(unit, Vector3.forward, halfHeight);
-        CheckForUnit(unit, -Vector3.forward, halfHeight);
-        CheckForUnit(unit, Vector3.right, halfHeight);
-        CheckForUnit(unit, -Vector3.right, halfHeight);
-
-        //Diagonals
-        CheckForUnit(unit, forwardAndLeft, halfHeight);
-        CheckForUnit(unit, forwardAndRight, halfHeight);
-        CheckForUnit(unit, backAndLeft, halfHeight);
-        CheckForUnit(unit, backAndRight, halfHeight);*/
-
-        Tile OriginTile = unit.GetComponent<TacticsMovement>().currentTile;
-        foreach (Tile t in OriginTile.adjacencyList)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(t.gameObject.transform.position, Vector3.up, out hit, 1.5f, ~9))
+            if (n.tile.occupant != null)
             {
-                if (hit.collider.GetComponent<Unit>() != null)
-                {
-                    unit.adjacentUnits.Add(hit.collider.GetComponent<Unit>());
-                }
-            }
-        }
-        foreach (Tile t in OriginTile.diagonalAdjacencyList)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(t.gameObject.transform.position, Vector3.up, out hit, 1.5f, ~9))
-            {
-                if (hit.collider.GetComponent<Unit>() != null)
-                {
-                    unit.adjacentUnits.Add(hit.collider.GetComponent<Unit>());
-                }
+                unit.adjacentUnits.Add(n.tile.occupant);
             }
         }
     }

@@ -176,6 +176,7 @@ public class Unit : MonoBehaviour
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length + 2);
 
+        gameObject.GetComponent<TacticsMovement>().currentTile.occupant = null;
         //Tell the initiative order to remove this unit. 
         Initiative.RemoveUnit(this);
     }

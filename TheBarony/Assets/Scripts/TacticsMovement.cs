@@ -69,6 +69,12 @@ public class TacticsMovement : Unit
         }
     }
 
+    public void AllocateTile()
+    {
+        GetCurrentTile();
+        currentTile.occupant = this;
+    }
+
     public void GetCurrentTile() {
         currentTile = GetTargetTile(gameObject);
 
@@ -88,7 +94,7 @@ public class TacticsMovement : Unit
 
         Tile tile = null;
 
-        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1, layerMask))
+        if (Physics.Raycast(target.transform.position + new Vector3(0,1,0), -Vector3.up, out hit, 2, layerMask))
         {
             tile = hit.collider.GetComponent<Tile>();
         }
@@ -222,6 +228,12 @@ public class TacticsMovement : Unit
         else if (path.Count > 0)
         {
             Tile t = path.Peek();
+
+            //Here is my part which establishes the current tiles, and those occupants of those tiles.
+            currentTile.occupant = null;
+            t.occupant = this;
+            currentTile = t;
+            
             Vector3 target = t.transform.position;
 
             //Calculate the unit's position on top of target tile. 
@@ -265,6 +277,7 @@ public class TacticsMovement : Unit
             {
                 //Tile centre reached
                 transform.position = target;
+
                 OnEnterSquare(this); //Alert that a unit has entered a square.
 
                 //Take this move off remaining move IF it's not the first tile in the path.
