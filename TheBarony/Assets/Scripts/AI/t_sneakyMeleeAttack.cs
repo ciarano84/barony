@@ -74,12 +74,6 @@ public class t_sneakyMeleeAttack : Task
         if (unit.remainingActions > 0)
         {
             RangeFinder.FindAdjacentUnits(unit);
-            //Debug
-            Initiative init = GameObject.Find("TurnManager").GetComponent<Initiative>();
-            if (init.test)
-            {
-                Debug.Log("test conditions met.");
-            }
 
             if (unit.adjacentUnits.Contains(target))
             {

@@ -54,12 +54,6 @@ public class NPC : TacticsMovement
 
     public void EndNPCTurn()
     {
-        //debug
-        foreach (Weapon.Target t in mainWeapon.targets)
-        {
-            if (t.unitTargeted.unitInfo.faction != Factions.enemies) Debug.Log(t.unitTargeted);
-        }
-
         destination = null;
         ai.tasks.Clear();
         ai.task = null;

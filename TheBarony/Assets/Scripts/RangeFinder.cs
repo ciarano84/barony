@@ -45,9 +45,15 @@ public class RangeFinder
 
         foreach (Neighbour n in unit.currentTile.neighbours)
         {
-            if (n.tile.occupant != null)
+            if (n != null)
             {
-                unit.adjacentUnits.Add(n.tile.occupant);
+                if (n.tile != null)
+                {
+                    if (n.tile.occupant != null)
+                    {
+                        unit.adjacentUnits.Add(n.tile.occupant);
+                    }
+                }
             }
         }
     }
