@@ -89,7 +89,18 @@ public class EncounterManager : MonoBehaviour
 
     void GetEnemies()
     {
-        for (int i = 0; i < numberOfEnemyCells; i++)
+        for (int CellCount = 0; CellCount < RostaInfo.currentEncounter.enemyCompany.cells.Count; CellCount++)
+        {
+            List<GameObject> enemies = new List<GameObject>();
+            for (int EnemyCount = 0; EnemyCount < RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies.Count; EnemyCount++)
+            {
+                GameObject enemyGO = Instantiate(RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies[EnemyCount]);
+                enemies.Add(enemyGO);
+            }
+            enemyCells.Add(enemies);
+        }
+        
+        /*for (int i = 0; i < numberOfEnemyCells; i++)
         {
             enemyCells.Add(new List<GameObject>());
             for (int x = EnemiesPerCell; x > 0; x--)
@@ -111,7 +122,7 @@ public class EncounterManager : MonoBehaviour
                 }
                 enemyCells[i].Add(enemy);
             }
-        }
+        }*/
     }
  
     void SetPositions()
@@ -209,6 +220,7 @@ public class EncounterManager : MonoBehaviour
             Vector3 p = arenaBlock.spawnPoints[i].transform.position;
             //The following includes a hack. I'm not ACTUALLY working out where to place them on the Y, I'm just putting in a value that works for basic units as is. Will need remidying. 
             units[i].transform.position = new Vector3 (p.x, p.y + 0.05f, p.z);
+            Debug.Log("Unit no " + units[i].gameObject.GetInstanceID() + " is at " + units[i].gameObject.transform.position);
         }
     }
 }

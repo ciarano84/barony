@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEditor.PackageManager;
 using System;
+using JetBrains.Annotations;
 
 public class MapManager : MonoBehaviour
 {
@@ -129,7 +130,7 @@ public class MapManager : MonoBehaviour
                 roll = 0;
                 break;
         }
-        //Debug.Log("modified roll is " + roll);
+
         if (roll >= 10)
         {
             CreateEncounter();
@@ -141,6 +142,9 @@ public class MapManager : MonoBehaviour
         encounter.permanent = true;
         encounter.GetReferences();
         FindLocation(encounter);
+        encounter.arenaSize = (((int)UnityEngine.Random.Range(1, 3)) * 2) + 2;
+        encounter.difficulty = UnityEngine.Random.Range(0, 2);
+        encounter.enemyCompany = EncounterTable.CreateEnemyCompany(encounter);
         RostaInfo.encounters.Add(encounter);
     }
 
@@ -190,8 +194,6 @@ public class MapManager : MonoBehaviour
             }
         }
     }
-
-
 }
 
 public abstract class Encounter
@@ -199,6 +201,10 @@ public abstract class Encounter
     public MapManager mapManager;
     public RostaInfo rosta;
     public int DaysRemaining;
+    public int arenaSize;
+    public int difficulty;
+    public EnemyType enemyType;
+    public EnemyCompany enemyCompany;
     public bool permanent;
     public EncounterSite site;
     public CompanyInfo selectedCompany;

@@ -31,6 +31,11 @@ PrefabInstance:
       propertyPath: ai
       value: 
       objectReference: {fileID: 4311074985349777694}
+    - target: {fileID: 4056870699266071281, guid: 0593fc0b7baafdf4ab7a4ece9e413dc5,
+        type: 3}
+      propertyPath: unitInfo.unitName
+      value: Goblin Scout
+      objectReference: {fileID: 0}
     - target: {fileID: 4989769727815611102, guid: 0593fc0b7baafdf4ab7a4ece9e413dc5,
         type: 3}
       propertyPath: m_ApplyRootMotion
