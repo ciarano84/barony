@@ -100,6 +100,7 @@ public class RangedWeapon : Weapon
             owner.remainingActions -= 1; }
         else 
         { owner.remainingMove = 0; }
+        Initiative.queuedActions++;
         Initiative.EndAction();
     }
 }

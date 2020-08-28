@@ -21,7 +21,8 @@ public class LongbowData : RangedWeaponData
         range = 200;
         missDistance = 20;
         maxAmmo = 1;
-        currentAmmo = 1;
+        //Debug settting to 0 to repro error. 
+        currentAmmo = 0;
         rangedDamage = 4;
         reloadSpeed = ActionCost.main;
 

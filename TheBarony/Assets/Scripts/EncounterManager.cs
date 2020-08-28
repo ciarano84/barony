@@ -30,8 +30,8 @@ public class EncounterManager : MonoBehaviour
 
     //This is all in lieu of an actual system of pulling in enemies. 
     List<List<GameObject>> enemyCells = new List<List<GameObject>>(); 
-    public int numberOfEnemyCells;
-    public int EnemiesPerCell;
+    //public int numberOfEnemyCells;
+    //public int EnemiesPerCell;
 
     //Debug
     public enum EncounterSettings { Standard, Test };
@@ -64,7 +64,6 @@ public class EncounterManager : MonoBehaviour
 
     void GetPlayers()
     {
-        
         if (encounterSettings == EncounterSettings.Standard)
         {
             CompanyInfo companyInfo = RostaInfo.currentEncounter.selectedCompany;
@@ -99,30 +98,6 @@ public class EncounterManager : MonoBehaviour
             }
             enemyCells.Add(enemies);
         }
-        
-        /*for (int i = 0; i < numberOfEnemyCells; i++)
-        {
-            enemyCells.Add(new List<GameObject>());
-            for (int x = EnemiesPerCell; x > 0; x--)
-            {
-                int encounterRoll = Random.Range(0,3);
-                GameObject enemy;
-
-                switch (encounterRoll)
-                {
-                    case 0:
-                        enemy = Instantiate(GameAssets.i.OrcDefender);
-                        break;
-                    case 1:
-                        enemy = Instantiate(GameAssets.i.GoblinScout);
-                        break;
-                    default:
-                        enemy = Instantiate(GameAssets.i.GoblinHunter);
-                        break;
-                }
-                enemyCells[i].Add(enemy);
-            }
-        }*/
     }
  
     void SetPositions()
@@ -220,7 +195,6 @@ public class EncounterManager : MonoBehaviour
             Vector3 p = arenaBlock.spawnPoints[i].transform.position;
             //The following includes a hack. I'm not ACTUALLY working out where to place them on the Y, I'm just putting in a value that works for basic units as is. Will need remidying. 
             units[i].transform.position = new Vector3 (p.x, p.y + 0.05f, p.z);
-            Debug.Log("Unit no " + units[i].gameObject.GetInstanceID() + " is at " + units[i].gameObject.transform.position);
         }
     }
 }

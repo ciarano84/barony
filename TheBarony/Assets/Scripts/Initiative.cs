@@ -35,6 +35,10 @@ public class Initiative : MonoBehaviour
     private void Update()
     {
         publicQueuedActions = queuedActions;
+        if (queuedActions < 0)
+        {
+            Debug.LogError("Initiative dropped to less than 0, current turn is " + Initiative.currentUnit.GetInstanceID());
+        }
     }
 
     public void Awake()
@@ -90,11 +94,6 @@ public class Initiative : MonoBehaviour
         unit.EndTurn();
         order.Enqueue(unit);
         StartTurn();
-    }
-
-    public void UpdateUI()
-    {
-        
     }
 
     public static IEnumerator CheckForTurnEnd() 
