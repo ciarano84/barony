@@ -45,7 +45,7 @@ public class AttackManager : MonoBehaviour
         }
 
         //check for weight
-        if (attacker.unitInfo.mainWeaponData.weight == ItemData.Weight.medium)
+        if (attacker.unitInfo.mainWeaponData.weight >= ItemData.Weight.medium)
         {
             if (attacker.unitInfo.mainWeaponData.weight >= ItemData.Weight.heavy) bonuses--;
             attacker.UpdateBreath(-1, true);

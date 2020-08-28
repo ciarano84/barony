@@ -11,6 +11,9 @@ public class Tile : MonoBehaviour
     public bool diagonal = false;
     public GameObject selectPlane;
 
+    public Neighbour[] neighbours = new Neighbour[8];
+    public Unit occupant;
+
     public List<Tile> adjacencyList = new List<Tile>();
     public List<Tile> diagonalAdjacencyList = new List<Tile>();
 
@@ -32,6 +35,64 @@ public class Tile : MonoBehaviour
     Vector3 forwardAndRight = new Vector3(1, 0, 1);
     Vector3 backAndLeft = new Vector3(-1, 0, -1);
     Vector3 backAndRight = new Vector3(1, 0, -1);
+
+    Collider[] collidersTemp = new Collider[32]; 
+
+    private void Start()
+    {
+        //Go through each direction and add the neighbour
+        for (int point = 0; point < 8; point++)
+        {
+            neighbours[point] = GetNeighbour(point);
+        }
+    }
+
+    private Neighbour GetNeighbour(int position)
+    {
+        Vector3 direction = new Vector3();
+        switch (position)
+        {
+            case 0: direction = Vector3.forward; break;
+            case 1: direction = forwardAndRight; break;
+            case 2: direction = Vector3.right; break;
+            case 3: direction = backAndRight; break;
+            case 4: direction = Vector3.back; break;
+            case 5: direction = backAndLeft; break;
+            case 6: direction = Vector3.left; break;
+            case 7: direction = forwardAndLeft; break;
+        }
+
+        int colliderCount;
+        bool barrier = false;
+
+        //Barrier check overlapbox
+        Vector3 barrierCheckRange = new Vector3(0.25f, 2f, 0.25f);
+        colliderCount = Physics.OverlapBoxNonAlloc(transform.position + (direction / 2), barrierCheckRange, collidersTemp);
+        for (int i = 0; i < colliderCount; i++)
+        {
+            if (collidersTemp[i].gameObject.tag == "barrier")
+            {
+                barrierCount++;
+                barrier = true;
+            }
+        }
+
+        Vector3 halfExtents = new Vector3(0.25f, 5f, 0.25f);
+        colliderCount = Physics.OverlapBoxNonAlloc(transform.position + direction, halfExtents, collidersTemp);
+        for (int i = 0; i < colliderCount; i++)
+        {
+            if (collidersTemp[i].gameObject.tag == "tile")
+            {
+                Neighbour neighbour = new Neighbour();
+                neighbour.tile = collidersTemp[i].gameObject.GetComponent<Tile>();
+                if (barrier) neighbour.cover = Cover.FULL;
+                neighbour.height = neighbour.tile.gameObject.transform.position.y - transform.position.y;
+                return neighbour;
+            }
+        }
+        return null;
+    }
+
 
     void Update()
     {
@@ -62,7 +123,7 @@ public class Tile : MonoBehaviour
         f = g = h = 0;
     }
 
-    public void FindNeighbours(float jumpHeight, Tile targetTile)
+    public void FindNeighbours(float jumpHeight = 0, Tile targetTile = null)
     {
         Reset();
 
@@ -78,7 +139,7 @@ public class Tile : MonoBehaviour
         CheckTile(backAndRight, jumpHeight, targetTile, true);
     }
 
-    public void CheckTile(Vector3 direction, float jumpHeight, Tile targetTile, bool diagonal = false) {
+    public void CheckTile(Vector3 direction, float jumpHeight = 0, Tile targetTile = null, bool diagonal = false) {
 
         //Barrier check overlapbox
         Vector3 barrierCheckRange = new Vector3(0.25f, 0.25f, 0.25f);
@@ -110,4 +171,14 @@ public class Tile : MonoBehaviour
             }
         }
     }
+}
+
+public enum Cover { NONE, PARTIAL, FULL };
+
+[System.Serializable]
+public class Neighbour
+{
+    public Tile tile;
+    public float height;
+    public Cover cover = Cover.NONE;
 }

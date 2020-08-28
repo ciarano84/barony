@@ -36,6 +36,13 @@ public class GameAssets : MonoBehaviour
     public GameObject GoblinHunter;
     public GameObject GoblinScout;
     public GameObject OrcDefender;
+    public GameObject OrcBrute;
+    public GameObject EliteOrcBrute;
+    public GameObject BanditAxeman;
+    public GameObject BanditHunter;
+    public GameObject BanditCuthroat;
+    public GameObject EliteBanditHunter;
+    public Material cubeTest;
 
     //Item Sprites
     public Sprite LeatherArmour;

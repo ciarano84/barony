@@ -5,6 +5,7 @@ using UnityEngine;
 public class t_sneakyMeleeAttack : Task
 {
     bool inFlankingPosition = false;
+    bool firstMoveDone = false;
     
     public override void EvaluateCandidates(NPC unit)
     {
@@ -35,6 +36,7 @@ public class t_sneakyMeleeAttack : Task
 
     public override void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null)
     {
+        //Check to see if the target has been removed. If so, end turn. 
         if (target == null && attacked == true)
         {
             flagEndofTurn = true;
@@ -42,7 +44,7 @@ public class t_sneakyMeleeAttack : Task
         }
 
         //if a flank is available, move to it. 
-        if (!inFlankingPosition)
+        if (!inFlankingPosition && !firstMoveDone)
         {
             unit.FindSelectableTiles();
             Tile flankingTile = RangeFinder.FindFlankingTile(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
@@ -51,17 +53,19 @@ public class t_sneakyMeleeAttack : Task
                 inFlankingPosition = true;
                 Initiative.queuedActions++;
                 unit.MoveToTile(flankingTile);
+                firstMoveDone = true;
                 return;
             }
         }
 
         //Move as close as possible if main action is available and you're not next to the target. 
         RangeFinder.FindAdjacentUnits(unit);
-        if (!unit.adjacentUnits.Contains(target))
+        if (!unit.adjacentUnits.Contains(target) && !firstMoveDone)
         {
             if (unit.remainingActions > 0 && unit.remainingMove > 0)
             {
                 unit.destination = target.gameObject;
+                firstMoveDone = true;
                 return;
             }
         }
@@ -69,6 +73,8 @@ public class t_sneakyMeleeAttack : Task
         //Attack if in the right position
         if (unit.remainingActions > 0)
         {
+            RangeFinder.FindAdjacentUnits(unit);
+
             if (unit.adjacentUnits.Contains(target))
             {
                 foreach (Weapon.Target t in unit.mainWeapon.targets)

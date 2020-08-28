@@ -69,6 +69,19 @@ MonoBehaviour:
     type: 3}
   OrcDefender: {fileID: 1862647173987473636, guid: 0aae096141b18e14a91a214f816320c0,
     type: 3}
+  OrcBrute: {fileID: 7249935298485761532, guid: 1d54a8d2b44aa374d9b0b497e1b9c16c,
+    type: 3}
+  EliteOrcBrute: {fileID: 4503029335929635032, guid: 45bfbae9c3117cd44a0b81008d5e37db,
+    type: 3}
+  BanditAxeman: {fileID: 6864722737949830393, guid: 258f5c6034139a545bc6846dd88b1469,
+    type: 3}
+  BanditHunter: {fileID: 3678349771492881243, guid: 8b84e95dc735a8245b3ea680cc344c39,
+    type: 3}
+  BanditCuthroat: {fileID: 6906133678342722059, guid: 68974da0663bc074b97a55c1df9d0e8e,
+    type: 3}
+  EliteBanditHunter: {fileID: 4603668534007430397, guid: 3e1992df2465fb24ba1b49fb891dd107,
+    type: 3}
+  cubeTest: {fileID: 2100000, guid: 6f3e37ef4df7d4f4fbf94513e8ee5708, type: 2}
   LeatherArmour: {fileID: 21300000, guid: 0eefbaa893519704ebaa2259714f64d5, type: 3}
   ShortSword: {fileID: 21300000, guid: 0cbfdb4978c99f046a96e9d6a543123e, type: 3}
   ShortBow: {fileID: 21300000, guid: 5b29463504d3b5b46bd528449b67db71, type: 3}

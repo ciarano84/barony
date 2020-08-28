@@ -47,7 +47,6 @@ public class t_SimpleMeleeAttack : Task
             if (target != null)
             {
                 if (unit.adjacentUnits.Contains(target))
-                //if (unit.adjacentUnits.Contains(unit.GetComponent<AI>().targetUnit))
                 {
                     foreach (Weapon.Target t in unit.mainWeapon.targets)
                     {

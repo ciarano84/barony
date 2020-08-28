@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 public class Initiative : MonoBehaviour
 {
+    //Debug
+    public bool test;
+
     public static int queuedActions = 0;
     public int publicQueuedActions;
     
@@ -28,10 +31,14 @@ public class Initiative : MonoBehaviour
     public delegate void OnEncounterStartDelegate(Unit unit);
     public static OnEncounterStartDelegate OnEncounterStart;
 
-
+    //Debug.
     private void Update()
     {
         publicQueuedActions = queuedActions;
+        if (queuedActions < 0)
+        {
+            Debug.LogError("Initiative dropped to less than 0, current turn is " + Initiative.currentUnit.GetInstanceID());
+        }
     }
 
     public void Awake()
@@ -52,6 +59,7 @@ public class Initiative : MonoBehaviour
         sortedUnits = unsortedUnits.OrderByDescending(o => o.currentInitiative).ToList();
         foreach (TacticsMovement u in sortedUnits)
         {
+            u.AllocateTile();
             order.Enqueue(u);
         }
         OnEncounterStart(order.Peek()); //Alert all that the encounter has started. 
@@ -86,11 +94,6 @@ public class Initiative : MonoBehaviour
         unit.EndTurn();
         order.Enqueue(unit);
         StartTurn();
-    }
-
-    public void UpdateUI()
-    {
-        
     }
 
     public static IEnumerator CheckForTurnEnd() 

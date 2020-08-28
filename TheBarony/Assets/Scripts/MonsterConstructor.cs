@@ -2,16 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AspectPack { SCOUT, DEFENDER, PRIEST, HUNTER};
+public enum AspectPack { SCOUT, DEFENDER, PRIEST, HUNTER, BRUTE };
 
 public class MonsterConstructor : MonoBehaviour
 {
     public AspectPack aspectPack;
+    public Fate fate = Fate.Drudge; 
 
     public void SetUpMonster()
     {
         UnitInfo unitInfo = GetComponent<Unit>().unitInfo;
         Unit unit = gameObject.GetComponent<Unit>();
+
+        if (fate == Fate.Elite)
+        {
+            unitInfo.fate = Fate.Elite;
+            unitInfo.flaggingBreath = unitInfo.firstBreath;
+            unitInfo.baseBreath = unitInfo.firstBreath + unitInfo.flaggingBreath;
+            unitInfo.currentBreath = unitInfo.baseBreath;
+        }
+        else unitInfo.fate = Fate.Drudge;
+            
 
         switch (aspectPack)
         {
@@ -26,6 +37,9 @@ public class MonsterConstructor : MonoBehaviour
                 break;
             case AspectPack.HUNTER:
                 unitInfo.aspectData = new HunterData();
+                break;
+            case AspectPack.BRUTE:
+                unitInfo.aspectData = new BruteData();
                 break;
             default:
                 break;
@@ -47,7 +61,7 @@ public class MonsterConstructor : MonoBehaviour
         {
             //Debug
         }
-        unitInfo.offHandData.EquipItem(unit);
+        if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(unit);
         unitInfo.armourData.EquipItem(unit);
         unitInfo.aspectData.GetAspect(unit);
 

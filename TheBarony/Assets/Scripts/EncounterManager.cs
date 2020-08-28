@@ -30,8 +30,8 @@ public class EncounterManager : MonoBehaviour
 
     //This is all in lieu of an actual system of pulling in enemies. 
     List<List<GameObject>> enemyCells = new List<List<GameObject>>(); 
-    public int numberOfEnemyCells;
-    public int EnemiesPerCell;
+    //public int numberOfEnemyCells;
+    //public int EnemiesPerCell;
 
     //Debug
     public enum EncounterSettings { Standard, Test };
@@ -40,8 +40,9 @@ public class EncounterManager : MonoBehaviour
 
     private void Awake()
     {
-        if (RostaInfo.encounter == true)
+        if (RostaInfo.encounter == true || encounterSettings == EncounterSettings.Test)
         {
+            RostaInfo.encounter = true;
             rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
             encounterManager = this;
             staticEncounterPanel = encounterEndPanel;
@@ -63,9 +64,9 @@ public class EncounterManager : MonoBehaviour
 
     void GetPlayers()
     {
-        CompanyInfo companyInfo = RostaInfo.currentEncounter.selectedCompany;
         if (encounterSettings == EncounterSettings.Standard)
         {
+            CompanyInfo companyInfo = RostaInfo.currentEncounter.selectedCompany;
             for (int i = 0; i < companyInfo.units.Count; i++)
             {
                 GameObject player = Instantiate(GameAssets.i.PlayerUnit);
@@ -74,41 +75,28 @@ public class EncounterManager : MonoBehaviour
             }
         }
 
-        //if (encounterSettings == EncounterSettings.Test)
-        //{
-        //    for (int i = 0; i < playerCount; i++)
-        //    {
-        //        GameObject player = Instantiate(GameAssets.i.PlayerUnit);
-        //        player.GetComponent<Unit>().unitInfo = RostaInfo.castle[i];
-        //        playerSquad.Add(player);
-        //    }
-        //}
+        if (encounterSettings == EncounterSettings.Test)
+        {
+            for (int i = 0; i < playerCount; i++)
+            {
+                GameObject player = Instantiate(GameAssets.i.PlayerUnit);
+                player.GetComponent<Unit>().unitInfo = rosta.castle[i];
+                playerSquad.Add(player);
+            }
+        }
     }
 
     void GetEnemies()
     {
-        for (int i = 0; i < numberOfEnemyCells; i++)
+        for (int CellCount = 0; CellCount < RostaInfo.currentEncounter.enemyCompany.cells.Count; CellCount++)
         {
-            enemyCells.Add(new List<GameObject>());
-            for (int x = EnemiesPerCell; x > 0; x--)
+            List<GameObject> enemies = new List<GameObject>();
+            for (int EnemyCount = 0; EnemyCount < RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies.Count; EnemyCount++)
             {
-                int encounterRoll = Random.Range(0,3);
-                GameObject enemy;
-
-                switch (encounterRoll)
-                {
-                    case 0:
-                        enemy = Instantiate(GameAssets.i.OrcDefender);
-                        break;
-                    case 1:
-                        enemy = Instantiate(GameAssets.i.GoblinScout);
-                        break;
-                    default:
-                        enemy = Instantiate(GameAssets.i.GoblinHunter);
-                        break;
-                }
-                enemyCells[i].Add(enemy);
+                GameObject enemyGO = Instantiate(RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies[EnemyCount]);
+                enemies.Add(enemyGO);
             }
+            enemyCells.Add(enemies);
         }
     }
  

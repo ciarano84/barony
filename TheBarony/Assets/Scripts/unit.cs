@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum Fate { Drudge, Elite, Fated };
+
 [System.Serializable]
 public class UnitInfo
 {
@@ -17,6 +19,7 @@ public class UnitInfo
     public ItemData armourData;
     public ItemData accessory1;
     public ItemData accessory2;
+    public Fate fate = Fate.Fated;
 
     //Base Stats
     public int baseBreath;
@@ -173,6 +176,7 @@ public class Unit : MonoBehaviour
         unitAnim.SetBool("dead", true);
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length + 2);
 
+        gameObject.GetComponent<TacticsMovement>().currentTile.occupant = null;
         //Tell the initiative order to remove this unit. 
         Initiative.RemoveUnit(this);
     }

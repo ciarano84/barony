@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefenderData : AspectData
+public class BruteData : AspectData
 {
     public override void SetAspectData(UnitInfo unit)
     {
         unitInfo = unit;
-        unit.mainWeaponData = new ShortswordData();
-        unit.offHandData = new ShieldData();
+        unit.mainWeaponData = new GreataxeData();
         unit.armourData = new LeatherArmourData();
         unit.accessory1 = new BlankItemData();
         unit.accessory2 = new BlankItemData();
@@ -22,7 +21,7 @@ public class DefenderData : AspectData
         {
             unitInfo.flaggingBreath += 1;
             unitInfo.baseBreath += 1;
-        }
+        }  
         unitInfo.baseStrength += 1;
         unitInfo.baseToughness += 1;
     }
@@ -30,26 +29,26 @@ public class DefenderData : AspectData
     public override void GetAspect(Unit unit)
     {
         //not sure about this. for monsters it means they get the defender script added a second time. But they DO want the owner part. 
-        Defender defenderAspect = unit.gameObject.AddComponent<Defender>();
-        defenderAspect.owner = unit;
+        Brute bruteAspect = unit.gameObject.AddComponent<Brute>();
+        bruteAspect.owner = unit;
     }
 
     public override Mesh GetVisual() { return GameAssets.i.MediumArmourMesh; }
 }
 
-public class Defender : Aspect
+public class Brute : Aspect
 {
     private void Start()
     {
-        AttackManager.OnGraze += SoakDamage;
+        AttackManager.OnGraze += Batter;
         Unit.onKO += UnSubscribe;
     }
 
-    public void SoakDamage(Unit attacker, Unit defender)
+    public void Batter(Unit attacker, Unit defender)
     {
-        if (defender == owner)
+        if (attacker == owner)
         {
-            AttackManager.grazeDamage += 1;
+            AttackManager.grazeDamage -= 1;
         }
     }
 
@@ -57,7 +56,7 @@ public class Defender : Aspect
     {
         if (unit == owner)
         {
-            AttackManager.OnGraze -= SoakDamage;
+            AttackManager.OnGraze -= Batter;
             Unit.onKO -= UnSubscribe;
         }
     }
@@ -67,5 +66,6 @@ public class Defender : Aspect
         aspectData = new DefenderData();
     }
 }
+
 
 
