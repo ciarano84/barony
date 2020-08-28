@@ -134,6 +134,8 @@ public class TacticsMovement : Unit
         process.Enqueue(currentTile);
         currentTile.visited = true;
 
+        firstTileInPath = currentTile;
+
         while (process.Count > 0)
         {
             Tile t = process.Dequeue();
@@ -144,11 +146,14 @@ public class TacticsMovement : Unit
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
-                    if (!tile.visited)
+                    float distanceToNextTile = 1;
+                    if (tile.difficultTerrain) distanceToNextTile += 1;
+                    
+                    if (!tile.visited && ((remainingMove - t.distance) >= distanceToNextTile))
                     {
                         tile.parent = t;
                         tile.visited = true;
-                        tile.distance = 1 + t.distance;
+                        tile.distance = distanceToNextTile + t.distance;
                         process.Enqueue(tile);
                     }
                 }
@@ -156,12 +161,15 @@ public class TacticsMovement : Unit
                 //Now go through the diagonals, which use up 'distance' quicker
                 foreach (Tile tile in t.diagonalAdjacencyList)
                 {
-                    if (!tile.visited)
+                    float distanceToNextTile = 1.4f;
+                    if (tile.difficultTerrain) distanceToNextTile += 1.4f;
+
+                    if (!tile.visited && ((remainingMove - t.distance) >= distanceToNextTile))
                     {
                         tile.parent = t;
                         tile.visited = true;
                         tile.diagonal = true;
-                        tile.distance = 1.41f + t.distance;
+                        tile.distance = distanceToNextTile + t.distance;
                         process.Enqueue(tile);
                     }
                 }
@@ -182,10 +190,10 @@ public class TacticsMovement : Unit
         while (next != null)
         {
             path.Push(next);
-            if (next.parent != null)
-            {
-                firstTileInPath = next;
-            }
+            //if (next.parent != null)
+            //{
+            //    firstTileInPath = next;
+            //}
             next = next.parent;
         }
     }
@@ -211,6 +219,7 @@ public class TacticsMovement : Unit
         while (next != null)
         {
             path.Push(next);
+            
             if (next.parent != null)
             {
                 firstTileInPath = next;
@@ -285,9 +294,14 @@ public class TacticsMovement : Unit
                 {
                     if (t.diagonal)
                     {
-                        remainingMove -= 1.41f;
-                    } 
-                    else remainingMove--;
+                        if (t.difficultTerrain) remainingMove -= 2.8f;
+                        else remainingMove -= 1.41f;
+                    }
+                    else
+                    {
+                        if (t.difficultTerrain) remainingMove -= 2f;
+                        else remainingMove--;
+                    }   
                 }
                 path.Pop();
             }

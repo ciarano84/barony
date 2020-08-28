@@ -1813,6 +1813,221 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArenaBlock Bog
       objectReference: {fileID: 0}
+    - target: {fileID: 7146891302248447116, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302272457787, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302302564620, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302313394864, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302399224139, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302517416545, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302585515273, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302679642012, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302751152969, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302767372385, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302780042470, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302783055868, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302795495196, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302848355882, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302877607789, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891302977682126, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303016366874, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303042427285, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303059756721, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303102579029, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303210794014, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303270073683, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303285112768, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303298854809, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303412989307, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303413751690, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303432355427, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303482120279, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303496099306, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303497776795, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303550280321, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303593100638, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303596465288, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303637389637, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303714241573, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303725981014, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303979762532, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891303986774803, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891304117501726, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891304168196479, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891304232639412, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891304238030531, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146891304263352153, guid: cc8ef6c112ec3a14b87597e1828401ae,
+        type: 3}
+      propertyPath: difficultTerrain
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8292997966532176576, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: m_TagString
