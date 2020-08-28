@@ -88,16 +88,19 @@ public class EncounterManager : MonoBehaviour
 
     void GetEnemies()
     {
-        for (int CellCount = 0; CellCount < RostaInfo.currentEncounter.enemyCompany.cells.Count; CellCount++)
+        if (encounterSettings != EncounterSettings.Test)
         {
-            List<GameObject> enemies = new List<GameObject>();
-            for (int EnemyCount = 0; EnemyCount < RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies.Count; EnemyCount++)
+            for (int CellCount = 0; CellCount < RostaInfo.currentEncounter.enemyCompany.cells.Count; CellCount++)
             {
-                GameObject enemyGO = Instantiate(RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies[EnemyCount]);
-                enemies.Add(enemyGO);
+                List<GameObject> enemies = new List<GameObject>();
+                for (int EnemyCount = 0; EnemyCount < RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies.Count; EnemyCount++)
+                {
+                    GameObject enemyGO = Instantiate(RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies[EnemyCount]);
+                    enemies.Add(enemyGO);
+                }
+                enemyCells.Add(enemies);
             }
-            enemyCells.Add(enemies);
-        }
+        } 
     }
  
     void SetPositions()
