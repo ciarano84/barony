@@ -12,9 +12,6 @@ public class Tile : MonoBehaviour
     public bool difficultTerrain = false;
     public GameObject selectPlane;
 
-    //Debug
-    public float evaluatedDistance;
-
     public Neighbour[] neighbours = new Neighbour[8];
     public Unit occupant;
 
