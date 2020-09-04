@@ -111,3 +111,15 @@ MonoBehaviour:
   PriestRobesMesh: {fileID: 4300048, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
   TwoHanded: {fileID: 9100000, guid: ddcfad943c4c3ed4aad710c1f8a4c878, type: 2}
   OneHanded: {fileID: 9100000, guid: a76e04cfc3f1cc64f91b9f7e2451d533, type: 2}
+  ArenaBarns: {fileID: 3191690090493110893, guid: 9aaa9336f1c7faa4fb86489550eed39a,
+    type: 3}
+  ArenaBog: {fileID: 6856052928922099233, guid: c2044b68430f05d4ca7f747a3f7ee4d7,
+    type: 3}
+  ArenaChapel: {fileID: 2230001111418578522, guid: f1137fd58c4d3c14e9badb3110af1817,
+    type: 3}
+  ArenaHills: {fileID: 1216174181441076425, guid: 1896fe3f63eb3a64199af0645d465dbc,
+    type: 3}
+  ArenaMarket: {fileID: 7996415037781218377, guid: 6f6b944a620892a4580556b299648826,
+    type: 3}
+  ArenaTavern: {fileID: 7570889017074273385, guid: 766600ed7d2a1ae469cded11f6b31c45,
+    type: 3}

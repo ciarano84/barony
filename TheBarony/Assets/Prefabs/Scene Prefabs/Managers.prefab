@@ -1,5 +1,48 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &486680781747450521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 732852253724102667}
+  - component: {fileID: 9084589683425035086}
+  m_Layer: 0
+  m_Name: ArenaManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &732852253724102667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486680781747450521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1600397596217859573}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9084589683425035086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486680781747450521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c307113e4e8f034bb789844485ca95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1600397596091638959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14739e143d44a0344811835eb0f95d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 0
   publicQueuedActions: 0
   selector: {fileID: 3415310857461834330}
 --- !u!1 &1600397595653035968
@@ -196,6 +240,13 @@ MonoBehaviour:
   GoblinHunter: {fileID: 0}
   GoblinScout: {fileID: 0}
   OrcDefender: {fileID: 0}
+  OrcBrute: {fileID: 0}
+  EliteOrcBrute: {fileID: 0}
+  BanditAxeman: {fileID: 0}
+  BanditHunter: {fileID: 0}
+  BanditCuthroat: {fileID: 0}
+  EliteBanditHunter: {fileID: 0}
+  cubeTest: {fileID: 0}
   LeatherArmour: {fileID: 0}
   ShortSword: {fileID: 0}
   ShortBow: {fileID: 0}
@@ -219,6 +270,12 @@ MonoBehaviour:
   PriestRobesMesh: {fileID: 0}
   TwoHanded: {fileID: 0}
   OneHanded: {fileID: 0}
+  ArenaBarns: {fileID: 0}
+  ArenaBog: {fileID: 0}
+  ArenaChapel: {fileID: 0}
+  ArenaHills: {fileID: 0}
+  ArenaMarket: {fileID: 0}
+  ArenaTavern: {fileID: 0}
 --- !u!1 &1600397595741385334
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +369,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  playerSquad: []
   playerPrefab: {fileID: 161662132890573409, guid: dba9681c49669134389ca7210d9d717c,
     type: 3}
   goblinCutters: {fileID: 5726284418059044258, guid: 959214cbb7d6896478b7ea0d5f30d059,
@@ -320,8 +378,6 @@ MonoBehaviour:
     type: 3}
   goblinArchers: {fileID: 5726284418059044258, guid: 6b10b5b6b933ee1449a72dcef5d4ca78,
     type: 3}
-  numberOfEnemyCells: 1
-  EnemiesPerCell: 1
   encounterSettings: 0
   playerCount: 0
 --- !u!1 &1600397596217859574
@@ -360,6 +416,7 @@ Transform:
   - {fileID: 1600397595741385332}
   - {fileID: 1600397595653035974}
   - {fileID: 6380100470650365249}
+  - {fileID: 732852253724102667}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -406,6 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c780cdb5a2b99a45b8845095d9590fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  encounterManager: {fileID: 1600397596020070167}
 --- !u!1001 &1600397594869304132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -492,12 +550,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1600397594869304132}
   m_PrefabAsset: {fileID: 0}
---- !u!120 &4976903835693179502 stripped
-LineRenderer:
-  m_CorrespondingSourceObject: {fileID: 5990986562271602986, guid: 9bdb5b7391e85d245b64ace676d8ab85,
-    type: 3}
-  m_PrefabInstance: {fileID: 1600397594869304132}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2137538787207985867 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 837617929690657167, guid: 9bdb5b7391e85d245b64ace676d8ab85,
@@ -507,6 +559,12 @@ GameObject:
 --- !u!1 &1131657205088065913 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1837949243690193469, guid: 9bdb5b7391e85d245b64ace676d8ab85,
+    type: 3}
+  m_PrefabInstance: {fileID: 1600397594869304132}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &4976903835693179502 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 5990986562271602986, guid: 9bdb5b7391e85d245b64ace676d8ab85,
     type: 3}
   m_PrefabInstance: {fileID: 1600397594869304132}
   m_PrefabAsset: {fileID: 0}
@@ -599,15 +657,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2952e1eba76edaf46abc287a4c922bb1, type: 3}
---- !u!1 &3415310857461834330 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4129904225550036803, guid: 2952e1eba76edaf46abc287a4c922bb1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1600397595057278233}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3415310857461834321 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4129904225550036808, guid: 2952e1eba76edaf46abc287a4c922bb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1600397595057278233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3415310857461834330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4129904225550036803, guid: 2952e1eba76edaf46abc287a4c922bb1,
     type: 3}
   m_PrefabInstance: {fileID: 1600397595057278233}
   m_PrefabAsset: {fileID: 0}

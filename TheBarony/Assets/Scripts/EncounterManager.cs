@@ -19,7 +19,7 @@ public class EncounterManager : MonoBehaviour
     public Text encounterEndtext;
     static Text staticEncounterEndtext;
 
-    public GameObject[] arenaBlocks;
+    //public GameObject[] arenaBlocks;
     GameObject[] arenaBlocksToBeAssignedTo;
 
     public List<GameObject> playerSquad = new List<GameObject>();
@@ -58,6 +58,7 @@ public class EncounterManager : MonoBehaviour
         GetPlayers();
         GetEnemies();
         yield return new WaitForSeconds(0.1f);
+        ArenaBuilder.BuildArena();
         SetPositions();
         yield break;
     }
@@ -105,25 +106,18 @@ public class EncounterManager : MonoBehaviour
  
     void SetPositions()
     {
-        if (encounterSettings != EncounterSettings.Test)
+        for (int count = 0; count < ArenaBuilder.size; count++)
         {
-            //Randomize the blocks
-            ShuffleArray(arenaBlocks);
-        }
-
-
-        foreach (GameObject a in arenaBlocks)
-        {
-            ArenaBlock arenaBlockScript = a.GetComponent<ArenaBlock>();
+            ArenaBlock arenaBlockScript = ArenaBuilder.arenaBlockList[count].GetComponent<ArenaBlock>();
             arenaBlockScript.spawnPoints = ShuffleArray(arenaBlockScript.spawnPoints);
         }
 
-        PlaceUnitsOnSpawnPoints(playerSquad, arenaBlocks[0].GetComponent<ArenaBlock>());
+        PlaceUnitsOnSpawnPoints(playerSquad, ArenaBuilder.arenaBlockList[0].GetComponent<ArenaBlock>());
 
         int blockToPlaceOn = 1;
         foreach (List<GameObject> cell in enemyCells)
         {
-            PlaceUnitsOnSpawnPoints(cell, arenaBlocks[blockToPlaceOn].GetComponent<ArenaBlock>());
+            PlaceUnitsOnSpawnPoints(cell, ArenaBuilder.arenaBlockList[blockToPlaceOn].GetComponent<ArenaBlock>());
             blockToPlaceOn++;
         }
     }
@@ -183,7 +177,7 @@ public class EncounterManager : MonoBehaviour
     }
 
     //Randomize arrays of gameobjects
-    GameObject[] ShuffleArray(GameObject[] source)
+    public static GameObject[] ShuffleArray(GameObject[] source)
     {
         for (int positionOfArray = 0; positionOfArray < source.Length; positionOfArray++)
         {

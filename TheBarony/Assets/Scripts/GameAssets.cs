@@ -72,4 +72,12 @@ public class GameAssets : MonoBehaviour
     //Animators
     public RuntimeAnimatorController TwoHanded;
     public RuntimeAnimatorController OneHanded;
+
+    //Arena Blocks
+    public GameObject ArenaBarns;
+    public GameObject ArenaBog;
+    public GameObject ArenaChapel;
+    public GameObject ArenaHills;
+    public GameObject ArenaMarket;
+    public GameObject ArenaTavern;
 }

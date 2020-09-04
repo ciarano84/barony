@@ -142,6 +142,7 @@ public class MapManager : MonoBehaviour
         encounter.permanent = true;
         encounter.GetReferences();
         FindLocation(encounter);
+        //Will need to change this formula if I want to get 3 by 3 arenas, but for now we're just making arenasizes 4 (2 b 2) and 6 (2 b 3). 
         encounter.arenaSize = (((int)UnityEngine.Random.Range(1, 3)) * 2) + 2;
         encounter.difficulty = UnityEngine.Random.Range(0, 2);
         encounter.enemyCompany = EncounterTable.CreateEnemyCompany(encounter);
