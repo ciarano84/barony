@@ -2021,32 +2021,32 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 
-      objectReference: {fileID: 7066936800288810444}
+      objectReference: {fileID: 2293225243998060201}
     - target: {fileID: 4089698405033554447, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: spawnPoints.Array.data[1]
       value: 
-      objectReference: {fileID: 8315241934055427602}
+      objectReference: {fileID: 7381608429276745796}
     - target: {fileID: 4089698405033554447, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: spawnPoints.Array.data[2]
       value: 
-      objectReference: {fileID: 8620099249512387554}
+      objectReference: {fileID: 8315241934055427602}
     - target: {fileID: 4089698405033554447, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: spawnPoints.Array.data[3]
       value: 
-      objectReference: {fileID: 7381608429276745796}
+      objectReference: {fileID: 6804808497343094968}
     - target: {fileID: 4089698405033554447, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: spawnPoints.Array.data[4]
       value: 
-      objectReference: {fileID: 2293225243998060201}
+      objectReference: {fileID: 8620099249512387554}
     - target: {fileID: 4089698405033554447, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: spawnPoints.Array.data[5]
       value: 
-      objectReference: {fileID: 6804808497343094968}
+      objectReference: {fileID: 7066936800288810444}
     - target: {fileID: 5285039928855715390, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: m_LocalPosition.x

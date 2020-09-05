@@ -14,6 +14,10 @@ public class ArenaBuilder : MonoBehaviour
     //The final list you'll want referenced to pull the blocks from. It should have 10 bocks, and no block appearing more than twice. 
     public static List<GameObject> arenaBlockList = new List<GameObject>();
 
+    public static List<GameObject> encounterArenaBlockList = new List<GameObject>();
+
+    public static GameObject[] tiles;
+
     public Transform[] inspectorArenaPoints;
     static public Transform[,] arenaPoints = new Transform[3,3]; 
     static int xInBlocks = 2;
@@ -48,6 +52,9 @@ public class ArenaBuilder : MonoBehaviour
         CreateRandomBlockList(baseList);
         GetDimensions();
         PlaceArenaBlocks();
+
+        tiles = new GameObject[size * 144];
+        tiles = GameObject.FindGameObjectsWithTag("tile");
     }
 
     public static void CreateRandomBlockList(List<GameObject> _blockList)
@@ -101,7 +108,8 @@ public class ArenaBuilder : MonoBehaviour
         {
             for (int j = 0; j < zInBlocks; j++)
             {
-                Instantiate(arenaBlockList[count], arenaPoints[i, j]);
+                GameObject block = Instantiate(arenaBlockList[count], arenaPoints[i, j]);
+                encounterArenaBlockList.Add(block);
                 count++;
             }
         }

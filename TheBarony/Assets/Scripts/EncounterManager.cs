@@ -112,12 +112,12 @@ public class EncounterManager : MonoBehaviour
             arenaBlockScript.spawnPoints = ShuffleArray(arenaBlockScript.spawnPoints);
         }
 
-        PlaceUnitsOnSpawnPoints(playerSquad, ArenaBuilder.arenaBlockList[0].GetComponent<ArenaBlock>());
+        PlaceUnitsOnSpawnPoints(playerSquad, ArenaBuilder.encounterArenaBlockList[0].GetComponent<ArenaBlock>());
 
         int blockToPlaceOn = 1;
         foreach (List<GameObject> cell in enemyCells)
         {
-            PlaceUnitsOnSpawnPoints(cell, ArenaBuilder.arenaBlockList[blockToPlaceOn].GetComponent<ArenaBlock>());
+            PlaceUnitsOnSpawnPoints(cell, ArenaBuilder.encounterArenaBlockList[blockToPlaceOn].GetComponent<ArenaBlock>());
             blockToPlaceOn++;
         }
     }
@@ -193,8 +193,6 @@ public class EncounterManager : MonoBehaviour
     {
         for (int i = 0; i < units.Count; i++)
         {
-            //Debug
-            //if (units[i].GetComponent<Unit>().unitInfo.faction == Factions.players) arenaBlock.spawnPoints[i].transform.position = arenaBlock.spawnPoints[i].transform.position + new Vector3(0, 10, 0);
             Vector3 p = arenaBlock.spawnPoints[i].transform.position;
             //The following includes a hack. I'm not ACTUALLY working out where to place them on the Y, I'm just putting in a value that works for basic units as is. Will need remidying. 
             units[i].transform.position = new Vector3 (p.x, p.y + 0.05f, p.z);

@@ -56,7 +56,7 @@ public class TacticsMovement : Unit
             GetComponent<MonsterConstructor>().SetUpMonster();
             SetStats();
         }
-        tiles = GameObject.FindGameObjectsWithTag("tile");
+        //tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         unitAnim = rig.GetComponent<Animator>();
         CheckInitiative();
@@ -107,7 +107,7 @@ public class TacticsMovement : Unit
         //required if the map is to change size after initializing. 
         //tiles = GameObject.FindGameObjectsWithTag("tile");
 
-        foreach (GameObject tile in tiles)
+        foreach (GameObject tile in ArenaBuilder.tiles)
         {
             Tile t = tile.GetComponent<Tile>();
 
