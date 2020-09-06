@@ -23,6 +23,7 @@ public class ArenaBuilder : MonoBehaviour
     static int xInBlocks = 2;
     static int zInBlocks = 2;
     public static int size = 4;
+    static bool preSetArenaPresent;
 
     private void Awake()
     {   
@@ -33,6 +34,20 @@ public class ArenaBuilder : MonoBehaviour
         baseList.Add(GameAssets.i.ArenaHills);
         baseList.Add(GameAssets.i.ArenaMarket);
         baseList.Add(GameAssets.i.ArenaTavern);
+
+        //Check to see if there is a preset arena, and if so, don't build one. 
+        foreach (Transform ap in inspectorArenaPoints)
+        {
+            if (ap.GetComponent<ArenaPoint>().block != null)
+            {
+                if (!preSetArenaPresent) size = 0;
+                preSetArenaPresent = true;
+                arenaBlockList.Add(ap.GetComponent<ArenaPoint>().block.gameObject);
+                encounterArenaBlockList.Add(ap.GetComponent<ArenaPoint>().block.gameObject);
+                size++;
+            }
+        }
+        if (preSetArenaPresent) return;
 
         //get all the inspector set grid points into the arenaPoints array. 
         int gridSize = (int)Math.Sqrt(inspectorArenaPoints.Length);
@@ -49,10 +64,12 @@ public class ArenaBuilder : MonoBehaviour
 
     public static void BuildArena()
     {
-        CreateRandomBlockList(baseList);
-        GetDimensions();
-        PlaceArenaBlocks();
-
+        if (!preSetArenaPresent)
+        {
+            CreateRandomBlockList(baseList);
+            GetDimensions();
+            PlaceArenaBlocks();
+        }
         tiles = new GameObject[size * 144];
         tiles = GameObject.FindGameObjectsWithTag("tile");
     }

@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: body
       value: 
       objectReference: {fileID: 6018941470284174149}
+    - target: {fileID: 1202535369076960860, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2191465398959735477, guid: 6b67a3594c39f4f4280f7825f1e1903e,
         type: 3}
       propertyPath: m_Name

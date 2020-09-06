@@ -126,7 +126,8 @@ public class RangeFinder
             {
                 TacticsMovement opponentTactics = opponent.GetComponent<TacticsMovement>();
                 opponentTactics.GetCurrentTile();
-                opponentTactics.currentTile.FindNeighbours(opponentTactics.jumpHeight, null);
+                //opponentTactics.currentTile.FindNeighbours(opponentTactics.jumpHeight, null);
+                opponentTactics.currentTile.CheckNeighbours(opponentTactics.jumpHeight, null);
 
                 foreach (Tile orthagonalTile in opponentTactics.currentTile.adjacencyList)
                 {

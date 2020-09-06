@@ -114,7 +114,8 @@ public class TacticsMovement : Unit
             //Debug
             if (t != null)
             {
-                t.FindNeighbours(jumpHeight, targetTile);
+                //t.FindNeighbours(jumpHeight, targetTile);
+                t.CheckNeighbours(jumpHeight, targetTile);
             }
             else
             {

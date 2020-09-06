@@ -65,10 +65,13 @@ public class EncounterManager : MonoBehaviour
 
     IEnumerator PositioningUnits()
     {
+        //Checks to see if there are present enemies in the scene. If there are it will block new enemies being bought in. 
+        GameObject presetEnemy = GameObject.FindGameObjectWithTag("character");
+        
         //This waits to give the player data time to catch up. Hopefully not needed once the player data persists between scenes. 
         yield return new WaitForSeconds(0.1f);
         GetPlayers();
-        GetEnemies();
+        if (presetEnemy == null) GetEnemies();
         yield return new WaitForSeconds(0.1f);
         ArenaBuilder.BuildArena();
         SetPositions();

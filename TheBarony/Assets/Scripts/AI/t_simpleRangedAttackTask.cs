@@ -65,14 +65,12 @@ public class t_simpleRangedAttackTask : Task
         {
             if (weapon.rangedWeaponData.reloadSpeed == ActionCost.move && (unit.remainingMove == unit.unitInfo.currentMove))
             {
-                Initiative.queuedActions++;
                 weapon.Reload(ActionCost.move);
                 flagEndofTurn = true;
                 return;
             }
             else if (unit.remainingActions > 0)
             {
-                Initiative.queuedActions++;
                 weapon.Reload(ActionCost.main);
                 flagEndofTurn = true;
                 return;
