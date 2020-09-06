@@ -56,4 +56,11 @@ public class AbilityCheck
         crits = 0;
         fumbles = 0;
     }
+
+    public static int IncrementAndLoopNumber(int _number, int _max)
+    {
+        _number++;
+        if (_number == _max) _number = 0;
+        return _number;
+    }
 }

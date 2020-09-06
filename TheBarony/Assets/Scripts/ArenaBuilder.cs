@@ -108,9 +108,22 @@ public class ArenaBuilder : MonoBehaviour
         {
             for (int j = 0; j < zInBlocks; j++)
             {
+                //check for a dupe laid previously on the x dimension.
+                if (i > 0)
+                {
+                    if (arenaPoints[i-1, j].GetComponent<ArenaPoint>().block.name == arenaBlockList[count].name) count = AbilityCheck.IncrementAndLoopNumber(count, arenaBlockList.Count);
+                }
+
+                //check for a dupe laid previously on the z dimension. 
+                if (j > 0)
+                {
+                    if (arenaPoints[i, j - 1].GetComponent<ArenaPoint>().block.name == arenaBlockList[count].name) count = AbilityCheck.IncrementAndLoopNumber(count, arenaBlockList.Count);
+                }
+
                 GameObject block = Instantiate(arenaBlockList[count], arenaPoints[i, j]);
                 encounterArenaBlockList.Add(block);
-                count++;
+                arenaPoints[i, j].GetComponent<ArenaPoint>().block = block;
+                count = AbilityCheck.IncrementAndLoopNumber(count, arenaBlockList.Count);
             }
         }
     }
