@@ -76,6 +76,10 @@ public class Unit : MonoBehaviour
     public Unit focus;
     public static Unit mousedOverUnit;
 
+    //Actions
+    public Action dash;
+    public Action defend;
+
     public void SetStats()
     {
         unitInfo.currentBreath = unitInfo.baseBreath;
@@ -84,6 +88,15 @@ public class Unit : MonoBehaviour
         unitInfo.currentToughness = unitInfo.baseToughness;
         unitInfo.currentDamage = unitInfo.baseStrength;
         unitInfo.currentMove = unitInfo.baseMove;
+    }
+
+    public void SetActions()
+    {
+        //Dash 
+        Dash d = new Dash();
+        d.SetActionButtonData(this);
+        actions.Add(d);
+        dash = d;
     }
 
     public void SetSlots()

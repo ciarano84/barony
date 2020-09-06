@@ -117,7 +117,7 @@ public class RangeFinder
             default:
                 break;
         }
-        
+
         foreach (Tile t in tiles)
         {
             bool found = false;
@@ -158,7 +158,7 @@ public class RangeFinder
             {
                 furthest = t;
                 highestRunValue = runValue;
-            }  
+            }
         }
         return furthest;
     }
@@ -191,5 +191,33 @@ public class RangeFinder
         }
         if (tiles.Contains(flankingTile)) return flankingTile;
         else return null;
+    }
+
+    //This can return null. 
+    public static Tile FindTileNextToTarget(TacticsMovement _origin, TacticsMovement _target)
+    {
+        _origin.GetCurrentTile();
+        
+        Tile closestTile = null;
+        float maxDistance = Mathf.Infinity;
+
+        foreach (Neighbour neighbour in _target.currentTile.neighbours)
+        {
+            if (neighbour != null)
+            {
+                foreach (Tile tileCanBeWalkedTo in _origin.selectableTiles)
+                {
+                    if (tileCanBeWalkedTo == neighbour.tile)
+                    {
+                        if (Vector3.Distance(_origin.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
+                        {
+                            maxDistance = Vector3.Distance(_origin.transform.position, tileCanBeWalkedTo.transform.position);
+                            closestTile = neighbour.tile;
+                        }
+                    }
+                }
+            }
+        }
+        return closestTile;
     }
 }

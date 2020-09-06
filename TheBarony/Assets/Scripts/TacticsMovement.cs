@@ -56,6 +56,7 @@ public class TacticsMovement : Unit
             GetComponent<MonsterConstructor>().SetUpMonster();
             SetStats();
         }
+        SetActions();
         //tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         unitAnim = rig.GetComponent<Animator>();

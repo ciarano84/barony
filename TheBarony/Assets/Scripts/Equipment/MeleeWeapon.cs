@@ -10,7 +10,7 @@ public abstract class MeleeWeaponData : WeaponData
 
 public class MeleeWeapon : Weapon
 {
-    List<Tile> selectableTiles = new List<Tile>();    //Target class to replace the dictionary, and associated list. 
+    //List<Tile> selectableTiles = new List<Tile>();    //Target class to replace the dictionary, and associated list. 
     public MeleeWeaponData meleeWeaponData;
 
     public override IEnumerator Attack(Target target)
@@ -85,7 +85,7 @@ public class MeleeWeapon : Weapon
     {
         targets.Clear();        
         Tile tileToMeleeAttackFrom = null;
-        selectableTiles = owner.selectableTiles;
+        //selectableTiles = owner.selectableTiles;
 
         //Go through each unit on the battlefield, get squares next to it, then work out which can be walked to. Pick one per unit. 
         foreach (TacticsMovement unit in Initiative.order)
@@ -93,7 +93,7 @@ public class MeleeWeapon : Weapon
             if (unit != owner.GetComponent<TacticsMovement>())
             {
                 unit.GetCurrentTile();
-                float maxDistance = Mathf.Infinity;
+                //float maxDistance = Mathf.Infinity;
                 bool targetFound = false;
 
                 //This way of finding adjacents by distance is flawed, particularly if and when they are up or down. But kinda works.  
@@ -104,41 +104,44 @@ public class MeleeWeapon : Weapon
 
                 else
                 {
+                    tileToMeleeAttackFrom = RangeFinder.FindTileNextToTarget(owner, unit);
+                    if (tileToMeleeAttackFrom != null) targetFound = true;
+
                     //I should really do this somewhere else.
                     //tileToMeleeAttackFrom = RangeFinder.FindTileNextToTarget(unit.gameobject);
-                    foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
-                    {
+                    //foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
+                    //{
 
-                        foreach (Tile tileCanBeWalkedTo in selectableTiles)
-                        {
-                            if (tileCanBeWalkedTo == tileNextToTarget)
-                            {
-                                targetFound = true;
-                                if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
-                                {
-                                    maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
-                                    tileToMeleeAttackFrom = tileNextToTarget;
-                                }
-                            }
-                        }
-                    }
+                    //    foreach (Tile tileCanBeWalkedTo in selectableTiles)
+                    //    {
+                    //        if (tileCanBeWalkedTo == tileNextToTarget)
+                    //        {
+                    //            targetFound = true;
+                    //            if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
+                    //            {
+                    //                maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
+                    //                tileToMeleeAttackFrom = tileNextToTarget;
+                    //            }
+                    //        }
+                    //    }
+                    //}
 
-                    foreach (Tile tileNextToTarget in unit.currentTile.diagonalAdjacencyList)
-                    {
+                    //foreach (Tile tileNextToTarget in unit.currentTile.diagonalAdjacencyList)
+                    //{
 
-                        foreach (Tile tileCanBeWalkedTo in selectableTiles)
-                        {
-                            if (tileCanBeWalkedTo == tileNextToTarget)
-                            {
-                                targetFound = true;
-                                if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
-                                {
-                                    maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
-                                    tileToMeleeAttackFrom = tileNextToTarget;
-                                }
-                            }
-                        }
-                    }
+                    //    foreach (Tile tileCanBeWalkedTo in selectableTiles)
+                    //    {
+                    //        if (tileCanBeWalkedTo == tileNextToTarget)
+                    //        {
+                    //            targetFound = true;
+                    //            if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
+                    //            {
+                    //                maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
+                    //                tileToMeleeAttackFrom = tileNextToTarget;
+                    //            }
+                    //        }
+                    //    }
+                    //}
                 }
                     
                 if (targetFound)
