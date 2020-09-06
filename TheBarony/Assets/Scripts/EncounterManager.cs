@@ -49,6 +49,18 @@ public class EncounterManager : MonoBehaviour
             staticEncounterEndtext = encounterEndtext;
             StartCoroutine(PositioningUnits());
         }
+
+        if (RostaInfo.currentEncounter == null)
+        {
+            Encounter encounter = new Reclaim();
+            encounter.permanent = true;
+            //encounter.GetReferences();
+            //Will need to change this formula if I want to get 3 by 3 arenas, but for now we're just making arenasizes 4 (2 b 2) and 6 (2 b 3). 
+            encounter.arenaSize = (((int)UnityEngine.Random.Range(1, 3)) * 2) + 2;
+            encounter.difficulty = UnityEngine.Random.Range(0, 2);
+            encounter.enemyCompany = EncounterTable.CreateEnemyCompany(encounter);
+            RostaInfo.currentEncounter = encounter;
+        }
     }
 
     IEnumerator PositioningUnits()
@@ -89,19 +101,16 @@ public class EncounterManager : MonoBehaviour
 
     void GetEnemies()
     {
-        if (encounterSettings != EncounterSettings.Test)
+        for (int CellCount = 0; CellCount < RostaInfo.currentEncounter.enemyCompany.cells.Count; CellCount++)
         {
-            for (int CellCount = 0; CellCount < RostaInfo.currentEncounter.enemyCompany.cells.Count; CellCount++)
+            List<GameObject> enemies = new List<GameObject>();
+            for (int EnemyCount = 0; EnemyCount < RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies.Count; EnemyCount++)
             {
-                List<GameObject> enemies = new List<GameObject>();
-                for (int EnemyCount = 0; EnemyCount < RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies.Count; EnemyCount++)
-                {
-                    GameObject enemyGO = Instantiate(RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies[EnemyCount]);
-                    enemies.Add(enemyGO);
-                }
-                enemyCells.Add(enemies);
+                GameObject enemyGO = Instantiate(RostaInfo.currentEncounter.enemyCompany.cells[CellCount].enemies[EnemyCount]);
+                enemies.Add(enemyGO);
             }
-        } 
+            enemyCells.Add(enemies);
+        }
     }
  
     void SetPositions()

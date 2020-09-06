@@ -89,4 +89,6 @@ public class ProxyRosta : MonoBehaviour
         inventory.UpdateEntry(new GreataxeData(), 1, false);
         inventory.UpdateEntry(new DaggerData(), 2, true);
     }
+
+
 }
