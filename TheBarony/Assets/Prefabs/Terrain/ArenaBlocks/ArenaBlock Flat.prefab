@@ -34,7 +34,7 @@ Transform:
   - {fileID: 851621897463840898}
   - {fileID: 7896031364299009221}
   m_Father: {fileID: 5421032827197599236}
-  m_RootOrder: 12
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &172081756825677882
 PrefabInstance:
@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 5285039928855715390, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 5285039928855715390, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 5285039928855715390, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 5285039928855715390, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
@@ -136,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 5285039928855715391, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
       propertyPath: m_Name
-      value: ArenaBlock Flat Variant
+      value: ArenaBlock Flat
       objectReference: {fileID: 0}
     - target: {fileID: 8292997966532176576, guid: cc8ef6c112ec3a14b87597e1828401ae,
         type: 3}
