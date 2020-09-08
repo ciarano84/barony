@@ -93,10 +93,16 @@ public class Unit : MonoBehaviour
     public void SetActions()
     {
         //Dash 
-        Dash d = new Dash();
-        d.SetActionButtonData(this);
-        actions.Add(d);
-        dash = d;
+        Dash da = new Dash();
+        da.SetActionButtonData(this);
+        actions.Add(da);
+        dash = da;
+
+        //Defend
+        Defend df = new Defend();
+        df.SetActionButtonData(this);
+        actions.Add(df);
+        defend = df;
     }
 
     public void SetSlots()

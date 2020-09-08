@@ -90,6 +90,7 @@ MonoBehaviour:
   Mace: {fileID: 21300000, guid: 0ec4da753622bf644ae31a4569396c49, type: 3}
   Reload: {fileID: 21300000, guid: 8bfd93d9ea27eb642b922ca1197d6f7d, type: 3}
   Dash: {fileID: 21300000, guid: 3a6b0bf347071bc4180ec8a27157fbc7, type: 3}
+  Defend: {fileID: 21300000, guid: 3b76fb01f1e481e40b4f1880d187fff9, type: 3}
   Longbow: {fileID: 21300000, guid: 8b8e614493e3f4b44b3aa26dfe845859, type: 3}
   Greataxe: {fileID: 21300000, guid: 323dcb274e7490341ab51af12239052d, type: 3}
   Dagger: {fileID: 21300000, guid: 53e6d625fc6cef64bab4fdf2725e44c8, type: 3}

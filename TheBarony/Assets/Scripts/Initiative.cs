@@ -31,6 +31,10 @@ public class Initiative : MonoBehaviour
     public delegate void OnEncounterStartDelegate(Unit unit);
     public static OnEncounterStartDelegate OnEncounterStart;
 
+    //OnTurnStart Delegate. 
+    public delegate void OnTurnStartDelegate(Unit unit);
+    public static OnTurnStartDelegate OnTurnStart;
+
     //Debug.
     private void Update()
     {
@@ -86,6 +90,7 @@ public class Initiative : MonoBehaviour
         GameObject selector = GameObject.FindGameObjectWithTag("selector");
         selector.transform.SetParent(currentUnit.transform, false);
         actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
+        OnTurnStart(currentUnit);
     }
 
     public static void EndTurn()

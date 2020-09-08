@@ -53,6 +53,7 @@ public class GameAssets : MonoBehaviour
     public Sprite Mace;
     public Sprite Reload;
     public Sprite Dash;
+    public Sprite Defend;
     public Sprite Longbow;
     public Sprite Greataxe;
     public Sprite Dagger;
