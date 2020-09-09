@@ -66,6 +66,7 @@ public class Unit : MonoBehaviour
     public bool canFocusSwitch = false;
 
     public List<Action> actions = new List<Action>();
+    public List<Effect> effects = new List<Effect>();
 
     public List<Unit> adjacentUnits = new List<Unit>();
 

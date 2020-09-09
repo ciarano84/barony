@@ -11,6 +11,7 @@ public class Bless : Effect
     public override void AddEffect(GameObject effectCauser)
     {
         owner = gameObject.GetComponent<Unit>();
+        owner.effects.Add(this);
         if (BlessVisual == null)
         {
             blessingUnit = effectCauser.GetComponent<Unit>();
@@ -57,9 +58,15 @@ public class Bless : Effect
     public override void Remove()
     {
         UnSubscribe(owner);
+        owner.effects.Remove(this);
         owner.unitInfo.currentAttack -= 2;
         owner.unitInfo.currentDefence -= 2;
         BlessVisual.SetActive(false);
         enabled = false;
+    }
+
+    public override Sprite SetImage()
+    {
+        return GameAssets.i.BlessIcon;
     }
 }

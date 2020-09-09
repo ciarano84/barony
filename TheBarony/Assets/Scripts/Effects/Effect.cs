@@ -15,4 +15,6 @@ public abstract class Effect : MonoBehaviour
     public abstract void RemovalCheck(Unit unit);
 
     public abstract void Remove();
+
+    public abstract Sprite SetImage();
 }

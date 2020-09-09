@@ -8,6 +8,7 @@ public class Defending : Effect
     public override void AddEffect(GameObject effectCauser)
     {
         owner = gameObject.GetComponent<Unit>();
+        owner.effects.Add(this);
         owner.unitInfo.currentDefence += 4;
         Initiative.OnTurnStart += RemovalCheck;
         Unit.onKO += DeathRemovalCheck;
@@ -33,7 +34,13 @@ public class Defending : Effect
     public override void Remove()
     {
         UnSubscribe(owner);
+        owner.effects.Remove(this);
         owner.unitInfo.currentDefence -= 4;
         enabled = false;
+    }
+
+    public override Sprite SetImage()
+    {
+        return GameAssets.i.Defending;
     }
 }

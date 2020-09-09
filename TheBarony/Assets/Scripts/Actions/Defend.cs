@@ -33,6 +33,14 @@ public class Defend : Action
     //this bool is used to decide if the action is avialable to the player or not. 
     public override bool CheckAvailable()
     {
+        if (actioningUnit.GetComponent<Defending>() != null)
+        {
+            if (actioningUnit.GetComponent<Defending>().enabled == true)
+            {
+                return false;
+            }
+        }
+        
         if (actioningUnit.unitInfo.currentBreath > 0)
         {
             return true;
