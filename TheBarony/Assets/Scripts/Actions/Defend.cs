@@ -14,6 +14,7 @@ public class Defend : Action
     public override void ExecuteAction(ActionCost actionCost)
     {
         Initiative.queuedActions++;
+        DamagePopUp.Create(actioningUnit.transform.position + new Vector3(0, (actioningUnit.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Defending", false);
 
         if (actioningUnit.GetComponent<Defending>() == null)
         {

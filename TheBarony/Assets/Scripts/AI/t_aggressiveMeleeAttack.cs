@@ -6,7 +6,7 @@ public class t_aggressiveMeleeAttack : Task
 {
     bool dashed = false;
     
-    public override void EvaluateCandidates(NPC unit)
+    public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
         if (unit.focus != null)
         {

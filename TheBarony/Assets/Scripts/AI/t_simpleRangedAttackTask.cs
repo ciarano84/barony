@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class t_simpleRangedAttackTask : Task
 {
-    public override void EvaluateCandidates(NPC unit)
+    public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
         if (unit.focus != null)
         {

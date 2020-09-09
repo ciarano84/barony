@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class t_runAway : Task
 {
-    public override void EvaluateCandidates(NPC unit)
+    public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
         if (unit.focus != null)
         {
@@ -25,9 +25,6 @@ public class t_runAway : Task
                 {
                     task.value -= 1;
                 }
-
-                //Debug
-                task.value += 10;
 
                 unit.GetComponent<AI>().tasks.Add(task);
             }

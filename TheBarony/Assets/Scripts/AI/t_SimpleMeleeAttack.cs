@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class t_SimpleMeleeAttack : Task
 {
-    public override void EvaluateCandidates(NPC unit)
+    public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
         if (unit.focus != null)
         {
             Task task = new t_SimpleMeleeAttack();
+            task.taskName = "simple melee";
             task.target = unit.focus;
             unit.GetComponent<AI>().tasks.Add(task);
         }
@@ -25,6 +26,7 @@ public class t_SimpleMeleeAttack : Task
                 if (t == null) return;
 
                 Task task = new t_SimpleMeleeAttack();
+                task.taskName = "simple melee";
                 task.value = 1 / Vector3.Distance(unit.transform.position, target.transform.position);
                 task.tile = t;
                 task.target = target.GetComponent<Unit>();

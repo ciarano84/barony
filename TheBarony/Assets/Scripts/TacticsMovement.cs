@@ -458,7 +458,7 @@ public class TacticsMovement : Unit
         FindSelectableTiles();  
         mainWeapon.GetTargets();
 
-        //So this needs to not get checked every time it comes to the end of an action AND has to be after turn is set to work. 
+        //this needs to not get checked every time it comes to the end of an action AND has to be after turn is set to work. 
         if (firstTurn)
         {
             if (gameObject.GetComponent<AI>() != null)

@@ -220,4 +220,20 @@ public class RangeFinder
         }
         return closestTile;
     }
+
+    //This returns a number which is how many more of your allies their are than the enemy, if it's negative, it's how many more of them there are. 
+    public static int HowOutnumberedAmI(Unit _unit)
+    {
+        int outNumberCount = 1;
+
+        foreach (TacticsMovement unit in Initiative.order)
+        {
+            if (LineOfSight(_unit, unit))
+            {
+                if (unit.unitInfo.faction != _unit.unitInfo.faction) outNumberCount--;
+                if (unit.unitInfo.faction == _unit.unitInfo.faction) outNumberCount++;
+            }
+        }
+        return outNumberCount;
+    }
 }

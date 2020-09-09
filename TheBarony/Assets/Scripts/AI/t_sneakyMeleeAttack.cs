@@ -7,7 +7,7 @@ public class t_sneakyMeleeAttack : Task
     bool inFlankingPosition = false;
     bool firstMoveDone = false;
     
-    public override void EvaluateCandidates(NPC unit)
+    public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
         foreach (Unit u in Initiative.players)
         {
