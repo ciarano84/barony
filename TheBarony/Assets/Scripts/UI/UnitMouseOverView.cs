@@ -12,12 +12,18 @@ public class UnitMouseOverView : MonoBehaviour
     public Slider unitMouseOverViewFlaggingBreathSlider;
     public GameObject canvass;
     public GameObject effectHolder;
-    public GameObject effectIcon;
     public static Unit targetUnit;
     public Camera cam;
 
+    ActionUIManager actionUIManager;
+
     static bool display = false;
     static bool effectsSet;
+
+    private void Start()
+    {
+        actionUIManager = GameObject.Find("Main Action Panel").GetComponent<ActionUIManager>();
+    }
 
     private void LateUpdate()
     {
@@ -62,14 +68,7 @@ public class UnitMouseOverView : MonoBehaviour
     public void SetEffects()
     {
         foreach (Transform child in effectHolder.gameObject.transform) Destroy(child.gameObject);
-        foreach (Effect effect in targetUnit.effects) AddEffectIcon(effect);
+        foreach (Effect effect in targetUnit.effects) actionUIManager.AddEffectIcon(effect, effectHolder.transform);
         effectsSet = true;
-    }
-
-    public void AddEffectIcon(Effect effect)
-    {
-        EffectIcon icon = Instantiate(effectIcon).GetComponent<EffectIcon>();
-        icon.image.sprite = effect.SetImage();
-        icon.gameObject.transform.SetParent(effectHolder.transform, false);
     }
 }
