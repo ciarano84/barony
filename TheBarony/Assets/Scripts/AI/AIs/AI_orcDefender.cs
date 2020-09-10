@@ -2,37 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_goblinScout : AI
+public class AI_orcDefender : AI
 {
-    Task simpleRangedAttack = new t_simpleRangedAttackTask();
-    Task run = new t_runAway();
+    public t_SimpleMeleeAttack simpleMelee = new t_SimpleMeleeAttack();
+    public t_defend defend = new t_defend();
     Task defaultTask = new DefaultTask();
 
     public override void SetTask()
     {
-        simpleRangedAttack.EvaluateCandidates(unit);
+        simpleMelee.EvaluateCandidates(unit);
+        defend.EvaluateCandidates(unit, -0.4f);
         defaultTask.EvaluateCandidates(unit);
 
-        foreach (Unit opponent in Initiative.players)
-        {
-            if (opponent.focus == unit)
-            {
-                run.EvaluateCandidates(unit);
-            }
-        }
         RandomizeValues();
-
         unit.actualTargetTile = null;
 
         //Pick the Winner;
         float highestValue = -100f;
+        //Debug.Log(unit.name + " " + unit.gameObject.GetInstanceID());
         foreach (Task t in tasks)
         {
+            //Debug.Log(t.taskName + " " + t.value);
             if (t.value > highestValue)
             {
                 task = t;
                 highestValue = t.value;
             }
         }
+        
     }
 }

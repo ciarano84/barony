@@ -9,6 +9,7 @@ public class t_simpleRangedAttackTask : Task
         if (unit.focus != null)
         {
             Task task = new t_simpleRangedAttackTask();
+            task.taskName = "simple ranged";
             task.target = unit.focus;
             unit.GetComponent<AI>().tasks.Add(task);
         }
@@ -17,6 +18,7 @@ public class t_simpleRangedAttackTask : Task
             foreach (Unit enemy in Initiative.players)
             {
                 Task task = new t_simpleRangedAttackTask();
+                task.taskName = "simple ranged";
                 task.value = 1 / Vector3.Distance(unit.transform.position, enemy.transform.position);
                 task.tile = null;
                 task.target = enemy.GetComponent<Unit>();
@@ -156,6 +158,7 @@ public class t_simpleRangedAttackTask : Task
             }
         }
 
+        //shoot
         if (RangeFinder.LineOfSight(unit, target) && unit.remainingActions > 0 && weapon.rangedWeaponData.currentAmmo > 0 && target == unit.focus)
         {
             foreach (Weapon.Target t in unit.mainWeapon.targets)
@@ -169,6 +172,15 @@ public class t_simpleRangedAttackTask : Task
                 }
             }
         }
+
+        //and defend if able.
+        if (unit.remainingActions > 0)
+        {
+            unit.defend.ExecuteAction(ActionCost.main);
+            flagEndofTurn = true;
+            return;
+        }
+
         flagEndofTurn = true;
     }
 }

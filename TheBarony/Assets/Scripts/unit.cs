@@ -64,6 +64,7 @@ public class Unit : MonoBehaviour
     //tracks if they have used a focus switch in their turn. 
     public bool focusSwitched = false;
     public bool canFocusSwitch = false;
+    bool focusSinceStart;
 
     public List<Action> actions = new List<Action>();
     public List<Effect> effects = new List<Effect>();
@@ -229,17 +230,29 @@ public class Unit : MonoBehaviour
         focus = unit;
         focusSwitched = true;
         canFocusSwitch = false;
+        focusSinceStart = false;
     }
 
-    public void CheckFocus()
+    public void CheckFocus(bool removalCheck)
     {
         if (focus != null)
         {
-            if (!RangeFinder.LineOfSight(this, focus))
+            if (removalCheck)
             {
-                focus = null;
+                if (!RangeFinder.LineOfSight(this, focus))
+                {
+                    if (focusSinceStart)
+                    {
+                        focus = null;
+                        focusSinceStart = false;
+                    }
+                }
             }
-        } 
+            else
+            {
+                focusSinceStart = true;
+            }
+        }
     }
 }
 

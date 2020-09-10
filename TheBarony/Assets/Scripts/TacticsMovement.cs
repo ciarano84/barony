@@ -258,10 +258,16 @@ public class TacticsMovement : Unit
             
             if (Vector3.Distance(transform.position, target) >= 0.2f)
             {
-                bool jump = transform.position.y != target.y;
+                bool jump = false;
 
+                //This next line was...
+                //bool jump = transform.position.y != target.y;
+
+                if (transform.position.y >= target.y + 0.05 || transform.position.y <= target.y - 0.05) jump = true;
+                
                 if (jump)
                 {
+                    Debug.Log("jumping");
                     Jump(target);
                 }
                 else
@@ -451,7 +457,7 @@ public class TacticsMovement : Unit
         {
             //put stuff that should only happen at the start of their turn in here (as opposed to the beginning of each time they choose a new action/move). 
             firstTurn = true;
-            CheckFocus();
+            CheckFocus(false);
         }
         
         turn = true;
@@ -474,6 +480,9 @@ public class TacticsMovement : Unit
         turn = false;
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
+        
+        //This needs to be altered to stop focus just being lost at the end of the turn. 
+        CheckFocus(true);
         focusSwitched = false;
         canFocusSwitch = false;
     }

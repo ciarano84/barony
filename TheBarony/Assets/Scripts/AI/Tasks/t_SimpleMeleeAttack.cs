@@ -30,10 +30,10 @@ public class t_SimpleMeleeAttack : Task
                 task.value = 1 / Vector3.Distance(unit.transform.position, target.transform.position);
                 task.tile = t;
                 task.target = target.GetComponent<Unit>();
-                if (!RangeFinder.LineOfSight(unit, target.GetComponent<Unit>()))
-                {
-                    task.value -= 1;
-                }
+                //if (!RangeFinder.LineOfSight(unit, target.GetComponent<Unit>()))
+                //{
+                //    task.value -= 1;
+                //}
                 unit.GetComponent<AI>().tasks.Add(task);
             }
         }
@@ -68,10 +68,16 @@ public class t_SimpleMeleeAttack : Task
         if (unit.remainingMove > 0 && unit.remainingActions > 0)
         {
             unit.destination = target.gameObject;
+            return;
         }
-        else
+
+        //Defend if you've not reached the target
+        if (unit.remainingActions > 0)
         {
-            flagEndofTurn = true;
+            unit.defend.ExecuteAction(ActionCost.main);
+            return;
         }
+
+        flagEndofTurn = true;
     }
 }

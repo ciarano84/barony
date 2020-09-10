@@ -102,7 +102,13 @@ public class t_sneakyMeleeAttack : Task
                 flagEndofTurn = true;
                 return;
             }
-            flagEndofTurn = true;
+        }
+
+        //Defend if you've not reached the target
+        if (unit.remainingActions > 0)
+        {
+            unit.defend.ExecuteAction(ActionCost.main);
+            return;
         }
 
         flagEndofTurn = true;

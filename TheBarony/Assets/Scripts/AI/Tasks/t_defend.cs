@@ -45,11 +45,14 @@ public class t_defend : Task
             }
         }
 
-        //and defend
+        //and defend if able.
         if (unit.remainingActions > 0)
         {
             unit.defend.ExecuteAction(ActionCost.main);
             flagEndofTurn = true;
+            return;
         }
+
+        flagEndofTurn = true;
     }
 }

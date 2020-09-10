@@ -43,7 +43,9 @@ public class AI : MonoBehaviour
     {
         foreach (Task t in tasks)
         {
-            t.value += UnityEngine.Random.Range(0, 6) / 10;
+            float roll = UnityEngine.Random.Range(0, 6);
+            roll /= 10;
+            t.value += roll;
         }
     }
 
