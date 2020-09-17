@@ -24,12 +24,12 @@ public class AI_goblinScout : AI
 
         unit.actualTargetTile = null;
 
-        Debug.Log(unit.name + " " + unit.gameObject.GetInstanceID());
+        //Debug.Log(unit.name + " " + unit.gameObject.GetInstanceID());
         //Pick the Winner;
         float highestValue = -100f;
         foreach (Task t in tasks)
         {
-            Debug.Log(t.taskName + " " + t.value);
+            //Debug.Log(t.taskName + " " + t.value);
             if (t.value > highestValue)
             {
                 task = t;

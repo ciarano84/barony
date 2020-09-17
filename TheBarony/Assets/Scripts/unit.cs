@@ -81,6 +81,7 @@ public class Unit : MonoBehaviour
     //Actions
     public Action dash;
     public Action defend;
+    public Action prime;
 
     public void SetStats()
     {
@@ -105,6 +106,12 @@ public class Unit : MonoBehaviour
         df.SetActionButtonData(this);
         actions.Add(df);
         defend = df;
+
+        //Prime
+        Prime pr = new Prime();
+        pr.SetActionButtonData(this);
+        actions.Add(pr);
+        prime = pr;
     }
 
     public void SetSlots()

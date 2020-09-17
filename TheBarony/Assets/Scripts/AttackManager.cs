@@ -8,22 +8,31 @@ public class AttackManager : MonoBehaviour
     //The values that can be manipulated by other classes. 
     public static int grazeDamage = -2;
     public static int damage = 0;
+    public static int bonuses = 0;
+    public static int attack = 0;
+    public static int defence = 0;
+    public static int resiliance = 0;
+    public static int wounds = 0;
 
     //These are the delegate handlers that class features and items can subscribe to. 
     public delegate void OnGrazeDelegate(Unit attacker, Unit defender);
     public static OnGrazeDelegate OnGraze;
+
+    public delegate void OnWoundDelegate(Unit attacker, Unit defender);
+    public static OnWoundDelegate OnWound;
 
     public delegate void OnAttackDelegate(Unit attacker, Unit defender);
     public static OnAttackDelegate OnAttack;
 
     //For now this will just be hitting or missing (no crits).
     //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. s
-    public static bool AttackRoll(Unit attacker, Unit defender, int bonuses = 0)
+    public static bool AttackRoll(Unit attacker, Unit defender, int _bonuses = 0)
     {
         ResetValues();
         
-        int attack = attacker.unitInfo.currentAttack;
-        int defence = defender.unitInfo.currentDefence;
+        attack += attacker.unitInfo.currentAttack;
+        defence += defender.unitInfo.currentDefence;
+        bonuses += _bonuses;
 
         OnAttack(attacker, defender);
 
@@ -65,9 +74,6 @@ public class AttackManager : MonoBehaviour
 
     public static void DamageRoll(Unit attacker, Unit defender)
     {
-        int resiliance;
-        int wounds;
-
         damage += attacker.unitInfo.currentDamage;
         resiliance = defender.unitInfo.currentToughness;
 
@@ -88,6 +94,7 @@ public class AttackManager : MonoBehaviour
         } 
         else
         {
+            OnWound(attacker, defender); //Alert all that someone is wounded. 
             if (result > 9) wounds = 1;
             else if (result > 4) wounds = 2;
             else { wounds = 3; }
@@ -103,5 +110,8 @@ public class AttackManager : MonoBehaviour
     {
         grazeDamage = -2;
         damage = 0;
+        bonuses = 0;
+        attack = 0;
+        defence = 0;
     }
 }

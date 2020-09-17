@@ -5,7 +5,7 @@ using UnityEngine;
 public class Defending : Effect
 {
     //The onus should be on the causer of the effect to check that this is a viable target (and doesn't have a similar effect on them). 
-    public override void AddEffect(GameObject effectCauser)
+    public override void AddEffect(GameObject effectCauser, GameEvent gameEvent = GameEvent.DEFAULT)
     {
         owner = gameObject.GetComponent<Unit>();
         owner.effects.Add(this);

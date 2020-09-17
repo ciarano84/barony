@@ -63,6 +63,8 @@ public class GameAssets : MonoBehaviour
     //Effect Sprites
     public Sprite Defending;
     public Sprite BlessIcon;
+    public Sprite PrimingIcon;
+    public Sprite ExposedIcon;
 
     //Item models
     public GameObject DaggerModel;
