@@ -43,7 +43,7 @@ public class Prime : Action
         if (!RangeFinder.LineOfSight(actioningUnit, actioningUnit.focus)) return false;
 
         if (actioningUnit.mainWeapon.weaponData.rangeType == WeaponData.Range.ranged) { }
-        else if (actioningUnit.mainWeapon.weaponData.rangeType == WeaponData.Range.melee && actioningUnit.mainWeapon.weaponData.weight >= ItemData.Weight.heavy) { }
+        else if (actioningUnit.mainWeapon.weaponData.rangeType == WeaponData.Range.melee && actioningUnit.mainWeapon.weaponData.weight >= ItemData.Weight.medium) { }
         else return false;
 
         if (actioningUnit.unitInfo.currentBreath > 0) return true;

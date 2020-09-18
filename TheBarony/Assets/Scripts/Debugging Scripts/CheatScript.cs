@@ -38,16 +38,25 @@ public class CheatScript : MonoBehaviour
             {
                 Destroy(child.gameObject);
             }
-
-
-
-            //Destroy(Initiative.currentUnit.mainWeapon.itemData.itemModel);
             GreataxeData axe = new GreataxeData();
             axe.SetData(Initiative.currentUnit.unitInfo, Slot.mainHand);
             axe.EquipItem(Initiative.currentUnit);
             BlankItemData blank = new BlankItemData();
             blank.SetData(Initiative.currentUnit.unitInfo, Slot.offHand);
         }
+
+        //Cheat for Mace
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.M))
+        {
+            foreach (Transform child in Initiative.currentUnit.mainHandSlot)
+            {
+                Destroy(child.gameObject);
+            }
+            MaceData mace = new MaceData();
+            mace.SetData(Initiative.currentUnit.unitInfo, Slot.mainHand);
+            mace.EquipItem(Initiative.currentUnit);
+        }
+
 
         //Stat Cheats
         if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.D))

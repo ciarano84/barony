@@ -25,7 +25,7 @@ public class Priming : Effect
             owner.GetComponent<Exposed>().enabled = true;
             owner.GetComponent<Exposed>().AddEffect(owner.gameObject);
         }
-        owner.unitAnim.SetBool("Heavy Priming", true);
+        owner.unitAnim.SetBool("Priming", true);
 
         AttackManager.OnAttack += BoostAttack;
         AttackManager.OnWound += WoundRemovalCheck;
@@ -63,7 +63,7 @@ public class Priming : Effect
     public override void Remove()
     {
         UnSubscribe(owner);
-        owner.unitAnim.SetBool("Heavy Priming", false);
+        owner.unitAnim.SetBool("Priming", false);
         OnEffectEnd(owner, this);
         owner.effects.Remove(this);
         enabled = false;
