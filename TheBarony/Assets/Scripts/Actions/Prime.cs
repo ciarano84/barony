@@ -18,8 +18,8 @@ public class Prime : Action
 
         if (actioningUnit.GetComponent<Priming>() == null)
         {
-            Priming defending = actioningUnit.gameObject.AddComponent<Priming>();
-            defending.AddEffect(actioningUnit.gameObject);
+            Priming priming = actioningUnit.gameObject.AddComponent<Priming>();
+            priming.AddEffect(actioningUnit.gameObject);
         }
         else if (!actioningUnit.GetComponent<Priming>().enabled)
         {

@@ -25,6 +25,7 @@ public class Priming : Effect
             owner.GetComponent<Exposed>().enabled = true;
             owner.GetComponent<Exposed>().AddEffect(owner.gameObject);
         }
+        owner.unitAnim.SetBool("Heavy Priming", true);
 
         AttackManager.OnAttack += BoostAttack;
         AttackManager.OnWound += WoundRemovalCheck;
@@ -62,6 +63,7 @@ public class Priming : Effect
     public override void Remove()
     {
         UnSubscribe(owner);
+        owner.unitAnim.SetBool("Heavy Priming", false);
         OnEffectEnd(owner, this);
         owner.effects.Remove(this);
         enabled = false;
@@ -87,8 +89,8 @@ public class Priming : Effect
                 AttackManager.damage += ((int)owner.mainWeapon.weaponData.weight) * 2;
                 DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Mighty Attack", false);
             }
+            Remove();
         }
-        Remove();
     }
 
     void WoundRemovalCheck(Unit attacker, Unit defender)

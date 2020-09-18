@@ -267,7 +267,6 @@ public class TacticsMovement : Unit
                 
                 if (jump)
                 {
-                    Debug.Log("jumping");
                     Jump(target);
                 }
                 else

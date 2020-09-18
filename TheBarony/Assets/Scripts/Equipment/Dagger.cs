@@ -39,8 +39,8 @@ public class DaggerData : MeleeWeaponData
 
     public override void EquipItem(Unit unit)
     {
-        GameObject model = GameObject.Instantiate(GameAssets.i.DaggerModel, unit.mainHandSlot);
-        model.transform.position = unit.mainHandSlot.position;
+        itemModel = GameObject.Instantiate(GameAssets.i.DaggerModel, unit.mainHandSlot);
+        itemModel.transform.position = unit.mainHandSlot.position;
 
         Dagger weapon = unit.gameObject.AddComponent<Dagger>();
         weapon.owner = unit.gameObject.GetComponent<TacticsMovement>();
