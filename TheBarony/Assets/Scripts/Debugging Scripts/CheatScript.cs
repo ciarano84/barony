@@ -57,6 +57,22 @@ public class CheatScript : MonoBehaviour
             mace.EquipItem(Initiative.currentUnit);
         }
 
+        //Cheat for Shortbow
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.B))
+        {
+            foreach (Transform child in Initiative.currentUnit.mainHandSlot)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (Transform child in Initiative.currentUnit.offHandSlot)
+            {
+                Destroy(child.gameObject);
+            }
+            ShortbowData bow = new ShortbowData();
+            bow.SetData(Initiative.currentUnit.unitInfo, Slot.offHand);
+            bow.EquipItem(Initiative.currentUnit);
+        }
+
 
         //Stat Cheats
         if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.D))

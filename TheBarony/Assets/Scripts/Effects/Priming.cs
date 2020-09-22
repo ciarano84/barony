@@ -12,9 +12,8 @@ public class Priming : Effect
     {
         owner = gameObject.GetComponent<Unit>();
         owner.effects.Add(this);
-        if (owner.mainWeapon.weaponData.rangeType == WeaponData.Range.ranged) primeAttackType = PrimeAttackType.AIMED;
-        else if (owner.mainWeapon.weaponData.rangeType == WeaponData.Range.melee && owner.mainWeapon.weaponData.weight >= ItemData.Weight.medium) primeAttackType = PrimeAttackType.MIGHTY;
 
+        //add exposed effect
         if (owner.GetComponent<Exposed>() == null)
         {
             Exposed exposed = owner.gameObject.AddComponent<Exposed>();
@@ -25,7 +24,20 @@ public class Priming : Effect
             owner.GetComponent<Exposed>().enabled = true;
             owner.GetComponent<Exposed>().AddEffect(owner.gameObject);
         }
-        owner.unitAnim.SetBool("Priming", true);
+
+        owner.aimingBow = true;
+        owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
+
+        if (owner.mainWeapon.weaponData.rangeType == WeaponData.Range.ranged)
+        {
+            primeAttackType = PrimeAttackType.AIMED;
+            owner.unitAnim.SetBool("PrimeAimed", true);
+        }
+        else if (owner.mainWeapon.weaponData.rangeType == WeaponData.Range.melee && owner.mainWeapon.weaponData.weight >= ItemData.Weight.medium)
+        {
+            primeAttackType = PrimeAttackType.MIGHTY;
+            owner.unitAnim.SetBool("PrimeMighty", true);
+        }
 
         AttackManager.OnAttack += BoostAttack;
         AttackManager.OnWound += WoundRemovalCheck;
@@ -43,7 +55,12 @@ public class Priming : Effect
     {
         if (unit == owner)
         {
-            if (primeAttackType == PrimeAttackType.AIMED) Remove();
+            if (primeAttackType == PrimeAttackType.AIMED)
+            {
+                Remove();
+                owner.aimingBow = false;
+                owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
+            }  
         }
     }
 
@@ -63,7 +80,8 @@ public class Priming : Effect
     public override void Remove()
     {
         UnSubscribe(owner);
-        owner.unitAnim.SetBool("Priming", false);
+        owner.unitAnim.SetBool("PrimeMighty", false);
+        owner.unitAnim.SetBool("PrimeAimed", false);
         OnEffectEnd(owner, this);
         owner.effects.Remove(this);
         enabled = false;
@@ -95,6 +113,11 @@ public class Priming : Effect
 
     void WoundRemovalCheck(Unit attacker, Unit defender)
     {
-        if (defender == owner) Remove();
+        if (defender == owner)
+        {
+            owner.aimingBow = false;
+            owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
+            Remove();
+        }      
     }
 }

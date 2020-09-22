@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &4334564604341716627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5376495479866703486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0b444470a756843b4accda66b9396c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 7318763801079180455}
 --- !u!1001 &8440092517917197051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11,7 +24,7 @@ PrefabInstance:
         type: 3}
       propertyPath: offHandSlot
       value: 
-      objectReference: {fileID: 397492367308759274}
+      objectReference: {fileID: 0}
     - target: {fileID: 1202535369076960860, guid: 6b67a3594c39f4f4280f7825f1e1903e,
         type: 3}
       propertyPath: body
@@ -20,7 +33,7 @@ PrefabInstance:
     - target: {fileID: 1202535369076960860, guid: 6b67a3594c39f4f4280f7825f1e1903e,
         type: 3}
       propertyPath: jumpHeight
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2191465398959735477, guid: 6b67a3594c39f4f4280f7825f1e1903e,
         type: 3}
@@ -89,15 +102,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b67a3594c39f4f4280f7825f1e1903e, type: 3}
---- !u!1 &6018941470284174149 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2785098196949717438, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+--- !u!114 &7318763801079180455 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1202535369076960860, guid: 6b67a3594c39f4f4280f7825f1e1903e,
     type: 3}
   m_PrefabInstance: {fileID: 8440092517917197051}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &397492367308759274 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8116918499806093841, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52dd51c56f588f346a5fd2471853612b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5376495479866703486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4592577925220514949, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8440092517917197051}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6018941470284174149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2785098196949717438, guid: 6b67a3594c39f4f4280f7825f1e1903e,
     type: 3}
   m_PrefabInstance: {fileID: 8440092517917197051}
   m_PrefabAsset: {fileID: 0}

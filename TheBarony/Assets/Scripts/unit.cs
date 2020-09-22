@@ -66,6 +66,8 @@ public class Unit : MonoBehaviour
     public bool canFocusSwitch = false;
     bool focusSinceStart;
 
+    public bool aimingBow;
+
     public List<Action> actions = new List<Action>();
     public List<Effect> effects = new List<Effect>();
 

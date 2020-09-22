@@ -15,6 +15,7 @@ public class scriptDelegateEmptyHandlers : MonoBehaviour
         Unit.onKO += OnEncounterStartEmptyHandler;
         Initiative.OnTurnStart += OnEncounterStartEmptyHandler;
         Effect.OnEffectEnd += OnEffectEndHandler;
+        //Missile.OnMissileHit += OnEncounterStartEmptyHandler;
     }
 
     void OnEncounterStartEmptyHandler(Unit unit) { }

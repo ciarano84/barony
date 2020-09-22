@@ -15,63 +15,67 @@ public abstract class RangedWeaponData : WeaponData
 public class RangedWeapon : Weapon
 {
     public RangedWeaponData rangedWeaponData;
-    Animator rootAnim;
+    public bool NextToEnemy;
 
     public override IEnumerator Attack(Target target)
     {
-        int bonuses = 0;
-        //owner.FindAdjacentUnits();
+        currentTarget = target;
         RangeFinder.FindAdjacentUnits(owner);
         foreach (Unit unit in owner.adjacentUnits)
         {
             if (unit.unitInfo.faction != owner.unitInfo.faction)
             {
-                bonuses--;
+                NextToEnemy = true;
                 break;
             }
         }
 
         owner.remainingActions--;
-
-        //root animation nonsense so it doesn't fire to the side. 
-        owner.FaceDirection(target.unitTargeted.gameObject.transform.position);
-        rootAnim = owner.GetComponent<Animator>();
-        rootAnim.SetTrigger("turnRight");
-        
+        owner.aimingBow = true;
+        owner.FaceDirection(currentTarget.unitTargeted.gameObject.transform.position);
         yield return new WaitForSeconds(0.3f);
-
-        //Create this animation.
         owner.unitAnim.SetTrigger("rangedAttack");
 
-        bool hit = AttackManager.AttackRoll(owner, target.unitTargeted.GetComponent<Unit>(), bonuses);
-        yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length);
-        GameObject missile = Instantiate(GameAssets.i.ArrowModel, owner.offHandSlot.position, owner.transform.rotation, owner.offHandSlot) as GameObject;
+        //attack event code WAS here. 
+
+        yield break;
+    }
+
+    public override void AttackEvent()
+    {
+        int bonuses = 0;
+        if (NextToEnemy) bonuses = -1;
+        bool hit = AttackManager.AttackRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), bonuses);
+        GameObject missile = Instantiate(GameAssets.i.ArrowModel, owner.offHandSlot.position, owner.transform.rotation) as GameObject;
+        missile.GetComponent<Missile>().target = currentTarget.unitTargeted.transform.position + new Vector3(0, currentTarget.unitTargeted.GetComponent<TacticsMovement>().halfHeight);
 
         if (hit)
         {
             //Hit goes here.
-            missile.GetComponent<Missile>().target = target.unitTargeted.transform.position;
             missile.GetComponent<Missile>().Launch(true);
-            yield return new WaitForSeconds(1.2f);
-            int storedDamage = owner.unitInfo.currentDamage;
-            owner.unitInfo.currentDamage = rangedWeaponData.rangedDamage;
-            AttackManager.DamageRoll(owner, target.unitTargeted.GetComponent<Unit>());
-            owner.unitInfo.currentDamage = storedDamage;
+            missile.GetComponent<Missile>().targetUnit = currentTarget.unitTargeted;
+            missile.GetComponent<Missile>().firingWeapon = this;
         }
         else
         {
             //miss goes here. 
             DamagePopUp.Create(transform.position + new Vector3(0, 2 * GetComponent<TacticsMovement>().halfHeight), "miss", false);
-            missile.GetComponent<Missile>().target = target.unitTargeted.transform.position;
             missile.GetComponent<Missile>().Launch(false);
         }
 
-        yield return new WaitForSeconds(1f);
-        rootAnim.SetTrigger("turnLeft");
+        owner.aimingBow = false;
+        NextToEnemy = false;
+        owner.FaceDirection(currentTarget.unitTargeted.gameObject.transform.position);
         rangedWeaponData.currentAmmo--;
         Initiative.EndAction();
+    }
 
-        yield break;
+    public void DamageEvent(Unit unit)
+    {
+        int storedDamage = owner.unitInfo.currentDamage;
+        owner.unitInfo.currentDamage = rangedWeaponData.rangedDamage;
+        AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
+        owner.unitInfo.currentDamage = storedDamage;
     }
 
     public override void GetTargets()

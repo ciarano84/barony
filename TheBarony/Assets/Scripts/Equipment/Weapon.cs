@@ -16,6 +16,7 @@ public abstract class WeaponData : ItemData
 public class Weapon : Item
 {
     public WeaponData weaponData;
+    public Target currentTarget;
 
     public class Target
     {
@@ -48,4 +49,6 @@ public class Weapon : Item
     public override void GetItemData()
     {
     }
+
+    public virtual void AttackEvent() { }
 }

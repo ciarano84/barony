@@ -507,6 +507,7 @@ public class TacticsMovement : Unit
     {
         target.y = transform.position.y;
         transform.LookAt(target);
+        if (aimingBow) transform.rotation *= Quaternion.Euler(0, 90f, 0);
     }
 
     //The A* formula. 
