@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: unitInfo.faction
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7318763801079180455, guid: 923239b3514fabd48947ef7725db0d19,
+        type: 3}
+      propertyPath: offHandSlot
+      value: 
+      objectReference: {fileID: 7693958012337367764}
     - target: {fileID: 7730601684680638529, guid: 923239b3514fabd48947ef7725db0d19,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -79,3 +84,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 923239b3514fabd48947ef7725db0d19, type: 3}
+--- !u!4 &7693958012337367764 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 397492367308759274, guid: 923239b3514fabd48947ef7725db0d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 8017044228703881790}
+  m_PrefabAsset: {fileID: 0}

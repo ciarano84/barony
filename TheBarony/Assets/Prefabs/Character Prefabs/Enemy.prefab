@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &3055099907477660027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4861493547287551773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a07925fb3b1a8c408c1cd618f2f9496, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aspectPack: 1
 --- !u!114 &-7023929707143316714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,6 +17,7 @@ MonoBehaviour:
     unitVisual: EnemyVisual
     faction: 1
     aspect: {fileID: 0}
+    fate: 2
     baseBreath: 3
     firstBreath: 3
     flaggingBreath: 0
@@ -54,6 +42,8 @@ MonoBehaviour:
   offHandSlot: {fileID: 3295455057085906873}
   focusSwitched: 0
   canFocusSwitch: 0
+  aimingBow: 0
+  effects: []
   adjacentUnits: []
   focus: {fileID: 0}
   turn: 0
@@ -69,6 +59,22 @@ MonoBehaviour:
   remainingMove: 0
   remainingActions: 0
   halfHeight: 0
+  destination: {fileID: 0}
+  ai: {fileID: 0}
+--- !u!114 &3055099907477660027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861493547287551773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a07925fb3b1a8c408c1cd618f2f9496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectPack: 1
+  fate: 0
 --- !u!1001 &2900287209024298835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76,6 +82,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4334564604341716627, guid: 923239b3514fabd48947ef7725db0d19,
+        type: 3}
+      propertyPath: unit
+      value: 
+      objectReference: {fileID: -7023929707143316714}
     - target: {fileID: 6018941470284174149, guid: 923239b3514fabd48947ef7725db0d19,
         type: 3}
       propertyPath: m_Name
@@ -139,7 +150,7 @@ PrefabInstance:
     - target: {fileID: 7730601684680638542, guid: 923239b3514fabd48947ef7725db0d19,
         type: 3}
       propertyPath: m_Name
-      value: Orc
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7318763801079180455, guid: 923239b3514fabd48947ef7725db0d19, type: 3}
