@@ -30,8 +30,6 @@ public class EncounterManager : MonoBehaviour
 
     //This is all in lieu of an actual system of pulling in enemies. 
     List<List<GameObject>> enemyCells = new List<List<GameObject>>(); 
-    //public int numberOfEnemyCells;
-    //public int EnemiesPerCell;
 
     //Debug
     public enum EncounterSettings { Standard, Test };

@@ -33,7 +33,6 @@ public class LongbowData : RangedWeaponData
 
     public override void EquipItem(Unit unit)
     {
-        Debug.Log(unit.gameObject.GetInstanceID());
         itemModel = GameObject.Instantiate(GameAssets.i.LongbowModel, unit.offHandSlot);
         itemModel.transform.position = unit.offHandSlot.position;
 

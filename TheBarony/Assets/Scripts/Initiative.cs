@@ -35,6 +35,10 @@ public class Initiative : MonoBehaviour
     public delegate void OnTurnStartDelegate(Unit unit);
     public static OnTurnStartDelegate OnTurnStart;
 
+    //OnActionTaken Delegate. 
+    public delegate void OnActionTakenDelegate(Unit unit);
+    public static OnActionTakenDelegate OnActionTaken;
+
     //Debug.
     private void Update()
     {
@@ -110,6 +114,7 @@ public class Initiative : MonoBehaviour
         }
         else
         {
+            OnActionTaken(currentUnit);
             yield return new WaitForSeconds(0.5f);
             if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {

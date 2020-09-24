@@ -35,10 +35,6 @@ public class UnitInfoPanel : MonoBehaviour
 
         GameObject unitPrefab = Instantiate(GameAssets.i.PlayerUnit, point.transform, false);
         unitPrefab.GetComponent<Unit>().unitInfo = unitInfo;
-
-        unit.mainWeaponData.SetData(unit);
-        unit.mainWeaponData.EquipItem(unitPrefab.GetComponent<Unit>());
-        unitWeaponImage.sprite = unit.mainWeaponData.SetImage();
     }
 
     public void SelectUnit()

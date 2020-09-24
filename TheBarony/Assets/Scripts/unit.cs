@@ -76,6 +76,9 @@ public class Unit : MonoBehaviour
     public delegate void OnKODelegate(Unit unit);
     public static OnKODelegate onKO;
 
+    public delegate void OnSetFocusDelegate(Unit unit);
+    public static OnSetFocusDelegate onSetFocus;
+
     //focus
     public Unit focus;
     public static Unit mousedOverUnit;
@@ -240,6 +243,7 @@ public class Unit : MonoBehaviour
         focusSwitched = true;
         canFocusSwitch = false;
         focusSinceStart = false;
+        onSetFocus(this);
     }
 
     public void CheckFocus(bool removalCheck)

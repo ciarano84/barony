@@ -102,7 +102,8 @@ public class AttackManager : MonoBehaviour
         }
         if (defender.focus != attacker)
         {
-            defender.focus = attacker;
+            //defender.focus = attacker;
+            defender.SetFocus(attacker);
         }
     }
 

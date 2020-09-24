@@ -5,6 +5,7 @@ using UnityEngine;
 public class Priming : Effect
 {
     bool turnStartFlag;
+    bool startCheckingForMainActionUsed;
     enum PrimeAttackType { AIMED, MIGHTY };
     PrimeAttackType primeAttackType;
 
@@ -42,6 +43,8 @@ public class Priming : Effect
         AttackManager.OnAttack += BoostAttack;
         AttackManager.OnWound += WoundRemovalCheck;
         TacticsMovement.OnEnterSquare += RemovalCheck;
+        Initiative.OnActionTaken += MainActionTakenRemovalCheck;
+        Unit.onSetFocus += DeathRemovalCheck;
         Unit.onKO += DeathRemovalCheck;
     }
 
@@ -64,6 +67,23 @@ public class Priming : Effect
         }
     }
 
+    public void MainActionTakenRemovalCheck(Unit unit = null)
+    {
+        Debug.Log("subscriber is called.");
+        if (unit == owner)
+        {
+            if (unit.GetComponent<TacticsMovement>().remainingActions < 1)
+            {
+                if (!startCheckingForMainActionUsed) startCheckingForMainActionUsed = true;
+                else
+                {
+                    Debug.Log("conditions are met for removal");
+                    Remove();
+                } 
+            }    
+        }
+    }
+
     public void UnSubscribe(Unit unit)
     {
         //Do all unsubscribes. 
@@ -74,7 +94,10 @@ public class Priming : Effect
         TacticsMovement.OnEnterSquare -= RemovalCheck;
         Unit.onKO -= DeathRemovalCheck;
         Unit.onKO -= UnSubscribe;
+        Initiative.OnActionTaken -= MainActionTakenRemovalCheck;
+        Unit.onSetFocus -= DeathRemovalCheck;
         turnStartFlag = false;
+        startCheckingForMainActionUsed = false;
     }
 
     public override void Remove()
@@ -84,7 +107,7 @@ public class Priming : Effect
         owner.unitAnim.SetBool("PrimeAimed", false);
         OnEffectEnd(owner, this);
         owner.effects.Remove(this);
-        enabled = false;
+        Destroy(this);
     }
 
     public override Sprite SetImage()

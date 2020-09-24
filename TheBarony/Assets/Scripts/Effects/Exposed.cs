@@ -20,7 +20,7 @@ public class Exposed : Effect
     {
         UnSubscribe(owner);
         owner.effects.Remove(this);
-        enabled = false;
+        Destroy(this);
     }
 
     public void UnSubscribe(Unit unit)

@@ -36,7 +36,7 @@ public class Defending : Effect
         UnSubscribe(owner);
         owner.effects.Remove(this);
         owner.unitInfo.currentDefence -= 4;
-        enabled = false;
+        Destroy(this);
     }
 
     public override Sprite SetImage()
