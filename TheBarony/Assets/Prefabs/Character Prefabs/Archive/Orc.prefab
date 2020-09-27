@@ -320,7 +320,6 @@ GameObject:
   - component: {fileID: 2191465398959735482}
   - component: {fileID: 1202535369076960860}
   - component: {fileID: 2515978268496713543}
-  - component: {fileID: 1433172871}
   m_Layer: 0
   m_Name: Orc
   m_TagString: character
@@ -360,7 +359,7 @@ MonoBehaviour:
     unitVisual: PlayerVisual
     faction: 1
     aspect: {fileID: 0}
-    className: 
+    fate: 2
     baseBreath: 3
     firstBreath: 3
     flaggingBreath: 0
@@ -380,15 +379,19 @@ MonoBehaviour:
   unitAnim: {fileID: 4533148834310164113}
   rig: {fileID: 4592577925220514949}
   mainWeapon: {fileID: 0}
+  body: {fileID: 0}
   mainHandSlot: {fileID: 64152343595138639}
   offHandSlot: {fileID: 0}
   focusSwitched: 0
   canFocusSwitch: 0
+  aimingBow: 0
+  effects: []
   adjacentUnits: []
   focus: {fileID: 0}
   turn: 0
   selectableTiles: []
   currentTile: {fileID: 0}
+  actualTargetTile: {fileID: 0}
   moving: 0
   jumpHeight: 2
   moveSpeed: 2
@@ -411,25 +414,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1, z: 0.6}
   m_Center: {x: 0, y: 0.52, z: 0}
---- !u!95 &1433172871
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2191465398959735477}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 871d5ae9bb79ef644a749d06cad73ab7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2273316506699682233
 GameObject:
   m_ObjectHideFlags: 0

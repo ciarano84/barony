@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class t_runAway : Task
 {
-    public override void EvaluateCandidates(NPC unit)
+    bool dashed;
+    
+    public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
         if (unit.focus != null)
         {
@@ -21,13 +23,9 @@ public class t_runAway : Task
                 task.value = 1 / Vector3.Distance(unit.transform.position, enemy.transform.position);
                 task.tile = null;
                 task.target = enemy.GetComponent<Unit>();
-                if (!RangeFinder.LineOfSight(unit, enemy.GetComponent<Unit>()))
-                {
-                    task.value -= 1;
-                }
 
-                //Debug
-                task.value += 10;
+                //am I outnumbered?
+                task.value += RangeFinder.HowOutnumberedAmI(unit) / 10;
 
                 unit.GetComponent<AI>().tasks.Add(task);
             }
@@ -36,7 +34,15 @@ public class t_runAway : Task
 
     public override void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null)
     {
-        //just runs.  
+        //Dash if that's needed
+        if (unit.remainingActions > 0 && dashed == false)
+        {
+            unit.dash.ExecuteAction(ActionCost.main);
+            dashed = true;
+            return;
+        }
+
+        //Then run 
         if (unit.remainingMove > 0)
         {
             unit.FindSelectableTiles();

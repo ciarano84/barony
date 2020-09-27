@@ -8,9 +8,10 @@ public class Bless : Effect
     Unit blessingUnit;
     
     //The onus should be on the causer of the effect to check that this is a viable target (and doesn't have a similar effect on them). 
-    public override void AddEffect(GameObject effectCauser)
+    public override void AddEffect(GameObject effectCauser, GameEvent endCondition = GameEvent.DEFAULT)
     {
         owner = gameObject.GetComponent<Unit>();
+        owner.effects.Add(this);
         if (BlessVisual == null)
         {
             blessingUnit = effectCauser.GetComponent<Unit>();
@@ -57,9 +58,15 @@ public class Bless : Effect
     public override void Remove()
     {
         UnSubscribe(owner);
+        owner.effects.Remove(this);
         owner.unitInfo.currentAttack -= 2;
         owner.unitInfo.currentDefence -= 2;
         BlessVisual.SetActive(false);
         enabled = false;
+    }
+
+    public override Sprite SetImage()
+    {
+        return GameAssets.i.BlessIcon;
     }
 }

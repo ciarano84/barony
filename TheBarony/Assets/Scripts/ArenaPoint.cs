@@ -6,8 +6,12 @@ public class ArenaPoint : MonoBehaviour
 {
     public GameObject block;
 
-    private void Start()
+    private void awake()
     {
+        //EncounterManager encounterManager = GameObject.Find("EncounterManager").GetComponent<EncounterManager>();
+        //if (encounterManager.encounterSettings == EncounterManager.EncounterSettings.Test) return;
+
+
         int rotationRoll = Random.Range(0, 4);
         float rotation;
 

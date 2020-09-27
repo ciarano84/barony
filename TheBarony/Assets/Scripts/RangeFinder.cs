@@ -117,7 +117,7 @@ public class RangeFinder
             default:
                 break;
         }
-        
+
         foreach (Tile t in tiles)
         {
             bool found = false;
@@ -158,7 +158,7 @@ public class RangeFinder
             {
                 furthest = t;
                 highestRunValue = runValue;
-            }  
+            }
         }
         return furthest;
     }
@@ -191,5 +191,49 @@ public class RangeFinder
         }
         if (tiles.Contains(flankingTile)) return flankingTile;
         else return null;
+    }
+
+    //This can return null. 
+    public static Tile FindTileNextToTarget(TacticsMovement _origin, TacticsMovement _target)
+    {
+        _origin.GetCurrentTile();
+        
+        Tile closestTile = null;
+        float maxDistance = Mathf.Infinity;
+
+        foreach (Neighbour neighbour in _target.currentTile.neighbours)
+        {
+            if (neighbour != null)
+            {
+                foreach (Tile tileCanBeWalkedTo in _origin.selectableTiles)
+                {
+                    if (tileCanBeWalkedTo == neighbour.tile)
+                    {
+                        if (Vector3.Distance(_origin.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
+                        {
+                            maxDistance = Vector3.Distance(_origin.transform.position, tileCanBeWalkedTo.transform.position);
+                            closestTile = neighbour.tile;
+                        }
+                    }
+                }
+            }
+        }
+        return closestTile;
+    }
+
+    //This returns a number which is how many more of your allies their are than the enemy, if it's negative, it's how many more of them there are. 
+    public static int HowOutnumberedAmI(Unit _unit)
+    {
+        int outNumberCount = 1;
+
+        foreach (TacticsMovement unit in Initiative.order)
+        {
+            if (LineOfSight(_unit, unit))
+            {
+                if (unit.unitInfo.faction != _unit.unitInfo.faction) outNumberCount--;
+                if (unit.unitInfo.faction == _unit.unitInfo.faction) outNumberCount++;
+            }
+        }
+        return outNumberCount;
     }
 }

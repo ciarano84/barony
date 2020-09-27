@@ -1,0 +1,146 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Priming : Effect
+{
+    bool turnStartFlag;
+    bool startCheckingForMainActionUsed;
+    enum PrimeAttackType { AIMED, MIGHTY };
+    PrimeAttackType primeAttackType;
+
+    public override void AddEffect(GameObject effectCauser, GameEvent gameEvent = GameEvent.DEFAULT)
+    {
+        owner = gameObject.GetComponent<Unit>();
+        owner.effects.Add(this);
+
+        //add exposed effect
+        if (owner.GetComponent<Exposed>() == null)
+        {
+            Exposed exposed = owner.gameObject.AddComponent<Exposed>();
+            exposed.AddEffect(owner.gameObject);
+        }
+        else if (!owner.GetComponent<Exposed>().enabled)
+        {
+            owner.GetComponent<Exposed>().enabled = true;
+            owner.GetComponent<Exposed>().AddEffect(owner.gameObject);
+        }
+
+        owner.aimingBow = true;
+        owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
+
+        if (owner.mainWeapon.weaponData.rangeType == WeaponData.Range.ranged)
+        {
+            primeAttackType = PrimeAttackType.AIMED;
+            owner.unitAnim.SetBool("PrimeAimed", true);
+        }
+        else if (owner.mainWeapon.weaponData.rangeType == WeaponData.Range.melee && owner.mainWeapon.weaponData.weight >= ItemData.Weight.medium)
+        {
+            primeAttackType = PrimeAttackType.MIGHTY;
+            owner.unitAnim.SetBool("PrimeMighty", true);
+        }
+
+        AttackManager.OnAttack += BoostAttack;
+        AttackManager.OnWound += WoundRemovalCheck;
+        TacticsMovement.OnEnterSquare += RemovalCheck;
+        Initiative.OnActionTaken += MainActionTakenRemovalCheck;
+        Unit.onSetFocus += DeathRemovalCheck;
+        Unit.onKO += DeathRemovalCheck;
+    }
+
+    public void DeathRemovalCheck(Unit unit)
+    {
+        if (unit == owner) Remove();
+    }
+
+    //This is only triggered by something moving. 
+    public override void RemovalCheck(Unit unit = null)
+    {
+        if (unit == owner)
+        {
+            if (primeAttackType == PrimeAttackType.AIMED)
+            {
+                Remove();
+                owner.aimingBow = false;
+                owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
+            }  
+        }
+    }
+
+    public void MainActionTakenRemovalCheck(Unit unit = null)
+    {
+        Debug.Log("subscriber is called.");
+        if (unit == owner)
+        {
+            if (unit.GetComponent<TacticsMovement>().remainingActions < 1)
+            {
+                if (!startCheckingForMainActionUsed) startCheckingForMainActionUsed = true;
+                else
+                {
+                    Debug.Log("conditions are met for removal");
+                    Remove();
+                } 
+            }    
+        }
+    }
+
+    public void UnSubscribe(Unit unit)
+    {
+        //Do all unsubscribes. 
+        //one of which, for future reference, will be on weapon change. 
+
+        AttackManager.OnAttack -= BoostAttack;
+        AttackManager.OnWound -= WoundRemovalCheck;
+        TacticsMovement.OnEnterSquare -= RemovalCheck;
+        Unit.onKO -= DeathRemovalCheck;
+        Unit.onKO -= UnSubscribe;
+        Initiative.OnActionTaken -= MainActionTakenRemovalCheck;
+        Unit.onSetFocus -= DeathRemovalCheck;
+        turnStartFlag = false;
+        startCheckingForMainActionUsed = false;
+    }
+
+    public override void Remove()
+    {
+        UnSubscribe(owner);
+        owner.unitAnim.SetBool("PrimeMighty", false);
+        owner.unitAnim.SetBool("PrimeAimed", false);
+        OnEffectEnd(owner, this);
+        owner.effects.Remove(this);
+        Destroy(this);
+    }
+
+    public override Sprite SetImage()
+    {
+        return GameAssets.i.PrimingIcon;
+    }
+
+    void BoostAttack(Unit attacker, Unit defender)
+    {
+        if (attacker == owner)
+        {
+            //put the benefit to the attack in here. 
+            if (primeAttackType == PrimeAttackType.AIMED)
+            {
+                AttackManager.bonuses += 1;
+                DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Aimed Shot", false);
+            }
+            else if (primeAttackType == PrimeAttackType.MIGHTY)
+            {
+                AttackManager.damage += ((int)owner.mainWeapon.weaponData.weight) * 2;
+                DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Mighty Attack", false);
+            }
+            Remove();
+        }
+    }
+
+    void WoundRemovalCheck(Unit attacker, Unit defender)
+    {
+        if (defender == owner)
+        {
+            owner.aimingBow = false;
+            owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
+            Remove();
+        }      
+    }
+}

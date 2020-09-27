@@ -64,17 +64,29 @@ public class Unit : MonoBehaviour
     //tracks if they have used a focus switch in their turn. 
     public bool focusSwitched = false;
     public bool canFocusSwitch = false;
+    bool focusSinceStart;
+
+    public bool aimingBow;
 
     public List<Action> actions = new List<Action>();
+    public List<Effect> effects = new List<Effect>();
 
     public List<Unit> adjacentUnits = new List<Unit>();
 
     public delegate void OnKODelegate(Unit unit);
     public static OnKODelegate onKO;
 
+    public delegate void OnSetFocusDelegate(Unit unit);
+    public static OnSetFocusDelegate onSetFocus;
+
     //focus
     public Unit focus;
     public static Unit mousedOverUnit;
+
+    //Actions
+    public Action dash;
+    public Action defend;
+    public Action prime;
 
     public void SetStats()
     {
@@ -84,6 +96,27 @@ public class Unit : MonoBehaviour
         unitInfo.currentToughness = unitInfo.baseToughness;
         unitInfo.currentDamage = unitInfo.baseStrength;
         unitInfo.currentMove = unitInfo.baseMove;
+    }
+
+    public void SetActions()
+    {
+        //Dash 
+        Dash da = new Dash();
+        da.SetActionButtonData(this);
+        actions.Add(da);
+        dash = da;
+
+        //Defend
+        Defend df = new Defend();
+        df.SetActionButtonData(this);
+        actions.Add(df);
+        defend = df;
+
+        //Prime
+        Prime pr = new Prime();
+        pr.SetActionButtonData(this);
+        actions.Add(pr);
+        prime = pr;
     }
 
     public void SetSlots()
@@ -209,17 +242,30 @@ public class Unit : MonoBehaviour
         focus = unit;
         focusSwitched = true;
         canFocusSwitch = false;
+        focusSinceStart = false;
+        onSetFocus(this);
     }
 
-    public void CheckFocus()
+    public void CheckFocus(bool removalCheck)
     {
         if (focus != null)
         {
-            if (!RangeFinder.LineOfSight(this, focus))
+            if (removalCheck)
             {
-                focus = null;
+                if (!RangeFinder.LineOfSight(this, focus))
+                {
+                    if (focusSinceStart)
+                    {
+                        focus = null;
+                        focusSinceStart = false;
+                    }
+                }
             }
-        } 
+            else
+            {
+                focusSinceStart = true;
+            }
+        }
     }
 }
 

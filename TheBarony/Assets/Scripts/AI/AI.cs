@@ -43,7 +43,9 @@ public class AI : MonoBehaviour
     {
         foreach (Task t in tasks)
         {
-            t.value += UnityEngine.Random.Range(0, 6) / 10;
+            float roll = UnityEngine.Random.Range(0, 6);
+            roll /= 10;
+            t.value += roll;
         }
     }
 
@@ -74,16 +76,20 @@ public abstract class Task
     public bool flagEndofTurn = false;
     public bool attacked = false;
 
-    public abstract void EvaluateCandidates(NPC unit);
+    //Debug
+    public string taskName;
+
+    public abstract void EvaluateCandidates(NPC unit, float weighting = 0);
     
     public abstract void DoTask(NPC unit, Unit targetUnit = null, Tile targetTile = null);
 }
 
 public class DefaultTask : Task
 {
-    public override void EvaluateCandidates(NPC unit)
+    public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
         Task task = new DefaultTask();
+        task.taskName = "default task";
         task.value = -10;
         unit.GetComponent<AI>().tasks.Add(task);
     }

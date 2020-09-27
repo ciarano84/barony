@@ -51,10 +51,20 @@ public class GameAssets : MonoBehaviour
     public Sprite Shield;
     public Sprite BlankItem;
     public Sprite Mace;
-    public Sprite Reload;
     public Sprite Longbow;
     public Sprite Greataxe;
     public Sprite Dagger;
+
+    //Action Sprites
+    public Sprite Reload;
+    public Sprite Dash;
+    public Sprite Defend;
+
+    //Effect Sprites
+    public Sprite Defending;
+    public Sprite BlessIcon;
+    public Sprite PrimingIcon;
+    public Sprite ExposedIcon;
 
     //Item models
     public GameObject DaggerModel;

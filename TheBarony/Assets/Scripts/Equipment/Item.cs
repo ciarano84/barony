@@ -10,6 +10,7 @@ public abstract class ItemData
     public string name;
     public string description;
     public Slot slot;
+    public GameObject itemModel;
     public enum Weight { light, medium, heavy, cumbersome };
     public Weight weight = Weight.light;
 

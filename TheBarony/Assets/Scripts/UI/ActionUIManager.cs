@@ -12,6 +12,8 @@ public class ActionUIManager : MonoBehaviour
     public Image weaponImage;
     public Slider firstBreathSlider;
     public Slider flaggingBreathSlider;
+    public GameObject statusEffects;
+    public GameObject effectIcon;
 
     public GameObject mainActionButton;
     public GameObject moveActionButton;
@@ -56,6 +58,8 @@ public class ActionUIManager : MonoBehaviour
         flaggingBreathSlider.maxValue = unit.unitInfo.flaggingBreath;
         flaggingBreathSlider.value = unit.unitInfo.currentBreath;
         TacticsMovement unitTactics = unit.GetComponent<TacticsMovement>();
+
+        foreach (Effect effect in unit.effects) AddEffectIcon(effect, statusEffects.transform);
 
         if (unitTactics.remainingMove >= unit.unitInfo.currentMove) moveAvailable = true;
         else moveAvailable = false;
@@ -146,6 +150,10 @@ public class ActionUIManager : MonoBehaviour
         {
             t.GetComponent<ActionButton>().RemoveSelf();
         }
+        foreach (Transform t in statusEffects.transform)
+        {
+            Destroy(t.gameObject);
+        }
     }
 
     public static void SetCursor()
@@ -221,5 +229,12 @@ public class ActionUIManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void AddEffectIcon(Effect effect, Transform parent)
+    {
+        EffectIcon icon = Instantiate(effectIcon).GetComponent<EffectIcon>();
+        icon.image.sprite = effect.SetImage();
+        icon.gameObject.transform.SetParent(parent.transform, false);
     }
 }

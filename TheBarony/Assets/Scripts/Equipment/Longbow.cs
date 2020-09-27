@@ -33,10 +33,10 @@ public class LongbowData : RangedWeaponData
 
     public override void EquipItem(Unit unit)
     {
-        GameObject model = GameObject.Instantiate(GameAssets.i.LongbowModel, unit.offHandSlot);
-        model.transform.position = unit.offHandSlot.position;
+        itemModel = GameObject.Instantiate(GameAssets.i.LongbowModel, unit.offHandSlot);
+        itemModel.transform.position = unit.offHandSlot.position;
 
-        Shortbow weapon = unit.gameObject.AddComponent<Shortbow>();
+        Longbow weapon = unit.gameObject.AddComponent<Longbow>();
         weapon.owner = unit.gameObject.GetComponent<TacticsMovement>();
         weapon.rangedWeaponData = this;
         //this next line looks like it's not needed BUT IT REALLY IS

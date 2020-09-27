@@ -10,6 +10,7 @@ public class Tile : MonoBehaviour
     public bool selectable = false;
     public bool diagonal = false;
     public bool difficultTerrain = false;
+    public bool test;
     public GameObject selectPlane;
 
     public Neighbour[] neighbours = new Neighbour[8];
@@ -51,6 +52,12 @@ public class Tile : MonoBehaviour
     private Neighbour GetNeighbour(int position)
     {
         Vector3 direction = new Vector3();
+
+        if (test)
+        {
+            
+        }
+
         switch (position)
         {
             case 0: direction = Vector3.forward; break;

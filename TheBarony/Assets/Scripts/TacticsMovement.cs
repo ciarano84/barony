@@ -56,6 +56,7 @@ public class TacticsMovement : Unit
             GetComponent<MonsterConstructor>().SetUpMonster();
             SetStats();
         }
+        SetActions();
         //tiles = GameObject.FindGameObjectsWithTag("tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         unitAnim = rig.GetComponent<Animator>();
@@ -257,8 +258,13 @@ public class TacticsMovement : Unit
             
             if (Vector3.Distance(transform.position, target) >= 0.2f)
             {
-                bool jump = transform.position.y != target.y;
+                bool jump = false;
 
+                //This next line was...
+                //bool jump = transform.position.y != target.y;
+
+                if (transform.position.y >= target.y + 0.05 || transform.position.y <= target.y - 0.05) jump = true;
+                
                 if (jump)
                 {
                     Jump(target);
@@ -450,14 +456,14 @@ public class TacticsMovement : Unit
         {
             //put stuff that should only happen at the start of their turn in here (as opposed to the beginning of each time they choose a new action/move). 
             firstTurn = true;
-            CheckFocus();
+            CheckFocus(false);
         }
         
         turn = true;
         FindSelectableTiles();  
         mainWeapon.GetTargets();
 
-        //So this needs to not get checked every time it comes to the end of an action AND has to be after turn is set to work. 
+        //this needs to not get checked every time it comes to the end of an action AND has to be after turn is set to work. 
         if (firstTurn)
         {
             if (gameObject.GetComponent<AI>() != null)
@@ -473,6 +479,9 @@ public class TacticsMovement : Unit
         turn = false;
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
+        
+        //This needs to be altered to stop focus just being lost at the end of the turn. 
+        CheckFocus(true);
         focusSwitched = false;
         canFocusSwitch = false;
     }
@@ -498,6 +507,7 @@ public class TacticsMovement : Unit
     {
         target.y = transform.position.y;
         transform.LookAt(target);
+        if (aimingBow) transform.rotation *= Quaternion.Euler(0, 90f, 0);
     }
 
     //The A* formula. 

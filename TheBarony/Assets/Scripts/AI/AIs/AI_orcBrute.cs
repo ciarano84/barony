@@ -2,26 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_goblinScout : AI
+public class AI_orcBrute : AI
 {
-    Task simpleRangedAttack = new t_simpleRangedAttackTask();
+    public t_aggressiveMeleeAttack aggressiveMelee = new t_aggressiveMeleeAttack();
     Task run = new t_runAway();
     Task defaultTask = new DefaultTask();
 
     public override void SetTask()
     {
-        simpleRangedAttack.EvaluateCandidates(unit);
+        aggressiveMelee.EvaluateCandidates(unit);
         defaultTask.EvaluateCandidates(unit);
 
-        foreach (Unit opponent in Initiative.players)
-        {
-            if (opponent.focus == unit)
-            {
-                run.EvaluateCandidates(unit);
-            }
-        }
         RandomizeValues();
-
         unit.actualTargetTile = null;
 
         //Pick the Winner;

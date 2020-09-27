@@ -10,35 +10,37 @@ public class Missile : MonoBehaviour
     float step;
     public Vector3 target;
     public Vector3 missVariance = new Vector3(1, 1, 0);
-    public bool launched = false;
     public bool hit = false;
     Vector3 dir;
-
+    public Unit targetUnit;
+    public RangedWeapon firingWeapon;
 
     public void Launch(bool onTarget)
     {
         if (onTarget)
         {
             dir = target - transform.position;
+            hit = true;
         }
         else
         {
             dir = (target + missVariance) - transform.position;
         }
         transform.LookAt(dir);
-        launched = true;
-        step = speed * Time.deltaTime;
-        Destroy(this.gameObject, 2);
+        Invoke("DestroyMissile", 2);
     }
 
     private void Update()
     {
+        step = speed * Time.deltaTime;
         transform.Translate(dir.normalized * step, Space.World);
-        if (Vector3.Distance(this.transform.position, target) < 0.25) Destroy(this.gameObject);
+        if (Vector3.Distance(this.transform.position, target) < 0.25) DestroyMissile();
         transform.forward = dir;
+    }
 
-        //Might need this to accomdate for aiming at the feet. 
-        //Vector3 direction = target.unitTargeted.transform.position;
-        //direction.y += target.unitTargeted.GetComponent<TacticsMovement>().halfHeight;
+    void DestroyMissile()
+    {
+        if (hit) firingWeapon.DamageEvent(targetUnit);
+        Destroy(this.gameObject);
     }
 }

@@ -7,7 +7,7 @@ public class t_sneakyMeleeAttack : Task
     bool inFlankingPosition = false;
     bool firstMoveDone = false;
     
-    public override void EvaluateCandidates(NPC unit)
+    public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
         foreach (Unit u in Initiative.players)
         {
@@ -102,7 +102,13 @@ public class t_sneakyMeleeAttack : Task
                 flagEndofTurn = true;
                 return;
             }
-            flagEndofTurn = true;
+        }
+
+        //Defend if you've not reached the target
+        if (unit.remainingActions > 0)
+        {
+            unit.defend.ExecuteAction(ActionCost.main);
+            return;
         }
 
         flagEndofTurn = true;
