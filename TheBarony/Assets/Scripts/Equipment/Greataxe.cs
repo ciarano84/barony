@@ -88,7 +88,6 @@ public class Greataxe : MeleeWeapon
 
     public override void AttackEvent()
     {
-        Debug.Log("attack event called");
         int bonuses = 0;
 
         //See if any of the adjacent units to the target allow you to flank. 

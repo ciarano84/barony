@@ -115,7 +115,6 @@ public class TacticsMovement : Unit
             //Debug
             if (t != null)
             {
-                //t.FindNeighbours(jumpHeight, targetTile);
                 t.CheckNeighbours(jumpHeight, targetTile);
             }
             else
@@ -128,7 +127,9 @@ public class TacticsMovement : Unit
 
     public void FindSelectableTiles()
     {
-        ComputeAdjacencyList(jumpHeight, null);
+        //This is only being run to find which tiles have people on them. that info is already avaiable, so could probably be worked out in a better way. 
+        //ComputeAdjacencyList(jumpHeight, null);
+        foreach (GameObject tile in ArenaBuilder.tiles) tile.GetComponent<Tile>().Reset();
         GetCurrentTile();
 
         Queue<Tile> process = new Queue<Tile>();
@@ -146,37 +147,47 @@ public class TacticsMovement : Unit
 
             if (t.distance < remainingMove)
             {
-                foreach (Tile tile in t.adjacencyList)
+                //check and add all the orthagonals
+                for (int neighbourNo = 0; neighbourNo < 8; neighbourNo +=2)
                 {
-                    float distanceToNextTile = 1;
-                    if (tile.difficultTerrain) distanceToNextTile += 1;
-                    
-                    if (!tile.visited && ((remainingMove - t.distance) >= distanceToNextTile))
-                    {
-                        tile.parent = t;
-                        tile.visited = true;
-                        tile.distance = distanceToNextTile + t.distance;
-                        process.Enqueue(tile);
-                    }
+                    AddTileToPath(process, t.neighbours[neighbourNo], false, t, neighbourNo);
                 }
 
-                //Now go through the diagonals, which use up 'distance' quicker
-                foreach (Tile tile in t.diagonalAdjacencyList)
+                //And the diagonals
+                for (int neighbourNo = 1; neighbourNo < 8; neighbourNo +=2)
                 {
-                    float distanceToNextTile = 1.4f;
-                    if (tile.difficultTerrain) distanceToNextTile += 1.4f;
-
-                    if (!tile.visited && ((remainingMove - t.distance) >= distanceToNextTile))
-                    {
-                        tile.parent = t;
-                        tile.visited = true;
-                        tile.diagonal = true;
-                        tile.distance = distanceToNextTile + t.distance;
-                        process.Enqueue(tile);
-                    }
+                    AddTileToPath(process, t.neighbours[neighbourNo], true, t, neighbourNo);
                 }
             }
         }
+    }
+
+    void AddTileToPath(Queue<Tile> process, Neighbour neighbour, bool diagonal, Tile preceding, int direction)
+    {
+        if (neighbour != null)
+        {
+            Tile tile = neighbour.tile;
+            if (tile.occupant == null && neighbour.height <= jumpHeight && !tile.visited)
+            {
+                float distanceToAdd = 1;
+                if (diagonal) distanceToAdd = 1.4f;
+                if (tile.difficultTerrain) distanceToAdd *= 2;
+
+                if ((remainingMove - preceding.distance) >= distanceToAdd)
+                {
+                    if (diagonal) tile.diagonal = true;
+
+                    //Find the inverse direction number (0 - 7) for the neighbouring tile and then make it aware of that neighbour as preceeding it. 
+                    int inverseDirection = direction - 4;
+                    if (inverseDirection < 0) inverseDirection += 8;
+                    tile.preceedingTile = preceding.neighbours[direction].tile.neighbours[inverseDirection];
+
+                    tile.visited = true;
+                    tile.distance = distanceToAdd + preceding.distance;
+                    process.Enqueue(tile);
+                }
+            }
+        }    
     }
 
     //HAS AN OVERLOAD!!!! (should likely just solve this by setting the additional parameter as a default. 
@@ -192,11 +203,12 @@ public class TacticsMovement : Unit
         while (next != null)
         {
             path.Push(next);
-            //if (next.parent != null)
-            //{
-            //    firstTileInPath = next;
-            //}
-            next = next.parent;
+            if (next.preceedingTile != null)
+            {
+                firstTileInPath = next;
+            }
+            if (next.preceedingTile == null) next = null;
+            else next = next.preceedingTile.tile;
         }
     }
 
@@ -221,12 +233,13 @@ public class TacticsMovement : Unit
         while (next != null)
         {
             path.Push(next);
-            
-            if (next.parent != null)
+
+            if (next.preceedingTile.tile != null)
             {
                 firstTileInPath = next;
             }
-            next = next.parent;
+            if (next.preceedingTile == null) next = null;
+            else next = next.preceedingTile.tile;
         }
     }
 
