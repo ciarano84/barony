@@ -26,7 +26,7 @@ public class Priming : Effect
             owner.GetComponent<Exposed>().AddEffect(owner.gameObject);
         }
 
-        owner.aimingBow = true;
+        if (owner.mainWeapon.weaponData.rangeType == WeaponData.Range.ranged) owner.aimingBow = true;
         owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
 
         if (owner.mainWeapon.weaponData.rangeType == WeaponData.Range.ranged)
