@@ -27,6 +27,8 @@ public class ActionUIManager : MonoBehaviour
     public GameObject focusActiveIndicator;
     public Button endTurn;
     public Button focusButton;
+    public Button defenceToggle;
+    public Image defenceToggleIcon;
     static bool focusBeingSelected = false;
 
     bool moveAvailable;
@@ -86,6 +88,8 @@ public class ActionUIManager : MonoBehaviour
             {
                 endTurn.gameObject.SetActive(true);
                 focusButton.gameObject.SetActive(true);
+                defenceToggle.gameObject.SetActive(true);
+                DefenceTypeSet(true);
 
                 //Ensure conditions for actions are met. 
                 foreach (Action a in unit.actions)
@@ -125,6 +129,7 @@ public class ActionUIManager : MonoBehaviour
         {
             //This is for NPC actions, so not really needed atm.
             Clear();
+            defenceToggle.gameObject.SetActive(false);
             return;
         }
     }
@@ -236,5 +241,12 @@ public class ActionUIManager : MonoBehaviour
         EffectIcon icon = Instantiate(effectIcon).GetComponent<EffectIcon>();
         icon.image.sprite = effect.SetImage();
         icon.gameObject.transform.SetParent(parent.transform, false);
+    }
+
+    public void DefenceTypeSet(bool defaultSetting = false)
+    {
+        if (!defaultSetting) currentUnit.dodge = !currentUnit.dodge;
+        if (currentUnit.dodge) defenceToggleIcon.sprite = GameAssets.i.DodgeToggle;
+        if (!currentUnit.dodge) defenceToggleIcon.sprite = GameAssets.i.BlockToggle;
     }
 }

@@ -94,6 +94,8 @@ MonoBehaviour:
   Reload: {fileID: 21300000, guid: 8bfd93d9ea27eb642b922ca1197d6f7d, type: 3}
   Dash: {fileID: 21300000, guid: 3a6b0bf347071bc4180ec8a27157fbc7, type: 3}
   Defend: {fileID: 21300000, guid: 3b76fb01f1e481e40b4f1880d187fff9, type: 3}
+  BlockToggle: {fileID: 21300000, guid: 0e2dc9914418f9b4abdf43b6bdddc7a6, type: 3}
+  DodgeToggle: {fileID: 21300000, guid: 961a55c22d83a364fa2e245c562ad8a8, type: 3}
   Defending: {fileID: 21300000, guid: 3b76fb01f1e481e40b4f1880d187fff9, type: 3}
   BlessIcon: {fileID: 21300000, guid: d587129f68dc2984aa8f4c27d04f6dc4, type: 3}
   PrimingIcon: {fileID: 21300000, guid: da853bf9ea4a47c438dff9430c02d7bd, type: 3}

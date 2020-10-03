@@ -88,6 +88,9 @@ public class Unit : MonoBehaviour
     public Action defend;
     public Action prime;
 
+    //defence - unts are assumed to be blocking if they are not dodging. By default they are blocking. 
+    public bool dodge;
+
     public void SetStats()
     {
         unitInfo.currentBreath = unitInfo.baseBreath;

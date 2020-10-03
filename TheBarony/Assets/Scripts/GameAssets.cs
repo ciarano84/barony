@@ -59,6 +59,8 @@ public class GameAssets : MonoBehaviour
     public Sprite Reload;
     public Sprite Dash;
     public Sprite Defend;
+    public Sprite BlockToggle;
+    public Sprite DodgeToggle;
 
     //Effect Sprites
     public Sprite Defending;
