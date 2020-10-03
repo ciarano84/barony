@@ -69,7 +69,6 @@ public class Priming : Effect
 
     public void MainActionTakenRemovalCheck(Unit unit = null)
     {
-        Debug.Log("subscriber is called.");
         if (unit == owner)
         {
             if (unit.GetComponent<TacticsMovement>().remainingActions < 1)
@@ -77,7 +76,6 @@ public class Priming : Effect
                 if (!startCheckingForMainActionUsed) startCheckingForMainActionUsed = true;
                 else
                 {
-                    Debug.Log("conditions are met for removal");
                     Remove();
                 } 
             }    

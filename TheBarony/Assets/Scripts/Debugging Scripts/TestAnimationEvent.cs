@@ -6,6 +6,5 @@ public class TestAnimationEvent : MonoBehaviour
 {
     public void AttackCalled()
     {
-        Debug.Log("attack called from clip");
     }
 }
