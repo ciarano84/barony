@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-
 public class UnitInfoPanel : MonoBehaviour
 {
     public TextMeshProUGUI unitName;
@@ -35,6 +34,7 @@ public class UnitInfoPanel : MonoBehaviour
 
         GameObject unitPrefab = Instantiate(GameAssets.i.PlayerUnit, point.transform, false);
         unitPrefab.GetComponent<Unit>().unitInfo = unitInfo;
+        unitWeaponImage.sprite = unit.mainWeaponData.SetImage();
     }
 
     public void SelectUnit()
