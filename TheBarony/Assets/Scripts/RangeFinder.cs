@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
 
 public class RangeFinder
@@ -235,5 +237,87 @@ public class RangeFinder
             }
         }
         return outNumberCount;
+    }
+
+    //Find a direction. The subject is asking the question here, and wants to know the direction to the object. 
+    public static int FindDirection(Transform _subject, Transform _object)
+    { 
+        UnityEngine.Vector3 s = _subject.position;
+        UnityEngine.Vector3 o = _object.position;
+        float[] positions = new float[8];
+        positions[0] = o.z - s.z;
+        positions[1] = ((o.z - s.z) + (o.x - s.x)) / 1.4f;
+        positions[2] = o.x - s.x;
+        positions[3] = ((o.x - s.x) + (s.z - o.z)) / 1.4f;
+        positions[4] = s.z - o.z;
+        positions[5] = ((s.z - o.z) + (s.x - o.x)) / 1.4f;
+        positions[6] = s.x - o.x;
+        positions[7] = ((s.x - o.x) + (o.z - s.z)) / 1.4f;
+
+        int position = 0;
+        float p = positions[0];
+        for (int count = 0; count < 8; count++)
+        {
+            if (positions[count] > p)
+            {
+                position = count;
+                p = positions[count];
+            }
+        }
+        return position;
+    }
+
+    public static Tile FindTileToDodgeTo(TacticsMovement defender, Unit attacker, int direction)
+    {
+        List<Neighbour> viableNeighbours = new List<Neighbour>();
+        List<Tile> tiles = new List<Tile>();
+
+        //if it's a ranged attack, pick squares to the side and add them to the list. 
+        if (attacker.mainWeapon.weaponData.rangeType == WeaponData.Range.ranged)
+        {
+            int opposite = GetDirection(direction + 4);
+            for (int count = 0; count < 8; count++)
+            {
+                if (count != direction && count != opposite)
+                {
+                    viableNeighbours.Add(defender.currentTile.neighbours[count]);
+                }
+            }
+        }
+        //if it's melee then dodge away or to the side. 
+        else if (attacker.mainWeapon.weaponData.rangeType == WeaponData.Range.melee)
+        {
+            int right = GetDirection(direction - 1);
+            int left = GetDirection(direction + 1);
+
+            for (int count = 0; count < 8; count++)
+            {
+                if (count != direction && count != right && count != left)
+                {
+                    viableNeighbours.Add(defender.currentTile.neighbours[count]);
+                }
+            }
+        }
+
+        //Check squares on the list for all that are unobscured, empty and don't have any height difference. 
+        foreach (Neighbour neighbour in viableNeighbours)
+        {
+            if (neighbour.height == 0 && neighbour.tile.occupant == null)
+            {
+                tiles.Add(neighbour.tile);
+            }
+        }
+
+        int r = UnityEngine.Random.Range(0, viableNeighbours.Count);
+        return viableNeighbours[r].tile; 
+
+            
+    }
+
+    public static int GetDirection(int n)
+    {
+        if (n > 7) n -= 8;
+        if (n < 0) n += 8;
+        return n;
     }
 }

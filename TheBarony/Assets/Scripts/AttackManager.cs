@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+public enum Result { FAIL, PARTIAL, SUCCESS };
+public enum DefenceType { SHIELD, BLOCK, DODGE };
+
 public class AttackManager : MonoBehaviour
 {
     //The values that can be manipulated by other classes. 
@@ -13,6 +16,8 @@ public class AttackManager : MonoBehaviour
     public static int defence = 0;
     public static int resiliance = 0;
     public static int wounds = 0;
+    public static int blockDice = 0;
+    public static DefenceType defenceType;
 
     //These are the delegate handlers that class features and items can subscribe to. 
     public delegate void OnGrazeDelegate(Unit attacker, Unit defender);
@@ -26,7 +31,7 @@ public class AttackManager : MonoBehaviour
 
     //For now this will just be hitting or missing (no crits).
     //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. s
-    public static bool AttackRoll(Unit attacker, Unit defender, int _bonuses = 0)
+    public static Result AttackRoll(Unit attacker, Unit defender, int _bonuses = 0)
     {
         ResetValues();
         
@@ -35,6 +40,8 @@ public class AttackManager : MonoBehaviour
         bonuses += _bonuses;
 
         OnAttack(attacker, defender);
+
+        defender.GetComponent<TacticsMovement>().Defend(attacker);
 
         //check conditions
         if (defender.unitInfo.flagging) { bonuses++; }
@@ -64,11 +71,15 @@ public class AttackManager : MonoBehaviour
 
         if (AbilityCheck.baseResult >= 0)
         {
-            return true;
+            return Result.SUCCESS;
+        }
+        else if (AbilityCheck.baseResult >= -9)
+        {
+            return Result.PARTIAL;
         }
         else
         {
-            return false;
+            return Result.FAIL;
         }
     }
 
@@ -77,7 +88,19 @@ public class AttackManager : MonoBehaviour
         damage += attacker.unitInfo.currentDamage;
         resiliance = defender.unitInfo.currentToughness;
 
-        AbilityCheck.CheckAbility(damage, resiliance);
+        //Blocking
+        if (defenceType == DefenceType.BLOCK)
+        {
+            blockDice = -1;
+            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "blocked", false);
+        }
+        if (defenceType == DefenceType.SHIELD)
+        {
+            blockDice = -2;
+            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shielded", false);
+        }
+
+        AbilityCheck.CheckAbility(damage, resiliance, blockDice);
 
         int result = AbilityCheck.baseResult;
 
@@ -95,9 +118,9 @@ public class AttackManager : MonoBehaviour
         else
         {
             OnWound(attacker, defender); //Alert all that someone is wounded. 
-            if (result > 9) wounds = 1;
+            if (result > 9) wounds = 3;
             else if (result > 4) wounds = 2;
-            else { wounds = 3; }
+            else { wounds = 1; }
             defender.UpdateWounds(wounds);
         }
         if (defender.focus != attacker)
@@ -114,5 +137,9 @@ public class AttackManager : MonoBehaviour
         bonuses = 0;
         attack = 0;
         defence = 0;
+        resiliance = 0;
+        wounds = 0;
+        blockDice = 0;
+        defenceType = DefenceType.BLOCK;
     }
 }

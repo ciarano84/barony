@@ -45,22 +45,17 @@ public class RangedWeapon : Weapon
     {
         int bonuses = 0;
         if (NextToEnemy) bonuses = -1;
-        bool hit = AttackManager.AttackRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), bonuses);
+        Result hit = AttackManager.AttackRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), bonuses);
         GameObject missile = Instantiate(GameAssets.i.ArrowModel, owner.offHandSlot.position, owner.transform.rotation) as GameObject;
         missile.GetComponent<Missile>().target = currentTarget.unitTargeted.transform.position + new Vector3(0, currentTarget.unitTargeted.GetComponent<TacticsMovement>().halfHeight);
 
-        if (hit)
-        {
-            //Hit goes here.
-            missile.GetComponent<Missile>().Launch(true);
-            missile.GetComponent<Missile>().targetUnit = currentTarget.unitTargeted;
-            missile.GetComponent<Missile>().firingWeapon = this;
-        }
-        else
-        {
-            //miss goes here. 
+        missile.GetComponent<Missile>().Launch(hit);
+        missile.GetComponent<Missile>().targetUnit = currentTarget.unitTargeted;
+        missile.GetComponent<Missile>().firingWeapon = this;
+
+        if (hit == Result.FAIL)
+        { 
             DamagePopUp.Create(transform.position + new Vector3(0, 2 * GetComponent<TacticsMovement>().halfHeight), "miss", false);
-            missile.GetComponent<Missile>().Launch(false);
         }
 
         owner.aimingBow = false;
@@ -70,11 +65,21 @@ public class RangedWeapon : Weapon
         Initiative.EndAction();
     }
 
-    public void DamageEvent(Unit unit)
+    public void DamageEvent(Unit unit, Result _result)
     {
         int storedDamage = owner.unitInfo.currentDamage;
         owner.unitInfo.currentDamage = rangedWeaponData.rangedDamage;
-        AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
+
+        //handle a block;
+        if (_result == Result.PARTIAL)
+        {
+            if (currentTarget.unitTargeted.GetComponent<Shield>())
+            {
+                AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
+            }
+        }
+            
+        else AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
         owner.unitInfo.currentDamage = storedDamage;
     }
 

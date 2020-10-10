@@ -1219,10 +1219,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArenaBlock Flat
       objectReference: {fileID: 0}
+    - target: {fileID: 7011401705639892285, guid: ab51dfcdb4f33514893e46ed0e1fb792,
+        type: 3}
+      propertyPath: test
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011401706721081669, guid: ab51dfcdb4f33514893e46ed0e1fb792,
+        type: 3}
+      propertyPath: test
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7011401707576398075, guid: ab51dfcdb4f33514893e46ed0e1fb792,
         type: 3}
       propertyPath: test
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7891024486182357234, guid: ab51dfcdb4f33514893e46ed0e1fb792,
         type: 3}

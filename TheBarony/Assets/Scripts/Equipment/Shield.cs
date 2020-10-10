@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldData : ItemData
 {
-    public int defendModifier;
+    public int shieldModifier;
 
     public override Sprite SetImage()
     {
@@ -17,7 +17,7 @@ public class ShieldData : ItemData
         slot = Slot.offHand;
         weight = Weight.medium;
         description = "A shield made up largely of planks. \r\nThe nails sticking out of it would be a real benefit if they weren't coming out both sides.";
-        defendModifier = 2;
+        shieldModifier = 2;
 
         if (unitInfo != null)
         {
@@ -33,7 +33,7 @@ public class ShieldData : ItemData
         Shield shield = unit.gameObject.AddComponent<Shield>();
         shield.owner = unit.gameObject.GetComponent<TacticsMovement>();
         shield.itemData = this;
-        unit.unitInfo.currentDefence = unit.unitInfo.baseDefence + defendModifier;
+        //shielding as an event is handled by the defend method in tactics movement. 
     }
 }
 

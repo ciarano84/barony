@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Linq;
 
 public class TacticsMovement : Unit
-{    
+{
     public bool turn = false;
     bool moveGate = false;
 
@@ -15,7 +15,7 @@ public class TacticsMovement : Unit
 
     Stack<Tile> path = new Stack<Tile>();
     public Tile currentTile;
-    
+
     //Used to ensure the first tile doesn't count against movement.
     Tile firstTileInPath;
 
@@ -46,6 +46,8 @@ public class TacticsMovement : Unit
     bool movingEdge = false;
     bool fallingDown = false;
     //bool mouseOver = false;
+    Vector3 dodgeTarget = new Vector3();
+    bool dodging = false;
 
     public delegate void OnEnterSquareDelegate(Unit mover);
     public static OnEnterSquareDelegate OnEnterSquare;
@@ -81,10 +83,10 @@ public class TacticsMovement : Unit
 
         //trying to catch the original fucker of a bug:
         if (currentTile == null)
-            {
+        {
             Debug.DrawRay(transform.position, -Vector3.up, Color.blue, 50f);
             Debug.Log("Bug no 1 found on " + this);
-            }
+        }
 
         if (turn) currentTile.current = true;
     }
@@ -95,7 +97,7 @@ public class TacticsMovement : Unit
 
         Tile tile = null;
 
-        if (Physics.Raycast(target.transform.position + new Vector3(0,1,0), -Vector3.up, out hit, 2, layerMask))
+        if (Physics.Raycast(target.transform.position + new Vector3(0, 1, 0), -Vector3.up, out hit, 2, layerMask))
         {
             tile = hit.collider.GetComponent<Tile>();
         }
@@ -103,7 +105,7 @@ public class TacticsMovement : Unit
         return tile;
     }
 
-    public void ComputeAdjacencyList(float jumpHeight, Tile targetTile) 
+    public void ComputeAdjacencyList(float jumpHeight, Tile targetTile)
     {
         //required if the map is to change size after initializing. 
         //tiles = GameObject.FindGameObjectsWithTag("tile");
@@ -150,7 +152,7 @@ public class TacticsMovement : Unit
                 {
                     float distanceToNextTile = 1;
                     if (tile.difficultTerrain) distanceToNextTile += 1;
-                    
+
                     if (!tile.visited && ((remainingMove - t.distance) >= distanceToNextTile))
                     {
                         tile.parent = t;
@@ -180,7 +182,7 @@ public class TacticsMovement : Unit
     }
 
     //HAS AN OVERLOAD!!!! (should likely just solve this by setting the additional parameter as a default. 
-    public void MoveToTile(Tile tile) 
+    public void MoveToTile(Tile tile)
     {
         path.Clear();
         moveGate = true;
@@ -221,7 +223,7 @@ public class TacticsMovement : Unit
         while (next != null)
         {
             path.Push(next);
-            
+
             if (next.parent != null)
             {
                 firstTileInPath = next;
@@ -235,7 +237,7 @@ public class TacticsMovement : Unit
         if (!moveGate)
         {
             return;
-        } 
+        }
         else if (path.Count > 0)
         {
             Tile t = path.Peek();
@@ -244,7 +246,7 @@ public class TacticsMovement : Unit
             currentTile.occupant = null;
             t.occupant = this;
             currentTile = t;
-            
+
             Vector3 target = t.transform.position;
 
             //Calculate the unit's position on top of target tile. 
@@ -255,7 +257,7 @@ public class TacticsMovement : Unit
             {
                 transform.position = target;
             }
-            
+
             if (Vector3.Distance(transform.position, target) >= 0.2f)
             {
                 bool jump = false;
@@ -264,7 +266,7 @@ public class TacticsMovement : Unit
                 //bool jump = transform.position.y != target.y;
 
                 if (transform.position.y >= target.y + 0.05 || transform.position.y <= target.y - 0.05) jump = true;
-                
+
                 if (jump)
                 {
                     Jump(target);
@@ -308,7 +310,7 @@ public class TacticsMovement : Unit
                     {
                         if (t.difficultTerrain) remainingMove -= 2f;
                         else remainingMove--;
-                    }   
+                    }
                 }
                 path.Pop();
             }
@@ -324,7 +326,7 @@ public class TacticsMovement : Unit
                     FaceDirection(focus.transform.position);
                 }
             }
-            
+
             if (turnRequired)
             {
                 FaceDirection(tileToFace);
@@ -362,7 +364,7 @@ public class TacticsMovement : Unit
         velocity = heading * moveSpeed;
     }
 
-    void Jump(Vector3 target) 
+    void Jump(Vector3 target)
     {
         if (fallingDown)
         {
@@ -376,7 +378,7 @@ public class TacticsMovement : Unit
         {
             MoveToEdge();
         }
-        else 
+        else
         {
             PrepareJump(target);
         }
@@ -440,7 +442,7 @@ public class TacticsMovement : Unit
         {
             SetHorizontalVelocity();
         }
-        else 
+        else
         {
             movingEdge = false;
             fallingDown = true;
@@ -449,7 +451,7 @@ public class TacticsMovement : Unit
         }
     }
 
-    public void BeginTurn() 
+    public void BeginTurn()
     {
         bool firstTurn = false;
         if (!turn)
@@ -458,9 +460,9 @@ public class TacticsMovement : Unit
             firstTurn = true;
             CheckFocus(false);
         }
-        
+
         turn = true;
-        FindSelectableTiles();  
+        FindSelectableTiles();
         mainWeapon.GetTargets();
 
         //this needs to not get checked every time it comes to the end of an action AND has to be after turn is set to work. 
@@ -479,7 +481,7 @@ public class TacticsMovement : Unit
         turn = false;
         remainingMove = unitInfo.currentMove;
         remainingActions = 1;
-        
+
         //This needs to be altered to stop focus just being lost at the end of the turn. 
         CheckFocus(true);
         focusSwitched = false;
@@ -625,5 +627,73 @@ public class TacticsMovement : Unit
         }
 
         return endTile;
+    }
+
+    //will need to feed in weapon being attacked with. 
+    public void Defend(Unit attacker)
+    {
+        if (!dodge)
+        {
+            if (GetComponent<Shield>() != null)
+            {
+                Debug.Log("shield");
+                AttackManager.defenceType = DefenceType.SHIELD;
+                unitAnim.SetTrigger("shield");
+                ShieldData data = (ShieldData)GetComponent<Shield>().itemData;
+                AttackManager.defence += data.shieldModifier;
+                return;
+            } else
+            {
+                if (GetComponent<MeleeWeapon>() != null)
+                {
+                    if (GetComponent<MeleeWeapon>().weaponData.weight > ItemData.Weight.light)
+                    {
+                        if (attacker.mainWeapon.weaponData.rangeType != WeaponData.Range.ranged)
+                        {
+                            AttackManager.defenceType = DefenceType.BLOCK;
+                            Debug.Log("block");
+                            //block anim.
+                            return;
+                        }
+                    }
+                }
+            }
+
+            //is there a square to dodge to? 
+            Tile dodgeTile = RangeFinder.FindTileToDodgeTo(this, attacker, RangeFinder.FindDirection(gameObject.transform, attacker.gameObject.transform));
+            
+            //check to see how successful the dodge is.
+            
+            //Do dodge anim.
+            if (dodgeTile != null)
+            {
+                Debug.Log("dodge to " + dodgeTile.gameObject.GetInstanceID());
+                AttackManager.defenceType = DefenceType.DODGE;
+                dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, gameObject.transform.position.y, dodgeTile.gameObject.transform.position.z);
+                dodging = true;
+                //MoveToTile(dodgeTile);
+                //do pop up that says 'dodge'. 
+                return;
+            }
+            //if not then dodge at disadvantage.
+            Debug.Log("dodging at disadvantage.");
+        }
+    }
+
+    private void Update()
+    {
+        //dodging
+        if (dodging)
+        {
+            if (Vector3.Distance(transform.position, dodgeTarget) >= 0.2f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, dodgeTarget, Time.deltaTime * 5);
+            }
+            else
+            {
+                transform.position = dodgeTarget;
+                dodging = false;
+            }
+        }
     }
 }

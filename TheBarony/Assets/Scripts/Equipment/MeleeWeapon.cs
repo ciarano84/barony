@@ -39,8 +39,6 @@ public class MeleeWeapon : Weapon
 
         yield return new WaitUntil(() => !owner.moving);
 
-        int bonuses = 0;
-
         //See if any of the adjacent units to the target allow you to flank. 
         foreach (Unit unit in currentTarget.unitTargeted.adjacentUnits)
         {
@@ -63,17 +61,25 @@ public class MeleeWeapon : Weapon
 
     public override void AttackEvent()
     {
-        Debug.Log("attack event called");
         int bonuses = 0;
         if (flanking) bonuses += 1;
-        bool hit = AttackManager.AttackRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), bonuses);
+        Result hit = AttackManager.AttackRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), bonuses);
+        MeleeAttackOutcome(hit);
+    }
 
-        if (hit)
+    public void MeleeAttackOutcome(Result result)
+    {
+        if (result == Result.SUCCESS)
         {
             AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
         }
 
-        if (!hit)
+        if (result == Result.PARTIAL)
+        {
+            AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
+        }
+
+        if (result == Result.FAIL)
         {
             DamagePopUp.Create(currentTarget.unitTargeted.gameObject.transform.position + new Vector3(0, currentTarget.unitTargeted.gameObject.GetComponent<TacticsMovement>().halfHeight), "miss", false);
         }
@@ -107,42 +113,6 @@ public class MeleeWeapon : Weapon
                 {
                     tileToMeleeAttackFrom = RangeFinder.FindTileNextToTarget(owner, unit);
                     if (tileToMeleeAttackFrom != null) targetFound = true;
-
-                    //I should really do this somewhere else.
-                    //tileToMeleeAttackFrom = RangeFinder.FindTileNextToTarget(unit.gameobject);
-                    //foreach (Tile tileNextToTarget in unit.currentTile.adjacencyList)
-                    //{
-
-                    //    foreach (Tile tileCanBeWalkedTo in selectableTiles)
-                    //    {
-                    //        if (tileCanBeWalkedTo == tileNextToTarget)
-                    //        {
-                    //            targetFound = true;
-                    //            if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
-                    //            {
-                    //                maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
-                    //                tileToMeleeAttackFrom = tileNextToTarget;
-                    //            }
-                    //        }
-                    //    }
-                    //}
-
-                    //foreach (Tile tileNextToTarget in unit.currentTile.diagonalAdjacencyList)
-                    //{
-
-                    //    foreach (Tile tileCanBeWalkedTo in selectableTiles)
-                    //    {
-                    //        if (tileCanBeWalkedTo == tileNextToTarget)
-                    //        {
-                    //            targetFound = true;
-                    //            if (Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position) < maxDistance)
-                    //            {
-                    //                maxDistance = Vector3.Distance(owner.transform.position, tileCanBeWalkedTo.transform.position);
-                    //                tileToMeleeAttackFrom = tileNextToTarget;
-                    //            }
-                    //        }
-                    //    }
-                    //}
                 }
                     
                 if (targetFound)

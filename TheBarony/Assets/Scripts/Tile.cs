@@ -47,6 +47,15 @@ public class Tile : MonoBehaviour
         {
             neighbours[point] = GetNeighbour(point);
         }
+
+        //Debug
+        if (test)
+        {
+            for (int point = 0; point < 8; point++)
+            {
+                Debug.Log("Neighbour at " + point + ", is at direction " + RangeFinder.FindDirection(transform, neighbours[point].tile.transform) + " according to rangefinder");
+            }
+        } 
     }
 
     private Neighbour GetNeighbour(int position)

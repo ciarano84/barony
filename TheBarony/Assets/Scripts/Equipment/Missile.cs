@@ -10,17 +10,18 @@ public class Missile : MonoBehaviour
     float step;
     public Vector3 target;
     public Vector3 missVariance = new Vector3(1, 1, 0);
-    public bool hit = false;
+    public Result hit = Result.FAIL;
     Vector3 dir;
     public Unit targetUnit;
     public RangedWeapon firingWeapon;
 
-    public void Launch(bool onTarget)
+    public void Launch(Result onTarget)
     {
-        if (onTarget)
+        hit = onTarget;
+        
+        if (hit >= Result.PARTIAL)
         {
             dir = target - transform.position;
-            hit = true;
         }
         else
         {
@@ -40,7 +41,7 @@ public class Missile : MonoBehaviour
 
     void DestroyMissile()
     {
-        if (hit) firingWeapon.DamageEvent(targetUnit);
+        firingWeapon.DamageEvent(targetUnit, hit);
         Destroy(this.gameObject);
     }
 }
