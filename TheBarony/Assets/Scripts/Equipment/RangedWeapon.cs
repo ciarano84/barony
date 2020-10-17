@@ -70,16 +70,13 @@ public class RangedWeapon : Weapon
         int storedDamage = owner.unitInfo.currentDamage;
         owner.unitInfo.currentDamage = rangedWeaponData.rangedDamage;
 
-        //handle a block;
-        if (_result == Result.PARTIAL)
+        //handle a dodge;
+        if (_result == Result.PARTIAL && AttackManager.defenceType == DefenceType.DODGE)
         {
-            if (currentTarget.unitTargeted.GetComponent<Shield>())
-            {
-                AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
-            }
+            return;
         }
             
-        else AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
+        else AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), _result);
         owner.unitInfo.currentDamage = storedDamage;
     }
 

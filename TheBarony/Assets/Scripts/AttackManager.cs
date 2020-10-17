@@ -9,6 +9,8 @@ public enum DefenceType { SHIELD, BLOCK, DODGE };
 public class AttackManager : MonoBehaviour
 {
     //The values that can be manipulated by other classes. 
+    public static Unit attacker;
+    public static Unit defender;
     public static int grazeDamage = -2;
     public static int damage = 0;
     public static int bonuses = 0;
@@ -31,16 +33,19 @@ public class AttackManager : MonoBehaviour
 
     //For now this will just be hitting or missing (no crits).
     //Crits and detailed attack data should probably be stored as variables on the attack manager, or even into seperate 'attackData' classes that are per attack. s
-    public static Result AttackRoll(Unit attacker, Unit defender, int _bonuses = 0)
+    public static Result AttackRoll(Unit _attacker, Unit _defender, int _bonuses = 0)
     {
         ResetValues();
+
+        attacker = _attacker;
+        defender = _defender;
         
         attack += attacker.unitInfo.currentAttack;
-        defence += defender.unitInfo.currentDefence;
         bonuses += _bonuses;
 
         OnAttack(attacker, defender);
 
+        //change this to decide defence. 
         defender.GetComponent<TacticsMovement>().Defend(attacker);
 
         //check conditions
@@ -63,7 +68,7 @@ public class AttackManager : MonoBehaviour
         //check for weight
         if (attacker.unitInfo.mainWeaponData.weight >= ItemData.Weight.medium)
         {
-            if (attacker.unitInfo.mainWeaponData.weight >= ItemData.Weight.heavy) bonuses--;
+            //if (attacker.unitInfo.mainWeaponData.weight >= ItemData.Weight.heavy) bonuses--;
             attacker.UpdateBreath(-1, true);
         }
 
@@ -83,7 +88,7 @@ public class AttackManager : MonoBehaviour
         }
     }
 
-    public static void DamageRoll(Unit attacker, Unit defender)
+    public static void DamageRoll(TacticsMovement attacker, Unit defender, Result attackResult)
     {
         damage += attacker.unitInfo.currentDamage;
         resiliance = defender.unitInfo.currentToughness;
@@ -99,11 +104,15 @@ public class AttackManager : MonoBehaviour
             blockDice = -2;
             DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shielded", false);
         }
+        //pull focus on a partial dodge. Should this be in tactics movement? this shouldn't even be called here. 
+        if (defenceType == DefenceType.DODGE && attackResult == Result.PARTIAL)
+        {
+            if (defender.focus != attacker) defender.SetFocus(attacker);
+            return;
+        }
 
         AbilityCheck.CheckAbility(damage, resiliance, blockDice);
-
         int result = AbilityCheck.baseResult;
-
         //assumes all are 'fated' for now. 
         if (result < -9)
         {
@@ -114,7 +123,7 @@ public class AttackManager : MonoBehaviour
         {
             OnGraze(attacker, defender); //Alert all that someone is grazed. 
             defender.UpdateBreath(grazeDamage);
-        } 
+        }
         else
         {
             OnWound(attacker, defender); //Alert all that someone is wounded. 
@@ -123,10 +132,67 @@ public class AttackManager : MonoBehaviour
             else { wounds = 1; }
             defender.UpdateWounds(wounds);
         }
+
         if (defender.focus != attacker)
         {
-            //defender.focus = attacker;
             defender.SetFocus(attacker);
+        }
+    }
+
+
+    //This needs to set the defence and the defence type. 
+    void DecideDefence(Unit attacker, Unit defender)
+    {
+        if (!defender.dodge)
+        {
+            if (defender.GetComponent<Shield>() != null)
+            {
+                defenceType = DefenceType.SHIELD;
+                //unitAnim.SetTrigger("shield");
+                //ShieldData data = (ShieldData)GetComponent<Shield>().itemData;
+                //AttackManager.defence += data.shieldModifier;
+                return;
+            }
+            else
+            {
+                if (defender.GetComponent<MeleeWeapon>() != null)
+                {
+                    if (defender.GetComponent<MeleeWeapon>().weaponData.weight > ItemData.Weight.light)
+                    {
+                        if (attacker.mainWeapon.weaponData.rangeType != WeaponData.Range.ranged)
+                        {
+                            defenceType = DefenceType.BLOCK;
+                            //block anim.
+                            return;
+                        }
+                    }
+                }
+            }
+
+            //is there a square to dodge to? 
+            Tile dodgeTile = RangeFinder.FindTileToDodgeTo(defender.GetComponent<TacticsMovement>(), attacker, RangeFinder.FindDirection(defender.gameObject.transform, attacker.gameObject.transform));
+
+            //Do dodge anim.
+            if (dodgeTile != null)
+            {
+                defenceType = DefenceType.DODGE;
+                
+
+                //dodgecode
+                //dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, gameObject.transform.position.y, dodgeTile.gameObject.transform.position.z);
+                //dodging = true;
+                //currentTile.occupant = null;
+                //Initiative.queuedActions++;
+                //unitAnim.SetTrigger("dodge");
+                //do pop up that says 'dodge'. 
+                return;
+            }
+            else
+            {
+                //dodge at disadvantage
+            }
+            //check to see how successful the dodge is.
+            Debug.Log("dodging at disadvantage.");
         }
     }
 

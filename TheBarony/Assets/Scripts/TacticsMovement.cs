@@ -632,6 +632,8 @@ public class TacticsMovement : Unit
     //will need to feed in weapon being attacked with. 
     public void Defend(Unit attacker)
     {
+        AttackManager.defence = unitInfo.currentDefence;
+
         if (!dodge)
         {
             if (GetComponent<Shield>() != null)
@@ -667,17 +669,24 @@ public class TacticsMovement : Unit
             //Do dodge anim.
             if (dodgeTile != null)
             {
-                Debug.Log("dodge to " + dodgeTile.gameObject.GetInstanceID());
                 AttackManager.defenceType = DefenceType.DODGE;
                 dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, gameObject.transform.position.y, dodgeTile.gameObject.transform.position.z);
-                dodging = true;
-                //MoveToTile(dodgeTile);
-                //do pop up that says 'dodge'. 
                 return;
             }
             //if not then dodge at disadvantage.
-            Debug.Log("dodging at disadvantage.");
+            DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Restricted", false);
+            AttackManager.bonuses++;
         }
+    }
+
+    public void Dodge(Result _result)
+    {
+        if (_result == Result.PARTIAL) UpdateBreath(-1, true);
+        dodging = true;
+        currentTile.occupant = null;
+        Initiative.queuedActions++;
+        unitAnim.SetTrigger("dodge");
+        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Dodge", false);
     }
 
     private void Update()
@@ -687,12 +696,14 @@ public class TacticsMovement : Unit
         {
             if (Vector3.Distance(transform.position, dodgeTarget) >= 0.2f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, dodgeTarget, Time.deltaTime * 5);
+                transform.position = Vector3.MoveTowards(transform.position, dodgeTarget, Time.deltaTime * 5f);
             }
             else
             {
                 transform.position = dodgeTarget;
                 dodging = false;
+                AllocateTile();
+                Initiative.queuedActions--;
             }
         }
     }

@@ -63,6 +63,7 @@ public class MeleeWeapon : Weapon
     {
         int bonuses = 0;
         if (flanking) bonuses += 1;
+        flanking = false;
         Result hit = AttackManager.AttackRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), bonuses);
         MeleeAttackOutcome(hit);
     }
@@ -71,17 +72,19 @@ public class MeleeWeapon : Weapon
     {
         if (result == Result.SUCCESS)
         {
-            AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
+            AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), result);
         }
-
-        if (result == Result.PARTIAL)
+        else if (result == Result.PARTIAL)
         {
-            AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>());
+            if (AttackManager.defenceType != DefenceType.DODGE) AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), result);
         }
-
-        if (result == Result.FAIL)
+        else if (result == Result.FAIL)
         {
             DamagePopUp.Create(currentTarget.unitTargeted.gameObject.transform.position + new Vector3(0, currentTarget.unitTargeted.gameObject.GetComponent<TacticsMovement>().halfHeight), "miss", false);
+        }
+        if (AttackManager.defenceType == DefenceType.DODGE)
+        {
+            AttackManager.defender.GetComponent<TacticsMovement>().Dodge(result);
         }
 
         Initiative.EndAction();
