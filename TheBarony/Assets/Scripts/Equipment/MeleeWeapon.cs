@@ -78,14 +78,6 @@ public class MeleeWeapon : Weapon
         {
             if (AttackManager.defenceType != DefenceType.DODGE) AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), result);
         }
-        else if (result == Result.FAIL)
-        {
-            DamagePopUp.Create(currentTarget.unitTargeted.gameObject.transform.position + new Vector3(0, currentTarget.unitTargeted.gameObject.GetComponent<TacticsMovement>().halfHeight), "miss", false);
-        }
-        if (AttackManager.defenceType == DefenceType.DODGE)
-        {
-            AttackManager.defender.GetComponent<TacticsMovement>().Dodge(result);
-        }
 
         Initiative.EndAction();
     }

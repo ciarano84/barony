@@ -46,7 +46,7 @@ public class AttackManager : MonoBehaviour
         OnAttack(attacker, defender);
 
         //change this to decide defence. 
-        defender.GetComponent<TacticsMovement>().Defend(attacker);
+        DecideDefence(attacker, defender);
 
         //check conditions
         if (defender.unitInfo.flagging) { bonuses++; }
@@ -78,12 +78,17 @@ public class AttackManager : MonoBehaviour
         {
             return Result.SUCCESS;
         }
-        else if (AbilityCheck.baseResult >= -9)
+        if (AbilityCheck.baseResult >= -9)
         {
+            if (defenceType == DefenceType.DODGE) defender.GetComponent<TacticsMovement>().Dodge(Result.PARTIAL);
+            if (defender.focus != attacker) defender.SetFocus(attacker);
+            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "dodged", false);
             return Result.PARTIAL;
         }
         else
         {
+            if (defenceType == DefenceType.DODGE) defender.GetComponent<TacticsMovement>().Dodge(Result.FAIL);
+            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "evaded", false);
             return Result.FAIL;
         }
     }
@@ -103,12 +108,6 @@ public class AttackManager : MonoBehaviour
         {
             blockDice = -2;
             DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shielded", false);
-        }
-        //pull focus on a partial dodge. Should this be in tactics movement? this shouldn't even be called here. 
-        if (defenceType == DefenceType.DODGE && attackResult == Result.PARTIAL)
-        {
-            if (defender.focus != attacker) defender.SetFocus(attacker);
-            return;
         }
 
         AbilityCheck.CheckAbility(damage, resiliance, blockDice);
@@ -141,16 +140,18 @@ public class AttackManager : MonoBehaviour
 
 
     //This needs to set the defence and the defence type. 
-    void DecideDefence(Unit attacker, Unit defender)
+    static void DecideDefence(Unit attacker, Unit defender)
     {
+        defence = defender.unitInfo.currentDefence;
+
         if (!defender.dodge)
         {
             if (defender.GetComponent<Shield>() != null)
             {
                 defenceType = DefenceType.SHIELD;
-                //unitAnim.SetTrigger("shield");
-                //ShieldData data = (ShieldData)GetComponent<Shield>().itemData;
-                //AttackManager.defence += data.shieldModifier;
+                defender.unitAnim.SetTrigger("shield");
+                ShieldData data = (ShieldData)defender.GetComponent<Shield>().itemData;
+                defence += data.shieldModifier;
                 return;
             }
             else
@@ -162,37 +163,27 @@ public class AttackManager : MonoBehaviour
                         if (attacker.mainWeapon.weaponData.rangeType != WeaponData.Range.ranged)
                         {
                             defenceType = DefenceType.BLOCK;
+                            defender.unitAnim.SetTrigger("block");
                             //block anim.
                             return;
                         }
                     }
                 }
             }
+        }
+        defenceType = DefenceType.DODGE;
 
-            //is there a square to dodge to? 
-            Tile dodgeTile = RangeFinder.FindTileToDodgeTo(defender.GetComponent<TacticsMovement>(), attacker, RangeFinder.FindDirection(defender.gameObject.transform, attacker.gameObject.transform));
+        //is there a square to dodge to? 
+        Tile dodgeTile = RangeFinder.FindTileToDodgeTo(defender.GetComponent<TacticsMovement>(), attacker, RangeFinder.FindDirection(defender.gameObject.transform, attacker.gameObject.transform));
 
-            //Do dodge anim.
-            if (dodgeTile != null)
-            {
-                defenceType = DefenceType.DODGE;
-                
-
-                //dodgecode
-                //dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, gameObject.transform.position.y, dodgeTile.gameObject.transform.position.z);
-                //dodging = true;
-                //currentTile.occupant = null;
-                //Initiative.queuedActions++;
-                //unitAnim.SetTrigger("dodge");
-                //do pop up that says 'dodge'. 
-                return;
-            }
-            else
-            {
-                //dodge at disadvantage
-            }
-            //check to see how successful the dodge is.
-            Debug.Log("dodging at disadvantage.");
+        //Do dodge anim.
+        if (dodgeTile != null)
+        {
+            defender.GetComponent<TacticsMovement>().dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, defender.gameObject.transform.position.y, dodgeTile.gameObject.transform.position.z);
+        }
+        else
+        {
+            bonuses++;
         }
     }
 

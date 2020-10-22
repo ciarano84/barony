@@ -278,10 +278,13 @@ public class RangeFinder
             int opposite = GetDirection(direction + 4);
             for (int count = 0; count < 8; count++)
             {
-                if (count != direction && count != opposite)
+                if (defender.currentTile.neighbours[count] != null)
                 {
-                    viableNeighbours.Add(defender.currentTile.neighbours[count]);
-                }
+                    if (count != direction && count != opposite)
+                    {
+                        viableNeighbours.Add(defender.currentTile.neighbours[count]);
+                    }
+                }     
             }
         }
         //if it's melee then dodge away or to the side. 
@@ -292,12 +295,17 @@ public class RangeFinder
 
             for (int count = 0; count < 8; count++)
             {
-                if (count != direction && count != right && count != left)
+                if (defender.currentTile.neighbours[count] != null)
                 {
-                    viableNeighbours.Add(defender.currentTile.neighbours[count]);
+                    if (count != direction && count != right && count != left)
+                    {
+                        viableNeighbours.Add(defender.currentTile.neighbours[count]);
+                    }
                 }
             }
         }
+
+        if (viableNeighbours.Count == 0) return null;
 
         //Check squares on the list for all that are unobscured, empty and don't have any height difference. 
         foreach (Neighbour neighbour in viableNeighbours)
@@ -308,8 +316,8 @@ public class RangeFinder
             }
         }
 
-        int r = UnityEngine.Random.Range(0, viableNeighbours.Count);
-        return viableNeighbours[r].tile; 
+        int r = UnityEngine.Random.Range(0, tiles.Count);
+        return tiles[r]; 
     }
 
     public static int GetDirection(int n)

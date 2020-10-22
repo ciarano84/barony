@@ -46,7 +46,7 @@ public class TacticsMovement : Unit
     bool movingEdge = false;
     bool fallingDown = false;
     //bool mouseOver = false;
-    Vector3 dodgeTarget = new Vector3();
+    public Vector3 dodgeTarget = new Vector3();
     bool dodging = false;
 
     public delegate void OnEnterSquareDelegate(Unit mover);
@@ -629,56 +629,6 @@ public class TacticsMovement : Unit
         return endTile;
     }
 
-    //will need to feed in weapon being attacked with. 
-    public void Defend(Unit attacker)
-    {
-        AttackManager.defence = unitInfo.currentDefence;
-
-        if (!dodge)
-        {
-            if (GetComponent<Shield>() != null)
-            {
-                Debug.Log("shield");
-                AttackManager.defenceType = DefenceType.SHIELD;
-                unitAnim.SetTrigger("shield");
-                ShieldData data = (ShieldData)GetComponent<Shield>().itemData;
-                AttackManager.defence += data.shieldModifier;
-                return;
-            } else
-            {
-                if (GetComponent<MeleeWeapon>() != null)
-                {
-                    if (GetComponent<MeleeWeapon>().weaponData.weight > ItemData.Weight.light)
-                    {
-                        if (attacker.mainWeapon.weaponData.rangeType != WeaponData.Range.ranged)
-                        {
-                            AttackManager.defenceType = DefenceType.BLOCK;
-                            Debug.Log("block");
-                            //block anim.
-                            return;
-                        }
-                    }
-                }
-            }
-
-            //is there a square to dodge to? 
-            Tile dodgeTile = RangeFinder.FindTileToDodgeTo(this, attacker, RangeFinder.FindDirection(gameObject.transform, attacker.gameObject.transform));
-            
-            //check to see how successful the dodge is.
-            
-            //Do dodge anim.
-            if (dodgeTile != null)
-            {
-                AttackManager.defenceType = DefenceType.DODGE;
-                dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, gameObject.transform.position.y, dodgeTile.gameObject.transform.position.z);
-                return;
-            }
-            //if not then dodge at disadvantage.
-            DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Restricted", false);
-            AttackManager.bonuses++;
-        }
-    }
-
     public void Dodge(Result _result)
     {
         if (_result == Result.PARTIAL) UpdateBreath(-1, true);
@@ -686,7 +636,6 @@ public class TacticsMovement : Unit
         currentTile.occupant = null;
         Initiative.queuedActions++;
         unitAnim.SetTrigger("dodge");
-        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Dodge", false);
     }
 
     private void Update()
