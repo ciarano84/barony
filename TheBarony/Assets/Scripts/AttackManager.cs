@@ -121,6 +121,7 @@ public class AttackManager : MonoBehaviour
         else if (result < 1)
         {
             OnGraze(attacker, defender); //Alert all that someone is grazed. 
+            defender.unitAnim.SetBool("graze", true);
             defender.UpdateBreath(grazeDamage);
         }
         else
@@ -130,6 +131,7 @@ public class AttackManager : MonoBehaviour
             else if (result > 4) wounds = 2;
             else { wounds = 1; }
             defender.UpdateWounds(wounds);
+            defender.unitAnim.SetBool("wound", true);
         }
 
         if (defender.focus != attacker)
