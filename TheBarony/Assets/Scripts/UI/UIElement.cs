@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class UIElement : MonoBehaviour
 {
     public string tooltipText;
-    Tooltip tooltip;
-    ActionUIManager UIManager;
+    public Tooltip tooltip;
+    public ActionUIManager UIManager;
 
     public void Awake()
     {
