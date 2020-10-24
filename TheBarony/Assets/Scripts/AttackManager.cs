@@ -19,6 +19,8 @@ public class AttackManager : MonoBehaviour
     public static int resiliance = 0;
     public static int wounds = 0;
     public static int blockDice = 0;
+    public enum StruckAnimation { SHIELD, BLOCK, DODGE, GRAZE, WOUND, EVADE };
+    public static StruckAnimation struckAnimation;
     public static DefenceType defenceType;
 
     //These are the delegate handlers that class features and items can subscribe to. 
@@ -45,7 +47,6 @@ public class AttackManager : MonoBehaviour
 
         OnAttack(attacker, defender);
 
-        //change this to decide defence. 
         DecideDefence(attacker, defender);
 
         //check conditions
@@ -87,8 +88,11 @@ public class AttackManager : MonoBehaviour
         }
         else
         {
-            if (defenceType == DefenceType.DODGE) defender.GetComponent<TacticsMovement>().Dodge(Result.FAIL);
-            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "evaded", false);
+            if (defenceType == DefenceType.DODGE)
+            {
+                defender.GetComponent<TacticsMovement>().Dodge(Result.FAIL);
+                DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "evaded", false);
+            }       
             return Result.FAIL;
         }
     }
@@ -121,8 +125,8 @@ public class AttackManager : MonoBehaviour
         else if (result < 1)
         {
             OnGraze(attacker, defender); //Alert all that someone is grazed. 
-            defender.unitAnim.SetBool("graze", true);
             defender.UpdateBreath(grazeDamage);
+            struckAnimation = StruckAnimation.GRAZE;
         }
         else
         {
@@ -131,7 +135,25 @@ public class AttackManager : MonoBehaviour
             else if (result > 4) wounds = 2;
             else { wounds = 1; }
             defender.UpdateWounds(wounds);
-            defender.unitAnim.SetBool("wound", true);
+            struckAnimation = StruckAnimation.WOUND;
+        }
+
+        switch (struckAnimation)
+        {
+            case StruckAnimation.SHIELD:
+                defender.unitAnim.SetTrigger("shield");
+                break;
+            case StruckAnimation.BLOCK:
+                defender.unitAnim.SetTrigger("block");
+                break;
+            case StruckAnimation.GRAZE:
+                defender.unitAnim.SetTrigger("graze");
+                break;
+            case StruckAnimation.WOUND:
+                defender.unitAnim.SetTrigger("wound");
+                break;
+            default:
+                break;
         }
 
         if (defender.focus != attacker)
@@ -151,7 +173,8 @@ public class AttackManager : MonoBehaviour
             if (defender.GetComponent<Shield>() != null)
             {
                 defenceType = DefenceType.SHIELD;
-                defender.unitAnim.SetTrigger("shield");
+                //defender.unitAnim.SetTrigger("shield");
+                struckAnimation = StruckAnimation.SHIELD;
                 ShieldData data = (ShieldData)defender.GetComponent<Shield>().itemData;
                 defence += data.shieldModifier;
                 return;
@@ -165,7 +188,7 @@ public class AttackManager : MonoBehaviour
                         if (attacker.mainWeapon.weaponData.rangeType != WeaponData.Range.ranged)
                         {
                             defenceType = DefenceType.BLOCK;
-                            defender.unitAnim.SetTrigger("block");
+                            struckAnimation = StruckAnimation.BLOCK;
                             //block anim.
                             return;
                         }
@@ -200,5 +223,6 @@ public class AttackManager : MonoBehaviour
         wounds = 0;
         blockDice = 0;
         defenceType = DefenceType.BLOCK;
+        struckAnimation = StruckAnimation.DODGE;
     }
 }
