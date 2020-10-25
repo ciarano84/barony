@@ -57,6 +57,9 @@ public class Unit : MonoBehaviour
     public Weapon mainWeapon;
     public GameObject body;
 
+    //Debug
+    public bool test;
+
     //slots
     public Transform mainHandSlot;
     public Transform offHandSlot;
@@ -89,7 +92,8 @@ public class Unit : MonoBehaviour
     public Action prime;
 
     //defence - unts are assumed to be blocking if they are not dodging. By default they are blocking. 
-    public bool dodge;
+    //public bool dodge;
+    public DefenceType defenceType = DefenceType.BLOCK;
 
     public void SetStats()
     {

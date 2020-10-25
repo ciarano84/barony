@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Exposed : Effect
 {
+    DefenceType storedDefenceType;
+
     public override void AddEffect(GameObject effectCauser, GameEvent gameEvent = GameEvent.DEFAULT)
     {
         owner = gameObject.GetComponent<Unit>();
         owner.effects.Add(this);
+        storedDefenceType = owner.defenceType;
+        owner.defenceType = DefenceType.EXPOSED;
 
         OnEffectEnd += PrimeEndRemovalCheck;
-        AttackManager.OnAttack += ExposeToAttack;
     }
 
     public override void RemovalCheck(Unit unit)
@@ -19,6 +22,7 @@ public class Exposed : Effect
     public override void Remove()
     {
         UnSubscribe(owner);
+        owner.defenceType = storedDefenceType;
         owner.effects.Remove(this);
         Destroy(this);
     }
@@ -26,9 +30,7 @@ public class Exposed : Effect
     public void UnSubscribe(Unit unit)
     {
         //Do all unsubscribes.  
-
         OnEffectEnd -= PrimeEndRemovalCheck;
-        AttackManager.OnAttack -= ExposeToAttack;
         Unit.onKO -= UnSubscribe;
     }
 
@@ -43,10 +45,5 @@ public class Exposed : Effect
         {
             if (effect is Priming) Remove();
         }
-    }
-
-    public void ExposeToAttack(Unit attacker, Unit defender)
-    {
-        if (owner == defender) AttackManager.bonuses++;
     }
 }

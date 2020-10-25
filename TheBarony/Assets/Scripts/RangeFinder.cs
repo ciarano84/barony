@@ -310,11 +310,13 @@ public class RangeFinder
         //Check squares on the list for all that are unobscured, empty and don't have any height difference. 
         foreach (Neighbour neighbour in viableNeighbours)
         {
-            if (neighbour.height == 0 && neighbour.tile.occupant == null && !neighbour.tile.difficultTerrain)
+            if (neighbour.height <= 0 && neighbour.tile.occupant == null && !neighbour.tile.difficultTerrain)
             {
                 tiles.Add(neighbour.tile);
             }
         }
+
+        if (tiles.Count == 0) return null;
 
         int r = UnityEngine.Random.Range(0, tiles.Count);
         return tiles[r]; 

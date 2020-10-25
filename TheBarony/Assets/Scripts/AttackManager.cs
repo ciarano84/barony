@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public enum Result { FAIL, PARTIAL, SUCCESS };
-public enum DefenceType { SHIELD, BLOCK, DODGE };
+public enum DefenceType { SHIELD, BLOCK, DODGE, EXPOSED };
 
 public class AttackManager : MonoBehaviour
 {
@@ -168,7 +168,12 @@ public class AttackManager : MonoBehaviour
     {
         defence = defender.unitInfo.currentDefence;
 
-        if (!defender.dodge)
+        if (defender.test == true)
+        {
+            Debug.Log("test unit found");
+        }
+
+        if (defender.defenceType == DefenceType.BLOCK)
         {
             if (defender.GetComponent<Shield>() != null)
             {
@@ -196,20 +201,21 @@ public class AttackManager : MonoBehaviour
                 }
             }
         }
-        defenceType = DefenceType.DODGE;
-
-        //is there a square to dodge to? 
-        Tile dodgeTile = RangeFinder.FindTileToDodgeTo(defender.GetComponent<TacticsMovement>(), attacker, RangeFinder.FindDirection(defender.gameObject.transform, attacker.gameObject.transform));
-
-        //Do dodge anim.
-        if (dodgeTile != null)
+        if (defender.defenceType != DefenceType.EXPOSED)
         {
-            defender.GetComponent<TacticsMovement>().dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, defender.gameObject.transform.position.y, dodgeTile.gameObject.transform.position.z);
+            //is there a square to dodge to? 
+            Tile dodgeTile = RangeFinder.FindTileToDodgeTo(defender.GetComponent<TacticsMovement>(), attacker, RangeFinder.FindDirection(defender.gameObject.transform, attacker.gameObject.transform));
+            //Do dodge anim.
+            if (dodgeTile != null)
+            {
+                defender.GetComponent<TacticsMovement>().dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, defender.gameObject.transform.position.y, dodgeTile.gameObject.transform.position.z);
+                defenceType = DefenceType.DODGE;
+                return;
+            }
         }
-        else
-        {
-            bonuses++;
-        }
+        //This catchall currently treats everything that doesn't fit the above as exposed. 
+        bonuses++;
+        defenceType = DefenceType.EXPOSED;
     }
 
     private static void ResetValues()
