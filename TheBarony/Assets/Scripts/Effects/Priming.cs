@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Priming : Effect
 {
-    bool turnStartFlag;
     bool startCheckingForMainActionUsed;
     enum PrimeAttackType { AIMED, MIGHTY };
     PrimeAttackType primeAttackType;
@@ -41,8 +40,10 @@ public class Priming : Effect
         }
 
         AttackManager.OnAttack += BoostAttack;
-        AttackManager.OnWound += WoundRemovalCheck;
+        AttackManager.OnGraze += GrazeRemovalCheck;
+        AttackManager.OnWound += GrazeRemovalCheck;
         TacticsMovement.OnEnterSquare += RemovalCheck;
+        TacticsMovement.OnDodge += DodgeRemovalCheck;
         Initiative.OnActionTaken += MainActionTakenRemovalCheck;
         Unit.onSetFocus += DeathRemovalCheck;
         Unit.onKO += DeathRemovalCheck;
@@ -50,7 +51,7 @@ public class Priming : Effect
 
     public void DeathRemovalCheck(Unit unit)
     {
-        if (unit == owner) Remove();
+        if (unit == owner || unit == owner.focus) Remove();
     }
 
     //This is only triggered by something moving. 
@@ -63,7 +64,7 @@ public class Priming : Effect
                 Remove();
                 owner.aimingBow = false;
                 owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
-            }  
+            }
         }
     }
 
@@ -88,13 +89,13 @@ public class Priming : Effect
         //one of which, for future reference, will be on weapon change. 
 
         AttackManager.OnAttack -= BoostAttack;
-        AttackManager.OnWound -= WoundRemovalCheck;
+        AttackManager.OnGraze -= GrazeRemovalCheck;
+        AttackManager.OnWound -= GrazeRemovalCheck;
         TacticsMovement.OnEnterSquare -= RemovalCheck;
         Unit.onKO -= DeathRemovalCheck;
         Unit.onKO -= UnSubscribe;
         Initiative.OnActionTaken -= MainActionTakenRemovalCheck;
         Unit.onSetFocus -= DeathRemovalCheck;
-        turnStartFlag = false;
         startCheckingForMainActionUsed = false;
     }
 
@@ -132,7 +133,7 @@ public class Priming : Effect
         }
     }
 
-    void WoundRemovalCheck(Unit attacker, Unit defender)
+    void GrazeRemovalCheck(Unit attacker, Unit defender)
     {
         if (defender == owner)
         {
@@ -140,5 +141,16 @@ public class Priming : Effect
             owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
             Remove();
         }      
+    }
+
+    void DodgeRemovalCheck(Unit _defender, Result _result)
+    {
+        if (_defender == this)
+        {
+            if (_result == Result.PARTIAL)
+            {
+                Remove();
+            }
+        }
     }
 }

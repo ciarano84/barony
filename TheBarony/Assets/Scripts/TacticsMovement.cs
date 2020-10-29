@@ -9,6 +9,9 @@ public class TacticsMovement : Unit
     public bool turn = false;
     bool moveGate = false;
 
+    //Debug
+    public bool test = false;
+
     //Made public so that the weapons can grab it. 
     public List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
@@ -51,6 +54,9 @@ public class TacticsMovement : Unit
 
     public delegate void OnEnterSquareDelegate(Unit mover);
     public static OnEnterSquareDelegate OnEnterSquare;
+
+    public delegate void OnDodgeDelegate(Unit attacker, Result result);
+    public static OnDodgeDelegate OnDodge;
 
     public void InitTacticsMovement() {
         if (unitInfo.faction == Factions.enemies)
@@ -631,9 +637,13 @@ public class TacticsMovement : Unit
 
     public void Dodge(Result _result)
     {
-        if (_result == Result.PARTIAL) UpdateBreath(-1, true);
+        if (_result == Result.PARTIAL)
+        {
+            UpdateBreath(-1, true);
+        }  
         dodging = true;
         currentTile.occupant = null;
+        OnDodge(this, _result);
         Initiative.queuedActions++;
         unitAnim.SetTrigger("dodge");
     }

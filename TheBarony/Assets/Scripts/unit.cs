@@ -57,9 +57,6 @@ public class Unit : MonoBehaviour
     public Weapon mainWeapon;
     public GameObject body;
 
-    //Debug
-    public bool test;
-
     //slots
     public Transform mainHandSlot;
     public Transform offHandSlot;

@@ -60,7 +60,7 @@ public class AttackManager : MonoBehaviour
             attacker.focus = defender;
             attacker.focusSwitched = true;
         }
-        if (defender.focus != attacker)
+        if (defender.focus != attacker && attacker.focus == defender)
         {
             DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Blindside", false);
             bonuses++;
@@ -81,9 +81,12 @@ public class AttackManager : MonoBehaviour
         }
         if (AbilityCheck.baseResult >= -9)
         {
-            if (defenceType == DefenceType.DODGE) defender.GetComponent<TacticsMovement>().Dodge(Result.PARTIAL);
+            if (defenceType == DefenceType.DODGE) 
+            {
+                defender.GetComponent<TacticsMovement>().Dodge(Result.PARTIAL);
+                DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "dodged", false);
+            }
             if (defender.focus != attacker) defender.SetFocus(attacker);
-            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "dodged", false);
             return Result.PARTIAL;
         }
         else
@@ -168,7 +171,7 @@ public class AttackManager : MonoBehaviour
     {
         defence = defender.unitInfo.currentDefence;
 
-        if (defender.test == true)
+        if (defender.GetComponent<TacticsMovement>().test == true)
         {
             Debug.Log("test unit found");
         }

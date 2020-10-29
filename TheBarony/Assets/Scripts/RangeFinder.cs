@@ -105,6 +105,9 @@ public class RangeFinder
 
     public static List<Tile> FindTilesNotNextToEnemy(TacticsMovement origin, List<Tile> tiles, Factions opposingFaction)
     {
+        //Trying to find the cause of creatures moving into each other's tiles. 
+        Debug.Log("findTileNextToEnemy called");
+        
         List<Tile> filteredTiles = new List<Tile>();
 
         List<Unit> opponents = new List<Unit>();
@@ -127,6 +130,7 @@ public class RangeFinder
             foreach (Unit opponent in opponents)
             {
                 TacticsMovement opponentTactics = opponent.GetComponent<TacticsMovement>();
+                //The next line shouldn't be needed as tiles should be allocated when a unit moves into them. 
                 opponentTactics.GetCurrentTile();
                 //opponentTactics.currentTile.FindNeighbours(opponentTactics.jumpHeight, null);
                 opponentTactics.currentTile.CheckNeighbours(opponentTactics.jumpHeight, null);
