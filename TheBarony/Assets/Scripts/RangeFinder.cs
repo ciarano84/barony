@@ -105,8 +105,6 @@ public class RangeFinder
 
     public static List<Tile> FindTilesNotNextToEnemy(TacticsMovement origin, List<Tile> tiles, Factions opposingFaction)
     {
-        //Trying to find the cause of creatures moving into each other's tiles. 
-        Debug.Log("findTileNextToEnemy called");
         
         List<Tile> filteredTiles = new List<Tile>();
 

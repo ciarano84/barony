@@ -662,7 +662,7 @@ public class TacticsMovement : Unit
                 transform.position = dodgeTarget;
                 dodging = false;
                 AllocateTile();
-                Initiative.queuedActions--;
+                Initiative.EndAction();
             }
         }
     }

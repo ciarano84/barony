@@ -107,6 +107,8 @@ public class Initiative : MonoBehaviour
 
     public static IEnumerator CheckForTurnEnd() 
     {
+        if (queuedActions < 1) Debug.LogWarning("zero or less queued actions");
+
         if (queuedActions > 1)
         {
             queuedActions--;

@@ -13,10 +13,12 @@ public class ProxyRosta : MonoBehaviour
 
     RostaInfo rosta;
     Inventory inventory;
+    EncounterManager encounterManager;
     public GameObject playerData;
 
     void Awake()
     {
+        encounterManager = GameObject.Find("EncounterManager").GetComponent<EncounterManager>();
         if (GameObject.Find("PlayerData"+"(Clone)") != null)
         {
             rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
@@ -50,25 +52,43 @@ public class ProxyRosta : MonoBehaviour
         player.baseMove = 3 + Random.Range(0, 4);
         player.faction = Factions.players;
 
-        int classroll = Random.Range(0, 10);
-        switch (classroll)
+        if (encounterManager.encounterSettings == EncounterManager.EncounterSettings.Test && encounterManager.testClassType != EncounterManager.TestClassType.ANY)
         {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-                player.aspectData = new DefenderData();
-                break;
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-                player.aspectData = new ScoutData();
-                break;
-            case 8:
-            case 9:
-                player.aspectData = new PriestData();
-                break;
+            switch (encounterManager.testClassType)
+            {
+                case EncounterManager.TestClassType.DEFENDER:
+                    player.aspectData = new DefenderData();
+                    break;
+                case EncounterManager.TestClassType.SCOUT:
+                    player.aspectData = new ScoutData();
+                    break;
+                case EncounterManager.TestClassType.PRIEST:
+                    player.aspectData = new PriestData();
+                    break;
+            }
+        }
+        else
+        {
+            int classroll = Random.Range(0, 10);
+            switch (classroll)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    player.aspectData = new DefenderData();
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    player.aspectData = new ScoutData();
+                    break;
+                case 8:
+                case 9:
+                    player.aspectData = new PriestData();
+                    break;
+            }
         }
         player.aspectData.SetAspectData(player);
         if (player.mainWeaponData != null) player.mainWeaponData.SetData(player);

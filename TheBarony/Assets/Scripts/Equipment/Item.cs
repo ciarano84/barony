@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum Slot { mainHand, offHand, oneHanded, twoHanded, armour, accessory, accessory1, accessory2}
 
+[System.Serializable]
 public abstract class ItemData
 {
     //As I add classes that inherit, we can get move variation. Crucially there should be a 1:1 relaionship between weapon scripts and WeaponData scripts.

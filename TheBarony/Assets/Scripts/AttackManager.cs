@@ -181,7 +181,6 @@ public class AttackManager : MonoBehaviour
             if (defender.GetComponent<Shield>() != null)
             {
                 defenceType = DefenceType.SHIELD;
-                //defender.unitAnim.SetTrigger("shield");
                 struckAnimation = StruckAnimation.SHIELD;
                 ShieldData data = (ShieldData)defender.GetComponent<Shield>().itemData;
                 defence += data.shieldModifier;

@@ -34,6 +34,8 @@ public class EncounterManager : MonoBehaviour
     //Debug
     public enum EncounterSettings { Standard, Test };
     public EncounterSettings encounterSettings = EncounterSettings.Standard;
+    public enum TestClassType { PRIEST, DEFENDER, SCOUT, ANY };
+    public TestClassType testClassType;
     public int playerCount;
 
     private void Awake()

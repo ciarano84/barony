@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Priming : Effect
@@ -45,13 +46,26 @@ public class Priming : Effect
         TacticsMovement.OnEnterSquare += RemovalCheck;
         TacticsMovement.OnDodge += DodgeRemovalCheck;
         Initiative.OnActionTaken += MainActionTakenRemovalCheck;
-        Unit.onSetFocus += DeathRemovalCheck;
+        Unit.onSetFocus += FocusSetRemovalCheck;
         Unit.onKO += DeathRemovalCheck;
     }
 
     public void DeathRemovalCheck(Unit unit)
     {
-        if (unit == owner || unit == owner.focus) Remove();
+        if (unit == owner || unit == owner.focus)
+        {
+            Debug.Log("death removal check conditions met");
+            Remove();
+        }   
+    }
+
+    public void FocusSetRemovalCheck(Unit unit)
+    {
+        if (unit == owner)
+        {
+            Debug.Log("focus set removal check conditions met");
+            Remove();
+        }
     }
 
     //This is only triggered by something moving. 
@@ -61,8 +75,8 @@ public class Priming : Effect
         {
             if (primeAttackType == PrimeAttackType.AIMED)
             {
+                Debug.Log("move removal check conditions met");
                 Remove();
-                owner.aimingBow = false;
                 owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
             }
         }
@@ -77,6 +91,7 @@ public class Priming : Effect
                 if (!startCheckingForMainActionUsed) startCheckingForMainActionUsed = true;
                 else
                 {
+                    Debug.Log("main action taken removal check conditions met");
                     Remove();
                 } 
             }    
@@ -95,7 +110,7 @@ public class Priming : Effect
         Unit.onKO -= DeathRemovalCheck;
         Unit.onKO -= UnSubscribe;
         Initiative.OnActionTaken -= MainActionTakenRemovalCheck;
-        Unit.onSetFocus -= DeathRemovalCheck;
+        Unit.onSetFocus -= FocusSetRemovalCheck;
         startCheckingForMainActionUsed = false;
     }
 
@@ -104,9 +119,10 @@ public class Priming : Effect
         UnSubscribe(owner);
         owner.unitAnim.SetBool("PrimeMighty", false);
         owner.unitAnim.SetBool("PrimeAimed", false);
+        owner.aimingBow = false;
         OnEffectEnd(owner, this);
         owner.effects.Remove(this);
-        Destroy(this);
+        enabled = false;
     }
 
     public override Sprite SetImage()
@@ -139,16 +155,18 @@ public class Priming : Effect
         {
             owner.aimingBow = false;
             owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
+            Debug.Log("graze removal check conditions met");
             Remove();
         }      
     }
 
     void DodgeRemovalCheck(Unit _defender, Result _result)
-    {
+    {   
         if (_defender == this)
         {
             if (_result == Result.PARTIAL)
             {
+                Debug.Log("dodge removal check conditions met");
                 Remove();
             }
         }

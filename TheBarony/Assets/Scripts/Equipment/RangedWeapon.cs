@@ -17,9 +17,20 @@ public class RangedWeapon : Weapon
     public RangedWeaponData rangedWeaponData;
     public bool NextToEnemy;
 
+    //Debug
+    public void Update()
+    {
+        if (owner.test == true)
+        {
+            Debug.Log("current ammo is " + rangedWeaponData.currentAmmo);
+        }
+    }
+
     public override IEnumerator Attack(Target target)
     {
         currentTarget = target;
+
+        //See if they are next to enemies which will later incur penalties to hit. 
         RangeFinder.FindAdjacentUnits(owner);
         foreach (Unit unit in owner.adjacentUnits)
         {
@@ -35,8 +46,6 @@ public class RangedWeapon : Weapon
         owner.FaceDirection(currentTarget.unitTargeted.gameObject.transform.position);
         yield return new WaitForSeconds(0.3f);
         owner.unitAnim.SetTrigger("rangedAttack");
-
-        //attack event code WAS here. 
 
         yield break;
     }
