@@ -69,10 +69,8 @@ public class PlayerCharacter : TacticsMovement
                             if (RangeFinder.LineOfSight(this, UnitClickedOn) == true)
                             {
                                 SetFocus(UnitClickedOn);
-                                if (remainingActions > 0)
-                                {
-                                    remainingActions--;
-                                }
+                                remainingActions = 0;
+                                remainingMove = 0;
                                 Initiative.queuedActions++;
                                 StartCoroutine(Initiative.CheckForTurnEnd());
                             }  

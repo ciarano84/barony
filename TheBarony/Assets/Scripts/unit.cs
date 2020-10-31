@@ -247,6 +247,7 @@ public class Unit : MonoBehaviour
         focusSwitched = true;
         canFocusSwitch = false;
         focusSinceStart = false;
+        GetComponent<TacticsMovement>().FaceDirection(unit.transform.position);
         onSetFocus(this);
     }
 

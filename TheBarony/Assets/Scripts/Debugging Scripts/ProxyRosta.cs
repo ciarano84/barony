@@ -18,7 +18,11 @@ public class ProxyRosta : MonoBehaviour
 
     void Awake()
     {
-        encounterManager = GameObject.Find("EncounterManager").GetComponent<EncounterManager>();
+        if (GameObject.Find("EncounterManager")!= null)
+        {
+            encounterManager = GameObject.Find("EncounterManager").GetComponent<EncounterManager>();
+        }
+
         if (GameObject.Find("PlayerData"+"(Clone)") != null)
         {
             rosta = GameObject.Find("PlayerData" + "(Clone)").GetComponent<RostaInfo>();
@@ -52,19 +56,22 @@ public class ProxyRosta : MonoBehaviour
         player.baseMove = 3 + Random.Range(0, 4);
         player.faction = Factions.players;
 
-        if (encounterManager.encounterSettings == EncounterManager.EncounterSettings.Test && encounterManager.testClassType != EncounterManager.TestClassType.ANY)
+        if (encounterManager != null)
         {
-            switch (encounterManager.testClassType)
+            if (encounterManager.encounterSettings == EncounterManager.EncounterSettings.Test && encounterManager.testClassType != EncounterManager.TestClassType.ANY)
             {
-                case EncounterManager.TestClassType.DEFENDER:
-                    player.aspectData = new DefenderData();
-                    break;
-                case EncounterManager.TestClassType.SCOUT:
-                    player.aspectData = new ScoutData();
-                    break;
-                case EncounterManager.TestClassType.PRIEST:
-                    player.aspectData = new PriestData();
-                    break;
+                switch (encounterManager.testClassType)
+                {
+                    case EncounterManager.TestClassType.DEFENDER:
+                        player.aspectData = new DefenderData();
+                        break;
+                    case EncounterManager.TestClassType.SCOUT:
+                        player.aspectData = new ScoutData();
+                        break;
+                    case EncounterManager.TestClassType.PRIEST:
+                        player.aspectData = new PriestData();
+                        break;
+                }
             }
         }
         else
