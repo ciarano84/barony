@@ -210,7 +210,8 @@ public class AttackManager : MonoBehaviour
             //Do dodge anim.
             if (dodgeTile != null)
             {
-                defender.GetComponent<TacticsMovement>().dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, defender.gameObject.transform.position.y, dodgeTile.gameObject.transform.position.z);
+                float heightOffset = dodgeTile.transform.position.y - defender.GetComponent<TacticsMovement>().currentTile.transform.position.y;
+                defender.GetComponent<TacticsMovement>().dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, defender.transform.position.y + heightOffset, dodgeTile.gameObject.transform.position.z);
                 defenceType = DefenceType.DODGE;
                 return;
             }

@@ -972,7 +972,7 @@ PrefabInstance:
     - target: {fileID: 1600397596020070167, guid: 92d11c72479115b48b67c0cae1459bc6,
         type: 3}
       propertyPath: playerCount
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1600397596020070167, guid: 92d11c72479115b48b67c0cae1459bc6,
         type: 3}
@@ -1009,6 +1009,11 @@ PrefabInstance:
         type: 3}
       propertyPath: encounterSettings
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1600397596020070167, guid: 92d11c72479115b48b67c0cae1459bc6,
+        type: 3}
+      propertyPath: testClassType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1600397596217859573, guid: 92d11c72479115b48b67c0cae1459bc6,
         type: 3}
