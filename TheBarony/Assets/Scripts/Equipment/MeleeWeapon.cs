@@ -57,7 +57,7 @@ public class MeleeWeapon : Weapon
         owner.unitAnim.SetTrigger("melee");
 
         //yield return new WaitForSeconds(2);
-        yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length + 1);
+        yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length);
         Initiative.EndAction();
 
         yield break;

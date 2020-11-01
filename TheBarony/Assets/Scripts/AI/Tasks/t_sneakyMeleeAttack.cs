@@ -26,7 +26,9 @@ public class t_sneakyMeleeAttack : Task
             task.target = u.GetComponent<Unit>();
             
             if (!RangeFinder.LineOfSight(unit, u.GetComponent<Unit>())) task.value -= 1;
-            if (unit.focus == u) task.value += 0.2f;
+            //Debug
+            if (unit.focus == u) task.value += 10f;
+            //if (unit.focus == u) task.value += 0.4f;
             if (u.focus == unit) task.value -= 0.3f;
             if (RangeFinder.FindFlankingTile(unit, unit.selectableTiles, u.GetComponent<TacticsMovement>()) != null) task.value += 0.2f;
 
@@ -94,6 +96,24 @@ public class t_sneakyMeleeAttack : Task
         if (unit.remainingMove >= 1)
         {
             unit.FindSelectableTiles();
+
+            //A Hack to solve the bug 'characters teleport rather than move, and can share spaces'
+            TacticsMovement targetT = target.GetComponent<TacticsMovement>();
+            targetT.GetCurrentTile();
+            if (unit.selectableTiles.Contains(targetT.currentTile))
+            {
+                unit.selectableTiles.Remove(targetT.currentTile);
+            }
+
+            //Debug
+            //TacticsMovement targetT = target.GetComponent<TacticsMovement>();
+            //targetT.GetCurrentTile();
+            //if (unit.selectableTiles.Contains(targetT.currentTile))
+            //{
+            //    Debug.LogError("enemy's tile has shown up in selectable tile list");
+            //    unit.selectableTiles.Remove(targetT.currentTile);
+            //}
+
             List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, unit.selectableTiles, Factions.players);
             if (preferedTiles.Count > 0)
             {

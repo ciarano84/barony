@@ -149,8 +149,13 @@ public class TacticsMovement : Unit
         while (process.Count > 0)
         {
             Tile t = process.Dequeue();
-            selectableTiles.Add(t);
-            t.selectable = true;
+
+            //This if statement didn't use to be here. It just used to add to selectable tiles, and mark as selectable. 
+            if (t != firstTileInPath)
+            {
+                selectableTiles.Add(t);
+                t.selectable = true;
+            }
 
             if (t.distance < remainingMove)
             {
@@ -185,6 +190,23 @@ public class TacticsMovement : Unit
                 }
             }
         }
+
+        //Trying to trackdown the sneaky attack secondary move bug. 
+        ////Debug
+        //foreach (Unit u in Initiative.order)
+        //{
+        //    if (selectableTiles.Contains(u.GetComponent<TacticsMovement>().currentTile))
+        //    {
+        //        Debug.LogError("a unit has got it's current tile someohow into the selectable tiles list. ");
+        //        //Vector3 errorPos = new Vector3(u.gameObject.transform.position.x, u.gameObject.transform.position.y + 1);
+        //        //u.gameObject.transform.position = errorPos;
+        //    }
+
+        //    if (currentTile.occupant == null)
+        //    {
+        //        Debug.LogError("I'm on a tile that doesn't think I'm here!");
+        //    }
+        //}
     }
 
     //HAS AN OVERLOAD!!!! (should likely just solve this by setting the additional parameter as a default. 
