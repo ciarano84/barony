@@ -14,6 +14,7 @@ public class Missile : MonoBehaviour
     Vector3 dir;
     public Unit targetUnit;
     public RangedWeapon firingWeapon;
+    bool onTarget = false;
 
     public void Launch(Result onTarget)
     {
@@ -35,13 +36,20 @@ public class Missile : MonoBehaviour
     {
         step = speed * Time.deltaTime;
         transform.Translate(dir.normalized * step, Space.World);
-        if (Vector3.Distance(this.transform.position, target) < 0.25) DestroyMissile();
+        if (hit >= Result.PARTIAL)
+        {
+            if (Vector3.Distance(transform.position, target) < 0.25)
+            {
+                onTarget = true;
+                DestroyMissile();
+            }
+        }
         transform.forward = dir;
     }
 
     void DestroyMissile()
     {
-        firingWeapon.DamageEvent(targetUnit, hit);
-        Destroy(this.gameObject);
+        if (onTarget) firingWeapon.DamageEvent(targetUnit, hit);
+        Destroy(gameObject);
     }
 }

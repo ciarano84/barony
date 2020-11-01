@@ -56,6 +56,10 @@ public class MeleeWeapon : Weapon
 
         owner.unitAnim.SetTrigger("melee");
 
+        //yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length + 1);
+        Initiative.EndAction();
+
         yield break;
     }
 
@@ -78,8 +82,6 @@ public class MeleeWeapon : Weapon
         {
             if (AttackManager.defenceType != DefenceType.DODGE) AttackManager.DamageRoll(owner, currentTarget.unitTargeted.GetComponent<Unit>(), result);
         }
-
-        Initiative.EndAction();
     }
 
     //This function is definitely gammy. 

@@ -59,8 +59,7 @@ public class AttackManager : MonoBehaviour
             bonuses--;
             attacker.focus = defender;
             attacker.focusSwitched = true;
-        }
-        if (defender.focus != attacker && attacker.focus == defender)
+        } else if (defender.focus != attacker)
         {
             DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Blindside", false);
             bonuses++;
@@ -207,7 +206,6 @@ public class AttackManager : MonoBehaviour
         {
             //is there a square to dodge to? 
             Tile dodgeTile = RangeFinder.FindTileToDodgeTo(defender.GetComponent<TacticsMovement>(), attacker, RangeFinder.FindDirection(defender.gameObject.transform, attacker.gameObject.transform));
-            //Do dodge anim.
             if (dodgeTile != null)
             {
                 float heightOffset = dodgeTile.transform.position.y - defender.GetComponent<TacticsMovement>().currentTile.transform.position.y;

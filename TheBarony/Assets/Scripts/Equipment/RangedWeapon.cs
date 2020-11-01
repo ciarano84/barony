@@ -47,6 +47,11 @@ public class RangedWeapon : Weapon
         yield return new WaitForSeconds(0.3f);
         owner.unitAnim.SetTrigger("rangedAttack");
 
+        //yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length + 2 /* + owner.unitAnim.GetCurrentAnimatorStateInfo(0).normalizedTime */);
+
+        Initiative.EndAction();
+
         yield break;
     }
 
@@ -71,7 +76,6 @@ public class RangedWeapon : Weapon
         NextToEnemy = false;
         owner.FaceDirection(currentTarget.unitTargeted.gameObject.transform.position);
         rangedWeaponData.currentAmmo--;
-        Initiative.EndAction();
     }
 
     public void DamageEvent(Unit unit, Result _result)

@@ -91,7 +91,7 @@ public class t_sneakyMeleeAttack : Task
         }
 
         //Move away if you have move left
-        if (unit.remainingMove > 0)
+        if (unit.remainingMove >= 1)
         {
             unit.FindSelectableTiles();
             List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, unit.selectableTiles, Factions.players);
