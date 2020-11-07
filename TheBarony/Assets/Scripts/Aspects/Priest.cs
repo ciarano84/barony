@@ -8,7 +8,7 @@ public class PriestData : AspectData
     {
         className = "Priest";
         unitInfo = unit;
-        unit.mainWeaponData = new ShortswordData();
+        unit.mainWeaponData = new MaceData();
         unit.offHandData = new BlankItemData();
         unit.armourData = new BlankItemData();
         unit.accessory1 = new BlankItemData();

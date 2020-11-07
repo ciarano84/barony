@@ -15,6 +15,8 @@ public class AbilityCheck
     {
         Reset();
 
+        if (!AttackManager.attackRolled) Debug.Log("Ability Roll with " + bonuses + " bonuses!");
+
         //Work out active roll
         int activeRoll = BasicRoll(activeModifier);
 
@@ -23,28 +25,33 @@ public class AbilityCheck
             int bonusRoll = Random.Range(1, 6);
             baseResult += bonusRoll;
             if (bonusRoll == 5) { crits++; }
+            if (!AttackManager.attackRolled) Debug.Log("bonus rolled, scoring a " + bonusRoll);
             bonuses--;
         }
 
         while (bonuses < 0)
         {
-            
-            baseResult -= Random.Range(1, 6);
+            int penaltyRoll = Random.Range(1, 6);
+            baseResult -= penaltyRoll;
+            if (!AttackManager.attackRolled) Debug.Log("penalty rolled, scoring a " + penaltyRoll);
             bonuses++;
         }
 
         //Work out passive check:
-        int passiveRoll = BasicRoll(passiveModifier);
+        int passiveRoll = BasicRoll(passiveModifier, false);
 
         baseResult += (activeRoll - passiveRoll);
     }
 
-    static int BasicRoll(int stat)
+    static int BasicRoll(int stat, bool active = true)
     {
+        //Doesn't appear to include fumbles atm. 
         int firstActiveDie = Random.Range(1, 11);
-        if (firstActiveDie == 10) crits++;
+        if (firstActiveDie == 10 && active) crits++;
+        if (!AttackManager.attackRolled) if (active) Debug.Log("first active roll is " + firstActiveDie);
         int secondActiveDie = Random.Range(1, 11);
-        if (secondActiveDie == 10) crits++;
+        if (secondActiveDie == 10 && active) crits++;
+        if (!AttackManager.attackRolled) if (active) Debug.Log("second active roll is " + secondActiveDie);
         stat += (firstActiveDie + secondActiveDie);
 
         return stat;

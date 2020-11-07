@@ -56,10 +56,13 @@ public class ProxyRosta : MonoBehaviour
         player.baseMove = 3 + Random.Range(0, 4);
         player.faction = Factions.players;
 
+        bool buildRosta = true;
+
         if (encounterManager != null)
         {
             if (encounterManager.encounterSettings == EncounterManager.EncounterSettings.Test && encounterManager.testClassType != EncounterManager.TestClassType.ANY)
             {
+                buildRosta = false;
                 switch (encounterManager.testClassType)
                 {
                     case EncounterManager.TestClassType.DEFENDER:
@@ -72,9 +75,9 @@ public class ProxyRosta : MonoBehaviour
                         player.aspectData = new PriestData();
                         break;
                 }
-            }
+            } 
         }
-        else
+        if (buildRosta)
         {
             int classroll = Random.Range(0, 10);
             switch (classroll)

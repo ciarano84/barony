@@ -62,4 +62,6 @@ public class Dagger : MeleeWeapon
     {
         itemData = new DaggerData();
     }
+
+    public override Critical CoreCritical() { return new c_Gouge(); }
 }

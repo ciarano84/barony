@@ -30,6 +30,7 @@ public class UnitInfo
     public int baseToughness = -3;
     public int baseStrength = 0;
     public int baseMove = 4;
+    public int baseArmour = 0;
 
     //Modified Stats
     public int wounds = 0;
@@ -39,6 +40,7 @@ public class UnitInfo
     public int currentToughness;
     public int currentDamage;
     public int currentMove;
+    public int currentArmour = 0;
 
     //conditions 
     public bool flagging;
@@ -171,7 +173,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void UpdateWounds(int amount)
+    public void UpdateWounds(int amount, int woundValueAdjustment = 0)
     {
         string woundedText;
         switch (amount)
@@ -191,7 +193,7 @@ public class Unit : MonoBehaviour
         }
         while (amount > 0)
         {
-            unitInfo.currentBreath -= 5;
+            unitInfo.currentBreath -= (5 + woundValueAdjustment);
             unitInfo.wounds++;
             amount--;
             if ((unitInfo.currentBreath <= 0) || (unitInfo.wounds >= 3))

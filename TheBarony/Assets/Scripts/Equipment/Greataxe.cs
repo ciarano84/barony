@@ -72,4 +72,6 @@ public class Greataxe : MeleeWeapon
 
         MeleeAttackOutcome(hit);
     }
+
+    public override Critical CoreCritical() { return new c_Cripple(); }
 }

@@ -60,4 +60,6 @@ public class Shortbow : RangedWeapon
     {
         itemData = new ShortbowData();
     }
+
+    public override Critical CoreCritical() { return new c_Cripple(); }
 }

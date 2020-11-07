@@ -54,7 +54,6 @@ public class Priming : Effect
     {
         if (unit == owner || unit == owner.focus)
         {
-            Debug.Log("death removal check conditions met");
             Remove();
         }   
     }
@@ -63,7 +62,6 @@ public class Priming : Effect
     {
         if (unit == owner)
         {
-            Debug.Log("focus set removal check conditions met");
             Remove();
         }
     }
@@ -75,7 +73,6 @@ public class Priming : Effect
         {
             if (primeAttackType == PrimeAttackType.AIMED)
             {
-                Debug.Log("move removal check conditions met");
                 Remove();
                 owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
             }
@@ -91,7 +88,6 @@ public class Priming : Effect
                 if (!startCheckingForMainActionUsed) startCheckingForMainActionUsed = true;
                 else
                 {
-                    Debug.Log("main action taken removal check conditions met");
                     Remove();
                 } 
             }    
@@ -155,7 +151,6 @@ public class Priming : Effect
         {
             owner.aimingBow = false;
             owner.GetComponent<TacticsMovement>().FaceDirection(owner.focus.transform.position);
-            Debug.Log("graze removal check conditions met");
             Remove();
         }      
     }
@@ -166,7 +161,6 @@ public class Priming : Effect
         {
             if (_result == Result.PARTIAL)
             {
-                Debug.Log("dodge removal check conditions met");
                 Remove();
             }
         }

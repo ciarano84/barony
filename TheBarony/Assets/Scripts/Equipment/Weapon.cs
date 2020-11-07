@@ -51,4 +51,6 @@ public class Weapon : Item
     }
 
     public virtual void AttackEvent() { }
+
+    public virtual Critical CoreCritical() { return new c_DamageUp(); }
 }

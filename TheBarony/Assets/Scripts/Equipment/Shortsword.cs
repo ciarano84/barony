@@ -62,4 +62,6 @@ public class Shortsword : MeleeWeapon
     {
         itemData = new ShortswordData();
     }
+
+    public override Critical CoreCritical() { return new c_Gouge(); } 
 }

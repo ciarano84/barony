@@ -61,4 +61,6 @@ public class Mace : MeleeWeapon
     {
         itemData = new MaceData();
     }
+
+    public override Critical CoreCritical() { return new c_Crush(); }
 }

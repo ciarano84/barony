@@ -60,4 +60,6 @@ public class Longbow : RangedWeapon
     {
         itemData = new LongbowData();
     }
+
+    //public override Critical CoreCritical() { return new c_Pierce(); }
 }

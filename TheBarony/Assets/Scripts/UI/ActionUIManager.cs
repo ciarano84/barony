@@ -243,12 +243,16 @@ public class ActionUIManager : MonoBehaviour
         icon.gameObject.transform.SetParent(parent.transform, false);
     }
 
-    public void DefenceTypeSet(bool defaultSetting = false)
+    public void DefenceTypeSet(bool KeepState = true)
     {
-        if (currentUnit.defenceType == DefenceType.BLOCK) currentUnit.defenceType = DefenceType.DODGE;
-        else if (currentUnit.defenceType == DefenceType.DODGE) currentUnit.defenceType = DefenceType.BLOCK;
+        if (!KeepState)
+        {
+            Debug.Log("pressed");
+            if (currentUnit.defenceType == DefenceType.BLOCK) currentUnit.defenceType = DefenceType.DODGE;
+            else if (currentUnit.defenceType == DefenceType.DODGE) currentUnit.defenceType = DefenceType.BLOCK;
+        }
 
-        //if (!defaultSetting) currentUnit.dodge = !currentUnit.dodge;
+        //if (!defaultSetting)
         if (currentUnit.defenceType == DefenceType.DODGE) defenceToggleIcon.sprite = GameAssets.i.DodgeToggle;
         if (currentUnit.defenceType == DefenceType.BLOCK) defenceToggleIcon.sprite = GameAssets.i.BlockToggle;
     }

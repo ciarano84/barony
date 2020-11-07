@@ -67,6 +67,7 @@ public class GameAssets : MonoBehaviour
     public Sprite BlessIcon;
     public Sprite PrimingIcon;
     public Sprite ExposedIcon;
+    public Sprite CrippledIcon;
 
     //Item models
     public GameObject DaggerModel;

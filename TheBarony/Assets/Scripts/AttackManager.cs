@@ -19,6 +19,12 @@ public class AttackManager : MonoBehaviour
     public static int resiliance = 0;
     public static int wounds = 0;
     public static int blockDice = 0;
+    public static int woundValueAdjustment = 0;
+    public static bool armourPierce = false;
+
+    //Debug
+    public static bool attackRolled = false;
+
     public enum StruckAnimation { SHIELD, BLOCK, DODGE, GRAZE, WOUND, EVADE };
     public static StruckAnimation struckAnimation;
     public static DefenceType defenceType;
@@ -74,6 +80,26 @@ public class AttackManager : MonoBehaviour
 
         AbilityCheck.CheckAbility(attack, defence, bonuses);
 
+        attackRolled = true;
+
+        //Work out criticals
+        CriticalManager.Reset();
+
+        //Debug
+        Debug.Log("Total of " + AbilityCheck.crits + " criticals.");
+
+        for (int count = 0; count < AbilityCheck.crits; count++)
+        {
+            CriticalManager.AddCritical(attacker.mainWeapon);
+        }
+
+        //Resolve all pre-damage criticals. 
+        foreach (Critical c in CriticalManager.criticalChain)
+        {
+            if (c.AfterDamage() == false) c.CriticalEffect();    
+        }
+
+        //Work out the result
         if (AbilityCheck.baseResult >= 0)
         {
             return Result.SUCCESS;
@@ -94,7 +120,8 @@ public class AttackManager : MonoBehaviour
             {
                 defender.GetComponent<TacticsMovement>().Dodge(Result.FAIL);
                 DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "evaded", false);
-            }       
+            }
+            DamagePopUp.Create(attacker.transform.position + new Vector3(0, (defender.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Miss", false);
             return Result.FAIL;
         }
     }
@@ -102,7 +129,8 @@ public class AttackManager : MonoBehaviour
     public static void DamageRoll(TacticsMovement attacker, Unit defender, Result attackResult)
     {
         damage += attacker.unitInfo.currentDamage;
-        resiliance = defender.unitInfo.currentToughness;
+        resiliance += defender.unitInfo.currentToughness;
+        if (!armourPierce) resiliance += defender.unitInfo.currentArmour; 
 
         //Blocking
         if (defenceType == DefenceType.BLOCK)
@@ -127,6 +155,7 @@ public class AttackManager : MonoBehaviour
         else if (result < 1)
         {
             OnGraze(attacker, defender); //Alert all that someone is grazed. 
+            Debug.Log("grazed for " + grazeDamage);
             defender.UpdateBreath(grazeDamage);
             struckAnimation = StruckAnimation.GRAZE;
         }
@@ -136,8 +165,14 @@ public class AttackManager : MonoBehaviour
             if (result > 9) wounds = 3;
             else if (result > 4) wounds = 2;
             else { wounds = 1; }
-            defender.UpdateWounds(wounds);
+            defender.UpdateWounds(wounds, woundValueAdjustment);
             struckAnimation = StruckAnimation.WOUND;
+        }
+
+        //Resolve all post-damage criticals. 
+        foreach (Critical c in CriticalManager.criticalChain)
+        {
+            if (c.AfterDamage() == true) c.CriticalEffect();  
         }
 
         switch (struckAnimation)
@@ -169,11 +204,6 @@ public class AttackManager : MonoBehaviour
     static void DecideDefence(Unit attacker, Unit defender)
     {
         defence = defender.unitInfo.currentDefence;
-
-        if (defender.GetComponent<TacticsMovement>().test == true)
-        {
-            Debug.Log("test unit found");
-        }
 
         if (defender.defenceType == DefenceType.BLOCK)
         {
@@ -231,5 +261,9 @@ public class AttackManager : MonoBehaviour
         blockDice = 0;
         defenceType = DefenceType.BLOCK;
         struckAnimation = StruckAnimation.DODGE;
+        armourPierce = false;
+
+        //Debug
+        attackRolled = false;
     }
 }

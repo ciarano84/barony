@@ -14,7 +14,7 @@ public class LeatherArmourData : ItemData
         name = "leather armour";
         slot = Slot.armour;
         weight = Weight.light;
-        description = "A rough, but thick leather jerkin.\r\nYour not entirely sure what it smells of, but some of it is definitely not you.";
+        description = "A rough, but thick leather jerkin.\r\nYour not entirely sure what it smells of, but it is definitely not you.";
 
         if (unitInfo != null)
         {
@@ -27,7 +27,7 @@ public class LeatherArmourData : ItemData
         LeatherArmour armour = unit.gameObject.AddComponent<LeatherArmour>();
         armour.owner = unit.gameObject.GetComponent<TacticsMovement>();
         armour.itemData = this;
-        unit.unitInfo.currentToughness += 1;
+        unit.unitInfo.currentArmour += 2;
     }
 }
 
