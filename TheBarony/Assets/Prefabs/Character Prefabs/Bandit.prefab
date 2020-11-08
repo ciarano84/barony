@@ -37,6 +37,16 @@ PrefabInstance:
       propertyPath: unitInfo.baseToughness
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3055099907477660027, guid: 0dd5e9e6b721a194488f2d990b5bc585,
+        type: 3}
+      propertyPath: mainWeapon
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3055099907477660027, guid: 0dd5e9e6b721a194488f2d990b5bc585,
+        type: 3}
+      propertyPath: armour
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4861493547287551762, guid: 0dd5e9e6b721a194488f2d990b5bc585,
         type: 3}
       propertyPath: m_LocalPosition.x

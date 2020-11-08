@@ -9,7 +9,7 @@ public class DefenderData : AspectData
         unitInfo = unit;
         unit.mainWeaponData = new ShortswordData();
         unit.offHandData = new ShieldData();
-        unit.armourData = new LeatherArmourData();
+        unit.armourData = new ChainShirtArmourData();
         unit.accessory1 = new BlankItemData();
         unit.accessory2 = new BlankItemData();
     }

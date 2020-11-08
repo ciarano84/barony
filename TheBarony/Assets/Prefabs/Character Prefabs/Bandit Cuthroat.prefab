@@ -26,6 +26,16 @@ PrefabInstance:
       propertyPath: aspectPack
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1237551776011681669, guid: 7c1a1ac1d617ca64fbd0cf009b4891dd,
+        type: 3}
+      propertyPath: mainWeapon
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237551776011681669, guid: 7c1a1ac1d617ca64fbd0cf009b4891dd,
+        type: 3}
+      propertyPath: armour
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2723748413374211560, guid: 7c1a1ac1d617ca64fbd0cf009b4891dd,
         type: 3}
       propertyPath: unitInfo.unitName

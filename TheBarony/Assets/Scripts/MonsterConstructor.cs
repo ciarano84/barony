@@ -7,7 +7,9 @@ public enum AspectPack { SCOUT, DEFENDER, PRIEST, HUNTER, BRUTE };
 public class MonsterConstructor : MonoBehaviour
 {
     public AspectPack aspectPack;
-    public Fate fate = Fate.Drudge; 
+    public Fate fate = Fate.Drudge;
+    public ItemRef mainWeapon;
+    public ItemRef armour;
 
     public void SetUpMonster()
     {
@@ -21,8 +23,7 @@ public class MonsterConstructor : MonoBehaviour
             unitInfo.baseBreath = unitInfo.firstBreath + unitInfo.flaggingBreath;
             unitInfo.currentBreath = unitInfo.baseBreath;
         }
-        else unitInfo.fate = Fate.Drudge;
-            
+        else unitInfo.fate = Fate.Drudge; 
 
         switch (aspectPack)
         {
@@ -44,9 +45,12 @@ public class MonsterConstructor : MonoBehaviour
             default:
                 break;
         }
-
         
         unitInfo.aspectData.SetAspectData(unitInfo);
+
+        //Set bespoke equipment. 
+        if (mainWeapon != ItemRef.DEFAULT) unitInfo.mainWeaponData = (WeaponData)Inventory.GetItem(mainWeapon);
+        if (armour != ItemRef.DEFAULT) unitInfo.armourData = Inventory.GetItem(armour);
 
         if (unitInfo.mainWeaponData != null) unitInfo.mainWeaponData.SetData(unitInfo);
         if (unitInfo.offHandData != null) unitInfo.offHandData.SetData(unitInfo);
@@ -56,13 +60,14 @@ public class MonsterConstructor : MonoBehaviour
 
         //Do I need this any more? 
         unit.SetSlots();
-        unitInfo.mainWeaponData.EquipItem(unit);
-        if (gameObject.name == "Orc Defender(Clone)")
+        if (unitInfo.mainWeaponData == null)
         {
-            //Debug
+            Debug.Log("weapon data is null");
         }
+
+        unitInfo.mainWeaponData.EquipItem(unit);
         if (unitInfo.offHandData != null) unitInfo.offHandData.EquipItem(unit);
-        unitInfo.armourData.EquipItem(unit);
+        if (unitInfo.armourData != null) unitInfo.armourData.EquipItem(unit);
         unitInfo.aspectData.GetAspect(unit);
 
         unitInfo.aspectData.Level1();

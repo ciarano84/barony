@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//These are NOT related to the respective items, but just allow me to find them via the GetItem method below.
+public enum ItemRef { SHORTBOW, NONE, SHORTSWORD, LONGBOW, LEATHERARMOUR, CHAINSHIRTARMOUR, MACE, GREATAXE, DAGGER, SHIELD, DEFAULT }
+
 public class ItemEntry
 {
     public bool infinite = false;
@@ -51,6 +54,24 @@ public class Inventory : MonoBehaviour
             //This seems hacky but works for now. I'm supposed to set item data to a unit. But there's no unit, so setting it to null. 
             _itemData.SetData(null);
             inventory.Add(new ItemEntry(_itemData, _amount, _infinite));
+        }
+    }
+
+    public static ItemData GetItem(ItemRef reference)
+    {
+        switch (reference)
+        {
+            case ItemRef.SHORTBOW: return new ShortbowData();
+            case ItemRef.NONE: return null;
+            case ItemRef.SHORTSWORD: return new ShortswordData();
+            case ItemRef.LONGBOW: return new LongbowData();
+            case ItemRef.LEATHERARMOUR: return new LeatherArmourData();
+            case ItemRef.CHAINSHIRTARMOUR: return new ChainShirtArmourData();
+            case ItemRef.MACE: return new MaceData();
+            case ItemRef.GREATAXE: return new GreataxeData();
+            case ItemRef.DAGGER: return new DaggerData();
+            case ItemRef.SHIELD: return new ShieldData();
+            default: return null;
         }
     }
 }

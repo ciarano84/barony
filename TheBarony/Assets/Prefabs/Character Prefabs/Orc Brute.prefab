@@ -96,6 +96,16 @@ PrefabInstance:
       propertyPath: aspectPack
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7515972219155056106, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+        type: 3}
+      propertyPath: mainWeapon
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515972219155056106, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+        type: 3}
+      propertyPath: armour
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6de6a71e5f3640b4ba692dc5b826fe7f, type: 3}
 --- !u!1 &7249935298485761532 stripped

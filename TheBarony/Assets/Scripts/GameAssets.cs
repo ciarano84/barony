@@ -46,6 +46,7 @@ public class GameAssets : MonoBehaviour
 
     //Item Sprites
     public Sprite LeatherArmour;
+    public Sprite ChainShirtArmour;
     public Sprite ShortSword;
     public Sprite ShortBow;
     public Sprite Shield;

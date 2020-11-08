@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: fate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6493772928648056125, guid: 8b84e95dc735a8245b3ea680cc344c39,
+        type: 3}
+      propertyPath: mainWeapon
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7998001624091842384, guid: 8b84e95dc735a8245b3ea680cc344c39,
         type: 3}
       propertyPath: unitInfo.flaggingBreath
