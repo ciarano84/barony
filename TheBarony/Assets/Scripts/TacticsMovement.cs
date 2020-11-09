@@ -275,6 +275,21 @@ public class TacticsMovement : Unit
             t.occupant = this;
             currentTile = t;
 
+            //Debug to try and spot when unit's move and don't have a current tile assigned. 
+            //if (tileTracked != null)
+            //{
+            //    if (currentTile != tileTracked)
+            //    {
+            //        Debug.Log("Now assigned to tile " + currentTile.GetInstanceID());
+            //        tileTracked = currentTile;
+            //    }
+            //}
+            //else
+            //{
+            //    Debug.Log("Now assigned to tile " + currentTile.GetInstanceID());
+            //    tileTracked = currentTile;
+            //}
+
             Vector3 target = t.transform.position;
 
             //Calculate the unit's position on top of target tile. 
@@ -369,11 +384,13 @@ public class TacticsMovement : Unit
 
     protected void RemoveSelectableTiles()
     {
-        if (currentTile != null)
-        {
-            currentTile.current = false;
-            currentTile = null;
-        }
+        //Debug - making the changes below as I'm not sure why we're letting go of current tile. This needs to be thoroughly tested before we actually sack off what was quite fundamental code. 
+        //if (currentTile != null)
+        //{
+        //    currentTile.current = false;
+        //    currentTile = null;
+        //}
+
         foreach (Tile tile in selectableTiles)
         {
             tile.Reset();

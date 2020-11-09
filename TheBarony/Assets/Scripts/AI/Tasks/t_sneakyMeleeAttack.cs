@@ -97,22 +97,13 @@ public class t_sneakyMeleeAttack : Task
         {
             unit.FindSelectableTiles();
 
-            //A Hack to solve the bug 'characters teleport rather than move, and can share spaces'
+            //A Hack to solve the bug 'characters teleport rather than move, and can share spaces'. This isn't working. 
             TacticsMovement targetT = target.GetComponent<TacticsMovement>();
             targetT.GetCurrentTile();
             if (unit.selectableTiles.Contains(targetT.currentTile))
             {
                 unit.selectableTiles.Remove(targetT.currentTile);
             }
-
-            //Debug
-            //TacticsMovement targetT = target.GetComponent<TacticsMovement>();
-            //targetT.GetCurrentTile();
-            //if (unit.selectableTiles.Contains(targetT.currentTile))
-            //{
-            //    Debug.LogError("enemy's tile has shown up in selectable tile list");
-            //    unit.selectableTiles.Remove(targetT.currentTile);
-            //}
 
             List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, unit.selectableTiles, Factions.players);
             if (preferedTiles.Count > 0)

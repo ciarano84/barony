@@ -86,7 +86,7 @@ public class AttackManager : MonoBehaviour
         CriticalManager.Reset();
 
         //Debug
-        Debug.Log("Total of " + AbilityCheck.crits + " criticals.");
+        //Debug.Log("Total of " + AbilityCheck.crits + " criticals.");
 
         for (int count = 0; count < AbilityCheck.crits; count++)
         {
@@ -155,7 +155,6 @@ public class AttackManager : MonoBehaviour
         else if (result < 1)
         {
             OnGraze(attacker, defender); //Alert all that someone is grazed. 
-            Debug.Log("grazed for " + grazeDamage);
             defender.UpdateBreath(grazeDamage);
             struckAnimation = StruckAnimation.GRAZE;
         }

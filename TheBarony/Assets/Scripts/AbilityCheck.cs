@@ -15,7 +15,7 @@ public class AbilityCheck
     {
         Reset();
 
-        if (!AttackManager.attackRolled) Debug.Log("Ability Roll with " + bonuses + " bonuses!");
+        //if (!AttackManager.attackRolled) Debug.Log("Ability Roll with " + bonuses + " bonuses!");
 
         //Work out active roll
         int activeRoll = BasicRoll(activeModifier);
@@ -25,7 +25,7 @@ public class AbilityCheck
             int bonusRoll = Random.Range(1, 6);
             baseResult += bonusRoll;
             if (bonusRoll == 5) { crits++; }
-            if (!AttackManager.attackRolled) Debug.Log("bonus rolled, scoring a " + bonusRoll);
+            //if (!AttackManager.attackRolled) Debug.Log("bonus rolled, scoring a " + bonusRoll);
             bonuses--;
         }
 
@@ -33,7 +33,7 @@ public class AbilityCheck
         {
             int penaltyRoll = Random.Range(1, 6);
             baseResult -= penaltyRoll;
-            if (!AttackManager.attackRolled) Debug.Log("penalty rolled, scoring a " + penaltyRoll);
+            //if (!AttackManager.attackRolled) Debug.Log("penalty rolled, scoring a " + penaltyRoll);
             bonuses++;
         }
 
@@ -48,10 +48,10 @@ public class AbilityCheck
         //Doesn't appear to include fumbles atm. 
         int firstActiveDie = Random.Range(1, 11);
         if (firstActiveDie == 10 && active) crits++;
-        if (!AttackManager.attackRolled) if (active) Debug.Log("first active roll is " + firstActiveDie);
+        //if (!AttackManager.attackRolled) if (active) Debug.Log("first active roll is " + firstActiveDie);
         int secondActiveDie = Random.Range(1, 11);
         if (secondActiveDie == 10 && active) crits++;
-        if (!AttackManager.attackRolled) if (active) Debug.Log("second active roll is " + secondActiveDie);
+        //if (!AttackManager.attackRolled) if (active) Debug.Log("second active roll is " + secondActiveDie);
         stat += (firstActiveDie + secondActiveDie);
 
         return stat;

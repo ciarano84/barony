@@ -102,6 +102,7 @@ public class Unit : MonoBehaviour
         unitInfo.currentToughness = unitInfo.baseToughness;
         unitInfo.currentDamage = unitInfo.baseStrength;
         unitInfo.currentMove = unitInfo.baseMove;
+        unitInfo.currentArmour = unitInfo.baseArmour;
     }
 
     public void SetActions()

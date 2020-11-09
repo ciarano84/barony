@@ -105,7 +105,6 @@ public class RangeFinder
 
     public static List<Tile> FindTilesNotNextToEnemy(TacticsMovement origin, List<Tile> tiles, Factions opposingFaction)
     {
-        
         List<Tile> filteredTiles = new List<Tile>();
 
         List<Unit> opponents = new List<Unit>();

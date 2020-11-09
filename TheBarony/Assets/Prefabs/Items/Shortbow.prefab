@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23422678202114376}
   - component: {fileID: 95992945264245516}
   m_Layer: 0
-  m_Name: Prop_Bow_01
+  m_Name: Shortbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124579395565338}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.4491864, y: 0.64745754, z: 0.5791264, w: -0.20890874}
+  m_LocalPosition: {x: 0.000027559534, y: 0.00012604006, z: -0.00016580464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -69.652, y: -225.90999, z: -257.66}
 --- !u!33 &33155596995939300
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -88,7 +88,7 @@ public class Initiative : MonoBehaviour
     }
 
     static void StartTurn()
-    {
+    {   
         order.Peek().BeginTurn();
         currentUnit = order.Peek();
         GameObject selector = GameObject.FindGameObjectWithTag("selector");
