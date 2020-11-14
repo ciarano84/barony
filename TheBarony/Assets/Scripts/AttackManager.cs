@@ -61,13 +61,15 @@ public class AttackManager : MonoBehaviour
         //check focus
         if (attacker.focus != defender)
         {
-            DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Unfocused", false);
+            //DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Unfocused", false);
+            attacker.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("Astray");
             bonuses--;
             attacker.focus = defender;
             attacker.focusSwitched = true;
         } else if (defender.focus != attacker)
         {
-            DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Blindside", false);
+            //DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Blindside", false);
+            attacker.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("Blindsiding");
             bonuses++;
         }
 
@@ -109,7 +111,8 @@ public class AttackManager : MonoBehaviour
             if (defenceType == DefenceType.DODGE) 
             {
                 defender.GetComponent<TacticsMovement>().Dodge(Result.PARTIAL);
-                DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "dodged", false);
+                //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "dodged", false);
+                defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("dodged");
             }
             if (defender.focus != attacker) defender.SetFocus(attacker);
             return Result.PARTIAL;
@@ -119,9 +122,11 @@ public class AttackManager : MonoBehaviour
             if (defenceType == DefenceType.DODGE)
             {
                 defender.GetComponent<TacticsMovement>().Dodge(Result.FAIL);
-                DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "evaded", false);
+                //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "evaded", false);
+                defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("evaded");
             }
-            DamagePopUp.Create(attacker.transform.position + new Vector3(0, (defender.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Miss", false);
+            //DamagePopUp.Create(attacker.transform.position + new Vector3(0, (defender.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Miss", false);
+            defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("miss");
             return Result.FAIL;
         }
     }
@@ -136,12 +141,14 @@ public class AttackManager : MonoBehaviour
         if (defenceType == DefenceType.BLOCK)
         {
             blockDice = -1;
-            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "blocked", false);
+            //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "blocked", false);
+            defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("blocked");
         }
         if (defenceType == DefenceType.SHIELD)
         {
             blockDice = -2;
-            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shielded", false);
+            //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shielded", false);
+            defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("shielded");
         }
 
         AbilityCheck.CheckAbility(damage, resiliance, blockDice);
@@ -149,7 +156,8 @@ public class AttackManager : MonoBehaviour
         //assumes all are 'fated' for now. 
         if (result < -9)
         {
-            DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shrugged", false);
+            //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shrugged", false);
+            defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("shrugged");
             return;
         }
         else if (result < 1)

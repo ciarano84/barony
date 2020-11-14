@@ -42,7 +42,7 @@ public class c_DamageUp : Critical
 
     public override void CriticalEffect()
     {
-        Debug.Log("damage up critical takes effect");
+        AttackManager.defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("Damage Up Critical", true);
         AttackManager.damage += 2;
     }
 }
@@ -56,13 +56,12 @@ public class c_Cripple : Critical
     public override void CriticalEffect()
     {
         if (AttackManager.wounds < 1) return;
-
-        Debug.Log("crippled critical takes effect");
         
         Unit attacker = AttackManager.attacker;
         Unit defender = AttackManager.defender;
-        
-        DamagePopUp.Create(defender.transform.position + new Vector3(0, (defender.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Crippled", false);
+
+        //DamagePopUp.Create(defender.transform.position + new Vector3(0, (defender.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Crippled", false);
+        defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("crippled", true);
 
         if (defender.GetComponent<Crippled>() == null)
         {
@@ -85,7 +84,7 @@ public class c_Gouge : Critical
 
     public override void CriticalEffect()
     {
-        Debug.Log("gouge critical takes effect");
+        AttackManager.defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("gouged", true);
         AttackManager.woundValueAdjustment += 2;
     }
 }
@@ -98,7 +97,7 @@ public class c_Crush : Critical
 
     public override void CriticalEffect()
     {
-        Debug.Log("Crush critical takes effect");
+        AttackManager.defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("crushing", true);
         AttackManager.grazeDamage -= 1;
     }
 }
@@ -111,7 +110,7 @@ public class c_ArmourPierce : Critical
 
     public override void CriticalEffect()
     {
-        Debug.Log("Armour piercing critical takes effect");
+        AttackManager.defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("armour pierced", true);
         AttackManager.armourPierce = true;
     }
 }

@@ -148,14 +148,16 @@ public class Unit : MonoBehaviour
                 }
                 else
                 {
-                    DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Knocked out", false);
+                    //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Knocked out", false);
+                    GetComponent<UnitPopUpManager>().AddPopUpInfo("Knocked out");
                     StartCoroutine("KO");
                 }
             }
         }
 
         unitInfo.currentBreath += amount;
-        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), amount.ToString(), false);
+        //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), amount.ToString(), false);
+        GetComponent<UnitPopUpManager>().AddPopUpInfo("breath " + amount.ToString());
 
         //check for flagging
         if (unitInfo.currentBreath <= unitInfo.flaggingBreath)
@@ -163,7 +165,8 @@ public class Unit : MonoBehaviour
             if (!unitInfo.flagging)
             {
                 unitInfo.flagging = true;
-                DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "flagging", false);
+                //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "flagging", false);
+                GetComponent<UnitPopUpManager>().AddPopUpInfo("flagging");
             }
         }
 
@@ -204,7 +207,8 @@ public class Unit : MonoBehaviour
             }
         }
 
-        DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), woundedText, true);
+        //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), woundedText, true);
+        GetComponent<UnitPopUpManager>().AddPopUpInfo(woundedText, true);
     }
 
     //This needs sorting out. 

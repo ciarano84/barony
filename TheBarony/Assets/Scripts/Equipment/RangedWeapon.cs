@@ -68,8 +68,9 @@ public class RangedWeapon : Weapon
         missile.GetComponent<Missile>().firingWeapon = this;
 
         if (hit == Result.FAIL)
-        { 
-            DamagePopUp.Create(transform.position + new Vector3(0, 2 * GetComponent<TacticsMovement>().halfHeight), "miss", false);
+        {
+            //DamagePopUp.Create(transform.position + new Vector3(0, 2 * GetComponent<TacticsMovement>().halfHeight), "miss", false);
+            gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("miss");
         }
 
         owner.aimingBow = false;
@@ -113,7 +114,8 @@ public class RangedWeapon : Weapon
     public void Reload(ActionCost actionCost)
     {
         rangedWeaponData.currentAmmo = rangedWeaponData.maxAmmo;
-        DamagePopUp.Create(transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Arrow nocked", false);
+        //DamagePopUp.Create(transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Arrow nocked", false);
+        gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("arrow nocked");
         if (actionCost == ActionCost.main)
         {
             owner.remainingActions -= 1; }

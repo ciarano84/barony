@@ -14,7 +14,8 @@ public class Prime : Action
     public override void ExecuteAction(ActionCost actionCost)
     {
         Initiative.queuedActions++;
-        DamagePopUp.Create(actioningUnit.transform.position + new Vector3(0, (actioningUnit.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Attack Primed", false);
+        //DamagePopUp.Create(actioningUnit.transform.position + new Vector3(0, (actioningUnit.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Attack Primed", false);
+        actioningUnit.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("attack primed");
 
         if (actioningUnit.GetComponent<Priming>() == null)
         {

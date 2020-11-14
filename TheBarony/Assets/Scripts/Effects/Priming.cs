@@ -134,12 +134,14 @@ public class Priming : Effect
             if (primeAttackType == PrimeAttackType.AIMED)
             {
                 AttackManager.bonuses += 1;
-                DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Aimed Shot", false);
+                //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Aimed Shot", false);
+                gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("aimed shot");
             }
             else if (primeAttackType == PrimeAttackType.MIGHTY)
             {
                 AttackManager.damage += ((int)owner.mainWeapon.weaponData.weight) * 2;
-                DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Mighty Attack", false);
+                //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Mighty Attack", false);
+                gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("mighty attack");
             }
             Remove();
         }
