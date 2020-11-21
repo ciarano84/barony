@@ -190,23 +190,6 @@ public class TacticsMovement : Unit
                 }
             }
         }
-
-        //Trying to trackdown the sneaky attack secondary move bug. 
-        ////Debug
-        //foreach (Unit u in Initiative.order)
-        //{
-        //    if (selectableTiles.Contains(u.GetComponent<TacticsMovement>().currentTile))
-        //    {
-        //        Debug.LogError("a unit has got it's current tile someohow into the selectable tiles list. ");
-        //        //Vector3 errorPos = new Vector3(u.gameObject.transform.position.x, u.gameObject.transform.position.y + 1);
-        //        //u.gameObject.transform.position = errorPos;
-        //    }
-
-        //    if (currentTile.occupant == null)
-        //    {
-        //        Debug.LogError("I'm on a tile that doesn't think I'm here!");
-        //    }
-        //}
     }
 
     //HAS AN OVERLOAD!!!! (should likely just solve this by setting the additional parameter as a default. 
@@ -274,21 +257,6 @@ public class TacticsMovement : Unit
             currentTile.occupant = null;
             t.occupant = this;
             currentTile = t;
-
-            //Debug to try and spot when unit's move and don't have a current tile assigned. 
-            //if (tileTracked != null)
-            //{
-            //    if (currentTile != tileTracked)
-            //    {
-            //        Debug.Log("Now assigned to tile " + currentTile.GetInstanceID());
-            //        tileTracked = currentTile;
-            //    }
-            //}
-            //else
-            //{
-            //    Debug.Log("Now assigned to tile " + currentTile.GetInstanceID());
-            //    tileTracked = currentTile;
-            //}
 
             Vector3 target = t.transform.position;
 
@@ -382,15 +350,8 @@ public class TacticsMovement : Unit
         }
     }
 
-    protected void RemoveSelectableTiles()
+    public void RemoveSelectableTiles()
     {
-        //Debug - making the changes below as I'm not sure why we're letting go of current tile. This needs to be thoroughly tested before we actually sack off what was quite fundamental code. 
-        //if (currentTile != null)
-        //{
-        //    currentTile.current = false;
-        //    currentTile = null;
-        //}
-
         foreach (Tile tile in selectableTiles)
         {
             tile.Reset();

@@ -157,6 +157,7 @@ public class Initiative : MonoBehaviour
 
     public static void EndAction()
     {
+        currentUnit.RemoveSelectableTiles();
         initiativeManager.StartCoroutine(CheckForTurnEnd());
     }
 
