@@ -133,3 +133,5 @@ MonoBehaviour:
     type: 3}
   ArenaTavern: {fileID: 7570889017074273385, guid: 766600ed7d2a1ae469cded11f6b31c45,
     type: 3}
+  TargetMarker: {fileID: 6546286375808705806, guid: 7431a6a984bfb4a409e3f8baf868ccf2,
+    type: 3}

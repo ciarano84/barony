@@ -63,13 +63,15 @@ public class RangedWeapon : Weapon
         GameObject missile = Instantiate(GameAssets.i.ArrowModel, owner.offHandSlot.position, owner.transform.rotation) as GameObject;
         missile.GetComponent<Missile>().target = currentTarget.unitTargeted.transform.position + new Vector3(0, currentTarget.unitTargeted.GetComponent<TacticsMovement>().halfHeight);
 
+        //Debug.
+        //GameObject marker = Instantiate(GameAssets.i.TargetMarker, currentTarget.unitTargeted.transform.position + new Vector3(0, currentTarget.unitTargeted.GetComponent<TacticsMovement>().halfHeight), Quaternion.identity);
+
         missile.GetComponent<Missile>().Launch(hit);
         missile.GetComponent<Missile>().targetUnit = currentTarget.unitTargeted;
         missile.GetComponent<Missile>().firingWeapon = this;
 
         if (hit == Result.FAIL)
         {
-            //DamagePopUp.Create(transform.position + new Vector3(0, 2 * GetComponent<TacticsMovement>().halfHeight), "miss", false);
             gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("miss");
         }
 

@@ -104,6 +104,7 @@ public class AttackManager : MonoBehaviour
         //Work out the result
         if (AbilityCheck.baseResult >= 0)
         {
+            Debug.Log("Attack is a success.");
             return Result.SUCCESS;
         }
         if (AbilityCheck.baseResult >= -9)
@@ -115,6 +116,7 @@ public class AttackManager : MonoBehaviour
                 defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("dodged");
             }
             if (defender.focus != attacker) defender.SetFocus(attacker);
+            Debug.Log("Attack is a Partial.");
             return Result.PARTIAL;
         }
         else
@@ -127,6 +129,7 @@ public class AttackManager : MonoBehaviour
             }
             //DamagePopUp.Create(attacker.transform.position + new Vector3(0, (defender.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Miss", false);
             defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("miss");
+            Debug.Log("Attack is a miss.");
             return Result.FAIL;
         }
     }
@@ -220,6 +223,7 @@ public class AttackManager : MonoBehaviour
                 struckAnimation = StruckAnimation.SHIELD;
                 ShieldData data = (ShieldData)defender.GetComponent<Shield>().itemData;
                 defence += data.shieldModifier;
+                Debug.Log("Defender shielding.");
                 return;
             }
             else
@@ -233,6 +237,7 @@ public class AttackManager : MonoBehaviour
                             defenceType = DefenceType.BLOCK;
                             struckAnimation = StruckAnimation.BLOCK;
                             //block anim.
+                            Debug.Log("Defender blocking.");
                             return;
                         }
                     }
@@ -248,11 +253,13 @@ public class AttackManager : MonoBehaviour
                 float heightOffset = dodgeTile.transform.position.y - defender.GetComponent<TacticsMovement>().currentTile.transform.position.y;
                 defender.GetComponent<TacticsMovement>().dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, defender.transform.position.y + heightOffset, dodgeTile.gameObject.transform.position.z);
                 defenceType = DefenceType.DODGE;
+                Debug.Log("Defender dodging.");
                 return;
             }
         }
         //This catchall currently treats everything that doesn't fit the above as exposed. 
         bonuses++;
+        Debug.Log("Defender exposed.");
         defenceType = DefenceType.EXPOSED;
     }
 

@@ -94,4 +94,7 @@ public class GameAssets : MonoBehaviour
     public GameObject ArenaHills;
     public GameObject ArenaMarket;
     public GameObject ArenaTavern;
+
+    //Debug
+    public GameObject TargetMarker;
 }

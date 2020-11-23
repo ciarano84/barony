@@ -120,6 +120,7 @@ public class Initiative : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
             {
+                Debug.Log("unit evaluated as having actions left.");
                 currentUnit.GetComponent<TacticsMovement>().BeginTurn();
                 actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
                 queuedActions--;

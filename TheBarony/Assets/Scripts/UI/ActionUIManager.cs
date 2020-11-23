@@ -34,11 +34,8 @@ public class ActionUIManager : MonoBehaviour
     bool moveAvailable;
     bool mainAvailable;
 
-    //List<Action> actions = new List<Action>();
     List<Action> moveActions = new List<Action>();
     List<Action> mainActions = new List<Action>();
-
-    static Texture2D attackCursor;
 
     private void Start()
     {
@@ -49,6 +46,7 @@ public class ActionUIManager : MonoBehaviour
 
     public void UpdateActions(TacticsMovement unit)
     {
+        Debug.Log("update actions called on ActionUIManager");
         Clear();
 
         //set all the info out for the selected unit
@@ -127,7 +125,7 @@ public class ActionUIManager : MonoBehaviour
         }
         else
         {
-            //This is for NPC actions, so not really needed atm.
+            //This is for NPC actions.
             Clear();
             defenceToggle.gameObject.SetActive(false);
             return;
@@ -247,12 +245,10 @@ public class ActionUIManager : MonoBehaviour
     {
         if (!KeepState)
         {
-            Debug.Log("pressed");
             if (currentUnit.defenceType == DefenceType.BLOCK) currentUnit.defenceType = DefenceType.DODGE;
             else if (currentUnit.defenceType == DefenceType.DODGE) currentUnit.defenceType = DefenceType.BLOCK;
         }
 
-        //if (!defaultSetting)
         if (currentUnit.defenceType == DefenceType.DODGE) defenceToggleIcon.sprite = GameAssets.i.DodgeToggle;
         if (currentUnit.defenceType == DefenceType.BLOCK) defenceToggleIcon.sprite = GameAssets.i.BlockToggle;
     }
