@@ -61,14 +61,12 @@ public class AttackManager : MonoBehaviour
         //check focus
         if (attacker.focus != defender)
         {
-            //DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Unfocused", false);
             attacker.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("Astray");
             bonuses--;
             attacker.focus = defender;
             attacker.focusSwitched = true;
         } else if (defender.focus != attacker)
         {
-            //DamagePopUp.Create(attacker.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "Blindside", false);
             attacker.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("Blindsiding");
             bonuses++;
         }
@@ -87,9 +85,6 @@ public class AttackManager : MonoBehaviour
         //Work out criticals
         CriticalManager.Reset();
 
-        //Debug
-        //Debug.Log("Total of " + AbilityCheck.crits + " criticals.");
-
         for (int count = 0; count < AbilityCheck.crits; count++)
         {
             CriticalManager.AddCritical(attacker.mainWeapon);
@@ -104,7 +99,6 @@ public class AttackManager : MonoBehaviour
         //Work out the result
         if (AbilityCheck.baseResult >= 0)
         {
-            Debug.Log("Attack is a success.");
             return Result.SUCCESS;
         }
         if (AbilityCheck.baseResult >= -9)
@@ -112,11 +106,9 @@ public class AttackManager : MonoBehaviour
             if (defenceType == DefenceType.DODGE) 
             {
                 defender.GetComponent<TacticsMovement>().Dodge(Result.PARTIAL);
-                //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "dodged", false);
                 defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("dodged");
             }
             if (defender.focus != attacker) defender.SetFocus(attacker);
-            Debug.Log("Attack is a Partial.");
             return Result.PARTIAL;
         }
         else
@@ -124,12 +116,9 @@ public class AttackManager : MonoBehaviour
             if (defenceType == DefenceType.DODGE)
             {
                 defender.GetComponent<TacticsMovement>().Dodge(Result.FAIL);
-                //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "evaded", false);
                 defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("evaded");
             }
-            //DamagePopUp.Create(attacker.transform.position + new Vector3(0, (defender.gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Miss", false);
             defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("miss");
-            Debug.Log("Attack is a miss.");
             return Result.FAIL;
         }
     }
@@ -144,13 +133,11 @@ public class AttackManager : MonoBehaviour
         if (defenceType == DefenceType.BLOCK)
         {
             blockDice = -1;
-            //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "blocked", false);
             defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("blocked");
         }
         if (defenceType == DefenceType.SHIELD)
         {
             blockDice = -2;
-            //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shielded", false);
             defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("shielded");
         }
 
@@ -159,7 +146,6 @@ public class AttackManager : MonoBehaviour
         //assumes all are 'fated' for now. 
         if (result < -9)
         {
-            //DamagePopUp.Create(defender.gameObject.transform.position + new Vector3(0, defender.gameObject.GetComponent<TacticsMovement>().halfHeight), "shrugged", false);
             defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("shrugged");
             return;
         }
@@ -223,7 +209,6 @@ public class AttackManager : MonoBehaviour
                 struckAnimation = StruckAnimation.SHIELD;
                 ShieldData data = (ShieldData)defender.GetComponent<Shield>().itemData;
                 defence += data.shieldModifier;
-                Debug.Log("Defender shielding.");
                 return;
             }
             else
@@ -237,7 +222,6 @@ public class AttackManager : MonoBehaviour
                             defenceType = DefenceType.BLOCK;
                             struckAnimation = StruckAnimation.BLOCK;
                             //block anim.
-                            Debug.Log("Defender blocking.");
                             return;
                         }
                     }
@@ -253,13 +237,11 @@ public class AttackManager : MonoBehaviour
                 float heightOffset = dodgeTile.transform.position.y - defender.GetComponent<TacticsMovement>().currentTile.transform.position.y;
                 defender.GetComponent<TacticsMovement>().dodgeTarget = new Vector3(dodgeTile.gameObject.transform.position.x, defender.transform.position.y + heightOffset, dodgeTile.gameObject.transform.position.z);
                 defenceType = DefenceType.DODGE;
-                Debug.Log("Defender dodging.");
                 return;
             }
         }
         //This catchall currently treats everything that doesn't fit the above as exposed. 
         bonuses++;
-        Debug.Log("Defender exposed.");
         defenceType = DefenceType.EXPOSED;
     }
 

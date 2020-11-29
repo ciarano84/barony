@@ -46,7 +46,6 @@ public class ActionUIManager : MonoBehaviour
 
     public void UpdateActions(TacticsMovement unit)
     {
-        Debug.Log("update actions called on ActionUIManager");
         Clear();
 
         //set all the info out for the selected unit
@@ -82,9 +81,9 @@ public class ActionUIManager : MonoBehaviour
 
         if (unit != null && unit.unitInfo.faction == Factions.players)
         {
+            endTurn.gameObject.SetActive(true);
             if (unit.remainingMove > 0 || unit.remainingActions > 0)
             {
-                endTurn.gameObject.SetActive(true);
                 focusButton.gameObject.SetActive(true);
                 defenceToggle.gameObject.SetActive(true);
                 DefenceTypeSet(true);
@@ -121,7 +120,7 @@ public class ActionUIManager : MonoBehaviour
                     AddActionButton(mainActions, count, customMainActions, ActionCost.main);
                 }
             }
-            else Clear();
+            //else Clear();
         }
         else
         {

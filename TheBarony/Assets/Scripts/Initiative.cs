@@ -45,7 +45,7 @@ public class Initiative : MonoBehaviour
         publicQueuedActions = queuedActions;
         if (queuedActions < 0)
         {
-            Debug.LogError("Initiative dropped to less than 0, current turn is " + Initiative.currentUnit.GetInstanceID());
+            Debug.LogError("queued actions dropped to less than 0, current turn is " + Initiative.currentUnit.GetInstanceID());
         }
     }
 
@@ -117,29 +117,47 @@ public class Initiative : MonoBehaviour
         else
         {
             OnActionTaken(currentUnit);
+            actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
+            queuedActions--;
             yield return new WaitForSeconds(0.5f);
-            if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
+
+            if (currentUnit.remainingMove >= 1 || currentUnit.remainingActions > 0)
             {
-                Debug.Log("unit evaluated as having actions left.");
                 currentUnit.GetComponent<TacticsMovement>().BeginTurn();
-                actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
-                queuedActions--;
                 yield break;
             }
-            else
+            if (currentUnit.focusSwitched == false)
             {
-                if (currentUnit.focusSwitched == false)
-                {
-                    currentUnit.canFocusSwitch = true;
-                    queuedActions--;
-                }
-                else
-                {
-                    EndTurn();
-                    queuedActions--;
-                    yield break;
-                }
+                currentUnit.canFocusSwitch = true;
+                yield break;
             }
+            EndTurn();
+            yield break;
+
+
+
+                //if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
+                //{
+                //    Debug.Log("unit evaluated as having actions left.");
+                //    currentUnit.GetComponent<TacticsMovement>().BeginTurn();
+                //    actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
+                //    queuedActions--;
+                //    yield break;
+                //}
+                //else
+                //{
+                //    if (currentUnit.focusSwitched == false)
+                //    {
+                //        currentUnit.canFocusSwitch = true;
+                //        queuedActions--;
+                //    }
+                //    else
+                //    {
+                //        EndTurn();
+                //        queuedActions--;
+                //        yield break;
+                //    }
+                //}
         }
     }
 

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 2H Primed Attack
+  m_Name: 2HPrimed Attack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -96373,6 +96373,14 @@ AnimationClip:
     functionName: AttackCalled
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 02a8b4b9b7a6e2c4c82b649e0e047c0b,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.8666666
+    functionName: EndActionCalled
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: b4635f7ec3259dd40940107a82d2e562,
       type: 3}
     floatParameter: 0
     intParameter: 0

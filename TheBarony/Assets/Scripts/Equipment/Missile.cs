@@ -23,18 +23,12 @@ public class Missile : MonoBehaviour
         
         if (hit >= Result.PARTIAL || AttackManager.defenceType == DefenceType.DODGE)
         {
-            //dir = target - transform.position;
             dir = target;
         }
         else
         {
-            //dir = (target + missVariance) - transform.position;
             dir = target + missVariance;
         }
-        
-        //Debug
-        //GameObject marker = Instantiate(GameAssets.i.TargetMarker, dir, Quaternion.identity);
-        //mark = marker.transform;
 
         transform.LookAt(dir);
         dir = (dir - transform.position).normalized;
@@ -51,7 +45,6 @@ public class Missile : MonoBehaviour
             {
                 if (AttackManager.defenceType != DefenceType.DODGE || hit == Result.SUCCESS)
                 {
-                    Debug.Log("missle hits target");
                     onTarget = true;
                     DestroyMissile();
                 }    

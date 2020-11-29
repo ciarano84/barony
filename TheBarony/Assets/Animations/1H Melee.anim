@@ -61871,3 +61871,11 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1.7333333
+    functionName: EndActionCalled
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: b4635f7ec3259dd40940107a82d2e562,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

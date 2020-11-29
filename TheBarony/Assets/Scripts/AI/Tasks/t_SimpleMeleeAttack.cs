@@ -18,7 +18,6 @@ public class t_SimpleMeleeAttack : Task
             foreach (Unit target in Initiative.players)
             {
                 //check it can find a route. 
-
                 unit.destination = target.gameObject;
                 target.GetComponent<TacticsMovement>().GetCurrentTile();
                 Tile t = unit.FindPath(target.GetComponent<TacticsMovement>().currentTile);

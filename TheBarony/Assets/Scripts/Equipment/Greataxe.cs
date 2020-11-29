@@ -38,7 +38,6 @@ public class GreataxeData : MeleeWeaponData
 
         unit.mainWeapon = weapon;
 
-        //not sure what we're gonna do when they have TWO shortswords. 
         Animator animator = weapon.owner.rig.gameObject.GetComponent<Animator>();
         animator.runtimeAnimatorController = GameAssets.i.TwoHanded as RuntimeAnimatorController;
 

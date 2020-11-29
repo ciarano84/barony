@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 2H Melee
+  m_Name: 2HMelee
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -75186,7 +75186,15 @@ AnimationClip:
   - time: 1.4
     functionName: AttackCalled
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: c9b12a77fe2e72f4aaf6e6da724c7510,
+    objectReferenceParameter: {fileID: 11500000, guid: b4635f7ec3259dd40940107a82d2e562,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.3
+    functionName: EndActionCalled
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: b4635f7ec3259dd40940107a82d2e562,
       type: 3}
     floatParameter: 0
     intParameter: 0
