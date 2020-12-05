@@ -47,8 +47,7 @@ public class RangedWeapon : Weapon
         yield return new WaitForSeconds(0.3f);
         owner.unitAnim.SetTrigger("rangedAttack");
 
-        //yield return new WaitForSeconds(2);
-        yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length + 2 /* + owner.unitAnim.GetCurrentAnimatorStateInfo(0).normalizedTime */);
+        yield return new WaitForSeconds(owner.unitAnim.GetCurrentAnimatorStateInfo(0).length + 2);
 
         Initiative.EndAction();
 

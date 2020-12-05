@@ -56,7 +56,6 @@ public class Weapon : Item
 
     public void EndAction()
     {
-        Debug.Log("called");
         Initiative.EndAction();
     }
 }
