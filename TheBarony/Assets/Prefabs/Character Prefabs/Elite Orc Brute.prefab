@@ -81,6 +81,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elite Orc Brute
       objectReference: {fileID: 0}
+    - target: {fileID: 4854254108497697771, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6678276267370962823, guid: 6de6a71e5f3640b4ba692dc5b826fe7f,
         type: 3}
       propertyPath: ai

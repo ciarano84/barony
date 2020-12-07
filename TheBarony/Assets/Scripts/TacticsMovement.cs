@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using System.Linq;
+using Cinemachine;
 
 public class TacticsMovement : Unit
 {
@@ -43,6 +44,9 @@ public class TacticsMovement : Unit
     Vector3 heading = new Vector3();
     Vector3 jumpTarget;
 
+    //It's virtualcamera
+    public CinemachineVirtualCamera vcam;
+
     public float halfHeight = 0;
 
     bool jumpingUp = false;
@@ -75,6 +79,7 @@ public class TacticsMovement : Unit
         if (RostaInfo.encounter)
         {
             Initiative.AddUnit(this);
+            vcam.gameObject.transform.parent = null;
         }
     }
 

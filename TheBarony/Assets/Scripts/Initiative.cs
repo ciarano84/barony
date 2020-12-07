@@ -94,6 +94,7 @@ public class Initiative : MonoBehaviour
         GameObject selector = GameObject.FindGameObjectWithTag("selector");
         selector.transform.SetParent(currentUnit.transform, false);
         actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
+        CinemachineCamera.FollowUnit(currentUnit.GetComponent<TacticsMovement>());
         OnTurnStart(currentUnit);
     }
 
@@ -133,31 +134,6 @@ public class Initiative : MonoBehaviour
             }
             EndTurn();
             yield break;
-
-
-
-                //if (currentUnit.remainingMove > 0 || currentUnit.remainingActions > 0)
-                //{
-                //    Debug.Log("unit evaluated as having actions left.");
-                //    currentUnit.GetComponent<TacticsMovement>().BeginTurn();
-                //    actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
-                //    queuedActions--;
-                //    yield break;
-                //}
-                //else
-                //{
-                //    if (currentUnit.focusSwitched == false)
-                //    {
-                //        currentUnit.canFocusSwitch = true;
-                //        queuedActions--;
-                //    }
-                //    else
-                //    {
-                //        EndTurn();
-                //        queuedActions--;
-                //        yield break;
-                //    }
-                //}
         }
     }
 

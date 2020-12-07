@@ -26,6 +26,7 @@ MonoBehaviour:
     baseToughness: -3
     baseStrength: 0
     baseMove: 4
+    baseArmour: 0
     wounds: 0
     currentBreath: 0
     currentAttack: 0
@@ -33,6 +34,7 @@ MonoBehaviour:
     currentToughness: 0
     currentDamage: 0
     currentMove: 0
+    currentArmour: 0
     flagging: 0
   unitAnim: {fileID: 7202982501385179961}
   rig: {fileID: 7107460858895278381}
@@ -46,7 +48,9 @@ MonoBehaviour:
   effects: []
   adjacentUnits: []
   focus: {fileID: 0}
+  defenceType: 1
   turn: 0
+  test: 0
   selectableTiles: []
   currentTile: {fileID: 0}
   actualTargetTile: {fileID: 0}
@@ -58,7 +62,9 @@ MonoBehaviour:
   currentInitiative: 0
   remainingMove: 0
   remainingActions: 0
+  vcam: {fileID: 4576070072816004851}
   halfHeight: 0
+  dodgeTarget: {x: 0, y: 0, z: 0}
   destination: {fileID: 0}
   ai: {fileID: 0}
 --- !u!114 &3055099907477660027
@@ -75,6 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectPack: 1
   fate: 0
+  mainWeapon: 0
+  armour: 0
 --- !u!1001 &2900287209024298835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,3 +199,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2900287209024298835}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4576070072816004851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1710968348562354592, guid: 923239b3514fabd48947ef7725db0d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 2900287209024298835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
