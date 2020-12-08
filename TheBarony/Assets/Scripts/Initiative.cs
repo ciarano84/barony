@@ -64,7 +64,7 @@ public class Initiative : MonoBehaviour
     IEnumerator StartEncounter()
     {
         yield return new WaitForSeconds(2f);
-        CameraController.GetCameras();
+        CinemachineCamera.GetCameras();
         sortedUnits = unsortedUnits.OrderByDescending(o => o.currentInitiative).ToList();
         foreach (TacticsMovement u in sortedUnits)
         {

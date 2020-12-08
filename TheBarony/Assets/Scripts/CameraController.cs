@@ -29,6 +29,23 @@ public class CameraController : MonoBehaviour
     {
         if (ready)
         {
+            //working with cinemachine
+            if (Input.GetKey(KeyCode.Q))
+            {
+                RotateVirtualCams(true);
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                RotateVirtualCams(false);
+            }
+
+
+
+
+
+
+            //obsolete with cinemachine
+
             //zooms the camera. 
             lens.transform.Translate(Vector3.forward * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed);
 
@@ -43,16 +60,7 @@ public class CameraController : MonoBehaviour
                     transform.position = hitInfo.point;
                 }
             }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                Debug.Log("key down registered.");
-                //transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
-                RotateVirtualCams();
-            }
-            if (Input.GetKey(KeyCode.E))
-            {
-                //transform.Rotate(Vector3.up * -rotateSpeed * Time.deltaTime);
-            }
+            
             if (Input.GetKey(KeyCode.W))
             {
                 //transform.Translate(Vector3.forward * flySpeed * Time.deltaTime);
@@ -72,27 +80,14 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    void RotateVirtualCams()
+    void RotateVirtualCams(bool clockwise)
     {
+        int rotationDirection = 1;
+        if (!clockwise) rotationDirection = -1;
+
         for (int count = 0; count < dollies.Length; count++)
         {
-            dollies[count].transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+            dollies[count].transform.Rotate((Vector3.up * rotateSpeed * Time.deltaTime) * rotationDirection);
         }
-
-
-            //for (int count = 0; count < dollies.Length; count++)
-            //{
-            //    vcams[count].GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().FollowTargetRotation
-
-
-
-            //    //vcams[count].transform.SetParent(dollies[count].transform);
-            //    //dollies[count].transform.Rotate(direction * rotateSpeed * Time.deltaTime);
-            //    //vcams[count].transform.SetParent(null);
-
-
-            ////another attempt
-            ////vcams[count].transform.RotateAround(dollies[count].transform.position, Vector3.up, 100 * Time.deltaTime);
-            //}
     }
 }
