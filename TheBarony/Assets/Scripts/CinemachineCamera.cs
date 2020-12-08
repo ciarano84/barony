@@ -8,6 +8,9 @@ public class CinemachineCamera : MonoBehaviour
     static Unit unitCurrentlyFollowed;
     static bool ready = false;
     public float rotateSpeed;
+    public float zoomSpeed;
+    public float minZoom, maxZoom;
+    public float zoomLevel;
 
     static GameObject[] dollies;
     static GameObject[] vcams;
@@ -31,6 +34,10 @@ public class CinemachineCamera : MonoBehaviour
             {
                 RotateVirtualCams(false);
             }
+
+            Initiative.currentUnit.vcam.m_Lens.FieldOfView += -Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+            if (Initiative.currentUnit.vcam.m_Lens.FieldOfView > maxZoom) Initiative.currentUnit.vcam.m_Lens.FieldOfView = maxZoom;
+            else if (Initiative.currentUnit.vcam.m_Lens.FieldOfView < minZoom) Initiative.currentUnit.vcam.m_Lens.FieldOfView = minZoom;
         }
     }
 

@@ -799,6 +799,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2571195705016460075, guid: dc9292dfad00d1b42ad0f27c0fba0b58,
+        type: 3}
+      propertyPath: zoomSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571195705016460075, guid: dc9292dfad00d1b42ad0f27c0fba0b58,
+        type: 3}
+      propertyPath: minZoom
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571195705016460075, guid: dc9292dfad00d1b42ad0f27c0fba0b58,
+        type: 3}
+      propertyPath: maxZoom
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4369400051733755784, guid: dc9292dfad00d1b42ad0f27c0fba0b58,
         type: 3}
       propertyPath: near clip plane
