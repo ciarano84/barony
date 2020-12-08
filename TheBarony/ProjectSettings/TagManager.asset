@@ -12,6 +12,8 @@ TagManager:
   - Tile Select
   - Site
   - company
+  - vcam
+  - dolly
   layers:
   - Default
   - TransparentFX
