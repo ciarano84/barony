@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,8 @@ public class UnitMouseOverView : MonoBehaviour
     public GameObject canvass;
     public GameObject effectHolder;
     public static Unit targetUnit;
-    public Camera cam;
+    public CinemachineBrain cam;
+    //public Camera cam;
 
     ActionUIManager actionUIManager;
 
@@ -33,7 +35,7 @@ public class UnitMouseOverView : MonoBehaviour
             if (targetUnit != null)
             {
                 transform.position = targetUnit.transform.position + new Vector3(0, offset);
-                transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
+                transform.rotation = Quaternion.LookRotation(transform.position - cam.ActiveVirtualCamera.VirtualCameraGameObject.transform.position);
                 unitMouseOverViewName.text = targetUnit.unitInfo.unitName;
 
                 if (!effectsSet) SetEffects();

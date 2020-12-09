@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2571195705016460075}
   m_Layer: 0
   m_Name: CameraBrain
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4867151013482865313}
-  m_LocalRotation: {x: 0.35323703, y: -0.37820482, z: 0.14761235, w: 0.84284955}
-  m_LocalPosition: {x: 18.438517, y: 10.858361, z: -59.24105}
+  m_LocalRotation: {x: 0.3373127, y: 0.34207743, z: -0.1331057, w: 0.866883}
+  m_LocalPosition: {x: -12.770347, y: 17.15, z: -13.661302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 39.454002, z: 0}
+  m_LocalEulerAnglesHint: {x: 42.523003, y: 43.069, z: 0}
 --- !u!114 &8619667855006377708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,13 +48,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
+  m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 0.5
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -91,11 +91,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 26.991467
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 50
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -132,3 +132,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 100
+  zoomSpeed: 10
+  minZoom: 10
+  maxZoom: 30
+  zoomLevel: 20
+  flySpeed: 10
+  playerCam: {fileID: 0}
+  playerCamDolly: {fileID: 0}

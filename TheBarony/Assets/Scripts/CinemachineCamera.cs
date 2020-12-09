@@ -41,6 +41,7 @@ public class CinemachineCamera : MonoBehaviour
 
             zoomLevel = Mathf.Clamp(zoomLevel + -Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, minZoom, maxZoom);
             Initiative.currentUnit.vcam.m_Lens.FieldOfView = zoomLevel;
+            if (playerControl) playerCam.m_Lens.FieldOfView = zoomLevel;
 
             if (Input.GetKey(KeyCode.W))
             {
@@ -109,13 +110,6 @@ public class CinemachineCamera : MonoBehaviour
         playerCam.m_Lens.FieldOfView = zoomLevel;
         playerCamDolly.transform.position = Initiative.currentUnit.dolly.transform.position;
         playerCamDolly.transform.eulerAngles = Initiative.currentUnit.dolly.transform.eulerAngles;
-
-        //playerCam.gameObject.transform.position = Initiative.currentUnit.vcam.transform.position;
-        //playerCam.gameObject.transform.eulerAngles = Initiative.currentUnit.vcam.transform.eulerAngles;
-        //playerCamDolly.transform.eulerAngles = new Vector3(
-        //    playerCamDolly.transform.eulerAngles.x,
-        //    playerCam.gameObject.transform.eulerAngles.y,
-        //    playerCamDolly.transform.eulerAngles.z);
         playerCam.MoveToTopOfPrioritySubqueue();
     }
 }
