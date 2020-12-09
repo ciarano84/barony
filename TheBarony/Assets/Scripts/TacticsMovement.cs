@@ -46,6 +46,7 @@ public class TacticsMovement : Unit
 
     //It's virtualcamera
     public CinemachineVirtualCamera vcam;
+    public GameObject dolly;
 
     public float halfHeight = 0;
 

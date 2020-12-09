@@ -11,6 +11,10 @@ public class CinemachineCamera : MonoBehaviour
     public float zoomSpeed;
     public float minZoom, maxZoom;
     public float zoomLevel;
+    public float flySpeed;
+    static bool playerControl = false;
+    public CinemachineVirtualCamera playerCam;
+    public GameObject playerCamDolly;
 
     static GameObject[] dollies;
     static GameObject[] vcams;
@@ -35,9 +39,41 @@ public class CinemachineCamera : MonoBehaviour
                 RotateVirtualCams(false);
             }
 
-            Initiative.currentUnit.vcam.m_Lens.FieldOfView += -Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-            if (Initiative.currentUnit.vcam.m_Lens.FieldOfView > maxZoom) Initiative.currentUnit.vcam.m_Lens.FieldOfView = maxZoom;
-            else if (Initiative.currentUnit.vcam.m_Lens.FieldOfView < minZoom) Initiative.currentUnit.vcam.m_Lens.FieldOfView = minZoom;
+            zoomLevel = Mathf.Clamp(zoomLevel + -Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, minZoom, maxZoom);
+            Initiative.currentUnit.vcam.m_Lens.FieldOfView = zoomLevel;
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                if (playerControl == false)
+                {
+                    EnablePlayerControl();
+                }
+                playerCamDolly.transform.Translate(Vector3.forward * flySpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                if (playerControl == false)
+                {
+                    EnablePlayerControl();
+                }
+                playerCamDolly.transform.Translate(Vector3.forward * -flySpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                if (playerControl == false)
+                {
+                    EnablePlayerControl();
+                }
+                playerCamDolly.transform.Translate(Vector3.left * flySpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (playerControl == false)
+                {
+                    EnablePlayerControl();
+                }
+                playerCamDolly.transform.Translate(Vector3.right * flySpeed * Time.deltaTime);
+            }
         }
     }
 
@@ -47,6 +83,9 @@ public class CinemachineCamera : MonoBehaviour
         {
             unit.vcam.transform.position = unitCurrentlyFollowed.transform.position;
         }
+
+        //Move the new unit's camera to be top of the subqueue.
+        playerControl = false;
         unit.vcam.MoveToTopOfPrioritySubqueue();
         unitCurrentlyFollowed = unit;
     }
@@ -60,5 +99,23 @@ public class CinemachineCamera : MonoBehaviour
         {
             dollies[count].transform.Rotate((Vector3.up * rotateSpeed * Time.deltaTime) * rotationDirection);
         }
+
+        playerCamDolly.transform.Rotate((Vector3.up * rotateSpeed * Time.deltaTime) * rotationDirection);
+    }
+
+    void EnablePlayerControl()
+    {
+        playerControl = true;
+        playerCam.m_Lens.FieldOfView = zoomLevel;
+        playerCamDolly.transform.position = Initiative.currentUnit.dolly.transform.position;
+        playerCamDolly.transform.eulerAngles = Initiative.currentUnit.dolly.transform.eulerAngles;
+
+        //playerCam.gameObject.transform.position = Initiative.currentUnit.vcam.transform.position;
+        //playerCam.gameObject.transform.eulerAngles = Initiative.currentUnit.vcam.transform.eulerAngles;
+        //playerCamDolly.transform.eulerAngles = new Vector3(
+        //    playerCamDolly.transform.eulerAngles.x,
+        //    playerCam.gameObject.transform.eulerAngles.y,
+        //    playerCamDolly.transform.eulerAngles.z);
+        playerCam.MoveToTopOfPrioritySubqueue();
     }
 }

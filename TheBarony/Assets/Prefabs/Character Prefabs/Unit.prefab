@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941708055865072604}
-  m_LocalRotation: {x: 0.30941576, y: 0.41083902, z: -0.15056685, w: 0.84427655}
-  m_LocalPosition: {x: -6.58, y: 7.0800004, z: -5.160001}
+  m_LocalRotation: {x: 0.3648564, y: 0.057177573, z: -0.022455096, w: 0.9290352}
+  m_LocalPosition: {x: 0.26, y: 5.68, z: -6.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3946205951213316590}
@@ -94,14 +94,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4405740295937143787}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4659610712596463115}
   m_Father: {fileID: 7730601684680638529}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &8256356428640149107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 3
-  m_FollowOffset: {x: -6.5799994, y: 7.0800004, z: -5.160001}
+  m_FollowOffset: {x: 0.20999978, y: 5.68, z: -6.190001}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -261,6 +261,11 @@ PrefabInstance:
       propertyPath: vcam
       value: 
       objectReference: {fileID: 1710968348562354592}
+    - target: {fileID: 1202535369076960860, guid: 6b67a3594c39f4f4280f7825f1e1903e,
+        type: 3}
+      propertyPath: dolly
+      value: 
+      objectReference: {fileID: 4405740295937143787}
     - target: {fileID: 2191465398959735477, guid: 6b67a3594c39f4f4280f7825f1e1903e,
         type: 3}
       propertyPath: m_Name
