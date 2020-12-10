@@ -211,10 +211,6 @@ public class TacticsMovement : Unit
         while (next != null)
         {
             path.Push(next);
-            //if (next.parent != null)
-            //{
-            //    firstTileInPath = next;
-            //}
             next = next.parent;
         }
     }
@@ -595,6 +591,7 @@ public class TacticsMovement : Unit
 
     protected void NPCMove()
     {
+        CombatLog.UpdateCombatLog(name + " Moves using A*");
         Initiative.queuedActions++;
         MoveToTile(actualTargetTile);
     }

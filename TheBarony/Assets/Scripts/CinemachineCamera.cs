@@ -17,12 +17,11 @@ public class CinemachineCamera : MonoBehaviour
     public GameObject playerCamDolly;
 
     static GameObject[] dollies;
-    static GameObject[] vcams;
 
     public static void GetCameras()
     {
         dollies = GameObject.FindGameObjectsWithTag("dolly");
-        vcams = GameObject.FindGameObjectsWithTag("vcam");
+        //vcams = GameObject.FindGameObjectsWithTag("vcam");
         ready = true;
     }
 
@@ -98,7 +97,10 @@ public class CinemachineCamera : MonoBehaviour
 
         for (int count = 0; count < dollies.Length; count++)
         {
-            dollies[count].transform.Rotate((Vector3.up * rotateSpeed * Time.deltaTime) * rotationDirection);
+            if (dollies[count] != null)
+            {
+                dollies[count].transform.Rotate((Vector3.up * rotateSpeed * Time.deltaTime) * rotationDirection);
+            }
         }
 
         playerCamDolly.transform.Rotate((Vector3.up * rotateSpeed * Time.deltaTime) * rotationDirection);

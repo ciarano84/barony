@@ -54,6 +54,7 @@ public class t_sneakyMeleeAttack : Task
             {
                 inFlankingPosition = true;
                 Initiative.queuedActions++;
+                CombatLog.UpdateCombatLog(unit.name + " moves to flank.");
                 unit.MoveToTile(flankingTile);
                 firstMoveDone = true;
                 return;
@@ -67,6 +68,7 @@ public class t_sneakyMeleeAttack : Task
             if (unit.remainingActions > 0 && unit.remainingMove > 0)
             {
                 unit.destination = target.gameObject;
+                CombatLog.UpdateCombatLog(unit.name + " moves toward opposing faction.");
                 firstMoveDone = true;
                 return;
             }
@@ -85,6 +87,7 @@ public class t_sneakyMeleeAttack : Task
                     {
                         Initiative.queuedActions += 1;
                         unit.mainWeapon.StartCoroutine("Attack", t);
+                        CombatLog.UpdateCombatLog(unit.name + " attacks " + target.name);
                         attacked = true;
                         return;
                     }
@@ -109,6 +112,7 @@ public class t_sneakyMeleeAttack : Task
             if (preferedTiles.Count > 0)
             {
                 Initiative.queuedActions++;
+                CombatLog.UpdateCombatLog(unit.name + " moves away.");
                 unit.MoveToTile(preferedTiles[Random.Range(0, preferedTiles.Count)]);
                 flagEndofTurn = true;
                 return;
@@ -119,6 +123,7 @@ public class t_sneakyMeleeAttack : Task
         if (unit.remainingActions > 0)
         {
             unit.defend.ExecuteAction(ActionCost.main);
+            CombatLog.UpdateCombatLog(unit.name + " defends.");
             return;
         }
 

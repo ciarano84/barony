@@ -39,6 +39,7 @@ public class t_defend : Task
             if (tiles[roll] != null)
             {
                 Initiative.queuedActions++;
+                CombatLog.UpdateCombatLog(unit.name + " moves toward opposing faction.");
                 unit.MoveToTile(tiles[roll]);
                 moved = true;
                 return;
@@ -49,6 +50,7 @@ public class t_defend : Task
         if (unit.remainingActions > 0)
         {
             unit.defend.ExecuteAction(ActionCost.main);
+            CombatLog.UpdateCombatLog(unit.name + " defends.");
             flagEndofTurn = true;
             return;
         }

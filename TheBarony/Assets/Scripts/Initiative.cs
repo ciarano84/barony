@@ -97,18 +97,21 @@ public class Initiative : MonoBehaviour
         actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
         CinemachineCamera.FollowUnit(currentUnit.GetComponent<TacticsMovement>());
         OnTurnStart(currentUnit);
+        CombatLog.UpdateCombatLog(currentUnit.name + "(" + currentUnit.gameObject.GetInstanceID() + ")" + " starts turn.");
     }
 
     public static void EndTurn()
     {
         TacticsMovement unit = order.Dequeue();
         unit.EndTurn();
+        CombatLog.UpdateCombatLog(currentUnit.name + "(" + currentUnit.gameObject.GetInstanceID() + ")" + " ends turn.");
         order.Enqueue(unit);
         StartTurn();
     }
 
     public static IEnumerator CheckForTurnEnd() 
     {
+        CombatLog.UpdateCombatLog("Action complete.");
         if (queuedActions < 1) Debug.LogWarning("zero or less queued actions");
 
         if (queuedActions > 1)
@@ -145,7 +148,9 @@ public class Initiative : MonoBehaviour
         //ensure the unit is removed from the relevant faction lists. 
         if (unit.unitInfo.faction == Factions.players) players.Remove(unit);
         if (unit.unitInfo.faction == Factions.enemies) enemies.Remove(unit);
-        
+
+        Destroy(unit.GetComponent<TacticsMovement>().dolly);
+        Destroy(unit.GetComponent<TacticsMovement>().vcam);
         Destroy(unit.gameObject);
         EncounterManager.CheckForFactionDeath();
         EndAction();

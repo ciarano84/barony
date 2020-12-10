@@ -99,6 +99,7 @@ public class AttackManager : MonoBehaviour
         //Work out the result
         if (AbilityCheck.baseResult >= 0)
         {
+            CombatLog.UpdateCombatLog(attacker.name + " attacks " + defender.name + " and scores a success.");
             return Result.SUCCESS;
         }
         if (AbilityCheck.baseResult >= -9)
@@ -109,6 +110,7 @@ public class AttackManager : MonoBehaviour
                 defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("dodged");
             }
             if (defender.focus != attacker) defender.SetFocus(attacker);
+            CombatLog.UpdateCombatLog(attacker.name + " attacks " + defender.name + " and scores a partial.");
             return Result.PARTIAL;
         }
         else
@@ -119,6 +121,7 @@ public class AttackManager : MonoBehaviour
                 defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("evaded");
             }
             defender.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("miss");
+            CombatLog.UpdateCombatLog(attacker.name + " attacks " + defender.name + " and scores a fail.");
             return Result.FAIL;
         }
     }

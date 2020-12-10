@@ -158,55 +158,6 @@ public class Tile : MonoBehaviour
             }
         }
     }
-
-    //public void FindNeighbours(float jumpHeight = 0, Tile targetTile = null)
-    //{
-    //    Reset();
-
-    //    CheckTile(Vector3.forward, jumpHeight, targetTile, false);
-    //    CheckTile(-Vector3.forward, jumpHeight, targetTile, false);
-    //    CheckTile(Vector3.right, jumpHeight, targetTile, false);
-    //    CheckTile(-Vector3.right, jumpHeight, targetTile, false);
-
-    //    //Diagonals
-    //    CheckTile(forwardAndLeft, jumpHeight, targetTile, true);
-    //    CheckTile(forwardAndRight, jumpHeight, targetTile, true);
-    //    CheckTile(backAndLeft, jumpHeight, targetTile, true);
-    //    CheckTile(backAndRight, jumpHeight, targetTile, true);
-    //}
-
-    //public void CheckTile(Vector3 direction, float jumpHeight = 0, Tile targetTile = null, bool diagonal = false) {
-
-    //    //Barrier check overlapbox
-    //    Vector3 barrierCheckRange = new Vector3(0.25f, 0.25f, 0.25f);
-    //    Collider[] barrierCheckColliders = Physics.OverlapBox(transform.position + (direction/2), barrierCheckRange);
-
-    //    foreach (Collider boundary in barrierCheckColliders)
-    //    {
-    //        if (boundary.gameObject.tag == "barrier")
-    //        {
-    //            barrierCount++;
-    //            return;
-    //        }
-    //    }
-
-    //    Vector3 halfExtents = new Vector3(0.25f, (1 + jumpHeight) / 2f, 0.25f);
-    //    Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
-
-    //    foreach (Collider item in colliders) 
-    //    {   
-    //        Tile tile = item.GetComponent<Tile>();
-    //        if (tile != null && tile.walkable)
-    //        {
-    //            RaycastHit hit;
-    //            if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == targetTile))
-    //            {
-    //                if (!diagonal) adjacencyList.Add(tile);
-    //                else diagonalAdjacencyList.Add(tile);
-    //            }
-    //        }
-    //    }
-    //}
 }
 
 public enum Cover { NONE, PARTIAL, FULL };

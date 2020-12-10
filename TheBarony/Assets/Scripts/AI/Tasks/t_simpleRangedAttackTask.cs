@@ -55,6 +55,7 @@ public class t_simpleRangedAttackTask : Task
                     if (tiles.Count > 0)
                     {
                         Initiative.queuedActions++;
+                        CombatLog.UpdateCombatLog(unit.name + " moves away to avoid ranged hindrance.");
                         unit.MoveToTile(tiles[Random.Range(0, tiles.Count)]);
                         return;
                     }
@@ -68,12 +69,14 @@ public class t_simpleRangedAttackTask : Task
             if (weapon.rangedWeaponData.reloadSpeed == ActionCost.move && (unit.remainingMove == unit.unitInfo.currentMove))
             {
                 weapon.Reload(ActionCost.move);
+                CombatLog.UpdateCombatLog(unit.name + " reloads as a move action.");
                 flagEndofTurn = true;
                 return;
             }
             else if (unit.remainingActions > 0)
             {
                 weapon.Reload(ActionCost.main);
+                CombatLog.UpdateCombatLog(unit.name + " reloads as a main action.");
                 flagEndofTurn = true;
                 return;
             }
@@ -82,6 +85,7 @@ public class t_simpleRangedAttackTask : Task
                 if (unit.remainingMove > 0)
                 {
                     Initiative.queuedActions++;
+                    CombatLog.UpdateCombatLog(unit.name + " moves as far from opposing faction as possible.");
                     unit.MoveToTile(RangeFinder.FindTileFurthestFromOpponents(unit, unit.selectableTiles));
                     return;
                 }
@@ -102,12 +106,14 @@ public class t_simpleRangedAttackTask : Task
                     if (preferedTiles.Count > 0)
                     {
                         Initiative.queuedActions++;
+                        CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
                         unit.MoveToTile(tiles[Random.Range(0, preferedTiles.Count)]);
                         return;
                     }
                     else
                     {
                         Initiative.queuedActions++;
+                        CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
                         unit.MoveToTile(tiles[Random.Range(0, tiles.Count)]);
                         return;
                     }
@@ -116,6 +122,7 @@ public class t_simpleRangedAttackTask : Task
                 {
                     //if you can't get to a place you can see from, A* toward the target. 
                     unit.destination = target.gameObject;
+                    //No combat log as this is automatically done whenever a creature uses A*.
                     flagEndofTurn = true;
                     return;
                 }
@@ -124,6 +131,7 @@ public class t_simpleRangedAttackTask : Task
             {
                 unit.SetFocus(target);
                 flagEndofTurn = true;
+                CombatLog.UpdateCombatLog(unit.name + " focuses on opposing faction.");
                 return;
             }
         }
@@ -140,12 +148,14 @@ public class t_simpleRangedAttackTask : Task
                 if (preferedTiles.Count > 0)
                 {
                     Initiative.queuedActions++;
+                    CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
                     unit.MoveToTile(tiles[Random.Range(0, preferedTiles.Count)]);
                     return;
                 }
                 else
                 {
                     Initiative.queuedActions++;
+                    CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
                     unit.MoveToTile(tiles[Random.Range(0, tiles.Count)]);
                     return;
                 }
@@ -154,6 +164,7 @@ public class t_simpleRangedAttackTask : Task
             {
                 //if you can't get to a place you can see from, A* toward the target. 
                 unit.destination = target.gameObject;
+                //No combat log as this is automatically done whenever a creature uses A*.
                 return;
             }
         }
@@ -167,6 +178,7 @@ public class t_simpleRangedAttackTask : Task
                 {
                     Initiative.queuedActions += 1;
                     unit.mainWeapon.StartCoroutine("Attack", t);
+                    CombatLog.UpdateCombatLog(unit.name + " shoots at " + target.name);
                     flagEndofTurn = true;
                     return;
                 }
@@ -177,6 +189,7 @@ public class t_simpleRangedAttackTask : Task
         if (unit.remainingActions > 0)
         {
             unit.defend.ExecuteAction(ActionCost.main);
+            CombatLog.UpdateCombatLog(unit.name + " defends");
             flagEndofTurn = true;
             return;
         }

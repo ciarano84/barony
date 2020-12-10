@@ -53,7 +53,8 @@ public class t_SimpleMeleeAttack : Task
                     {
                         if (t.unitTargeted == target)
                         {
-                            Initiative.queuedActions += 1;
+                            Initiative.queuedActions++;
+                            CombatLog.UpdateCombatLog(unit.name + " melee attacks " + target.name);
                             unit.mainWeapon.StartCoroutine("Attack", t);
                             flagEndofTurn = true;
                             return;
@@ -74,6 +75,7 @@ public class t_SimpleMeleeAttack : Task
         if (unit.remainingActions > 0)
         {
             unit.defend.ExecuteAction(ActionCost.main);
+            CombatLog.UpdateCombatLog(unit.name + " defends.");
             return;
         }
 

@@ -56,6 +56,7 @@ public class t_aggressiveMeleeAttack : Task
                         {
                             Initiative.queuedActions += 1;
                             unit.mainWeapon.StartCoroutine("Attack", t);
+                            CombatLog.UpdateCombatLog(unit.name + " melee attacks " + target.name);
                             flagEndofTurn = true;
                             return;
                         }

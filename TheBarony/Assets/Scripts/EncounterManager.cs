@@ -75,6 +75,7 @@ public class EncounterManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         ArenaBuilder.BuildArena();
         SetPositions();
+        CombatLog.UpdateCombatLog("Units ready!");
         yield break;
     }
 

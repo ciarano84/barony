@@ -215,6 +215,7 @@ public class Unit : MonoBehaviour
     public IEnumerator KO()
     {
         Initiative.queuedActions++;
+        CombatLog.UpdateCombatLog(name + " KOed.");
         onKO(this);
 
         unitAnim.SetBool("dead", true);

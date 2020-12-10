@@ -47,6 +47,7 @@ public class t_runAway : Task
         {
             unit.FindSelectableTiles();
             Initiative.queuedActions++;
+            CombatLog.UpdateCombatLog(unit.name + " dashes from opposing unit.");
             unit.MoveToTile(RangeFinder.FindTileFurthestFromOpponents(unit, unit.selectableTiles));
             flagEndofTurn = true;
         }
