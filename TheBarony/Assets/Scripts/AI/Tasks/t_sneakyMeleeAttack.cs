@@ -68,7 +68,7 @@ public class t_sneakyMeleeAttack : Task
             if (unit.remainingActions > 0 && unit.remainingMove > 0)
             {
                 unit.destination = target.gameObject;
-                CombatLog.UpdateCombatLog(unit.name + " moves toward opposing faction.");
+                CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
                 firstMoveDone = true;
                 return;
             }
@@ -122,8 +122,8 @@ public class t_sneakyMeleeAttack : Task
         //Defend if you've not reached the target
         if (unit.remainingActions > 0)
         {
-            unit.defend.ExecuteAction(ActionCost.main);
             CombatLog.UpdateCombatLog(unit.name + " defends.");
+            unit.defend.ExecuteAction(ActionCost.main);
             return;
         }
 

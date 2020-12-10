@@ -63,6 +63,7 @@ MonoBehaviour:
   remainingMove: 0
   remainingActions: 0
   vcam: {fileID: 4576070072816004851}
+  dolly: {fileID: 1521010155317472440}
   halfHeight: 0
   dodgeTarget: {x: 0, y: 0, z: 0}
   destination: {fileID: 0}
@@ -196,6 +197,12 @@ Transform:
 --- !u!4 &6772624955711202279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8485574832440491188, guid: 923239b3514fabd48947ef7725db0d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 2900287209024298835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1521010155317472440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4405740295937143787, guid: 923239b3514fabd48947ef7725db0d19,
     type: 3}
   m_PrefabInstance: {fileID: 2900287209024298835}
   m_PrefabAsset: {fileID: 0}

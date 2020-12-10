@@ -104,7 +104,7 @@ public class Initiative : MonoBehaviour
     {
         TacticsMovement unit = order.Dequeue();
         unit.EndTurn();
-        CombatLog.UpdateCombatLog(currentUnit.name + "(" + currentUnit.gameObject.GetInstanceID() + ")" + " ends turn.");
+        CombatLog.UpdateCombatLog(currentUnit.name + "(" + currentUnit.gameObject.GetInstanceID() + ")" + " ends turn. \r\n");
         order.Enqueue(unit);
         StartTurn();
     }
@@ -149,9 +149,12 @@ public class Initiative : MonoBehaviour
         if (unit.unitInfo.faction == Factions.players) players.Remove(unit);
         if (unit.unitInfo.faction == Factions.enemies) enemies.Remove(unit);
 
-        Destroy(unit.GetComponent<TacticsMovement>().dolly);
-        Destroy(unit.GetComponent<TacticsMovement>().vcam);
+        //should bag this up and put it on the unit script
+        Destroy(unit.GetComponent<TacticsMovement>().dolly.gameObject);
+        Destroy(unit.GetComponent<TacticsMovement>().vcam.gameObject);
         Destroy(unit.gameObject);
+        //
+
         EncounterManager.CheckForFactionDeath();
         EndAction();
     }

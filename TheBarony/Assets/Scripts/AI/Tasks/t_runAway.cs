@@ -38,6 +38,7 @@ public class t_runAway : Task
         if (unit.remainingActions > 0 && dashed == false)
         {
             unit.dash.ExecuteAction(ActionCost.main);
+            CombatLog.UpdateCombatLog(unit.name + " dashes.");
             dashed = true;
             return;
         }
@@ -47,7 +48,7 @@ public class t_runAway : Task
         {
             unit.FindSelectableTiles();
             Initiative.queuedActions++;
-            CombatLog.UpdateCombatLog(unit.name + " dashes from opposing unit.");
+            CombatLog.UpdateCombatLog(unit.name + " moves away from opposing unit.");
             unit.MoveToTile(RangeFinder.FindTileFurthestFromOpponents(unit, unit.selectableTiles));
             flagEndofTurn = true;
         }

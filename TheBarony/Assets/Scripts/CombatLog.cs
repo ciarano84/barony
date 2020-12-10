@@ -17,7 +17,6 @@ public class CombatLog : MonoBehaviour
             try
             {
                 File.Delete(logFilePath);
-                Debug.Log("log file deleted.");
             }
             catch
             {

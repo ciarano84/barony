@@ -150,6 +150,8 @@ public class Unit : MonoBehaviour
                 {
                     //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Knocked out", false);
                     GetComponent<UnitPopUpManager>().AddPopUpInfo("Knocked out");
+
+                    Debug.Log("KO called from UpdateBreath.");
                     StartCoroutine("KO");
                 }
             }
@@ -179,6 +181,7 @@ public class Unit : MonoBehaviour
 
     public void UpdateWounds(int amount, int woundValueAdjustment = 0)
     {
+        //Sort the popup message.
         string woundedText;
         switch (amount)
         {
@@ -195,6 +198,8 @@ public class Unit : MonoBehaviour
                 woundedText = "wounded";
                 break;
         }
+        GetComponent<UnitPopUpManager>().AddPopUpInfo(woundedText, true);
+
         while (amount > 0)
         {
             unitInfo.currentBreath -= (5 + woundValueAdjustment);
@@ -203,12 +208,11 @@ public class Unit : MonoBehaviour
             if ((unitInfo.currentBreath <= 0) || (unitInfo.wounds >= 3))
             {
                 unitInfo.currentBreath = 0;
+
+                Debug.Log("KO called from UpdateWounds.");
                 StartCoroutine("KO");
             }
         }
-
-        //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), woundedText, true);
-        GetComponent<UnitPopUpManager>().AddPopUpInfo(woundedText, true);
     }
 
     //This needs sorting out. 

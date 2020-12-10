@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class t_SimpleMeleeAttack : Task
 {
+    bool movedCloser = false;
+
     public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
         if (unit.focus != null)
@@ -67,15 +69,20 @@ public class t_SimpleMeleeAttack : Task
         //Move closer to the target if needed. 
         if (unit.remainingMove > 0 && unit.remainingActions > 0)
         {
-            unit.destination = target.gameObject;
-            return;
+            if (!movedCloser)
+            {
+                unit.destination = target.gameObject;
+                CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
+                movedCloser = true;
+                return;
+            }
         }
 
         //Defend if you've not reached the target
         if (unit.remainingActions > 0)
         {
-            unit.defend.ExecuteAction(ActionCost.main);
             CombatLog.UpdateCombatLog(unit.name + " defends.");
+            unit.defend.ExecuteAction(ActionCost.main);
             return;
         }
 

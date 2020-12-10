@@ -122,7 +122,7 @@ public class t_simpleRangedAttackTask : Task
                 {
                     //if you can't get to a place you can see from, A* toward the target. 
                     unit.destination = target.gameObject;
-                    //No combat log as this is automatically done whenever a creature uses A*.
+                    CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
                     flagEndofTurn = true;
                     return;
                 }
@@ -137,7 +137,7 @@ public class t_simpleRangedAttackTask : Task
         }
         
 
-        //If not line of sight then get it. this pretty much duplicates above, so I should consider this for being broken out into another method. 
+        //If no line of sight then get it. this pretty much duplicates above, so I should consider this for being broken out into another method. 
         if (!RangeFinder.LineOfSight(unit, target) && unit.remainingMove > 0)
         {
             //Find a tile to move to that has LoS, ideally one that isn't next to an enemy.
@@ -164,7 +164,7 @@ public class t_simpleRangedAttackTask : Task
             {
                 //if you can't get to a place you can see from, A* toward the target. 
                 unit.destination = target.gameObject;
-                //No combat log as this is automatically done whenever a creature uses A*.
+                CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
                 return;
             }
         }

@@ -591,7 +591,6 @@ public class TacticsMovement : Unit
 
     protected void NPCMove()
     {
-        CombatLog.UpdateCombatLog(name + " Moves using A*");
         Initiative.queuedActions++;
         MoveToTile(actualTargetTile);
     }

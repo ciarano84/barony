@@ -72,6 +72,7 @@ public class t_aggressiveMeleeAttack : Task
             if (unit.remainingActions > 0)
             {
                 unit.dash.ExecuteAction(ActionCost.main);
+                CombatLog.UpdateCombatLog(unit.name + " dashes.");
                 dashed = true;
             }
         }
@@ -80,6 +81,7 @@ public class t_aggressiveMeleeAttack : Task
         if ((unit.remainingMove > 0 && unit.remainingActions > 0) || dashed == true)
         {
             unit.destination = target.gameObject;
+            CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
             dashed = false;
         }
         else
