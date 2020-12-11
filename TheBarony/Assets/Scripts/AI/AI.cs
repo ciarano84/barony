@@ -28,6 +28,7 @@ public class AI : MonoBehaviour
         if (task == null)
         {
             Debug.LogWarning("task is null");
+            Debug.Log("current unit is " + Initiative.currentUnit.gameObject.GetInstanceID());
         }
 
         if (task.flagEndofTurn == true)

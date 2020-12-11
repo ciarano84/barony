@@ -92,42 +92,35 @@ public class t_simpleRangedAttackTask : Task
             }
         }
 
-        //If you've not got focus, get it.
-        if (unit.focus == null)
+        //re-write going here.
+
+        //If you've not got line of sight, get it.
+        if (!RangeFinder.LineOfSight(unit, target) && unit.remainingMove >= 1)
         {
-            if (!RangeFinder.LineOfSight(unit, target) && unit.remainingMove > 0)
+            //Find a tile to move to that has LoS, ideally one that isn't next to an enemy.
+            unit.FindSelectableTiles();
+            List<Tile> tiles = RangeFinder.FindTilesWithLineOfSight(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
+            if (tiles.Count > 0)
             {
-                //Find a tile to move to that has LoS, ideally one that isn't next to an enemy.
-                unit.FindSelectableTiles();
-                List<Tile> tiles = RangeFinder.FindTilesWithLineOfSight(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
-                if (tiles.Count > 0)
-                {
-                    List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, Factions.players);
-                    if (preferedTiles.Count > 0)
-                    {
-                        Initiative.queuedActions++;
-                        CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
-                        unit.MoveToTile(tiles[Random.Range(0, preferedTiles.Count)]);
-                        return;
-                    }
-                    else
-                    {
-                        Initiative.queuedActions++;
-                        CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
-                        unit.MoveToTile(tiles[Random.Range(0, tiles.Count)]);
-                        return;
-                    }
-                }
-                else
-                {
-                    //if you can't get to a place you can see from, A* toward the target. 
-                    unit.destination = target.gameObject;
-                    CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
-                    flagEndofTurn = true;
-                    return;
-                }
+                List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, Factions.players);
+                Initiative.queuedActions++;
+                CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
+                if (preferedTiles.Count > 0) unit.MoveToTile(tiles[Random.Range(0, preferedTiles.Count)]);
+                else unit.MoveToTile(tiles[Random.Range(0, tiles.Count)]);
             }
-            else if (RangeFinder.LineOfSight(unit, target))
+            else
+            {
+                //if you can't get to a place you can see from, A* toward the target. 
+                unit.destination = target.gameObject;
+                CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
+            }
+            return;
+        }
+
+        //If you've not got focus, get it. 
+        if (unit.focus = null)
+        {
+            if (RangeFinder.LineOfSight(unit, target) && unit.remainingActions <= 0)
             {
                 unit.SetFocus(target);
                 flagEndofTurn = true;
@@ -135,39 +128,85 @@ public class t_simpleRangedAttackTask : Task
                 return;
             }
         }
-        
 
-        //If no line of sight then get it. this pretty much duplicates above, so I should consider this for being broken out into another method. 
-        if (!RangeFinder.LineOfSight(unit, target) && unit.remainingMove > 0)
-        {
-            //Find a tile to move to that has LoS, ideally one that isn't next to an enemy.
-            List<Tile> tiles = RangeFinder.FindTilesWithLineOfSight(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
-            if (tiles.Count > 0)
-            {
-                List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, Factions.players);
-                if (preferedTiles.Count > 0)
-                {
-                    Initiative.queuedActions++;
-                    CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
-                    unit.MoveToTile(tiles[Random.Range(0, preferedTiles.Count)]);
-                    return;
-                }
-                else
-                {
-                    Initiative.queuedActions++;
-                    CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
-                    unit.MoveToTile(tiles[Random.Range(0, tiles.Count)]);
-                    return;
-                }
-            }
-            else
-            {
-                //if you can't get to a place you can see from, A* toward the target. 
-                unit.destination = target.gameObject;
-                CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
-                return;
-            }
-        }
+        // end of re-write
+
+
+        //If you've not got focus, get it.
+        //if (unit.focus == null)
+        //{
+        //    if (!RangeFinder.LineOfSight(unit, target) && unit.remainingMove > 0)
+        //    {
+        //        //Find a tile to move to that has LoS, ideally one that isn't next to an enemy.
+        //        unit.FindSelectableTiles();
+        //        List<Tile> tiles = RangeFinder.FindTilesWithLineOfSight(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
+        //        if (tiles.Count > 0)
+        //        {
+        //            List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, Factions.players);
+        //            if (preferedTiles.Count > 0)
+        //            {
+        //                Initiative.queuedActions++;
+        //                CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
+        //                unit.MoveToTile(tiles[Random.Range(0, preferedTiles.Count)]);
+        //                return;
+        //            }
+        //            else
+        //            {
+        //                Initiative.queuedActions++;
+        //                CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
+        //                unit.MoveToTile(tiles[Random.Range(0, tiles.Count)]);
+        //                return;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //if you can't get to a place you can see from, A* toward the target. 
+        //            unit.destination = target.gameObject;
+        //            CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
+        //            flagEndofTurn = true;
+        //            return;
+        //        }
+        //    }
+        //    else if (RangeFinder.LineOfSight(unit, target))
+        //    {
+        //        unit.SetFocus(target);
+        //        flagEndofTurn = true;
+        //        CombatLog.UpdateCombatLog(unit.name + " focuses on opposing faction.");
+        //        return;
+        //    }
+        //}
+
+        ////If no line of sight then get it. this pretty much duplicates above, so I should consider this for being broken out into another method. 
+        //if (!RangeFinder.LineOfSight(unit, target) && unit.remainingMove > 0)
+        //{
+        //    //Find a tile to move to that has LoS, ideally one that isn't next to an enemy.
+        //    List<Tile> tiles = RangeFinder.FindTilesWithLineOfSight(unit, unit.selectableTiles, target.GetComponent<TacticsMovement>());
+        //    if (tiles.Count > 0)
+        //    {
+        //        List<Tile> preferedTiles = RangeFinder.FindTilesNotNextToEnemy(unit, tiles, Factions.players);
+        //        if (preferedTiles.Count > 0)
+        //        {
+        //            Initiative.queuedActions++;
+        //            CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
+        //            unit.MoveToTile(tiles[Random.Range(0, preferedTiles.Count)]);
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            Initiative.queuedActions++;
+        //            CombatLog.UpdateCombatLog(unit.name + " moves to get line of sight.");
+        //            unit.MoveToTile(tiles[Random.Range(0, tiles.Count)]);
+        //            return;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        //if you can't get to a place you can see from, A* toward the target. 
+        //        unit.destination = target.gameObject;
+        //        CombatLog.UpdateCombatLog(unit.name + " A* toward opposing faction.");
+        //        return;
+        //    }
+        //}
 
         //shoot
         if (RangeFinder.LineOfSight(unit, target) && unit.remainingActions > 0 && weapon.rangedWeaponData.currentAmmo > 0 && target == unit.focus)

@@ -15,7 +15,8 @@ public class NPC : TacticsMovement
 
     private void FixedUpdate()
     {
-        if (!turn)
+        //if (!turn)
+        if (Initiative.currentUnit != this)
         {
             if (focus != null)
             {
@@ -24,26 +25,27 @@ public class NPC : TacticsMovement
                     FaceDirection(focus.transform.position);
                 }
             }
-            return;
         }
-
-        if (!moving && Initiative.queuedActions < 1)
+        else 
         {
-            destination = null;
-            ai.DoTurn();
-
-            //This section DOES the A* move, but once the tile has been decided. 
-            if (remainingMove > 0 && turn && destination != null)
+            if (!moving && Initiative.queuedActions < 1)
             {
-                CalculatePath();
-                NPCMove();
-                actualTargetTile.target = true;
+                destination = null;
+                ai.DoTurn();
+
+                //This section DOES the A* move, but once the tile has been decided. 
+                if (remainingMove > 0 && turn && destination != null)
+                {
+                    CalculatePath();
+                    NPCMove();
+                    actualTargetTile.target = true;
+                }
             }
-        }
-        else
-        {
-            Move();
-        }
+            else
+            {
+                Move();
+            }
+        }    
     }
     
     void CalculatePath()
@@ -57,6 +59,6 @@ public class NPC : TacticsMovement
         destination = null;
         ai.tasks.Clear();
         ai.task = null;
-        Initiative.EndTurn();
+        Initiative.ForceTurnEnd(true);
     }
 }

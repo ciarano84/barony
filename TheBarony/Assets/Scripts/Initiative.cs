@@ -100,13 +100,23 @@ public class Initiative : MonoBehaviour
         CombatLog.UpdateCombatLog(currentUnit.name + "(" + currentUnit.gameObject.GetInstanceID() + ")" + " starts turn.");
     }
 
-    public static void EndTurn()
+    public static void ForceTurnEnd(bool delay = false)
     {
+        initiativeManager.StartCoroutine(EndTurn(delay));
+    }
+
+    public static IEnumerator EndTurn(bool delay = false)
+    {
+        CombatLog.UpdateCombatLog(currentUnit.name + "(" + currentUnit.gameObject.GetInstanceID() + ")" + " ends turn. \r\n");
+        currentUnit = null;
         TacticsMovement unit = order.Dequeue();
         unit.EndTurn();
-        CombatLog.UpdateCombatLog(currentUnit.name + "(" + currentUnit.gameObject.GetInstanceID() + ")" + " ends turn. \r\n");
+
+        if (delay == true) yield return new WaitForSeconds(1f);
+
         order.Enqueue(unit);
         StartTurn();
+        yield break;
     }
 
     public static IEnumerator CheckForTurnEnd() 
@@ -124,7 +134,7 @@ public class Initiative : MonoBehaviour
             OnActionTaken(currentUnit);
             actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
             queuedActions--;
-            yield return new WaitForSeconds(0.5f);
+            //yield return new WaitForSeconds(0.5f);
 
             if (currentUnit.remainingMove >= 1 || currentUnit.remainingActions > 0)
             {
@@ -136,7 +146,7 @@ public class Initiative : MonoBehaviour
                 currentUnit.canFocusSwitch = true;
                 yield break;
             }
-            EndTurn();
+            initiativeManager.StartCoroutine(EndTurn());
             yield break;
         }
     }

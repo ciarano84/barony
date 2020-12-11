@@ -39,7 +39,7 @@ public class CinemachineCamera : MonoBehaviour
             }
 
             zoomLevel = Mathf.Clamp(zoomLevel + -Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, minZoom, maxZoom);
-            Initiative.currentUnit.vcam.m_Lens.FieldOfView = zoomLevel;
+            unitCurrentlyFollowed.GetComponent<TacticsMovement>().vcam.m_Lens.FieldOfView = zoomLevel;
             if (playerControl) playerCam.m_Lens.FieldOfView = zoomLevel;
 
             if (Input.GetKey(KeyCode.W))

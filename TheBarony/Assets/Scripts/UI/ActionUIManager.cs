@@ -134,7 +134,7 @@ public class ActionUIManager : MonoBehaviour
     public void PlayerEndsTurnEarly()
     {
         if (Initiative.queuedActions > 0) return;
-        Initiative.EndTurn();
+        Initiative.ForceTurnEnd();
     }
 
     public void Clear()
@@ -170,17 +170,20 @@ public class ActionUIManager : MonoBehaviour
                     Cursor.SetCursor(GameAssets.i.Eye_Cursor, Vector2.zero, CursorMode.Auto);
                 }
             }
-            else if ((Initiative.currentUnit.remainingActions > 0) && (!Initiative.currentUnit.moving))
+            else if (Initiative.currentUnit != null)
             {
-                foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<TacticsMovement>().mainWeapon.targets)
+                if ((Initiative.currentUnit.remainingActions > 0) && (!Initiative.currentUnit.moving))
                 {
-
-                    if (target.unitTargeted == TacticsMovement.mousedOverUnit)
+                    foreach (Weapon.Target target in Initiative.currentUnit.GetComponent<TacticsMovement>().mainWeapon.targets)
                     {
-                        Cursor.SetCursor(GameAssets.i.Sword_Cursor, Vector2.zero, CursorMode.Auto);
+
+                        if (target.unitTargeted == TacticsMovement.mousedOverUnit)
+                        {
+                            Cursor.SetCursor(GameAssets.i.Sword_Cursor, Vector2.zero, CursorMode.Auto);
+                        }
                     }
                 }
-            }
+            } 
             else
             {
                 Cursor.SetCursor(default, Vector2.zero, CursorMode.ForceSoftware);
