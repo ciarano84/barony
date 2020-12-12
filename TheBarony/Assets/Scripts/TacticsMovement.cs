@@ -487,13 +487,16 @@ public class TacticsMovement : Unit
     {
         AutoSetFocus();
         turn = false;
-        remainingMove = unitInfo.currentMove;
-        remainingActions = 1;
-
         //This needs to be altered to stop focus just being lost at the end of the turn. 
         CheckFocus(true);
         focusSwitched = false;
         canFocusSwitch = false;
+    }
+
+    public void ResetActions()
+    {
+        remainingMove = unitInfo.currentMove;
+        remainingActions = 1;
     }
 
     void CheckInitiative()

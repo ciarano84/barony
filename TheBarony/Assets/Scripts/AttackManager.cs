@@ -21,6 +21,7 @@ public class AttackManager : MonoBehaviour
     public static int blockDice = 0;
     public static int woundValueAdjustment = 0;
     public static bool armourPierce = false;
+    public static bool autocrit = false;
 
     //Debug
     public static bool attackRolled = false;
@@ -84,6 +85,8 @@ public class AttackManager : MonoBehaviour
 
         //Work out criticals
         CriticalManager.Reset();
+
+        if (autocrit) AbilityCheck.crits = Mathf.Max(AbilityCheck.crits, 1);
 
         for (int count = 0; count < AbilityCheck.crits; count++)
         {
@@ -261,6 +264,7 @@ public class AttackManager : MonoBehaviour
         defenceType = DefenceType.BLOCK;
         struckAnimation = StruckAnimation.DODGE;
         armourPierce = false;
+        autocrit = false;
 
         //Debug
         attackRolled = false;

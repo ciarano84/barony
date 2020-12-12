@@ -63,7 +63,6 @@ public class Greataxe : MeleeWeapon
         if (owner.currentTile.barrierCount > 0)
         {
             bonuses--;
-            //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Hindered", false);
             gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("hindered");
             if (owner.currentTile.barrierCount > 5) bonuses--;
         }

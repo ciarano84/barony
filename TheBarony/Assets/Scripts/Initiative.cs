@@ -89,9 +89,10 @@ public class Initiative : MonoBehaviour
     }
 
     static void StartTurn()
-    {   
-        order.Peek().BeginTurn();
+    {
         currentUnit = order.Peek();
+        currentUnit.ResetActions();
+        order.Peek().BeginTurn();
         GameObject selector = GameObject.FindGameObjectWithTag("selector");
         selector.transform.SetParent(currentUnit.transform, false);
         actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
