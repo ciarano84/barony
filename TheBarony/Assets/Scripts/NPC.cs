@@ -34,9 +34,18 @@ public class NPC : TacticsMovement
                 ai.DoTurn();
 
                 //This section DOES the A* move, but once the tile has been decided. 
-                if (remainingMove > 0 && turn && destination != null)
+                if (remainingMove >= 1 && turn && destination != null)
                 {
                     CalculatePath();
+
+                    //Failsafe, in case of there being no path. 
+                    if (actualTargetTile == null)
+                    {
+                        ai.task = new DefaultTask();
+                        Debug.LogWarning("unit defaulted on task as no route found.");
+                        return;
+                    }
+                        
                     NPCMove();
                     actualTargetTile.target = true;
                 }

@@ -40,16 +40,6 @@ public class AI : MonoBehaviour
         task.DoTask(unit);
     }
 
-    public void RandomizeValues()
-    {
-        foreach (Task t in tasks)
-        {
-            float roll = UnityEngine.Random.Range(0, 6);
-            roll /= 10;
-            t.value += roll;
-        }
-    }
-
     public virtual void SetTask()
     {
         basicTask.EvaluateCandidates(unit);
@@ -65,6 +55,16 @@ public class AI : MonoBehaviour
                 task = t;
                 highestValue = t.value;
             }
+        }
+    }
+
+    public void RandomizeValues()
+    {
+        foreach (Task t in tasks)
+        {
+            float roll = UnityEngine.Random.Range(0, 6);
+            roll /= 10;
+            t.value += roll;
         }
     }
 }

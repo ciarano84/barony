@@ -31,10 +31,6 @@ public class t_SimpleMeleeAttack : Task
                 task.value = 1 / Vector3.Distance(unit.transform.position, target.transform.position);
                 task.tile = t;
                 task.target = target.GetComponent<Unit>();
-                //if (!RangeFinder.LineOfSight(unit, target.GetComponent<Unit>()))
-                //{
-                //    task.value -= 1;
-                //}
                 unit.GetComponent<AI>().tasks.Add(task);
             }
         }
