@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using UnityEngine;
 using System.Linq;
 using Cinemachine;
+using UnityEngine.EventSystems;
 
 public class TacticsMovement : Unit
 {
@@ -506,8 +507,11 @@ public class TacticsMovement : Unit
 
     void OnMouseOver()
     {
-        mousedOverUnit = this;
-        if (RostaInfo.encounter) ActionUIManager.SetCursor();
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            mousedOverUnit = this;
+            if (RostaInfo.encounter) ActionUIManager.SetCursor();
+        } 
     }
 
     void OnMouseExit()

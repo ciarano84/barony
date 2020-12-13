@@ -41,7 +41,6 @@ public class t_SimpleMeleeAttack : Task
         //Attack the target if possible. 
         if (unit.remainingActions > 0)
         {
-            //unit.FindAdjacentUnits();
             RangeFinder.FindAdjacentUnits(unit);
             if (target != null)
             {

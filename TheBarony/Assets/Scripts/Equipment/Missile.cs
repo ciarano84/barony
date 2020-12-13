@@ -8,19 +8,27 @@ public class Missile : MonoBehaviour
 {
     readonly float speed = 16;
     float step;
+
     public Vector3 target;
-    public Vector3 missVariance = new Vector3(1, 1, 0);
-    public Result hit = Result.FAIL;
     Vector3 dir;
+    public Vector3 missVariance = new Vector3(1, 1, 0);
+
+    public Result hit = Result.FAIL;
     public Unit targetUnit;
     public RangedWeapon firingWeapon;
     bool onTarget = false;
-    //Transform mark;
+
+    //Debug
+    GameObject marker;
 
     public void Launch(Result onTarget)
     {
         hit = onTarget;
-        
+
+        //Debug
+        Destroy(GameObject.Find("Cube"));
+        marker = Instantiate(GameAssets.i.TargetMarker, target, Quaternion.identity);
+
         if (hit >= Result.PARTIAL || AttackManager.defenceType == DefenceType.DODGE)
         {
             dir = target;
@@ -37,12 +45,15 @@ public class Missile : MonoBehaviour
 
     private void Update()
     {
+        marker.transform.position = target;
+        
         step = speed * Time.deltaTime;
         transform.Translate(dir * step, Space.World);
         if (hit >= Result.PARTIAL)
         {
             if (Vector3.Distance(transform.position, target) < 0.25)
             {
+                Debug.Log("attack counts as landing inside the bounds");
                 if (AttackManager.defenceType != DefenceType.DODGE || hit == Result.SUCCESS)
                 {
                     onTarget = true;

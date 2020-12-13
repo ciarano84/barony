@@ -6,8 +6,10 @@ public class t_simpleRangedAttackTask : Task
 {
     public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
+        Debug.Log("evaluating candidates.");
         if (unit.focus != null)
         {
+            Debug.Log("goblin has a focus.");
             Task task = new t_simpleRangedAttackTask();
             task.taskName = "simple ranged";
             task.target = unit.focus;
@@ -116,9 +118,9 @@ public class t_simpleRangedAttackTask : Task
         }
 
         //If you've not got focus, get it. 
-        if (unit.focus = null)
+        if (unit.focus == null)
         {
-            if (RangeFinder.LineOfSight(unit, target) && unit.remainingActions <= 0)
+            if (RangeFinder.LineOfSight(unit, target))
             {
                 unit.SetFocus(target);
                 flagEndofTurn = true;
@@ -130,6 +132,7 @@ public class t_simpleRangedAttackTask : Task
         //shoot
         if (RangeFinder.LineOfSight(unit, target) && unit.remainingActions > 0 && weapon.rangedWeaponData.currentAmmo > 0 && target == unit.focus)
         {
+            Debug.Log("goes to attack");
             foreach (Weapon.Target t in unit.mainWeapon.targets)
             {
                 if (t.unitTargeted == target)

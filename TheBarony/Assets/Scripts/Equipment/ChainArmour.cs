@@ -28,7 +28,7 @@ public class ChainShirtArmourData : ItemData
         ChainShirtArmour armour = unit.gameObject.AddComponent<ChainShirtArmour>();
         armour.owner = unit.gameObject.GetComponent<TacticsMovement>();
         armour.itemData = this;
-        unit.unitInfo.currentArmour += 4;
+        unit.unitInfo.currentArmour += 3;
     }
 }
 

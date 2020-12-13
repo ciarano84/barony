@@ -26,6 +26,7 @@ public class t_runAway : Task
 
                 //am I outnumbered?
                 task.value += RangeFinder.HowOutnumberedAmI(unit) / 10;
+                task.value += weighting;
 
                 unit.GetComponent<AI>().tasks.Add(task);
             }

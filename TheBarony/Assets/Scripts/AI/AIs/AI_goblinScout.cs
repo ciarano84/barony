@@ -17,9 +17,10 @@ public class AI_goblinScout : AI
         {
             if (opponent.focus == unit)
             {
-                run.EvaluateCandidates(unit, -0.1f);
+                run.EvaluateCandidates(unit, -0.4f);
             }
         }
+
         RandomizeValues();
 
         unit.actualTargetTile = null;
@@ -28,7 +29,6 @@ public class AI_goblinScout : AI
         float highestValue = -100f;
         foreach (Task t in tasks)
         {
-            //Debug.Log(t.taskName + " " + t.value);
             if (t.value > highestValue)
             {
                 task = t;
