@@ -27,6 +27,7 @@ public class MapManager : MonoBehaviour
         {
             if (RostaInfo.currentEncounter.completionState == Encounter.CompletionState.VICTORY)
             {
+                if (RostaInfo.currentEncounter.encounterType == Encounter.EncounterType.RECLAIM) RostaInfo.ReclaimedSites += 1;
                 MapUIManager.RequestAlert(RostaInfo.currentEncounter.victoryMapText, "Return");
                 RostaInfo.currentEncounter.selectedCompany.targetEncounter = null;
                 RostaInfo.currentEncounter.site.encounter = null;
@@ -213,6 +214,10 @@ public abstract class Encounter
     //This tracks the victory/defeat state of the encounter.
     public enum CompletionState { INPROGRESS, VICTORY, DEFEAT, ESCAPED, UNASSIGNED };
     public CompletionState completionState = CompletionState.INPROGRESS;
+
+    //This tells you the type of encounter
+    public enum EncounterType { RECLAIM, PURGE, DEFENCE, AMBUSH };
+    public EncounterType encounterType = EncounterType.RECLAIM;
 
     //This is used to record the starting point of a company. 
     public Transform origin;

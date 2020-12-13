@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede82377ea797af4c8025053840d5c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosta: []
-  squad: []
+  castle: []
   currentUnitShown: 0
   companyPosition: 0
 --- !u!114 &3125471042529088662

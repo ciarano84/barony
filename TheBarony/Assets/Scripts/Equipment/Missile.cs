@@ -19,7 +19,7 @@ public class Missile : MonoBehaviour
     bool onTarget = false;
 
     //Debug
-    GameObject marker;
+    //GameObject marker;
 
     public void Launch(Result onTarget)
     {
@@ -45,7 +45,8 @@ public class Missile : MonoBehaviour
 
     private void Update()
     {
-        marker.transform.position = target;
+        //Debugging
+        //marker.transform.position = target;
         
         step = speed * Time.deltaTime;
         transform.Translate(dir * step, Space.World);

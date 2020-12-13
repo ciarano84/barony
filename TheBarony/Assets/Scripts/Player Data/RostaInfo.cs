@@ -7,12 +7,16 @@ public class RostaInfo : MonoBehaviour
 {
     public List<UnitInfo> castle = new List<UnitInfo>();
     public static List<CompanyInfo> companies = new List<CompanyInfo>();
-    public static List<Encounter> encounters = new List<Encounter>();
-
+    
     //used to detirmine a character's position in the squadview.
     public int currentUnitShown = 0;
     public int companyPosition;
-    
+
+    public static List<Encounter> encounters = new List<Encounter>();
+
+    //Tracks campaign progress
+    public static int ReclaimedSites = 0;
+
     //The encounter currently being handled. 
     public static Encounter currentEncounter;
 
