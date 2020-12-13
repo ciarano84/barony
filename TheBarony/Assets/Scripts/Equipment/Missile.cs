@@ -26,8 +26,8 @@ public class Missile : MonoBehaviour
         hit = onTarget;
 
         //Debug
-        Destroy(GameObject.Find("Cube"));
-        marker = Instantiate(GameAssets.i.TargetMarker, target, Quaternion.identity);
+        //Destroy(GameObject.Find("Cube"));
+        //marker = Instantiate(GameAssets.i.TargetMarker, target, Quaternion.identity);
 
         if (hit >= Result.PARTIAL || AttackManager.defenceType == DefenceType.DODGE)
         {
