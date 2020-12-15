@@ -1254,6 +1254,7 @@ MonoBehaviour:
   rosta: {fileID: 0}
   date: {fileID: 12745455}
   encounterPanel: {fileID: 896401598}
+  campaign: {fileID: 903935710}
 --- !u!4 &890855147
 Transform:
   m_ObjectHideFlags: 0

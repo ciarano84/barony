@@ -16,6 +16,7 @@ public class MapManager : MonoBehaviour
     public RostaInfo rosta;
     public Text date;
     public GameObject encounterPanel;
+    public CampaignManager campaign;
 
     private void Start()
     {
@@ -28,6 +29,8 @@ public class MapManager : MonoBehaviour
             if (RostaInfo.currentEncounter.completionState == Encounter.CompletionState.VICTORY)
             {
                 if (RostaInfo.currentEncounter.encounterType == Encounter.EncounterType.RECLAIM) RostaInfo.ReclaimedSites += 1;
+                if (campaign.CheckForCampaignCompletion() == true) return;
+
                 MapUIManager.RequestAlert(RostaInfo.currentEncounter.victoryMapText, "Return");
                 RostaInfo.currentEncounter.selectedCompany.targetEncounter = null;
                 RostaInfo.currentEncounter.site.encounter = null;

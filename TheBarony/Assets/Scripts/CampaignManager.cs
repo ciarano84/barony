@@ -7,11 +7,12 @@ public class CampaignManager : MonoBehaviour
     public int reclaimsForVictory;
     public string completionMessage;
 
-    public void CheckForCampaignCompletion()
+    public bool CheckForCampaignCompletion()
     {
         if (RostaInfo.ReclaimedSites >= reclaimsForVictory)
         {
             MapUIManager.RequestAlert(completionMessage ,"ok");
-        }
+            return true;
+        } else return false;
     }
 }

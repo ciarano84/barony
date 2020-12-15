@@ -52,7 +52,7 @@ public class Company : MonoBehaviour
 
             if (companyInfo.targetEncounter == null)
             {
-                Debug.LogWarning("No encounter to travel to, heading back");
+                //Debug.LogWarning("No encounter to travel to, heading back");
                 companyInfo.destination = MapManager.theCastle.transform;
             }
             
