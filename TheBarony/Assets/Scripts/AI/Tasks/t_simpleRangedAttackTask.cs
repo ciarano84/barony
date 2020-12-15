@@ -6,10 +6,8 @@ public class t_simpleRangedAttackTask : Task
 {
     public override void EvaluateCandidates(NPC unit, float weighting = 0)
     {
-        Debug.Log("evaluating candidates.");
         if (unit.focus != null)
         {
-            Debug.Log("goblin has a focus.");
             Task task = new t_simpleRangedAttackTask();
             task.taskName = "simple ranged";
             task.target = unit.focus;

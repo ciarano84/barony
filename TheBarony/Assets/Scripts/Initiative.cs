@@ -23,9 +23,9 @@ public class Initiative : MonoBehaviour
 
     public static TacticsMovement currentUnit; 
     static ActionUIManager actionUIManager;
-
     public static Initiative initiativeManager;
     public GameObject selector;
+    CinemachineCamera cinemachineCamera;
 
     //OnEncounterStart Delegate. 
     public delegate void OnEncounterStartDelegate(Unit unit);
@@ -58,13 +58,14 @@ public class Initiative : MonoBehaviour
     { 
         actionUIManager = FindObjectOfType<ActionUIManager>();
         selector = GameObject.FindGameObjectWithTag("selector");
+        cinemachineCamera = GameObject.FindObjectOfType<CinemachineCamera>();
         StartCoroutine("StartEncounter");
     }
 
     IEnumerator StartEncounter()
     {
         yield return new WaitForSeconds(2f);
-        CinemachineCamera.GetCameras();
+        cinemachineCamera.GetCameras();
         sortedUnits = unsortedUnits.OrderByDescending(o => o.currentInitiative).ToList();
         foreach (TacticsMovement u in sortedUnits)
         {

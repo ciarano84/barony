@@ -6,7 +6,7 @@ using UnityEngine;
 public class CinemachineCamera : MonoBehaviour
 {
     static Unit unitCurrentlyFollowed;
-    static bool ready = false;
+    public bool ready = false;
     public float rotateSpeed;
     public float zoomSpeed;
     public float minZoom, maxZoom;
@@ -18,10 +18,9 @@ public class CinemachineCamera : MonoBehaviour
 
     static GameObject[] dollies;
 
-    public static void GetCameras()
+    public void GetCameras()
     {
         dollies = GameObject.FindGameObjectsWithTag("dolly");
-        //vcams = GameObject.FindGameObjectsWithTag("vcam");
         ready = true;
     }
 

@@ -26,7 +26,9 @@ public class ArenaBuilder : MonoBehaviour
     static bool preSetArenaPresent;
 
     private void Awake()
-    {   
+    {
+        EncounterReset();
+
         //Load in all the blocks
         baseList.Add(GameAssets.i.ArenaBarns);
         baseList.Add(GameAssets.i.ArenaBog);
@@ -143,5 +145,16 @@ public class ArenaBuilder : MonoBehaviour
                 count = AbilityCheck.IncrementAndLoopNumber(count, arenaBlockList.Count);
             }
         }
+    }
+
+    private void EncounterReset()
+    {
+        baseList.Clear();
+        arenaBlockList.Clear();
+        encounterArenaBlockList.Clear();
+        arenaPoints = new Transform[3, 3];
+        xInBlocks = 2;
+        zInBlocks = 2;
+        size = 4;
     }
 }

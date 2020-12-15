@@ -165,4 +165,9 @@ public class Priming : Effect
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        UnSubscribe(gameObject.GetComponent<Unit>());
+    }
 }

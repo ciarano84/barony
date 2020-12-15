@@ -80,4 +80,9 @@ public class Priest : Aspect
     {
         aspectData = new PriestData();
     }
+
+    private void OnDestroy()
+    {
+        UnSubscribe(gameObject.GetComponent<Unit>());
+    }
 }

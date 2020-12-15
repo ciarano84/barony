@@ -69,4 +69,9 @@ public class Bless : Effect
     {
         return GameAssets.i.BlessIcon;
     }
+
+    private void OnDestroy()
+    {
+        UnSubscribe(gameObject.GetComponent<Unit>());
+    }
 }

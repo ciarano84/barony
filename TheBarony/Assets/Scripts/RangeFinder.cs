@@ -8,7 +8,7 @@ public class RangeFinder
 {
     //This is for checking for line of sight
     public static bool LineOfSight(Unit origin, Unit target, float RangeLimit = 0)
-    {
+    {   
         Vector3 POV = origin.transform.position + new Vector3(0, origin.GetComponent<TacticsMovement>().halfHeight);
 
         if (Physics.Raycast(POV, (target.gameObject.transform.position + new Vector3(0, target.GetComponent<TacticsMovement>().halfHeight) - POV), out RaycastHit hit))

@@ -66,6 +66,11 @@ public class Defender : Aspect
     {
         aspectData = new DefenderData();
     }
+
+    private void OnDestroy()
+    {
+        UnSubscribe(gameObject.GetComponent<Unit>());
+    }
 }
 
 
