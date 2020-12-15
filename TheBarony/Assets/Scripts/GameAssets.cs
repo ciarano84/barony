@@ -95,6 +95,9 @@ public class GameAssets : MonoBehaviour
     public GameObject ArenaMarket;
     public GameObject ArenaTavern;
 
+    //Music
+    public AudioClip QueensFuneral;
+
     //Debug
     public GameObject TargetMarker;
 }
