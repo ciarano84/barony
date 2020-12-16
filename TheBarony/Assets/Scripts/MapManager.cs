@@ -69,7 +69,7 @@ public class MapManager : MonoBehaviour
 
     public void NewDay()
     {
-        if (MapUIManager.uiState == MapUIManager.UIState.standard)
+        if (UIManager.uiState == UIManager.UIState.standard)
         {
             RostaInfo.date++;
             date.text = ("Day " + RostaInfo.date);

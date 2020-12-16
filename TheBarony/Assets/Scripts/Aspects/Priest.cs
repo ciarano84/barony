@@ -15,9 +15,14 @@ public class PriestData : AspectData
         unit.accessory2 = new BlankItemData();
     }
 
-    public override void Level1()
+    public override void Tier1()
     {
 
+    }
+
+    public override void Tier2()
+    {
+        throw new System.NotImplementedException();
     }
 
     public override void GetAspect(Unit unit)

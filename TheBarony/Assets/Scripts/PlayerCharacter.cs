@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerCharacter : TacticsMovement
+public class PlayerCharacterData : UnitInfo
 {
+    public int level;
+    public int clarity;
+    public int experience;
+}
+
+public class PlayerCharacter : TacticsMovement
+{   
     private void Start()
     {
         InitUnit();
@@ -51,7 +58,7 @@ public class PlayerCharacter : TacticsMovement
 
     void CheckMouse()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && UIManager.uiState == UIManager.UIState.standard)
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {

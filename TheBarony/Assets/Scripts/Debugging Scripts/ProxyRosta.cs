@@ -71,6 +71,9 @@ public class ProxyRosta : MonoBehaviour
                     case EncounterManager.TestClassType.SCOUT:
                         player.aspectData = new ScoutData();
                         break;
+                    case EncounterManager.TestClassType.HUNTER:
+                        player.aspectData = new HunterData();
+                        break;
                     case EncounterManager.TestClassType.PRIEST:
                         player.aspectData = new PriestData();
                         break;
@@ -92,7 +95,7 @@ public class ProxyRosta : MonoBehaviour
                 case 5:
                 case 6:
                 case 7:
-                    player.aspectData = new ScoutData();
+                    player.aspectData = new HunterData();
                     break;
                 case 8:
                 case 9:
@@ -107,7 +110,7 @@ public class ProxyRosta : MonoBehaviour
         if (player.accessory1 != null) player.accessory1.SetData(player);
         if (player.accessory2 != null) player.accessory2.SetData(player);
 
-        player.aspectData.Level1();
+        player.aspectData.Tier1();
     }
 
     void InitializeInventory()

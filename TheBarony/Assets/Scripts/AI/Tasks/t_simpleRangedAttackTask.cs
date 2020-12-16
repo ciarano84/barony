@@ -130,7 +130,6 @@ public class t_simpleRangedAttackTask : Task
         //shoot
         if (RangeFinder.LineOfSight(unit, target) && unit.remainingActions > 0 && weapon.rangedWeaponData.currentAmmo > 0 && target == unit.focus)
         {
-            Debug.Log("goes to attack");
             foreach (Weapon.Target t in unit.mainWeapon.targets)
             {
                 if (t.unitTargeted == target)

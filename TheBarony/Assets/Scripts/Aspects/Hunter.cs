@@ -18,17 +18,38 @@ public class HunterData : AspectData
         unit.accessory2 = new BlankItemData();
     }
 
-    public override void Level1()
+    public override void Tier1()
     {
         unitInfo.baseAttack += 1;
         unitInfo.baseDefence += 1;
         unitInfo.baseMove += 1;
     }
 
+    public override void Tier2()
+    {
+        Debug.Log("levelled up");
+        
+        //set tier
+        tier = 2;
+
+
+
+        //health up
+        unitInfo.baseBreath += 1;
+        unitInfo.firstBreath += 1;
+        if (unitInfo.fate != Fate.Drudge)
+        {
+            unitInfo.flaggingBreath += 1;
+            unitInfo.baseBreath += 1;
+        }
+    }
+
     public override void GetAspect(Unit unit)
     {
         Hunter hunterAspect = unit.gameObject.AddComponent<Hunter>();
         hunterAspect.owner = unit;
+
+        if (tier >= 2) hunterAspect.SetPrecisionStrikeAction();
     }
 
     //this needs assigning to a new visual. 
@@ -52,8 +73,20 @@ public class Hunter : Aspect
             {
                 if (u.focus == owner) focusedOn = true;
             }
-            if (!focusedOn) AttackManager.damage += 2;
+            if (!focusedOn)
+            {
+                attacker.GetComponent<UnitPopUpManager>().AddPopUpInfo("Ghosting");
+                AttackManager.damage += 2;
+            }   
         }
+    }
+
+    public void SetPrecisionStrikeAction()
+    {
+        Debug.Log("SetPSAction called");
+        PrecisionStrike ps = new PrecisionStrike();
+        ps.SetActionButtonData(owner);
+        owner.actions.Add(ps);
     }
 
     public void UnSubscribe(Unit unit)

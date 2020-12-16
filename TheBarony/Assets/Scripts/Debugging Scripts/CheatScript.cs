@@ -76,7 +76,7 @@ public class CheatScript : MonoBehaviour
 
         //Stat Cheats (button1)
 
-            //Defence
+        //Defence
         if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.D))
         {
             Initiative.currentUnit.unitInfo.currentDefence += 30;
@@ -87,6 +87,14 @@ public class CheatScript : MonoBehaviour
         {
             Debug.Log("autocrit enabled");
             AttackManager.OnAttack += SetAutoCrit;
+        }
+
+        //auto-level up the first aspect component to tier x
+        if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Initiative.currentUnit.unitInfo.aspectData.Tier2();
+            Destroy(Initiative.currentUnit.GetComponent<Aspect>());
+            Initiative.currentUnit.unitInfo.aspectData.GetAspect(Initiative.currentUnit);
         }
     }
 

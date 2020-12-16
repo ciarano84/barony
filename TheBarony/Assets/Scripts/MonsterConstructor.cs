@@ -70,6 +70,6 @@ public class MonsterConstructor : MonoBehaviour
         if (unitInfo.armourData != null) unitInfo.armourData.EquipItem(unit);
         unitInfo.aspectData.GetAspect(unit);
 
-        unitInfo.aspectData.Level1();
+        unitInfo.aspectData.Tier1();
     }
 }

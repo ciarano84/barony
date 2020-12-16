@@ -18,11 +18,16 @@ public class ScoutData : AspectData
         unit.accessory2 = new BlankItemData();
     }
 
-    public override void Level1()
+    public override void Tier1()
     {
         unitInfo.baseAttack += 1;
         unitInfo.baseDefence += 1;
         unitInfo.baseMove += 1;
+    }
+
+    public override void Tier2()
+    {
+        throw new System.NotImplementedException();
     }
 
     public override void GetAspect(Unit unit)

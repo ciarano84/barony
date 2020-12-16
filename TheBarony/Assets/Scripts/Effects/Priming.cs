@@ -9,7 +9,7 @@ public class Priming : Effect
     enum PrimeAttackType { AIMED, MIGHTY };
     PrimeAttackType primeAttackType;
 
-    public override void AddEffect(GameObject effectCauser, GameEvent gameEvent = GameEvent.DEFAULT)
+    public override void AddEffect(GameObject effectCauser, GameEvent endCondition = GameEvent.DEFAULT)
     {
         owner = gameObject.GetComponent<Unit>();
         owner.effects.Add(this);

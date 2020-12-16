@@ -22,6 +22,7 @@ public class AttackManager : MonoBehaviour
     public static int woundValueAdjustment = 0;
     public static bool armourPierce = false;
     public static bool autocrit = false;
+    public static int critRange = 1;
 
     //Debug
     public static bool attackRolled = false;
@@ -79,7 +80,7 @@ public class AttackManager : MonoBehaviour
             if (attacker.unitInfo.mainWeaponData.weight > ItemData.Weight.medium) damage += (int)attacker.unitInfo.mainWeaponData.weight;
         }
 
-        AbilityCheck.CheckAbility(attack, defence, bonuses);
+        AbilityCheck.CheckAbility(attack, defence, bonuses, critRange);
 
         attackRolled = true;
 
@@ -265,6 +266,7 @@ public class AttackManager : MonoBehaviour
         struckAnimation = StruckAnimation.DODGE;
         armourPierce = false;
         autocrit = false;
+        critRange = 1;
 
         //Debug
         attackRolled = false;

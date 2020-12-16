@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ActionUIManager : MonoBehaviour
+public class ActionUIManager : UIManager
 {
     public static Unit currentUnit;
     public Text unitName;
@@ -42,6 +42,15 @@ public class ActionUIManager : MonoBehaviour
         endTurn.gameObject.SetActive(false);
         focusButton.gameObject.SetActive(false);
         tooltip.SetActive(false);
+    }
+
+    //Debug to test confirmation popups
+    public void Update()
+    {
+        if (Input.GetKey("space"))
+        {
+            UIManager.RequestConfirmation("do the thing?", "yes", "cancel");
+        }
     }
 
     public void UpdateActions(TacticsMovement unit)

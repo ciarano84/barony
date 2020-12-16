@@ -148,7 +148,6 @@ public class Unit : MonoBehaviour
                 }
                 else
                 {
-                    //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "Knocked out", false);
                     GetComponent<UnitPopUpManager>().AddPopUpInfo("Knocked out");
 
                     Debug.Log("KO called from UpdateBreath.");

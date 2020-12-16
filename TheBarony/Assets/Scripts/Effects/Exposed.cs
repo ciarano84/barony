@@ -6,12 +6,17 @@ public class Exposed : Effect
 {
     DefenceType storedDefenceType;
 
-    public override void AddEffect(GameObject effectCauser, GameEvent gameEvent = GameEvent.DEFAULT)
+    public override void AddEffect(GameObject effectCauser, GameEvent endCondition = GameEvent.DEFAULT)
     {
         owner = gameObject.GetComponent<Unit>();
         owner.effects.Add(this);
         storedDefenceType = owner.defenceType;
         owner.defenceType = DefenceType.EXPOSED;
+
+        if (endCondition == GameEvent.TURNSTART)
+        {
+            Initiative.OnTurnStart += TurnStartRemovalCheck;
+        }
 
         OnEffectEnd += PrimeEndRemovalCheck;
     }
@@ -21,17 +26,18 @@ public class Exposed : Effect
 
     public override void Remove()
     {
-        UnSubscribe(owner);
+        Unsubscribe(owner);
         owner.defenceType = storedDefenceType;
         owner.effects.Remove(this);
         Destroy(this);
     }
 
-    public void UnSubscribe(Unit unit)
+    public void Unsubscribe(Unit unit)
     {
         //Do all unsubscribes.  
         OnEffectEnd -= PrimeEndRemovalCheck;
-        Unit.onKO -= UnSubscribe;
+        Unit.onKO -= Unsubscribe;
+        Initiative.OnTurnStart -= TurnStartRemovalCheck;
     }
 
     public override Sprite SetImage()
@@ -45,5 +51,18 @@ public class Exposed : Effect
         {
             if (effect is Priming) Remove();
         }
+    }
+
+    public void TurnStartRemovalCheck(Unit unit)
+    {
+        if (unit == owner)
+        {
+            Remove();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Unsubscribe(owner);
     }
 }

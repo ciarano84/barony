@@ -11,7 +11,7 @@ public class AbilityCheck
 
     //This returns -1 for a failure. 0 for a success. and 1 for each critical beyond that. 
     //Because the last permater is set in the method declaration, it has a default and is optional. 
-    public static void CheckAbility(int activeModifier, int passiveModifier, int bonuses = 0)
+    public static void CheckAbility(int activeModifier, int passiveModifier, int bonuses = 0, int critRange = 1)
     {
         Reset();
 
@@ -24,7 +24,7 @@ public class AbilityCheck
         {
             int bonusRoll = Random.Range(1, 6);
             baseResult += bonusRoll;
-            if (bonusRoll == 5) { crits++; }
+            if (bonusRoll >= (6 - critRange)) { crits++; }
             //if (!AttackManager.attackRolled) Debug.Log("bonus rolled, scoring a " + bonusRoll);
             bonuses--;
         }

@@ -14,7 +14,7 @@ public class DefenderData : AspectData
         unit.accessory2 = new BlankItemData();
     }
 
-    public override void Level1()
+    public override void Tier1()
     {
         unitInfo.baseBreath += 1;
         unitInfo.firstBreath += 1;
@@ -25,6 +25,11 @@ public class DefenderData : AspectData
         }
         unitInfo.baseStrength += 1;
         unitInfo.baseToughness += 1;
+    }
+
+    public override void Tier2()
+    {
+        throw new System.NotImplementedException();
     }
 
     public override void GetAspect(Unit unit)

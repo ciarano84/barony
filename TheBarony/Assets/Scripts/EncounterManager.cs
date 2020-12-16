@@ -20,7 +20,7 @@ public class EncounterManager : MonoBehaviour
     static Text staticEncounterEndtext;
 
     //public GameObject[] arenaBlocks;
-    GameObject[] arenaBlocksToBeAssignedTo;
+    //GameObject[] arenaBlocksToBeAssignedTo;
 
     public List<GameObject> playerSquad = new List<GameObject>();
     public GameObject playerPrefab;
@@ -34,7 +34,7 @@ public class EncounterManager : MonoBehaviour
     //Debug
     public enum EncounterSettings { Standard, Test };
     public EncounterSettings encounterSettings = EncounterSettings.Standard;
-    public enum TestClassType { PRIEST, DEFENDER, SCOUT, ANY };
+    public enum TestClassType { BRUTE, HUNTER, PRIEST, DEFENDER, SCOUT, ANY };
     public TestClassType testClassType;
     public int playerCount;
 
@@ -76,6 +76,7 @@ public class EncounterManager : MonoBehaviour
         ArenaBuilder.BuildArena();
         SetPositions();
         CombatLog.UpdateCombatLog("Units ready!");
+        UIManager.uiState = UIManager.UIState.standard;
         yield break;
     }
 
