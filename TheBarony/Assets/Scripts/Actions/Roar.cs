@@ -59,18 +59,16 @@ public class Roar : Action
             }
         }
 
-        //need to replace this. 
-
-        //if (actioningUnit.GetComponent<Defending>() == null)
-        //{
-        //    Defending defending = actioningUnit.gameObject.AddComponent<Defending>();
-        //    defending.AddEffect(actioningUnit.gameObject);
-        //}
-        //else if (!actioningUnit.GetComponent<Defending>().enabled)
-        //{
-        //    actioningUnit.GetComponent<Defending>().enabled = true;
-        //    actioningUnit.GetComponent<Defending>().AddEffect(actioningUnit.gameObject);
-        //}
+        if (actioningUnit.GetComponent<Roaring>() == null)
+        {
+            Roaring roaring = actioningUnit.gameObject.AddComponent<Roaring>();
+            roaring.AddEffect(actioningUnit.gameObject);
+        }
+        else if (!actioningUnit.GetComponent<Roaring>().enabled)
+        {
+            actioningUnit.GetComponent<Roaring>().enabled = true;
+            actioningUnit.GetComponent<Roaring>().AddEffect(actioningUnit.gameObject);
+        }
 
         actioningUnit.GetComponent<TacticsMovement>().remainingActions -= 1;
 
