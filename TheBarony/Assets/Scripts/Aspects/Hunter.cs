@@ -32,8 +32,6 @@ public class HunterData : AspectData
         //set tier
         tier = 2;
 
-
-
         //health up
         unitInfo.baseBreath += 1;
         unitInfo.firstBreath += 1;

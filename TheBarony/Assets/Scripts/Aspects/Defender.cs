@@ -29,7 +29,19 @@ public class DefenderData : AspectData
 
     public override void Tier2()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("levelled up");
+
+        //set tier
+        tier = 2;
+
+        //health up
+        unitInfo.baseBreath += 1;
+        unitInfo.firstBreath += 1;
+        if (unitInfo.fate != Fate.Drudge)
+        {
+            unitInfo.flaggingBreath += 1;
+            unitInfo.baseBreath += 1;
+        }
     }
 
     public override void GetAspect(Unit unit)
@@ -37,6 +49,8 @@ public class DefenderData : AspectData
         //not sure about this. for monsters it means they get the defender script added a second time. But they DO want the owner part. 
         Defender defenderAspect = unit.gameObject.AddComponent<Defender>();
         defenderAspect.owner = unit;
+
+        if (tier >= 2) defenderAspect.SetRoarAction();
     }
 
     public override Mesh GetVisual() { return GameAssets.i.MediumArmourMesh; }
@@ -70,6 +84,14 @@ public class Defender : Aspect
     public override void GetAspectData()
     {
         aspectData = new DefenderData();
+    }
+
+    public void SetRoarAction()
+    {
+        Debug.Log("Set Roar Action called");
+        Roar r = new Roar();
+        r.SetActionButtonData(owner);
+        owner.actions.Add(r);
     }
 
     private void OnDestroy()

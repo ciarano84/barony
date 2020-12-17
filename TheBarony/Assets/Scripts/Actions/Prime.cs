@@ -60,4 +60,6 @@ public class Prime : Action
     {
         return GameAssets.i.PrimingIcon;
     }
+
+    public override void Unsubscribe() { }
 }

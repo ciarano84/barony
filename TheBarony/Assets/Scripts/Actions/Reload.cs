@@ -37,4 +37,6 @@ public class Reload : Action
     {
         return GameAssets.i.Reload;
     }
+
+    public override void Unsubscribe() { }
 }

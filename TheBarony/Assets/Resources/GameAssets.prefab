@@ -104,6 +104,7 @@ MonoBehaviour:
   CrippledIcon: {fileID: 21300000, guid: c3a3fb6e6d935b24eadb35bed831761c, type: 3}
   PrecisionStrikeIcon: {fileID: 21300000, guid: 995060e3314a28e439bcee045eb3b16b,
     type: 3}
+  RoarIcon: {fileID: 21300000, guid: 52dd324f6f5f3974f9d3d18c605106c4, type: 3}
   DaggerModel: {fileID: 1288124249450929000, guid: 7a5df5cc2c80a4342b34889ac0dac64e,
     type: 3}
   ShortswordModel: {fileID: 1288124249450929000, guid: c6be0ccaed2fc564cbb92e3fae23db5e,

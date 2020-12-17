@@ -35,4 +35,6 @@ public class Dash : Action
     {
         return GameAssets.i.Dash;
     }
+
+    public override void Unsubscribe() { }
 }

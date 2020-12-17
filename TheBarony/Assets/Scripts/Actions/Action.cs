@@ -17,4 +17,11 @@ public abstract class Action
     public abstract bool CheckAvailable();
 
     public abstract Sprite SetImage();
+
+    public abstract void Unsubscribe();
+
+    private void OnDestroy()
+    {
+        Unsubscribe();
+    }
 }

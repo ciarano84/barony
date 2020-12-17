@@ -11,7 +11,7 @@ public class RangeFinder
     {   
         Vector3 POV = origin.transform.position + new Vector3(0, origin.GetComponent<TacticsMovement>().halfHeight);
 
-        if (Physics.Raycast(POV, (target.gameObject.transform.position + new Vector3(0, target.GetComponent<TacticsMovement>().halfHeight) - POV), out RaycastHit hit))
+        if (Physics.Raycast(POV, (target.transform.position + new Vector3(0, target.GetComponent<TacticsMovement>().halfHeight) - POV), out RaycastHit hit))
         {
             if (target == hit.collider.gameObject.GetComponent<TacticsMovement>())
             {
@@ -328,5 +328,50 @@ public class RangeFinder
         if (n > 7) n -= 8;
         if (n < 0) n += 8;
         return n;
+    }
+
+    static List<Tile> openList = new List<Tile>();
+    static List<Tile> closedList = new List<Tile>();
+
+    public static bool IsItWtihinXTiles(Unit origin, Unit target, int rangeInTiles, bool LoSrequired = false)
+    {
+        if (LoSrequired)
+        {
+            if (LineOfSight(origin, target) == false) return false;
+        }
+        float distance = Vector3.Distance(origin.GetComponent<TacticsMovement>().currentTile.transform.position, target.GetComponent<TacticsMovement>().currentTile.transform.position);
+        if ((distance + 0.1) < rangeInTiles) return true;
+        else return false;
+        
+        //Tile startTile = origin.GetComponent<TacticsMovement>().currentTile;
+        //Tile endTile = target.GetComponent<TacticsMovement>().currentTile;
+
+        //bool inRange = false;
+        
+        ////should do a check for LoS and add as a bool paremeter
+
+        //foreach (Neighbour n in startTile.neighbours)
+        //{
+        //    if (n.tile != null) openList.Add(n.tile);
+        //}
+
+        ////the master loops, by range count.
+        //for (int count = 0; count < rangeInTiles; count++)
+        //{
+        //    //looping through each tile within range to check for the target.
+        //    foreach (Tile t in openList)
+        //    {
+        //        if (t == endTile) return true;
+        //        closedList.Add(t);
+        //    }
+        //    foreach (Tile t in openList)
+        //    {
+        //        if (!closedList.Contains(t))
+        //        {
+                    
+        //        } else openList.Remove(t);
+        //    }
+            
+        //}
     }
 }

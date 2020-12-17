@@ -283,6 +283,21 @@ public class Unit : MonoBehaviour
             }
         }
     }
+
+    public void TriggerAnimation(string animName) { StartCoroutine(DoAnimation(animName)); }
+
+    public IEnumerator DoAnimation(string animName)
+    {
+        Initiative.queuedActions++;
+
+        Debug.Log("roar called");
+        unitAnim.SetTrigger(animName);
+
+        yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);
+
+        Initiative.EndAction();
+        yield break;
+    }
 }
 
 

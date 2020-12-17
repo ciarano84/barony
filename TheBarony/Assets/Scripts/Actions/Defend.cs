@@ -54,4 +54,6 @@ public class Defend : Action
     {
         return GameAssets.i.Defend;
     }
+
+    public override void Unsubscribe() { }
 }

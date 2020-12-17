@@ -70,6 +70,7 @@ public class GameAssets : MonoBehaviour
     public Sprite ExposedIcon;
     public Sprite CrippledIcon;
     public Sprite PrecisionStrikeIcon;
+    public Sprite RoarIcon;
 
     //Item models
     public GameObject DaggerModel;

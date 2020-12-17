@@ -72,6 +72,7 @@ public class PrecisionStrike : Action
             actioningUnit.GetComponent<Exposed>().enabled = true;
             actioningUnit.GetComponent<Exposed>().AddEffect(actioningUnit.gameObject);
         }
+        Initiative.EndAction();
     }
 
     public void OnCancel()
@@ -90,7 +91,7 @@ public class PrecisionStrike : Action
         }
     }
 
-    public void Unsubscribe()
+    public override void Unsubscribe()
     {
         AttackManager.OnAttack -= BoostAttack;
     }
