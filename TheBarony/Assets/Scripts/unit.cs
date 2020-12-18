@@ -157,7 +157,6 @@ public class Unit : MonoBehaviour
         }
 
         unitInfo.currentBreath += amount;
-        //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), amount.ToString(), false);
         GetComponent<UnitPopUpManager>().AddPopUpInfo("breath " + amount.ToString());
 
         //check for flagging
@@ -166,7 +165,6 @@ public class Unit : MonoBehaviour
             if (!unitInfo.flagging)
             {
                 unitInfo.flagging = true;
-                //DamagePopUp.Create(gameObject.transform.position + new Vector3(0, (gameObject.GetComponent<TacticsMovement>().halfHeight) + 0.5f), "flagging", false);
                 GetComponent<UnitPopUpManager>().AddPopUpInfo("flagging");
             }
         }

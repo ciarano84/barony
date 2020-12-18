@@ -34,9 +34,11 @@ public class PrecisionStrike : Action
                     {
                         if (t.unitTargeted == actioningUnit.focus)
                         {
-                            Debug.Log("criteria met");
-                            target = t;
-                            return true;
+                            if (RangeFinder.LineOfSight(actioningUnit, t.unitTargeted))
+                            {
+                                target = t;
+                                return true;
+                            }
                         }
                     }
                 }
@@ -56,7 +58,8 @@ public class PrecisionStrike : Action
         Debug.Log("do the strike");
 
         //Do the strike
-        actioningUnit.UpdateBreath(2, true);
+        actioningUnit.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("Precision Strike");
+        actioningUnit.UpdateBreath(-2, true);
         Initiative.queuedActions += actioningUnit.mainWeapon.weaponData.actionsPerAttack;
         AttackManager.OnAttack += BoostAttack;
         actioningUnit.mainWeapon.StartCoroutine("Attack", target);

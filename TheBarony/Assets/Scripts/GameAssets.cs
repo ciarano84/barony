@@ -71,6 +71,7 @@ public class GameAssets : MonoBehaviour
     public Sprite CrippledIcon;
     public Sprite PrecisionStrikeIcon;
     public Sprite RoarIcon;
+    public Sprite CurseIcon;
 
     //Item models
     public GameObject DaggerModel;

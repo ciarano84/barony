@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameEvent { DEFAULT, TURNSTART, TURNEND, WOUNDED, HIT, ATTACKING, MOVED };
+public enum GameEvent { DEFAULT, TURNSTART, TURNEND, WOUNDED, HIT, ATTACKING, MOVED, FOCUSSET };
 
 public abstract class Effect : MonoBehaviour
 {

@@ -88,7 +88,6 @@ public class Defender : Aspect
 
     public void SetRoarAction()
     {
-        Debug.Log("Set Roar Action called");
         Roar r = new Roar();
         r.SetActionButtonData(owner);
         owner.actions.Add(r);

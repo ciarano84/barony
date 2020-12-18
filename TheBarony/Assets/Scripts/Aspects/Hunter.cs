@@ -27,7 +27,6 @@ public class HunterData : AspectData
 
     public override void Tier2()
     {
-        Debug.Log("levelled up");
         
         //set tier
         tier = 2;
@@ -81,7 +80,6 @@ public class Hunter : Aspect
 
     public void SetPrecisionStrikeAction()
     {
-        Debug.Log("SetPSAction called");
         PrecisionStrike ps = new PrecisionStrike();
         ps.SetActionButtonData(owner);
         owner.actions.Add(ps);

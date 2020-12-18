@@ -28,7 +28,6 @@ public class Roar : Action
         {
             if (actioningUnit.GetComponent<TacticsMovement>().remainingActions >= 1)
             {
-                Debug.Log("criteria met");
                 return true;
             }
         }
@@ -45,7 +44,7 @@ public class Roar : Action
         Initiative.queuedActions++;
 
         actioningUnit.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("Roar");
-        actioningUnit.UpdateBreath(1, true);
+        actioningUnit.UpdateBreath(-1, true);
         actioningUnit.focus = null;
         
         foreach(Unit u in Initiative.order)

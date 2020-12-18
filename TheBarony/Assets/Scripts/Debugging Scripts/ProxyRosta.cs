@@ -74,8 +74,8 @@ public class ProxyRosta : MonoBehaviour
                     case EncounterManager.TestClassType.HUNTER:
                         player.aspectData = new HunterData();
                         break;
-                    case EncounterManager.TestClassType.PRIEST:
-                        player.aspectData = new PriestData();
+                    case EncounterManager.TestClassType.PROPHET:
+                        player.aspectData = new ProphetData();
                         break;
                 }
             } 
@@ -99,7 +99,7 @@ public class ProxyRosta : MonoBehaviour
                     break;
                 case 8:
                 case 9:
-                    player.aspectData = new PriestData();
+                    player.aspectData = new ProphetData();
                     break;
             }
         }
