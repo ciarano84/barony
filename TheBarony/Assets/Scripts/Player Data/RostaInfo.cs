@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RostaInfo : MonoBehaviour
 {
-    public List<UnitInfo> castle = new List<UnitInfo>();
+    public static List<UnitInfo> castle = new List<UnitInfo>();
     public static List<CompanyInfo> companies = new List<CompanyInfo>();
     
     //used to detirmine a character's position in the squadview.
@@ -39,5 +39,14 @@ public class RostaInfo : MonoBehaviour
         companyInfo.destinationSave = TransformSave.StoreTransform(destination);
         encounter.selectedCompany = companyInfo;
         companies.Add(companyInfo);
+    }
+
+    public static void NewDay()
+    {
+        date++;
+        foreach (UnitInfo u in castle)
+        {
+            u.clarity++;
+        }
     }
 }

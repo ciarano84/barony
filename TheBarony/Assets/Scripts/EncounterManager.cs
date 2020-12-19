@@ -98,7 +98,7 @@ public class EncounterManager : MonoBehaviour
             for (int i = 0; i < playerCount; i++)
             {
                 GameObject player = Instantiate(GameAssets.i.PlayerUnit);
-                player.GetComponent<Unit>().unitInfo = rosta.castle[i];
+                player.GetComponent<Unit>().unitInfo = RostaInfo.castle[i];
                 playerSquad.Add(player);
             }
         }

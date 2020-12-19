@@ -34,7 +34,7 @@ public class PlayerCharacter : TacticsMovement
 
     private void FixedUpdate()
     {
-        if (!turn)
+        if (!moving)
         {
             if (focus != null)
             {
@@ -43,17 +43,11 @@ public class PlayerCharacter : TacticsMovement
                     FaceDirection(focus.transform.position);
                 }
             }       
-            return;
+
+            if (Initiative.queuedActions < 1 && Initiative.currentUnit == this) CheckMouse();
         }
 
-        if (!moving && Initiative.queuedActions < 1)
-        {
-            CheckMouse();
-        }
-        else 
-        {   
-            Move();
-        }
+        else Move();
     }
 
     void CheckMouse()

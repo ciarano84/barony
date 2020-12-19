@@ -40,7 +40,7 @@ public class Reclaim : Encounter
     {
         if (selectedCompany == null)
         {
-            if (rosta.castle.Count == 0)
+            if (RostaInfo.castle.Count == 0)
             {
                 MapUIManager.RequestAlert("You have no available troops.", "Return");
                 return;

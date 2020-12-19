@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor.PackageManager;
 using System;
 using JetBrains.Annotations;
+using UnityEngine.PlayerLoop;
 
 public class MapManager : MonoBehaviour
 {
@@ -71,7 +72,7 @@ public class MapManager : MonoBehaviour
     {
         if (UIManager.uiState == UIManager.UIState.standard)
         {
-            RostaInfo.date++;
+            RostaInfo.NewDay();
             date.text = ("Day " + RostaInfo.date);
             GenerateEncounters();
             foreach (EncounterSite site in sites)
@@ -107,7 +108,7 @@ public class MapManager : MonoBehaviour
             {
                 foreach (UnitInfo unitInfo in company.companyInfo.units)
                 {
-                    rosta.castle.Add(unitInfo);
+                    RostaInfo.castle.Add(unitInfo);
                 }
                 Destroy(company.gameObject);
             } else tempList.Add(company);
@@ -214,6 +215,9 @@ public abstract class Encounter
     public EncounterSite site;
     public CompanyInfo selectedCompany;
 
+    //tracking the rewards of the encounter;
+    public int XPreward;
+
     //This tracks the victory/defeat state of the encounter.
     public enum CompletionState { INPROGRESS, VICTORY, DEFEAT, ESCAPED, UNASSIGNED };
     public CompletionState completionState = CompletionState.INPROGRESS;
@@ -279,14 +283,14 @@ public abstract class Encounter
     {
         if (runCompanySelectSetUp) return;
 
-        int unitLimit = Math.Min(3, rosta.castle.Count - 1);
+        int unitLimit = Math.Min(3, RostaInfo.castle.Count - 1);
         for (int count = unitLimit; count >= 0; count--)
         {
             //Add unit to company.
-            selectedCompany.units.Add(rosta.castle[count]);
+            selectedCompany.units.Add(RostaInfo.castle[count]);
 
             //Remove it from rosta.
-            rosta.castle.Remove(rosta.castle[count]);
+            RostaInfo.castle.Remove(RostaInfo.castle[count]);
         }
         runCompanySelectSetUp = true;
     }

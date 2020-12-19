@@ -20,6 +20,11 @@ public class UnitInfo
     public ItemData accessory1;
     public ItemData accessory2;
     public Fate fate = Fate.Fated;
+    public Company company;
+
+    //Progress Info
+    public int clarity;
+    public int experience;
 
     //Base Stats
     public int baseBreath;
@@ -287,8 +292,6 @@ public class Unit : MonoBehaviour
     public IEnumerator DoAnimation(string animName)
     {
         Initiative.queuedActions++;
-
-        Debug.Log("roar called");
         unitAnim.SetTrigger(animName);
 
         yield return new WaitForSeconds(unitAnim.GetCurrentAnimatorStateInfo(0).length);

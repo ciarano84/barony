@@ -73,9 +73,9 @@ public class RostaManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         //Move the troop into the castle (but keep them in the company as well, for this scene);
-        rosta.castle.Add(RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition]);
+        RostaInfo.castle.Add(RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition]);
         //RostaInfo.currentEncounter.selectedCompany.units.Remove(RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition]);
-        rosta.currentUnitShown = rosta.castle.Count-1;
+        rosta.currentUnitShown = RostaInfo.castle.Count-1;
 
         ShowStats();
         yield break;
@@ -84,7 +84,7 @@ public class RostaManager : MonoBehaviour
     public void ShowStats()
     {
         Destroy(unitPrefab);
-        unit = rosta.castle[rosta.currentUnitShown];
+        unit = RostaInfo.castle[rosta.currentUnitShown];
         unit.mainWeaponData.SetData(unit);
         unitPrefab = Instantiate(GameAssets.i.PlayerUnit, pedestal.transform);
         unitPrefab.GetComponent<Unit>().unitInfo = unit;
@@ -136,10 +136,10 @@ public class RostaManager : MonoBehaviour
     public void SelectUnit()
     {
         //Add unit to company.
-        RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition] = rosta.castle[rosta.currentUnitShown];
+        RostaInfo.currentEncounter.selectedCompany.units[rosta.companyPosition] = RostaInfo.castle[rosta.currentUnitShown];
 
         //Remove it from rosta.
-        rosta.castle.Remove(rosta.castle[rosta.currentUnitShown]);
+        RostaInfo.castle.Remove(RostaInfo.castle[rosta.currentUnitShown]);
 
         SceneManager.LoadScene("SquadView");
     }
@@ -149,7 +149,7 @@ public class RostaManager : MonoBehaviour
         if (direction == Direction.right)
         {
             rosta.currentUnitShown++;
-            if (rosta.currentUnitShown >= rosta.castle.Count)
+            if (rosta.currentUnitShown >= RostaInfo.castle.Count)
             {
                 rosta.currentUnitShown = 0;
             }
@@ -159,7 +159,7 @@ public class RostaManager : MonoBehaviour
             rosta.currentUnitShown--;
             if (rosta.currentUnitShown < 0)
             {
-                rosta.currentUnitShown = (rosta.castle.Count - 1);
+                rosta.currentUnitShown = (RostaInfo.castle.Count - 1);
             }
         }
         ShowStats();

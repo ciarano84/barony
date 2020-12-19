@@ -58,6 +58,7 @@ public class Prophet : Aspect
     {
         if (unit == gameObject.GetComponent<Unit>())
         {
+            Initiative.OnTurnStart -= EvilEye;
         }
     }
 
@@ -89,7 +90,6 @@ public class Prophet : Aspect
 
     public void SetCurseAction()
     {
-        Debug.Log("SetCurse called");
         Curse c = new Curse();
         c.SetActionButtonData(owner);
         owner.actions.Add(c);

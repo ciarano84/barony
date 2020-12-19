@@ -48,14 +48,14 @@ public class Curse : Action
 
         if (actioningUnit.GetComponent<Cursed>() == null)
         {
-            Cursed cursed = actioningUnit.gameObject.AddComponent<Cursed>();
-            cursed.AddEffect(actioningUnit.gameObject);
+            Cursed cursed = actioningUnit.focus.gameObject.AddComponent<Cursed>();
+            cursed.AddEffect(actioningUnit.focus.gameObject);
             cursed.cursingUnit = actioningUnit;
         }
         else if (!actioningUnit.GetComponent<Cursed>().enabled)
         {
-            actioningUnit.GetComponent<Cursed>().enabled = true;
-            actioningUnit.GetComponent<Cursed>().AddEffect(actioningUnit.gameObject);
+            actioningUnit.focus.GetComponent<Cursed>().enabled = true;
+            actioningUnit.focus.GetComponent<Cursed>().AddEffect(actioningUnit.gameObject);
             actioningUnit.GetComponent<Cursed>().cursingUnit = actioningUnit;
         }
 

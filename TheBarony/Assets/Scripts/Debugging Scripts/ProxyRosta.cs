@@ -35,7 +35,7 @@ public class ProxyRosta : MonoBehaviour
             {
                 UnitInfo unit = new UnitInfo();
                 AssignStats(unit);
-                rosta.castle.Add(unit);
+                RostaInfo.castle.Add(unit);
             }
             //Build the intial inventory
             inventory = playerData.GetComponent<Inventory>();
@@ -54,6 +54,7 @@ public class ProxyRosta : MonoBehaviour
         player.baseStrength = -1 + Random.Range(0, 4);
         player.baseToughness = -1 + Random.Range(0, 4);
         player.baseMove = 3 + Random.Range(0, 4);
+        player.clarity = 5 + Random.Range(0, 10);
         player.faction = Factions.players;
 
         bool buildRosta = true;

@@ -15,8 +15,7 @@ public class NPC : TacticsMovement
 
     private void FixedUpdate()
     {
-        //if (!turn)
-        if (Initiative.currentUnit != this)
+        if (!moving)
         {
             if (focus != null)
             {
@@ -25,10 +24,8 @@ public class NPC : TacticsMovement
                     FaceDirection(focus.transform.position);
                 }
             }
-        }
-        else 
-        {
-            if (!moving && Initiative.queuedActions < 1)
+
+            if (Initiative.currentUnit == this && Initiative.queuedActions < 1)
             {
                 destination = null;
                 ai.DoTurn();
@@ -45,16 +42,13 @@ public class NPC : TacticsMovement
                         Debug.LogWarning("unit defaulted on task as no route found.");
                         return;
                     }
-                        
+
                     NPCMove();
                     actualTargetTile.target = true;
                 }
             }
-            else
-            {
-                Move();
-            }
-        }    
+        }
+        else Move();
     }
     
     void CalculatePath()
