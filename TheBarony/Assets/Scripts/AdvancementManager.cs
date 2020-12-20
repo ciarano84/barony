@@ -62,9 +62,9 @@ public class AdvancementManager : MonoBehaviour
         {
             levelUpMessage += u.unitInfo.unitName + " to level " + u.levelGointUpTo + ", ";
         }
-        string newlevelUpMessage = "";
-        //newlevelUpMessage.Substring(levelUpMessage.Length - 3);
-        newlevelUpMessage = levelUpMessage + ".";
+        char[] MyChar = { ',', ' ' };
+        string newlevelUpMessage = levelUpMessage.TrimEnd(MyChar);
+        newlevelUpMessage = newlevelUpMessage + ".";
 
         UIManager.RequestAlert(newlevelUpMessage, "Return");
     }

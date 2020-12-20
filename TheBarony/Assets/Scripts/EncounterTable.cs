@@ -83,7 +83,7 @@ public class EncounterTable
         // - this next section chooses a random block that HAS to contain enemies. 
         int blockAlwaysPopulated = UnityEngine.Random.Range(0, 3);
 
-        for (int cellCount = encounter.arenaSize -1; cellCount > 0 && ec.cells.Count < 3; cellCount--)
+        for (int cellCount = encounter.arenaSize -1; cellCount >= 0 && ec.cells.Count < 3; cellCount--)
         {
             roll = UnityEngine.Random.Range(0,6) + encounter.difficulty;
             createCell = true;

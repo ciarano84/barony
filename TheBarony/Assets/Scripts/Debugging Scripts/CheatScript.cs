@@ -92,6 +92,7 @@ public class CheatScript : MonoBehaviour
         //auto-level up the first aspect component to tier x
         if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
         {
+            Debug.Log("level up");
             Initiative.currentUnit.unitInfo.aspectData.Tier2();
             Destroy(Initiative.currentUnit.GetComponent<Aspect>());
             Initiative.currentUnit.unitInfo.aspectData.GetAspect(Initiative.currentUnit);

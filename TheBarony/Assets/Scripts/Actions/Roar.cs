@@ -42,6 +42,7 @@ public class Roar : Action
     public void OnConfirm()
     {
         Initiative.queuedActions++;
+        Unsubscribe();
 
         actioningUnit.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("Roar");
         actioningUnit.UpdateBreath(-1, true);
@@ -76,10 +77,14 @@ public class Roar : Action
         Initiative.EndAction();
     }
 
-    public void OnCancel() { }
+    public void OnCancel() 
+    {
+        Unsubscribe();
+    }
 
     public override void Unsubscribe() 
     {
-    //Do unsubscribes if there are any. 
+        ConfirmationPopUp.onConfirm -= OnConfirm;
+        ConfirmationPopUp.onCancel -= OnCancel;
     }
 }

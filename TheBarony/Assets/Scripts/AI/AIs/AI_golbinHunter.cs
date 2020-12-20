@@ -17,7 +17,7 @@ public class AI_golbinHunter : AI
         {
             if (opponent.focus == unit)
             {
-                run.EvaluateCandidates(unit, -0.1f);
+                run.EvaluateCandidates(unit, -0.8f);
             }
         }
         RandomizeValues();

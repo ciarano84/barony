@@ -51,6 +51,8 @@ public class LongbowData : RangedWeaponData
         Reload reload = new Reload();
         reload.SetActionButtonData(unit);
         unit.actions.Add(reload);
+
+        weapon.rangedWeaponData.currentAmmo = weapon.rangedWeaponData.maxAmmo;
     }
 }
 

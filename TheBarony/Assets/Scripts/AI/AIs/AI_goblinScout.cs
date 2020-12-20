@@ -17,7 +17,7 @@ public class AI_goblinScout : AI
         {
             if (opponent.focus == unit)
             {
-                run.EvaluateCandidates(unit, -0.4f);
+                run.EvaluateCandidates(unit, -0.8f);
             }
         }
 

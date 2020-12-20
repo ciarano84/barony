@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public static UIState uiState = UIState.standard;
     Queue<PopUp> popUps = new Queue<PopUp>();
     public static UIManager ui;
+    bool messageDelayNeeded = false;
 
     private void Awake()
     {
@@ -21,7 +22,9 @@ public class UIManager : MonoBehaviour
         {
             if (popUps.Count > 0)
             {
-                ui.StartCoroutine(SetPopUp(popUps.Dequeue(), true));
+                ui.StartCoroutine(SetPopUp(popUps.Dequeue(), messageDelayNeeded));
+                if (popUps.Count > 1) messageDelayNeeded = true;
+                else messageDelayNeeded = false;
             }
         }
     }

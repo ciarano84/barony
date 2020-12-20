@@ -55,12 +55,11 @@ public class PrecisionStrike : Action
 
     public void OnConfirm()
     {
-        Debug.Log("do the strike");
-
         //Do the strike
         actioningUnit.gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("Precision Strike");
         actioningUnit.UpdateBreath(-2, true);
         Initiative.queuedActions += actioningUnit.mainWeapon.weaponData.actionsPerAttack;
+        Unsubscribe();
         AttackManager.OnAttack += BoostAttack;
         actioningUnit.mainWeapon.StartCoroutine("Attack", target);
 
@@ -75,28 +74,34 @@ public class PrecisionStrike : Action
             actioningUnit.GetComponent<Exposed>().enabled = true;
             actioningUnit.GetComponent<Exposed>().AddEffect(actioningUnit.gameObject);
         }
-        Initiative.EndAction();
+        //Initiative.EndAction();
     }
 
     public void OnCancel()
     {
+        Unsubscribe();
         target = null;
     }
 
     public void BoostAttack(Unit a, Unit d)
     {
-        if (a == actioningUnit && d == target.unitTargeted)
+        if (a == actioningUnit)
         {
-            Debug.Log("precision attack added");
-            AttackManager.bonuses++;
-            AttackManager.critRange += 1;
-            Unsubscribe();
+            if (d == target.unitTargeted)
+            {
+                Debug.Log("precision attack added");
+                AttackManager.bonuses++;
+                AttackManager.critRange += 1;
+                Unsubscribe();
+            }
         }
     }
 
     public override void Unsubscribe()
     {
         AttackManager.OnAttack -= BoostAttack;
+        ConfirmationPopUp.onConfirm -= OnConfirm;
+        ConfirmationPopUp.onCancel -= OnCancel;
     }
 
     private void OnDestroy()

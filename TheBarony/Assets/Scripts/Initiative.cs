@@ -124,6 +124,7 @@ public class Initiative : MonoBehaviour
 
     public static IEnumerator CheckForTurnEnd() 
     {
+        yield return new WaitForSeconds(0.1f);
         CombatLog.UpdateCombatLog("Action complete.");
         if (queuedActions < 1) Debug.LogWarning("zero or less queued actions");
 
@@ -137,7 +138,6 @@ public class Initiative : MonoBehaviour
             OnActionTaken(currentUnit);
             actionUIManager.UpdateActions(currentUnit.GetComponent<TacticsMovement>());
             queuedActions--;
-            //yield return new WaitForSeconds(0.5f);
 
             if (currentUnit.remainingMove >= 1 || currentUnit.remainingActions > 0)
             {
