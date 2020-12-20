@@ -114,15 +114,14 @@ public class RangedWeapon : Weapon
 
     public void Reload(ActionCost actionCost)
     {
+        Initiative.queuedActions++;
         rangedWeaponData.currentAmmo = rangedWeaponData.maxAmmo;
-        //DamagePopUp.Create(transform.position + new Vector3(0, gameObject.GetComponent<TacticsMovement>().halfHeight), "Arrow nocked", false);
         gameObject.GetComponent<UnitPopUpManager>().AddPopUpInfo("arrow nocked");
         if (actionCost == ActionCost.main)
         {
             owner.remainingActions -= 1; }
         else 
         { owner.remainingMove = 0; }
-        Initiative.queuedActions++;
         Initiative.EndAction();
     }
 }

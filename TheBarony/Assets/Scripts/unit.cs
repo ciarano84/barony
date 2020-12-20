@@ -25,6 +25,7 @@ public class UnitInfo
     //Progress Info
     public int clarity;
     public int experience;
+    public int level;
 
     //Base Stats
     public int baseBreath;
@@ -211,7 +212,6 @@ public class Unit : MonoBehaviour
             {
                 unitInfo.currentBreath = 0;
 
-                Debug.Log("KO called from UpdateWounds.");
                 StartCoroutine("KO");
             }
         }

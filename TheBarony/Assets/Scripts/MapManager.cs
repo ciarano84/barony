@@ -29,17 +29,24 @@ public class MapManager : MonoBehaviour
         {
             if (RostaInfo.currentEncounter.completionState == Encounter.CompletionState.VICTORY)
             {
-                if (RostaInfo.currentEncounter.encounterType == Encounter.EncounterType.RECLAIM) RostaInfo.ReclaimedSites += 1;
+                
+                
+                RostaInfo.ProcessEncounterRewards();
+                foreach (UnitInfo u in RostaInfo.currentEncounter.selectedCompany.units)
+                {
+                    Debug.Log(u.experience);
+                }
+
                 if (campaign.CheckForCampaignCompletion() == true) return;
 
-                MapUIManager.RequestAlert(RostaInfo.currentEncounter.victoryMapText, "Return");
+                UIManager.RequestAlert(RostaInfo.currentEncounter.victoryMapText, "Return");
                 RostaInfo.currentEncounter.selectedCompany.targetEncounter = null;
                 RostaInfo.currentEncounter.site.encounter = null;
                 RostaInfo.encounters.Remove(RostaInfo.currentEncounter);
             }
             else if (RostaInfo.currentEncounter.completionState == Encounter.CompletionState.DEFEAT)
             {
-                MapUIManager.RequestAlert(RostaInfo.currentEncounter.defeatMapText, "Return");
+                UIManager.RequestAlert(RostaInfo.currentEncounter.defeatMapText, "Return");
                 RostaInfo.currentEncounter.selectedCompany.targetEncounter = null;
                 RostaInfo.currentEncounter.selectedCompany = null;
                 RostaInfo.currentEncounter.completionState = Encounter.CompletionState.UNASSIGNED;
@@ -148,8 +155,11 @@ public class MapManager : MonoBehaviour
         encounter.GetReferences();
         FindLocation(encounter);
         //Will need to change this formula if I want to get 3 by 3 arenas, but for now we're just making arenasizes 4 (2 b 2) and 6 (2 b 3). 
-        encounter.arenaSize = (((int)UnityEngine.Random.Range(1, 3)) * 2) + 2;
-        encounter.difficulty = UnityEngine.Random.Range(0, 2);
+        //encounter.arenaSize = (((int)UnityEngine.Random.Range(1, 3)) * 2) + 2;
+        encounter.arenaSize = UnityEngine.Random.Range(1, 3) * 2;
+
+        encounter.difficulty = UnityEngine.Random.Range(-2, 1);
+        encounter.XPreward = 10;
         encounter.enemyCompany = EncounterTable.CreateEnemyCompany(encounter);
         RostaInfo.encounters.Add(encounter);
     }
@@ -199,6 +209,21 @@ public class MapManager : MonoBehaviour
                 } 
             }
         }
+    }
+
+    public void ReportLevelUps(List<LevelUp> levelUps)
+    {
+        Debug.Log("report level ups");
+        string levelUpMessage = "";
+        foreach (LevelUp u in levelUps)
+        {
+            levelUpMessage += u.unitInfo.unitName + " to level " + u.levelGointUpTo + ", ";
+        }
+        string newlevelUpMessage = "";
+        newlevelUpMessage.Substring(levelUpMessage.Length-3);
+        newlevelUpMessage += ".";
+
+        UIManager.RequestAlert(newlevelUpMessage, "Return");
     }
 }
 

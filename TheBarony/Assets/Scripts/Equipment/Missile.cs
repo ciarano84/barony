@@ -54,7 +54,6 @@ public class Missile : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, target) < 0.25)
             {
-                Debug.Log("attack counts as landing inside the bounds");
                 if (AttackManager.defenceType != DefenceType.DODGE || hit == Result.SUCCESS)
                 {
                     onTarget = true;

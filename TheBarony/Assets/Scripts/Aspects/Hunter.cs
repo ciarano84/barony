@@ -11,7 +11,7 @@ public class HunterData : AspectData
         //Do we need this next line, isn't it just setting A to be A?
         unitInfo = unit;
 
-        unit.mainWeaponData = new DaggerData();
+        unit.mainWeaponData = new ShortbowData();
         unit.offHandData = new BlankItemData();
         unit.armourData = new LeatherArmourData();
         unit.accessory1 = new BlankItemData();

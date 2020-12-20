@@ -2213,7 +2213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feafcf5504fabd840afaac886922007d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfStartingUnits: 12
+  numberOfStartingUnits: 8
   playerData: {fileID: 5074459663259614845, guid: 5107435ded40eff49ad7d8de3a62f05b,
     type: 3}
 --- !u!4 &1536297775 stripped

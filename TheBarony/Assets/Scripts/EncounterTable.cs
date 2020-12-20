@@ -12,8 +12,6 @@ public class EncounterTable
     {
         List<GameObject> monsters = new List<GameObject>();
 
-        //have to find a way to add in the elite.
-
         if (enemyType == EnemyType.BANDITS)
         {
             if (!enemyCompany.leaderAdded)
@@ -25,22 +23,16 @@ public class EncounterTable
             if (cellStrength == 0)
             {
                 monsters.Add(GameAssets.i.BanditAxeman);
-                monsters.Add(GameAssets.i.BanditAxeman);
             }
             else if (cellStrength == 1)
             {
                 monsters.Add(GameAssets.i.BanditHunter);
-                monsters.Add(GameAssets.i.BanditHunter);
-                monsters.Add(GameAssets.i.BanditCuthroat);
                 monsters.Add(GameAssets.i.BanditCuthroat);
             }
             else
             {
                 monsters.Add(GameAssets.i.BanditHunter);
                 monsters.Add(GameAssets.i.BanditHunter);
-                monsters.Add(GameAssets.i.BanditAxeman);
-                monsters.Add(GameAssets.i.BanditAxeman);
-                monsters.Add(GameAssets.i.BanditAxeman);
             }
         }
         else if (enemyType == EnemyType.GOBLINOIDS)
@@ -54,23 +46,16 @@ public class EncounterTable
             if (cellStrength == 0)
             {
                 monsters.Add(GameAssets.i.GoblinHunter);
-                monsters.Add(GameAssets.i.GoblinHunter);
-                monsters.Add(GameAssets.i.GoblinScout);
                 monsters.Add(GameAssets.i.GoblinScout);
             }
             else if (cellStrength == 1)
             {
                 monsters.Add(GameAssets.i.OrcDefender);
-                monsters.Add(GameAssets.i.OrcDefender);
-                monsters.Add(GameAssets.i.GoblinHunter);
                 monsters.Add(GameAssets.i.GoblinHunter);
             }
             else
             {
                 monsters.Add(GameAssets.i.OrcBrute);
-                monsters.Add(GameAssets.i.OrcBrute);
-                monsters.Add(GameAssets.i.GoblinScout);
-                monsters.Add(GameAssets.i.GoblinScout);
                 monsters.Add(GameAssets.i.GoblinScout);
             }
         }
@@ -93,19 +78,33 @@ public class EncounterTable
             default: break;
         }
 
+        //generating the difficutly of each cell
+
+        // - this next section chooses a random block that HAS to contain enemies. 
+        int blockAlwaysPopulated = UnityEngine.Random.Range(0, 3);
+
         for (int cellCount = encounter.arenaSize -1; cellCount > 0 && ec.cells.Count < 3; cellCount--)
         {
             roll = UnityEngine.Random.Range(0,6) + encounter.difficulty;
             createCell = true;
-            switch (roll)
+
+            if (roll > 1)
             {
-                case 0: createCell = false; break;
-                case 1: createCell = false; break;
-                case 2: cellStrength = 0; break;
-                case 3: cellStrength = 1; break;
-                case 4: cellStrength = 2; break;
-                default: cellStrength = 2; break;
+                switch (roll)
+                {
+                    case 2: cellStrength = 0; break;
+                    case 3: cellStrength = 1; break;
+                    case 4: cellStrength = 2; break;
+                    default: cellStrength = 2; break;
+                }
             }
+            else
+            {
+                if (cellCount == blockAlwaysPopulated) cellStrength = 0;
+                else createCell = false;
+            }
+                
+                
             if (createCell)
             {
                 ec.AddCell(LookUpEnemyCellContents(ec, cellStrength, encounter.enemyType), cellStrength);
