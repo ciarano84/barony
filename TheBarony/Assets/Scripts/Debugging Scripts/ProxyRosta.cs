@@ -55,7 +55,7 @@ public class ProxyRosta : MonoBehaviour
         player.baseToughness = -1 + Random.Range(0, 4);
         player.baseMove = 3 + Random.Range(0, 4);
         player.level = 1;
-        player.clarity = 5 + Random.Range(0, 10);
+        player.clarity = 10 + Random.Range(0, 10);
         player.faction = Factions.players;
 
         bool buildRosta = true;

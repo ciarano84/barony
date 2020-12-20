@@ -42,6 +42,7 @@ public class Initiative : MonoBehaviour
     //Debug.
     private void Update()
     {
+        actionUIManager.CheckForMessages();
         publicQueuedActions = queuedActions;
         if (queuedActions < 0)
         {

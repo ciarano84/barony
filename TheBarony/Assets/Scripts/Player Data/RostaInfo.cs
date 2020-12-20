@@ -49,19 +49,4 @@ public class RostaInfo : MonoBehaviour
             u.clarity++;
         }
     }
-
-    public static void ProcessEncounterRewards()
-    {
-        if (currentEncounter.encounterType == Encounter.EncounterType.RECLAIM) ReclaimedSites += 1;
-        foreach (UnitInfo u in currentEncounter.selectedCompany.units)
-        {
-            //add a random percentage to the base offering of the encounter.
-            int TotalXPavailable = Mathf.RoundToInt(currentEncounter.XPreward * (1 + (Random.Range(0, 5) / 10)));
-            //work out the amount of xp to transfer (choosing the minimum between the clarity and the xp on offer). 
-            int clarityTransfered = Mathf.Min(u.clarity, TotalXPavailable);
-            u.experience += clarityTransfered;
-            u.clarity -= clarityTransfered;
-            AdvancementManager.CheckForLevelUp(u);
-        }
-    }
 }

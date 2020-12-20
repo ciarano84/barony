@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class MapUIManager : UIManager
 {
-    
+    private void Update()
+    {
+        
+    }
 }

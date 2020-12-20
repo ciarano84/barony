@@ -18,6 +18,13 @@ public class MapManager : MonoBehaviour
     public Text date;
     public GameObject encounterPanel;
     public CampaignManager campaign;
+    public MapUIManager mapUI;
+    public AdvancementManager advancementManager;
+
+    private void Update()
+    {
+        mapUI.CheckForMessages();
+    }
 
     private void Start()
     {
@@ -29,16 +36,8 @@ public class MapManager : MonoBehaviour
         {
             if (RostaInfo.currentEncounter.completionState == Encounter.CompletionState.VICTORY)
             {
-                
-                
-                RostaInfo.ProcessEncounterRewards();
-                foreach (UnitInfo u in RostaInfo.currentEncounter.selectedCompany.units)
-                {
-                    Debug.Log(u.experience);
-                }
-
                 if (campaign.CheckForCampaignCompletion() == true) return;
-
+                AdvancementManager.instance.ProcessEncounterRewards();
                 UIManager.RequestAlert(RostaInfo.currentEncounter.victoryMapText, "Return");
                 RostaInfo.currentEncounter.selectedCompany.targetEncounter = null;
                 RostaInfo.currentEncounter.site.encounter = null;
@@ -209,21 +208,6 @@ public class MapManager : MonoBehaviour
                 } 
             }
         }
-    }
-
-    public void ReportLevelUps(List<LevelUp> levelUps)
-    {
-        Debug.Log("report level ups");
-        string levelUpMessage = "";
-        foreach (LevelUp u in levelUps)
-        {
-            levelUpMessage += u.unitInfo.unitName + " to level " + u.levelGointUpTo + ", ";
-        }
-        string newlevelUpMessage = "";
-        newlevelUpMessage.Substring(levelUpMessage.Length-3);
-        newlevelUpMessage += ".";
-
-        UIManager.RequestAlert(newlevelUpMessage, "Return");
     }
 }
 

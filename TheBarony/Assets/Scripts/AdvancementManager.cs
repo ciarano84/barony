@@ -2,13 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AdvancementManager
+public class AdvancementManager : MonoBehaviour
 {
-    static int level2Threshold = 10;
-    static int level3Threshold = 30;
+    int level2Threshold = 5;
+    int level3Threshold = 30;
     static List<LevelUp> levelUps = new List<LevelUp>();
+    public static AdvancementManager instance;
+    public MapManager mapManager;
 
-    public static void CheckForLevelUp(UnitInfo unit)
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public void ProcessEncounterRewards()
+    {
+        if (RostaInfo.currentEncounter.encounterType == Encounter.EncounterType.RECLAIM) RostaInfo.ReclaimedSites += 1;
+        foreach (UnitInfo u in RostaInfo.currentEncounter.selectedCompany.units)
+        {
+            //add a random percentage to the base offering of the encounter.
+            int TotalXPavailable = Mathf.RoundToInt(RostaInfo.currentEncounter.XPreward * (1 + (Random.Range(0, 5) / 10)));
+            //work out the amount of xp to transfer (choosing the minimum between the clarity and the xp on offer). 
+            int clarityTransfered = Mathf.Min(u.clarity, TotalXPavailable);
+            u.experience += clarityTransfered;
+            u.clarity -= clarityTransfered;
+            CheckForLevelUp(u);
+        }
+        if (levelUps.Count > 0)
+        {
+            ReportLevelUps(levelUps);
+            levelUps.Clear();
+        }
+    }
+
+    public void CheckForLevelUp(UnitInfo unit)
     {
         switch (unit.level)
         {
@@ -19,24 +46,27 @@ public class AdvancementManager
                     LevelUp levelUp = new LevelUp();
                     levelUp.unitInfo = unit;
                     levelUp.levelGointUpTo = 2;
-                }
-                    
+                    levelUps.Add(levelUp);
+                }  
                 break;
-            case 2:
-
-                break;
-            
             default:
                 break;
         }
-        if (levelUps.Count > 0) ReportAdvancement();
     }
 
-    public static void ReportAdvancement()
+    public void ReportLevelUps(List<LevelUp> levelUps)
     {
-        MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
-        mapManager.ReportLevelUps(levelUps);
-        levelUps.Clear();
+        Debug.Log("report level ups");
+        string levelUpMessage = "";
+        foreach (LevelUp u in levelUps)
+        {
+            levelUpMessage += u.unitInfo.unitName + " to level " + u.levelGointUpTo + ", ";
+        }
+        string newlevelUpMessage = "";
+        //newlevelUpMessage.Substring(levelUpMessage.Length - 3);
+        newlevelUpMessage = levelUpMessage + ".";
+
+        UIManager.RequestAlert(newlevelUpMessage, "Return");
     }
 }
 

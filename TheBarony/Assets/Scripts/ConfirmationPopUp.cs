@@ -10,7 +10,6 @@ public class ConfirmationPopUp : MonoBehaviour
     public Text noText;
     public GameObject UI;
 
-
     public delegate void OnConfirmDelegate();
     public static OnConfirmDelegate onConfirm;
 
@@ -20,7 +19,6 @@ public class ConfirmationPopUp : MonoBehaviour
     public void GetConfirmation(string _question, string _yesText, string _noText)
     {
         UI.SetActive(true);
-        UIManager.uiState = UIManager.UIState.confirmation;
         question.text = _question;
         yesText.text = _yesText;
         noText.text = _noText;
