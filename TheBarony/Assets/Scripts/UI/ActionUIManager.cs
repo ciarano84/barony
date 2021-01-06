@@ -44,15 +44,6 @@ public class ActionUIManager : UIManager
         tooltip.SetActive(false);
     }
 
-    //Debug to test confirmation popups
-    public void Update()
-    {
-        if (Input.GetKey("space"))
-        {
-            UIManager.RequestConfirmation("do the thing?", "yes", "cancel");
-        }
-    }
-
     public void UpdateActions(TacticsMovement unit)
     {
         Clear();

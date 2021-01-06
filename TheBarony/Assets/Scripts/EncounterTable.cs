@@ -70,13 +70,15 @@ public class EncounterTable
         bool createCell;
 
         //Detirmine monster type.
-        roll = UnityEngine.Random.Range(0, 2);
-        switch (roll)
-        {
-            case 0: encounter.enemyType = EnemyType.BANDITS; break;
-            case 1: encounter.enemyType = EnemyType.GOBLINOIDS; break;
-            default: break;
-        }
+        encounter.enemyType = EnemyType.BANDITS;
+
+        //roll = UnityEngine.Random.Range(0, 2);
+        //switch (roll)
+        //{
+        //    case 0: encounter.enemyType = EnemyType.BANDITS; break;
+        //    case 1: encounter.enemyType = EnemyType.GOBLINOIDS; break;
+        //    default: break;
+        //}
 
         //generating the difficutly of each cell
 

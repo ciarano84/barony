@@ -265,8 +265,7 @@ public abstract class Encounter
     { }
 
     public virtual void Selected()
-    {
-    }
+    { }
 
     public virtual void GoToCompanySelect()
     {
@@ -305,6 +304,19 @@ public abstract class Encounter
     }
 
     public virtual void EncounterButtonSelected()
+    {
+    }
+
+    public virtual void CreateEnemyCompany()
+    {
+        enemyCompany = EncounterTable.CreateEnemyCompany(this);
+    }
+
+    //Below are events that can happen in the encounter that might trigger changes to the encounter. These are overridden by the specific encounter type. 
+    //They could include players entering specific areas, or enemies being cleared from certain areas. Or just turns ending. 
+    //If victory has been met, then change the completion state to victory. 
+
+    public virtual void OnUnitDeath(Unit unit)
     {
     }
 }

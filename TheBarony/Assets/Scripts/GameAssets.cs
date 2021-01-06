@@ -42,6 +42,7 @@ public class GameAssets : MonoBehaviour
     public GameObject BanditHunter;
     public GameObject BanditCuthroat;
     public GameObject EliteBanditHunter;
+    public GameObject Headman;
     public Material cubeTest;
 
     //Item Sprites

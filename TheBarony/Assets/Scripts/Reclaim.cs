@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Reclaim : Encounter
 {
+    UnitInfo headman;
+    
     public override void SetEncounterData()
     {
         RallyConfirmationQuestionText = "Rally a company to reclaim " + site.SiteName + "?";
@@ -101,5 +103,19 @@ public class Reclaim : Encounter
         selectedCompany.targetEncounter = null;
         selectedCompany = null;
         mapManager.CheckForAvailableEncounters();
+    }
+
+    public override void CreateEnemyCompany()
+    {
+        base.CreateEnemyCompany();
+        int position = Random.Range(0, enemyCompany.cells.Count);
+        GameObject headmanObj = GameAssets.i.Headman;
+        enemyCompany.cells[position].enemies.Add(headmanObj);
+        headman = headmanObj.GetComponent<Unit>().unitInfo;
+    }
+
+    public override void OnUnitDeath(Unit unit)
+    {
+        base.OnUnitDeath(unit);
     }
 }

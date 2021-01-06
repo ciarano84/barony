@@ -81,6 +81,7 @@ MonoBehaviour:
     type: 3}
   EliteBanditHunter: {fileID: 4603668534007430397, guid: 3e1992df2465fb24ba1b49fb891dd107,
     type: 3}
+  Headman: {fileID: 4603668534007430397, guid: 7cedc85316d843c4f836f60584dc1678, type: 3}
   cubeTest: {fileID: 2100000, guid: 6f3e37ef4df7d4f4fbf94513e8ee5708, type: 2}
   LeatherArmour: {fileID: 21300000, guid: 0eefbaa893519704ebaa2259714f64d5, type: 3}
   ChainShirtArmour: {fileID: 21300000, guid: 14e7e0052795a06429dcf1d345dd7ec8, type: 3}
